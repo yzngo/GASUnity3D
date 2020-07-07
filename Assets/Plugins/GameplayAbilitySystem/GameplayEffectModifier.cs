@@ -8,7 +8,7 @@ using GAS.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace GAS {
+namespace GAS.GameplayEffects {
     /// <inheritdoc />
     [Serializable]
     public class GameplayEffectModifier : IGameplayEffectModifier {
