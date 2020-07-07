@@ -5,6 +5,12 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 
 namespace GameplayAbilitySystem.Attributes {
+
+    [Serializable]
+    public class AttributeChangeEvent : UnityEvent<AttributeChangeData> {
+
+    }
+
     /// <summary>
     /// Container for attribute change events
     /// </summary>
@@ -40,8 +46,4 @@ namespace GameplayAbilitySystem.Attributes {
 
     }
 
-    [Serializable]
-    public class AttributeChangeEvent : UnityEvent<AttributeChangeData> {
-
-    }
 }
