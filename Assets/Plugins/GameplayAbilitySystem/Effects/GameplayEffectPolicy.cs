@@ -11,6 +11,11 @@ namespace GAS.GameplayEffects {
     [Serializable]
     public class GameplayEffectPolicy : IGameplayEffectPolicy {
         [SerializeField]
+        [Tooltip(
+@"游戏效果策略 
+        Instant  执行一次  
+        Duration 执行一段时间
+        Infinite 一直执行不停止")]
         private DurationPolicy durationPolicy = default;
 
         [SerializeField]

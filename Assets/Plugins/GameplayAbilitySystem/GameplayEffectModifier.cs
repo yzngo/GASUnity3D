@@ -12,25 +12,19 @@ namespace GAS {
     /// <inheritdoc />
     [Serializable]
     public class GameplayEffectModifier : IGameplayEffectModifier {
-        [SerializeField]
-        private AttributeType attributeType = null;
+        [SerializeField] private AttributeType attributeType = null;
 
-        [SerializeField]
-        private ModifierOperationType modifierOperationType = default;
+        [SerializeField] private ModifierOperationType modifierOperationType = default;
+
         [Space(10)]
+        [SerializeField] private ModifierCalculationType magnitudeCalculationType = default;
 
-        [SerializeField]
-        private ModifierCalculationType magnitudeCalculationType = default;
+        [SerializeField] private float scaledMagnitude = 0f;
 
-        [SerializeField]
-        private float scaledMagnitude = 0f;
         [Space(10)]
+        [SerializeField] private GameplayEffectModifierTagCollection sourceTags = null;
 
-        [SerializeField]
-        private GameplayEffectModifierTagCollection sourceTags = null;
-
-        [SerializeField]
-        private GameplayEffectModifierTagCollection targetTags = null;
+        [SerializeField] private GameplayEffectModifierTagCollection targetTags = null;
 
         /// <inheritdoc />
         public AttributeType Attribute => attributeType;

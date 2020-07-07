@@ -14,16 +14,13 @@ namespace GAS.GameplayEffects {
     // 改变自己或别人的Attributes 和GameplayTags的途径
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class GameplayEffect : ScriptableObject {
-        [SerializeField]
-        GameplayEffectPolicy gameplayEffectPolicy = new GameplayEffectPolicy();
+        [SerializeField] GameplayEffectPolicy gameplayEffectPolicy = new GameplayEffectPolicy();
 
-        [SerializeField]
-        GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
+        [SerializeField] GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
 
         public EffectPeriodicity Period;
 
-        [SerializeField]
-        public List<GameplayCue> GameplayCues = new List<GameplayCue>();
+        [SerializeField] public List<GameplayCue> GameplayCues = new List<GameplayCue>();
 
         public StackingPolicy StackingPolicy = new StackingPolicy();
         public GameplayEffectTags GameplayEffectTags { get => gameplayEffectTags; }
