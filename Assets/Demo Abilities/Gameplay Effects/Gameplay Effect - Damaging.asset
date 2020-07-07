@@ -42,11 +42,11 @@ MonoBehaviour:
     grantedTags:
       _added: []
     ongoingTagRequirements:
-      _requirePresence: []
-      _requireAbsence: []
+      requirePresence: []
+      requireAbsence: []
     applicationTagRequirements:
-      _requirePresence: []
-      _requireAbsence: []
+      requirePresence: []
+      requireAbsence: []
     removeGameplayEffectsWithTag:
       _added: []
   Period:

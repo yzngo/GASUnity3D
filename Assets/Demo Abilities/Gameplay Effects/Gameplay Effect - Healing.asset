@@ -15,7 +15,17 @@ MonoBehaviour:
   gameplayEffectPolicy:
     durationPolicy: 1
     durationMagnitude: 21
-    _modifiers: []
+    modifiers:
+    - attributeType: {fileID: 0}
+      modifierOperationType: 0
+      magnitudeCalculationType: 0
+      scaledMagnitude: 0
+      sourceTags:
+        RequireTags: []
+        IgnoreTags: []
+      targetTags:
+        RequireTags: []
+        IgnoreTags: []
   gameplayEffectTags:
     assetTags:
       _added: []
@@ -23,11 +33,11 @@ MonoBehaviour:
       _added:
       - {fileID: 11400000, guid: 0f7aacaa3f81d2b419604039ea36b254, type: 2}
     ongoingTagRequirements:
-      _requirePresence: []
-      _requireAbsence: []
+      requirePresence: []
+      requireAbsence: []
     applicationTagRequirements:
-      _requirePresence: []
-      _requireAbsence: []
+      requirePresence: []
+      requireAbsence: []
     removeGameplayEffectsWithTag:
       _added:
       - Tag: {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
