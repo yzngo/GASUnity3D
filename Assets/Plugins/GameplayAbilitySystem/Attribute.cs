@@ -8,14 +8,11 @@ namespace GameplayAbilitySystem {
     [AddComponentMenu("Ability System/Attributes/Attribute")]
     [System.Serializable]
     public class Attribute : IAttribute {
-        [SerializeField]
-        AttributeType _attributeType;
+        [SerializeField] AttributeType _attributeType;
 
-        [SerializeField]
-        float _baseValue;
+        [SerializeField] float _baseValue;
 
-        [SerializeField]
-        float _currentValue;
+        [SerializeField] float _currentValue;
 
         /// <inheritdoc />
         public float BaseValue { get => _baseValue; }

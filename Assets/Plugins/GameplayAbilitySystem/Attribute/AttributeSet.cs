@@ -10,30 +10,26 @@ namespace GameplayAbilitySystem.Attributes {
     [System.Serializable]
     [RequireComponent(typeof(AbilitySystemComponent))]
     public class AttributeSet : MonoBehaviour, IAttributeSet {
-        [SerializeField]
-        private AttributeChangeEvent attributeBaseValueChanged = default;
+        [SerializeField] private AttributeChangeEvent attributeBaseValueChanged = default;
+        [SerializeField] private AttributeChangeEvent attributeCurrentValueChanged = default;
+        [SerializeField] private List<Attribute> attributes;
+
         /// <inheritdoc />
         public AttributeChangeEvent AttributeBaseValueChanged => attributeBaseValueChanged;
 
         /// <inheritDoc />
-        [SerializeField]
-        private AttributeChangeEvent attributeCurrentValueChanged = default;
         public AttributeChangeEvent AttributeCurrentValueChanged => attributeCurrentValueChanged;
 
         /// <inheritdoc />
-        [SerializeField]
-        private List<Attribute> attributes;
         public List<Attribute> Attributes { 
             get => attributes; 
             set => attributes = value; 
         }
 
-        [SerializeField]
-        private BaseAttributeChangeHandler preAttributeBaseChangeHandler = default;
+        [SerializeField] private BaseAttributeChangeHandler preAttributeBaseChangeHandler = default;
         public BaseAttributeChangeHandler PreAttributeBaseChangeHandler => preAttributeBaseChangeHandler;
 
-        [SerializeField]
-        private BaseAttributeChangeHandler preAttributeChangeHandler = default;
+        [SerializeField] private BaseAttributeChangeHandler preAttributeChangeHandler = default;
         public BaseAttributeChangeHandler PreAttributeChangeHandler => preAttributeChangeHandler;
 
         /// <inheritdoc />
