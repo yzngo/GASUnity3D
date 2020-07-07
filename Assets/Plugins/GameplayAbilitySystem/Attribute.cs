@@ -2,7 +2,7 @@ using GAS.Attributes;
 using GAS.Interfaces;
 using UnityEngine;
 
-namespace GAS {
+namespace GAS.Attributes {
 
     /// <inheritdoc />
     [AddComponentMenu("Ability System/Attributes/Attribute")]

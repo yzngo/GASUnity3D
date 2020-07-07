@@ -4,7 +4,7 @@ using GAS.GameplayEffects;
 using GAS.Interfaces;
 using UnityEngine;
 
-namespace GAS {
+namespace GAS.Abilities {
     /// <inheritdoc />
     [Serializable]
     public class GameplayAbilityTags : IAbilityTags {
