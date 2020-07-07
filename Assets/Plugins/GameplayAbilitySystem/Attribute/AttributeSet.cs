@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using GameplayAbilitySystem.GameplayEffects;
-using GameplayAbilitySystem.Interfaces;
+using GAS.GameplayEffects;
+using GAS.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.Attributes {
+namespace GAS.Attributes {
 
     /// <inheritdoc />
     [AddComponentMenu("Gameplay Ability System/Attribute Set")]

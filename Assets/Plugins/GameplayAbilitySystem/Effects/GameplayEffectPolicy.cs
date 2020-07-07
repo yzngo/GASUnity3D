@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Enums;
-using GameplayAbilitySystem.Interfaces;
+using GAS.Enums;
+using GAS.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GAS.GameplayEffects {
     // Effect的策略集合
     // - 时长 (立即生效, 区间+magnitude, 无穷)
     // - 修改器

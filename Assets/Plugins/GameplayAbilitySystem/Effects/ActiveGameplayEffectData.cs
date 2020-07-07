@@ -1,10 +1,10 @@
 using UnityEngine;
 using System;
-using GameplayAbilitySystem.Interfaces;
+using GAS.Interfaces;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Attributes;
+using GAS.Attributes;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GAS.GameplayEffects {
     /// <summary>
     /// This class is used to keep track of active <see cref="GameplayEffect"/>.  
     /// </summary>

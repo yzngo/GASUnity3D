@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Attributes;
+using GAS.Attributes;
 using UniRx.Async;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GAS.GameplayEffects {
     public class ActiveEffectAttributeAggregator {
         Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>> Map = new Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>>();
 

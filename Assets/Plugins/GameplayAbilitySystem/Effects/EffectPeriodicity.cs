@@ -1,6 +1,6 @@
 using System;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GAS.GameplayEffects {
     [Serializable]
     public class EffectPeriodicity {
         public float Period;

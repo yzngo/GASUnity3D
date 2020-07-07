@@ -1,4 +1,4 @@
-namespace GameplayAbilitySystem.Enums {
+namespace GAS.Enums {
     public enum DurationPolicy {
         Instant,    // 永久修改basevalue
         Duration,    // 临时修改currentValue

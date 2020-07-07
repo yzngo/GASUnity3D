@@ -1,6 +1,6 @@
-using GameplayAbilitySystem.Attributes;
+using GAS.Attributes;
 
-namespace GameplayAbilitySystem.Interfaces {
+namespace GAS.Interfaces {
     /// <summary>
     /// Attributes are used to define parameters (such as health, speed) for a character.
     /// </summary>

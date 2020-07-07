@@ -1,6 +1,6 @@
-using GameplayAbilitySystem.GameplayEffects;
+using GAS.GameplayEffects;
 
-namespace GameplayAbilitySystem.Interfaces {
+namespace GAS.Interfaces {
     /// <summary>
     /// Represents the cost of a <see cref="IGameplayAbility"/>.
     /// The <see cref="GameplayEffect"/> defines the actual cost of the ability by describing which <see cref="IAttribute"/> are reduced on the 

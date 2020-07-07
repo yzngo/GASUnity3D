@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.GameplayCues {
+namespace GAS.GameplayCues {
     [CreateAssetMenu(fileName = "GameplayCue", menuName = "Ability System/Gameplay Cue/Gameplay Cue")]
     public class GameplayCue : ScriptableObject {
 

@@ -1,10 +1,10 @@
 using System;
-using GameplayAbilitySystem.Interfaces;
+using GAS.Interfaces;
 using UnityEngine.Events;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace GameplayAbilitySystem.Events {
+namespace GAS.Events {
     [Serializable]
     public class GenericAbilityEvent : UnityEvent<IGameplayAbility> {
 

@@ -1,8 +1,8 @@
 using System;
-using GameplayAbilitySystem.Interfaces;
+using GAS.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.GameplayCues {
+namespace GAS.GameplayCues {
     public class GameplayCueParameters {
         public float NormalisedMagnitude = 0f;
         public float RawMagnitude = 0f;

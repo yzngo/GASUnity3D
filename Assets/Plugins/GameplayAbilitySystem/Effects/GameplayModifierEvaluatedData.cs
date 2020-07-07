@@ -1,7 +1,7 @@
-using GameplayAbilitySystem.Interfaces;
-using GameplayAbilitySystem.Enums;
+using GAS.Interfaces;
+using GAS.Enums;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GAS.GameplayEffects {
     public struct GameplayModifierEvaluatedData {
         public IAttribute Attribute;
         public ModifierOperationType ModOperation;

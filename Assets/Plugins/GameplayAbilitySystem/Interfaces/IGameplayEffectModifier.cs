@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using GameplayAbilitySystem;
-using GameplayAbilitySystem.Attributes;
-using GameplayAbilitySystem.Enums;
-using GameplayAbilitySystem.GameplayEffects;
+using GAS;
+using GAS.Attributes;
+using GAS.Enums;
+using GAS.GameplayEffects;
 
-namespace GameplayAbilitySystem.Interfaces {
+namespace GAS.Interfaces {
 
     /// <summary>
     /// This class defines how a  <see cref="GameplayEffect"/> modifies attributes (e.g. doing damage, healing)

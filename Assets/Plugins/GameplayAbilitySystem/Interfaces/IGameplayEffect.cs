@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Enums;
-using GameplayAbilitySystem.GameplayEffects;
+using GAS.Enums;
+using GAS.GameplayEffects;
 
-namespace GameplayAbilitySystem.Interfaces
+namespace GAS.Interfaces
 {
 
     /// <summary>

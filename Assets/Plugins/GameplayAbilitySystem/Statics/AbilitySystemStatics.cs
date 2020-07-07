@@ -1,9 +1,9 @@
 using System;
-using GameplayAbilitySystem;
-using GameplayAbilitySystem.Enums;
-using GameplayAbilitySystem.Events;
+using GAS;
+using GAS.Enums;
+using GAS.Events;
 
-namespace GameplayAbilitySystem.Statics {
+namespace GAS.Statics {
     public class AbilitySystemStatics {
         public static void SendGameplayEventToComponent(AbilitySystemComponent TargetAbilitySystem, GameplayTag EventTag, GameplayEventData Payload) {
             TargetAbilitySystem.HandleGameplayEvent(EventTag, Payload);

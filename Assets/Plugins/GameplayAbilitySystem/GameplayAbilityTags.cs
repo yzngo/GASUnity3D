@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using GameplayAbilitySystem.GameplayEffects;
-using GameplayAbilitySystem.Interfaces;
+using GAS.GameplayEffects;
+using GAS.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem {
+namespace GAS {
     /// <inheritdoc />
     [Serializable]
     public class GameplayAbilityTags : IAbilityTags {

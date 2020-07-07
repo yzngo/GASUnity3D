@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Interfaces;
-using GameplayAbilitySystem.Statics;
-using GameplayAbilitySystem;
-using GameplayAbilitySystem.Attributes;
-using GameplayAbilitySystem.Enums;
+using GAS.Interfaces;
+using GAS.Statics;
+using GAS;
+using GAS.Attributes;
+using GAS.Enums;
 using UnityEngine;
-using GameplayAbilitySystem.GameplayCues;
+using GAS.GameplayCues;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GAS.GameplayEffects {
 
     // 改变自己或别人的Attributes 和GameplayTags的途径
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]

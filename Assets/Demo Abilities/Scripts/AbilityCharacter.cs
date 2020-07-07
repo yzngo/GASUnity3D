@@ -2,25 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GameplayAbilitySystem.ExtensionMethods;
-using GameplayAbilitySystem.Statics;
-using GameplayAbilitySystem;
-using GameplayAbilitySystem.Abilities;
-using GameplayAbilitySystem.Events;
+using GAS.ExtensionMethods;
+using GAS.Statics;
+using GAS;
+using GAS.Abilities;
+using GAS.Events;
 using UniRx.Async;
 using UnityEngine;
 using System;
 
 public class AbilityCharacter : MonoBehaviour
 {
-    public GameplayAbilitySystem.AbilitySystemComponent SelfAbilitySystem { get; private set; }
+    public GAS.AbilitySystemComponent SelfAbilitySystem { get; private set; }
 
     public List<CastingAbilityContainer> Abilities = new List<CastingAbilityContainer>();
 
     // Start is called before the first frame update
     void Start()
     {
-        SelfAbilitySystem = GetComponent<GameplayAbilitySystem.AbilitySystemComponent>();
+        SelfAbilitySystem = GetComponent<GAS.AbilitySystemComponent>();
     }
 
 
@@ -71,5 +71,5 @@ public class CastingAbilityContainer
 {
     public GameplayAbility Ability;
 
-    public GameplayAbilitySystem.AbilitySystemComponent AbilityTarget;
+    public GAS.AbilitySystemComponent AbilityTarget;
 }

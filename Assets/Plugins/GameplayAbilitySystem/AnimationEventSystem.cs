@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace GameplayAbilitySystem {
+namespace GAS {
 
     /// <summary>
     /// Animation event

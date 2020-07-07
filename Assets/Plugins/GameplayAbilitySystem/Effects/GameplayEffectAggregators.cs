@@ -1,11 +1,11 @@
 using System.Linq;
 using System;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Enums;
+using GAS.Enums;
 using UnityEngine.Events;
-using GameplayAbilitySystem.Attributes;
+using GAS.Attributes;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GAS.GameplayEffects {
     public class Aggregator {
         private AttributeType AttributeType;
 

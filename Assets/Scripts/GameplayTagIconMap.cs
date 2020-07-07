@@ -1,7 +1,7 @@
 
 using System;
-using GameplayAbilitySystem;
-using GameplayAbilitySystem.GameplayEffects;
+using GAS;
+using GAS.GameplayEffects;
 using UnityEngine;
 
 [Serializable]

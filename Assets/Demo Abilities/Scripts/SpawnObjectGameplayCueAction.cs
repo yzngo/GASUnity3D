@@ -1,6 +1,6 @@
 
 using System;
-using GameplayAbilitySystem.GameplayCues;
+using GAS.GameplayCues;
 using UniRx.Async;
 using UnityEngine;
 

@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GameplayAbilitySystem.Events;
-using GameplayAbilitySystem.ExtensionMethods;
-using GameplayAbilitySystem.GameplayEffects;
-using GameplayAbilitySystem.Interfaces;
+using GAS.Events;
+using GAS.ExtensionMethods;
+using GAS.GameplayEffects;
+using GAS.Interfaces;
 using UniRx.Async;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.Abilities.AbilityActivations {
+namespace GAS.Abilities.AbilityActivations {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Range Attack")]
     public class RangeAttack : AbstractAbilityActivation {
 

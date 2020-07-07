@@ -4,18 +4,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GameplayAbilitySystem.ExtensionMethods;
-using GameplayAbilitySystem.Abilities;
-using GameplayAbilitySystem.Events;
-using GameplayAbilitySystem.GameplayEffects;
-using GameplayAbilitySystem.Interfaces;
+using GAS.ExtensionMethods;
+using GAS.Abilities;
+using GAS.Events;
+using GAS.GameplayEffects;
+using GAS.Interfaces;
 using UnityEngine;
-using GameplayAbilitySystem.Attributes;
+using GAS.Attributes;
 using UnityEngine.Events;
-using GameplayAbilitySystem.Enums;
-using GameplayAbilitySystem.GameplayCues;
+using GAS.Enums;
+using GAS.GameplayCues;
 
-namespace GameplayAbilitySystem {
+namespace GAS {
     /// <inheritdoc />
     [AddComponentMenu("Gameplay Ability System/Ability System")]
     public class AbilitySystemComponent : MonoBehaviour, IGameplayAbilitySystem {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GameplayAbilitySystem.Interfaces {
+namespace GAS.Interfaces {
     /// <summary>
     /// List of tags that must be present, and list of tags that must not be present
     /// </summary>

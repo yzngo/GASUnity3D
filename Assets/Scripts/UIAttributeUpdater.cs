@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using GameplayAbilitySystem;
-using GameplayAbilitySystem.Attributes;
+using GAS;
+using GAS.Attributes;
 using UnityEngine;
 
 public class UIAttributeUpdater : MonoBehaviour {

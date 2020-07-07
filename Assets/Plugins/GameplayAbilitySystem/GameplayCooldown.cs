@@ -1,11 +1,11 @@
 using System.Linq;
 using System;
-using GameplayAbilitySystem.Interfaces;
-using GameplayAbilitySystem.GameplayEffects;
+using GAS.Interfaces;
+using GAS.GameplayEffects;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace GameplayAbilitySystem {
+namespace GAS {
     /// <inheritdoc />
     [Serializable]
     public class GameplayCooldown : IGameplayCooldown {

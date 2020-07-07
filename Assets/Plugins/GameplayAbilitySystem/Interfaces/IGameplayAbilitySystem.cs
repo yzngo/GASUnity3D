@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Abilities;
-using GameplayAbilitySystem.Attributes;
-using GameplayAbilitySystem.Events;
-using GameplayAbilitySystem.GameplayEffects;
+using GAS.Abilities;
+using GAS.Attributes;
+using GAS.Events;
+using GAS.GameplayEffects;
 using UnityEngine;
 using UnityEngine.Events;
-using GameplayAbilitySystem.Enums;
+using GAS.Enums;
 using System.Threading.Tasks;
 
-namespace GameplayAbilitySystem.Interfaces {
+namespace GAS.Interfaces {
 
     /// <summary>
     /// The <see cref="IGameplayAbilitySystem"/> is the primary component of the Gameplay Ability System.

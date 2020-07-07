@@ -2,16 +2,16 @@ using System.Threading;
 using System.Xml.Linq;
 using System.Linq;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Interfaces;
-using GameplayAbilitySystem.Attributes;
+using GAS.Interfaces;
+using GAS.Attributes;
 using System;
 using UnityEngine.Events;
 using UniRx.Async;
 using System.Threading.Tasks;
 using UnityEngine;
-using GameplayAbilitySystem.GameplayCues;
+using GAS.GameplayCues;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GAS.GameplayEffects {
     [Serializable]
     public class ActiveGameplayEffectsContainer {
         private IGameplayAbilitySystem AbilitySystem;
