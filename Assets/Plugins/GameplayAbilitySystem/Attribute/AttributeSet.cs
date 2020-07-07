@@ -9,7 +9,7 @@ namespace GAS.Attributes {
     [AddComponentMenu("Gameplay Ability System/Attribute Set")]
     [System.Serializable]
     [RequireComponent(typeof(AbilitySystemComponent))]
-    public class AttributeSet : MonoBehaviour, IAttributeSet {
+    public sealed class AttributeSet : MonoBehaviour, IAttributeSet {
         [SerializeField] private AttributeChangeEvent attributeBaseValueChanged = default;
         [SerializeField] private AttributeChangeEvent attributeCurrentValueChanged = default;
         [SerializeField] private List<Attribute> attributes;
