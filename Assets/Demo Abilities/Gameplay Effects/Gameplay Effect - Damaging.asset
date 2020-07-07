@@ -15,7 +15,7 @@ MonoBehaviour:
   gameplayEffectPolicy:
     durationPolicy: 0
     durationMagnitude: 10
-    _modifiers:
+    modifiers:
     - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
       modifierOperationType: 1
       magnitudeCalculationType: 0
