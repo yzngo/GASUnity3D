@@ -10,19 +10,16 @@ namespace GAS.GameplayEffects {
     // - 修改器
     [Serializable]
     public class GameplayEffectPolicy : IGameplayEffectPolicy {
-        [SerializeField]
         [Tooltip(
 @"游戏效果策略 
         Instant  执行一次  
         Duration 执行一段时间
         Infinite 一直执行不停止")]
-        private DurationPolicy durationPolicy = default;
+        [SerializeField] private DurationPolicy durationPolicy = default;
 
-        [SerializeField]
-        private float durationMagnitude = 0f;
+        [SerializeField] private float durationMagnitude = 0f;
 
-        [SerializeField]
-        private List<GameplayEffectModifier> modifiers = new List<GameplayEffectModifier>();
+        [SerializeField] private List<GameplayEffectModifier> modifiers = new List<GameplayEffectModifier>();
 
         public DurationPolicy DurationPolicy => durationPolicy;
         public float DurationMagnitude => durationMagnitude;
