@@ -11,14 +11,14 @@ namespace GameplayAbilitySystem.Attributes {
     [RequireComponent(typeof(AbilitySystemComponent))]
     public class AttributeSet : MonoBehaviour, IAttributeSet {
         [SerializeField]
-        private AttributeChangeDataEvent attributeBaseValueChanged = default;
+        private AttributeChangeEvent attributeBaseValueChanged = default;
         /// <inheritdoc />
-        public AttributeChangeDataEvent AttributeBaseValueChanged => attributeBaseValueChanged;
+        public AttributeChangeEvent AttributeBaseValueChanged => attributeBaseValueChanged;
 
         /// <inheritDoc />
         [SerializeField]
-        private AttributeChangeDataEvent attributeCurrentValueChanged = default;
-        public AttributeChangeDataEvent AttributeCurrentValueChanged => attributeCurrentValueChanged;
+        private AttributeChangeEvent attributeCurrentValueChanged = default;
+        public AttributeChangeEvent AttributeCurrentValueChanged => attributeCurrentValueChanged;
 
         /// <inheritdoc />
         [SerializeField]

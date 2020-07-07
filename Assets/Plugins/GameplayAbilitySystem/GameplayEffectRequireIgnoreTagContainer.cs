@@ -7,14 +7,14 @@ namespace GameplayAbilitySystem.GameplayEffects {
     [Serializable]
     public class GameplayEffectRequireIgnoreTagContainer : GameplayEffectTagContainer, IRequireIgnoreTags {
         [SerializeField]
-        private List<GameplayTag> _requirePresence = new List<GameplayTag>();
+        private List<GameplayTag> requirePresence = new List<GameplayTag>();
         
         [SerializeField]
-        private List<GameplayTag> _requireAbsence = new List<GameplayTag>();
+        private List<GameplayTag> requireAbsence = new List<GameplayTag>();
 
-        public List<GameplayTag> RequirePresence => _requirePresence;
+        public List<GameplayTag> RequirePresence => requirePresence;
 
-        public List<GameplayTag> RequireAbsence => _requireAbsence;
+        public List<GameplayTag> RequireAbsence => requireAbsence;
 
         public override bool HasAll(IEnumerable<GameplayTag> Tags) {
             throw new System.NotImplementedException();

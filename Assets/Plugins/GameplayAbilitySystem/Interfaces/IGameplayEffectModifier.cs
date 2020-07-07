@@ -44,7 +44,7 @@ namespace GameplayAbilitySystem.Interfaces {
         /// <see cref="GameplayTag"/> that must be present/must not be present on the target of the <see cref="IGameplayAbilitySystem"/>
         GameplayEffectModifierTagCollection TargetTags { get; }
 
-        bool AttemptCalculateMagnitude(out float EvaluatedMagnitude);
+        bool AttemptCalculateMagnitude(out float evaluatedMagnitude);
     }
 
     /// <summary>
@@ -53,12 +53,12 @@ namespace GameplayAbilitySystem.Interfaces {
     [Serializable]
     public class GameplayEffectModifierTagCollection {
         /// <summary>
-        /// <see cref="GameplayTag"/> that must be present on the source <see cref="IGameplayAbilitySystem"/>
+        /// <see cref="GameplayTag"/> that must be present on the <see cref="IGameplayAbilitySystem"/>
         /// </summary>
         public List<GameplayTag> RequireTags;
 
         /// <summary>
-        /// <see cref="GameplayTag"/> that must not be present on the target <see cref="IGameplayAbilitySystem"/>
+        /// <see cref="GameplayTag"/> that must not be present on the <see cref="IGameplayAbilitySystem"/>
         /// </summary>        
         public List<GameplayTag> IgnoreTags;
     }

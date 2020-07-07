@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayEffectPolicy:
     durationPolicy: 1
-    durationMagnitude: 2
-    _modifiers: []
+    durationMagnitude: 5
+    modifiers: []
   gameplayEffectTags:
     assetTags:
       _added: []
@@ -23,11 +23,11 @@ MonoBehaviour:
       _added:
       - {fileID: 11400000, guid: 910dc94fbfa7a024e88265c21eafc190, type: 2}
     ongoingTagRequirements:
-      _requirePresence: []
-      _requireAbsence: []
+      requirePresence: []
+      requireAbsence: []
     applicationTagRequirements:
-      _requirePresence: []
-      _requireAbsence: []
+      requirePresence: []
+      requireAbsence: []
     removeGameplayEffectsWithTag:
       _added: []
   Period:

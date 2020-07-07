@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace GameplayAbilitySystem.GameplayEffects {
     // Effect的策略集合
-    // - 时长策略 (立即生效, 区间+magnitude, 无穷)
+    // - 时长 (立即生效, 区间+magnitude, 无穷)
+    // - 修改器
     [Serializable]
     public class GameplayEffectPolicy : IGameplayEffectPolicy {
         [SerializeField]

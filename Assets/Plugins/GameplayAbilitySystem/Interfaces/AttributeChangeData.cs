@@ -12,7 +12,7 @@ namespace GameplayAbilitySystem.Attributes {
     public struct AttributeChangeData {
 
         /// <summary>
-        /// <see cref="IAttribute"/> that was cahnged
+        /// <see cref="IAttribute"/> that was change
         /// </summary>
         public IAttribute Attribute;
 
@@ -41,7 +41,7 @@ namespace GameplayAbilitySystem.Attributes {
     }
 
     [Serializable]
-    public class AttributeChangeDataEvent : UnityEvent<AttributeChangeData> {
+    public class AttributeChangeEvent : UnityEvent<AttributeChangeData> {
 
     }
 }

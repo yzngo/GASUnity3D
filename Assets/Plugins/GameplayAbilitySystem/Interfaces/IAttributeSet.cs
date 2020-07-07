@@ -53,14 +53,14 @@ namespace GameplayAbilitySystem.Interfaces {
         /// <summary>
         /// Event called whenever a base attribute value changes
         /// </summary>
-        /// <value>Event is raised with a payload of <see cref="AttributeChangeDataEvent"/></value>
-        AttributeChangeDataEvent AttributeBaseValueChanged { get; }
+        /// <value>Event is raised with a payload of <see cref="AttributeChangeEvent"/></value>
+        AttributeChangeEvent AttributeBaseValueChanged { get; }
 
         /// <summary>
         /// Event called whenever a current attribute value changes
         /// </summary>
-        /// <value>Event is raised with a payload of <see cref="AttributeChangeDataEvent"/></value>
-        AttributeChangeDataEvent AttributeCurrentValueChanged { get; }
+        /// <value>Event is raised with a payload of <see cref="AttributeChangeEvent"/></value>
+        AttributeChangeEvent AttributeCurrentValueChanged { get; }
 
         /// <summary>
         /// Gets the <see cref="AbilitySystemComponent"/> that owns this Attribute Set
