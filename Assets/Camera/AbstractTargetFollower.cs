@@ -12,9 +12,9 @@ namespace UnityStandardAssets.Cameras
             ManualUpdate, // user must call to update camera
         }
 
-        [SerializeField] protected Transform m_Target;            // The target object to follow
+        [SerializeField] protected Transform m_Target = default;            // The target object to follow
         [SerializeField] private bool m_AutoTargetPlayer = true;  // Whether the rig should automatically target the player.
-        [SerializeField] private UpdateType m_UpdateType;         // stores the selected update type
+        [SerializeField] private UpdateType m_UpdateType = default;         // stores the selected update type
 
         protected Rigidbody targetRigidbody;
 

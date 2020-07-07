@@ -30,7 +30,11 @@ namespace GameplayAbilitySystem.GameplayEffects {
 
         public ActiveGameplayEffectsEvent ActiveGameplayEffectAdded = new ActiveGameplayEffectsEvent();
 
-        public async Task<ActiveGameplayEffectData> ApplyGameEffect(ActiveGameplayEffectData EffectData) {
+
+        //todo async 异步?
+        // public async Task<ActiveGameplayEffectData> ApplyGameEffect(ActiveGameplayEffectData EffectData) {
+
+        public ActiveGameplayEffectData ApplyGameEffect(ActiveGameplayEffectData EffectData) {
             // Durational effect.  Add granted modifiers to active list
             var existingStacks = -1;
             var maxStacks = EffectData.Effect.StackingPolicy.StackLimit;
