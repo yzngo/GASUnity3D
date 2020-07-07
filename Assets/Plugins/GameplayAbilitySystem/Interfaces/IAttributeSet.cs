@@ -23,7 +23,7 @@ namespace GAS.Interfaces {
         /// <param name="Effect">Effect being executed</param>
         /// <param name="EvalData">Attribute modifier</param>
         /// <returns>True if attribute change should take effect, false otherwise</returns>
-        bool PreGameplayEffectExecute(GameplayEffect Effect, GameplayModifierEvaluatedData EvalData);
+        // bool PreGameplayEffectExecute(GameplayEffect Effect, GameplayModifierEvaluatedData EvalData);
 
         /// <summary>
         /// Called before modification to the base attribute value.  This should be used to enforce clamping rules
@@ -47,7 +47,7 @@ namespace GAS.Interfaces {
         /// </summary>
         /// <param name="Effect">Effect that was executed</param>
         /// <param name="EvalData">Attribute modifier</param>
-        void PostGameplayEffectExecute(GameplayEffect Effect, GameplayModifierEvaluatedData EvalData);
+        // void PostGameplayEffectExecute(GameplayEffect Effect, GameplayModifierEvaluatedData EvalData);
 
 
         /// <summary>

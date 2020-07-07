@@ -38,29 +38,29 @@ namespace GAS.Attributes {
         }
 
         /// <inheritdoc />
-        public bool PreGameplayEffectExecute(GameplayEffect Effect, GameplayModifierEvaluatedData EvalData) {
-            return true;
-        }
+        // public bool PreGameplayEffectExecute(GameplayEffect effect, GameplayModifierEvaluatedData evalData) {
+        //     return true;
+        // }
 
         /// <inheritdoc />
-        public void PreAttributeBaseChange(IAttribute Attribute, ref float newMagnitude) {
+        public void PreAttributeBaseChange(IAttribute attribute, ref float newMagnitude) {
             if (preAttributeBaseChangeHandler != null) {
-                preAttributeBaseChangeHandler.OnAttributeChange(this, Attribute, ref newMagnitude);
+                preAttributeBaseChangeHandler.OnAttributeChange(this, attribute, ref newMagnitude);
             }
             return;
         }
 
         /// <inheritdoc />
-        public void PreAttributeChange(IAttribute Attribute, ref float newValue) {
+        public void PreAttributeChange(IAttribute attribute, ref float newValue) {
             if (preAttributeChangeHandler != null) {
-                preAttributeChangeHandler.OnAttributeChange(this, Attribute, ref newValue);
+                preAttributeChangeHandler.OnAttributeChange(this, attribute, ref newValue);
             }
             return;
         }
 
         /// <inheritdoc />
-        public void PostGameplayEffectExecute(GameplayEffect effect, GameplayModifierEvaluatedData EvalData) {
-            return;
-        }
+        // public void PostGameplayEffectExecute(GameplayEffect effect, GameplayModifierEvaluatedData evalData) {
+        //     return;
+        // }
     }
 }
