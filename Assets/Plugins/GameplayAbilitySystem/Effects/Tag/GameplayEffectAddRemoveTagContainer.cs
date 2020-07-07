@@ -9,6 +9,7 @@ namespace GAS.GameplayEffects {
 
     [Serializable]
     public class GameplayEffectAddRemoveTagContainer : GameplayEffectTagContainer, IAddedRemovedTags {
+
         [SerializeField]
         List<GameplayTag> _added = new List<GameplayTag>();
 
