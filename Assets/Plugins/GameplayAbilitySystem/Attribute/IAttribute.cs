@@ -14,7 +14,7 @@ namespace GameplayAbilitySystem.Interfaces {
 
         /// <summary>
         /// The base value of the attribute, unaffected by e.g. buffs
-        /// 基值是角色的恒值
+        /// 基值是角色的恒值, 对数值的永久修改操作这个值
         /// </summary>
         /// <value></value>
         float BaseValue { get; }

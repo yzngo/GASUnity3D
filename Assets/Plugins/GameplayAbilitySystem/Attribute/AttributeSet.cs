@@ -23,7 +23,10 @@ namespace GameplayAbilitySystem.Attributes {
         /// <inheritdoc />
         [SerializeField]
         private List<Attribute> attributes;
-        public List<Attribute> Attributes { get => attributes; set => attributes = value; }
+        public List<Attribute> Attributes { 
+            get => attributes; 
+            set => attributes = value; 
+        }
 
         [SerializeField]
         private BaseAttributeChangeHandler preAttributeBaseChangeHandler = default;
@@ -52,15 +55,15 @@ namespace GameplayAbilitySystem.Attributes {
         }
 
         /// <inheritdoc />
-        public void PreAttributeChange(IAttribute Attribute, ref float NewValue) {
+        public void PreAttributeChange(IAttribute Attribute, ref float newValue) {
             if (preAttributeChangeHandler != null) {
-                preAttributeChangeHandler.OnAttributeChange(this, Attribute, ref NewValue);
+                preAttributeChangeHandler.OnAttributeChange(this, Attribute, ref newValue);
             }
             return;
         }
 
         /// <inheritdoc />
-        public void PostGameplayEffectExecute(GameplayEffect Effect, GameplayModifierEvaluatedData EvalData) {
+        public void PostGameplayEffectExecute(GameplayEffect effect, GameplayModifierEvaluatedData EvalData) {
             return;
         }
     }
