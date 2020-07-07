@@ -15,7 +15,7 @@ namespace GameplayAbilitySystem.Interfaces
         /// Whether the <see cref="GameplayEffect"/> lasts for some finite time, infinite time, or is applied instantly
         /// </summary>
         /// <value></value>
-        EDurationPolicy DurationPolicy { get; }
+        DurationPolicy DurationPolicy { get; }
 
         /// <summary>
         /// Duration of the <see cref="GameplayEffect"/>, if this lasts for some finite time

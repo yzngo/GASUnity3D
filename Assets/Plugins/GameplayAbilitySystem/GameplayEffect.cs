@@ -10,13 +10,15 @@ using UnityEngine;
 using GameplayAbilitySystem.GameplayCues;
 
 namespace GameplayAbilitySystem.GameplayEffects {
+
+    // 改变自己或别人的Attributes 和GameplayTags的途径
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class GameplayEffect : ScriptableObject {
         [SerializeField]
-        GameplayEffectPolicy _gameplayEffectPolicy = new GameplayEffectPolicy();
+        GameplayEffectPolicy gameplayEffectPolicy = new GameplayEffectPolicy();
 
         [SerializeField]
-        GameplayEffectTags _gameplayEffectTags = new GameplayEffectTags();
+        GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
 
         public EffectPeriodicity Period;
 
@@ -24,8 +26,8 @@ namespace GameplayAbilitySystem.GameplayEffects {
         public List<GameplayCue> GameplayCues = new List<GameplayCue>();
 
         public StackingPolicy StackingPolicy = new StackingPolicy();
-        public GameplayEffectTags GameplayEffectTags { get => _gameplayEffectTags; }
-        public GameplayEffectPolicy GameplayEffectPolicy { get => _gameplayEffectPolicy; }
+        public GameplayEffectTags GameplayEffectTags { get => gameplayEffectTags; }
+        public GameplayEffectPolicy GameplayEffectPolicy { get => gameplayEffectPolicy; }
 
         public IEnumerable<(GameplayTag Tag, GameplayEffect Effect)> GrantedEffectTags => this.GrantedTags.Select(x => (x, this));
 
@@ -46,16 +48,16 @@ namespace GameplayAbilitySystem.GameplayEffects {
         }
 
         public List<GameplayTag> GetOwningTags() {
-            var tags = new List<GameplayTag>(_gameplayEffectTags.GrantedTags.Added.Count
-                                            + _gameplayEffectTags.AssetTags.Added.Count);
+            var tags = new List<GameplayTag>(gameplayEffectTags.GrantedTags.Added.Count
+                                            + gameplayEffectTags.AssetTags.Added.Count);
 
-            tags.AddRange(_gameplayEffectTags.GrantedTags.Added);
-            tags.AddRange(_gameplayEffectTags.AssetTags.Added);
+            tags.AddRange(gameplayEffectTags.GrantedTags.Added);
+            tags.AddRange(gameplayEffectTags.AssetTags.Added);
 
             return tags;
         }
 
-        public List<GameplayTag> GrantedTags => _gameplayEffectTags.GrantedTags.Added;
+        public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedTags.Added;
 
         public bool ApplicationRequirementsPass(AbilitySystemComponent AbilitySystem) {
             // return _gameplayEffectTags.ApplicationTagRequirements.RequirePresence;
@@ -63,10 +65,10 @@ namespace GameplayAbilitySystem.GameplayEffects {
             return true;
         }
 
-        public Dictionary<AttributeType, Dictionary<EModifierOperationType, float>> CalculateModifierEffect(Dictionary<AttributeType, Dictionary<EModifierOperationType, float>> Existing = null) {
-            Dictionary<AttributeType, Dictionary<EModifierOperationType, float>> modifierTotals;
+        public Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> CalculateModifierEffect(Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> Existing = null) {
+            Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> modifierTotals;
             if (Existing == null) {
-                modifierTotals = new Dictionary<AttributeType, Dictionary<EModifierOperationType, float>>();
+                modifierTotals = new Dictionary<AttributeType, Dictionary<ModifierOperationType, float>>();
 
             } else {
                 modifierTotals = Existing;
@@ -75,17 +77,17 @@ namespace GameplayAbilitySystem.GameplayEffects {
             foreach (var modifier in this.GameplayEffectPolicy.Modifiers) {
                 if (!modifierTotals.TryGetValue(modifier.Attribute, out var modifierType)) {
                     // This attribute hasn't been recorded before, so create a blank new record
-                    modifierType = new Dictionary<EModifierOperationType, float>();
+                    modifierType = new Dictionary<ModifierOperationType, float>();
                     modifierTotals.Add(modifier.Attribute, modifierType);
                 }
 
                 if (!modifierType.TryGetValue(modifier.ModifierOperation, out var value)) {
                     value = 0;
                     switch (modifier.ModifierOperation) {
-                        case EModifierOperationType.Multiply:
+                        case ModifierOperationType.Multiply:
                             value = 1;
                             break;
-                        case EModifierOperationType.Divide:
+                        case ModifierOperationType.Divide:
                             value = 1;
                             break;
                         default:
@@ -97,13 +99,13 @@ namespace GameplayAbilitySystem.GameplayEffects {
                 }
 
                 switch (modifier.ModifierOperation) {
-                    case EModifierOperationType.Add:
+                    case ModifierOperationType.Add:
                         modifierTotals[modifier.Attribute][modifier.ModifierOperation] += modifier.ScaledMagnitude;
                         break;
-                    case EModifierOperationType.Multiply:
+                    case ModifierOperationType.Multiply:
                         modifierTotals[modifier.Attribute][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
                         break;
-                    case EModifierOperationType.Divide:
+                    case ModifierOperationType.Divide:
                         modifierTotals[modifier.Attribute][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
                         break;
                 }
@@ -112,19 +114,19 @@ namespace GameplayAbilitySystem.GameplayEffects {
             return modifierTotals;
         }
 
-        public Dictionary<AttributeType, AttributeModificationValues> CalculateAttributeModification(IGameplayAbilitySystem AbilitySystem, Dictionary<AttributeType, Dictionary<EModifierOperationType, float>> Modifiers, bool operateOnCurrentValue = false) {
+        public Dictionary<AttributeType, AttributeModificationValues> CalculateAttributeModification(IGameplayAbilitySystem AbilitySystem, Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> Modifiers, bool operateOnCurrentValue = false) {
             var attributeModification = new Dictionary<AttributeType, AttributeModificationValues>();
 
             foreach (var attribute in Modifiers) {
-                if (!attribute.Value.TryGetValue(EModifierOperationType.Add, out var addition)) {
+                if (!attribute.Value.TryGetValue(ModifierOperationType.Add, out var addition)) {
                     addition = 0;
                 }
 
-                if (!attribute.Value.TryGetValue(EModifierOperationType.Multiply, out var multiplication)) {
+                if (!attribute.Value.TryGetValue(ModifierOperationType.Multiply, out var multiplication)) {
                     multiplication = 1;
                 }
 
-                if (!attribute.Value.TryGetValue(EModifierOperationType.Divide, out var division)) {
+                if (!attribute.Value.TryGetValue(ModifierOperationType.Divide, out var division)) {
                     division = 1;
                 }
 

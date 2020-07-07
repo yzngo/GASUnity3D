@@ -37,25 +37,25 @@ namespace GameplayAbilitySystem.GameplayEffects {
             IEnumerable<ActiveGameplayEffectData> matchingStackedActiveEffects = GetMatchingEffectsForActiveEffect(EffectData);
 
             switch (EffectData.Effect.StackingPolicy.StackDurationRefreshPolicy) {
-                case EStackRefreshPolicy.RefreshOnSuccessfulApplication: // We refresh all instances of this game effect
+                case StackRefreshPolicy.RefreshOnSuccessfulApplication: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
                         effect.ResetDuration();
                     }
                     break;
-                case EStackRefreshPolicy.NeverRefresh: // Don't do anything.  Effect will expire naturally
+                case StackRefreshPolicy.NeverRefresh: // Don't do anything.  Effect will expire naturally
                     break;
 
             }
 
             switch (EffectData.Effect.StackingPolicy.StackPeriodResetPolicy) {
-                case EStackRefreshPolicy.RefreshOnSuccessfulApplication: // We refresh all instances of this game effect
+                case StackRefreshPolicy.RefreshOnSuccessfulApplication: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
                         effect.ResetPeriodicTime();
                     }
                     break;
-                case EStackRefreshPolicy.NeverRefresh: // Don't do anything.  Each stack maintains its own periodic effect
+                case StackRefreshPolicy.NeverRefresh: // Don't do anything.  Each stack maintains its own periodic effect
                     break;
             }
 
@@ -65,8 +65,8 @@ namespace GameplayAbilitySystem.GameplayEffects {
                 AddActiveGameplayEffect(EffectData);
                 ActiveGameplayEffectAdded?.Invoke(AbilitySystem, EffectData);
                 // We only need to do timed checks for durational abilities
-                if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.EDurationPolicy.HasDuration
-                    || EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.EDurationPolicy.Infinite) {
+                if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Duration
+                    || EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Infinite) {
                     var removalTime = EffectData.Effect.GameplayEffectPolicy.DurationMagnitude * 1000.0f;
                     CheckGameplayEffectForTimedEffects(EffectData);
                 }
@@ -144,11 +144,11 @@ namespace GameplayAbilitySystem.GameplayEffects {
 
                 if (EffectData.bForceRemoveEffect) {
                     durationExpired = true;
-                } else if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.EDurationPolicy.HasDuration) {
+                } else if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Duration) {
                     // Check whether required time has expired
                     // We only need to do this for effects with a finite duration
                     durationExpired = EffectData.CooldownTimeRemaining <= 0 ? true : false;
-                } else if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.EDurationPolicy.Infinite) {
+                } else if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Infinite) {
                     durationExpired = EffectData.StartWorldTime <= 0 ? true : false;
                 }
 
@@ -185,14 +185,14 @@ namespace GameplayAbilitySystem.GameplayEffects {
             IEnumerable<ActiveGameplayEffectData> matchingEffects;
 
             switch (EffectData.Effect.StackingPolicy.StackExpirationPolicy) {
-                case EStackExpirationPolicy.ClearEntireStack: // Remove all effects which match
+                case StackExpirationPolicy.ClearEntireStack: // Remove all effects which match
                     matchingEffects = GetMatchingEffectsForActiveEffect(EffectData);
                     if (matchingEffects == null) break;
                     foreach (var effect in matchingEffects) {
                         effect.EndEffect();
                     }
                     break;
-                case EStackExpirationPolicy.RemoveSingleStackAndRefreshDuration:
+                case StackExpirationPolicy.RemoveSingleStackAndRefreshDuration:
                     // Remove this effect, and reset all other durations to max
                     matchingEffects = GetMatchingEffectsForActiveEffect(EffectData);
                     if (matchingEffects == null) break;
@@ -208,7 +208,7 @@ namespace GameplayAbilitySystem.GameplayEffects {
                     // This effect was going to expire anyway, but we put this here to be explicit to future code readers
                     EffectData.EndEffect();
                     break;
-                case EStackExpirationPolicy.RefreshDuration:
+                case StackExpirationPolicy.RefreshDuration:
                     // Refreshing duration on expiry basically means the effect can never expire
                     matchingEffects = GetMatchingEffectsForActiveEffect(EffectData);
                     if (matchingEffects == null) break;
@@ -260,16 +260,16 @@ namespace GameplayAbilitySystem.GameplayEffects {
             switch (EffectData.Effect.StackingPolicy.StackingType) {
                 // Stacking Type None:
                 // Add effect as a separate instance. 
-                case EStackingType.None:
+                case StackingType.None:
                     break;
 
-                case EStackingType.AggregatedBySource:
+                case StackingType.AggregatedBySource:
                     matchingStackedActiveEffects = this.ActiveEffectAttributeAggregator
                                         .GetActiveEffects()
                                         .Where(x => x.Instigator == EffectData.Instigator && x.Effect == EffectData.Effect);
                     break;
 
-                case EStackingType.AggregatedByTarget:
+                case StackingType.AggregatedByTarget:
                     matchingStackedActiveEffects = this.ActiveEffectAttributeAggregator
                                         .GetActiveEffects()
                                         .Where(x => x.Effect == EffectData.Effect);

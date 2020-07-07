@@ -3,22 +3,24 @@ using System;
 namespace GameplayAbilitySystem.GameplayEffects {
     [Serializable]
     public class StackingPolicy {
-        public EStackingType StackingType;
+        public StackingType StackingType;
         public int StackLimit;
-        public EStackRefreshPolicy StackDurationRefreshPolicy;
-        public EStackRefreshPolicy StackPeriodResetPolicy;
-        public EStackExpirationPolicy StackExpirationPolicy;
+        public StackRefreshPolicy StackDurationRefreshPolicy;
+        public StackRefreshPolicy StackPeriodResetPolicy;
+        public StackExpirationPolicy StackExpirationPolicy;
     }
 
-    public enum EStackingType {
-        None, AggregatedBySource, AggregatedByTarget
+    public enum StackingType {
+        None, 
+        AggregatedBySource, 
+        AggregatedByTarget
     }
 
-    public enum EStackRefreshPolicy {
+    public enum StackRefreshPolicy {
         RefreshOnSuccessfulApplication, NeverRefresh
     }
 
-    public enum EStackExpirationPolicy {
+    public enum StackExpirationPolicy {
         ClearEntireStack, RemoveSingleStackAndRefreshDuration, RefreshDuration
     }
 }

@@ -12,17 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cc1ff66db5d0749b0bab3afccec0ce, type: 3}
   m_Name: Gameplay Effect - Blood Pact
   m_EditorClassIdentifier: 
-  _gameplayEffectPolicy:
-    _durationPolicy: 2
-    _durationMagnitude: 20
+  gameplayEffectPolicy:
+    durationPolicy: 1
+    durationMagnitude: 20
     _modifiers: []
-  _gameplayEffectTags:
-    _assetTags:
+  gameplayEffectTags:
+    assetTags:
       _added: []
-    _grantedTags:
+    grantedTags:
       _added:
       - {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
-    _removeGameplayEffectsWithTag:
+    ongoingTagRequirements:
+      _requirePresence: []
+      _requireAbsence: []
+    applicationTagRequirements:
+      _requirePresence: []
+      _requireAbsence: []
+    removeGameplayEffectsWithTag:
       _added: []
   Period:
     Period: 1

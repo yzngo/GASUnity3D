@@ -6,25 +6,25 @@ namespace GameplayAbilitySystem.GameplayEffects {
     [Serializable]
     public class GameplayEffectTags : IGameplayEffectTags {
         [SerializeField]
-        private GameplayEffectAddRemoveTagContainer _assetTags = new GameplayEffectAddRemoveTagContainer();
+        private GameplayEffectAddRemoveTagContainer assetTags = new GameplayEffectAddRemoveTagContainer();
 
         [SerializeField]
-        private GameplayEffectAddRemoveTagContainer _grantedTags = new GameplayEffectAddRemoveTagContainer();
+        private GameplayEffectAddRemoveTagContainer grantedTags = new GameplayEffectAddRemoveTagContainer();
 
         [SerializeField]
-        private GameplayEffectRequireIgnoreTagContainer _ongoingTagRequirements = new GameplayEffectRequireIgnoreTagContainer();
+        private GameplayEffectRequireIgnoreTagContainer ongoingTagRequirements = new GameplayEffectRequireIgnoreTagContainer();
 
         [SerializeField]
-        private GameplayEffectRequireIgnoreTagContainer _applicationTagRequirements = new GameplayEffectRequireIgnoreTagContainer();
+        private GameplayEffectRequireIgnoreTagContainer applicationTagRequirements = new GameplayEffectRequireIgnoreTagContainer();
 
         [SerializeField]
-        private GameplayEffectAddRemoveStacksTagContainer _removeGameplayEffectsWithTag = new GameplayEffectAddRemoveStacksTagContainer();
+        private GameplayEffectAddRemoveStacksTagContainer removeGameplayEffectsWithTag = new GameplayEffectAddRemoveStacksTagContainer();
 
-        public GameplayEffectAddRemoveTagContainer AssetTags => _assetTags;
-        public GameplayEffectAddRemoveTagContainer GrantedTags => _grantedTags;
-        public GameplayEffectRequireIgnoreTagContainer OngoingTagRequirements => _ongoingTagRequirements;
-        public GameplayEffectRequireIgnoreTagContainer ApplicationTagRequirements => _applicationTagRequirements;
-        public GameplayEffectAddRemoveStacksTagContainer RemoveGameplayEffectsWithTag => _removeGameplayEffectsWithTag;
+        public GameplayEffectAddRemoveTagContainer AssetTags => assetTags;
+        public GameplayEffectAddRemoveTagContainer GrantedTags => grantedTags;
+        public GameplayEffectRequireIgnoreTagContainer OngoingTagRequirements => ongoingTagRequirements;
+        public GameplayEffectRequireIgnoreTagContainer ApplicationTagRequirements => applicationTagRequirements;
+        public GameplayEffectAddRemoveStacksTagContainer RemoveGameplayEffectsWithTag => removeGameplayEffectsWithTag;
 
     }
 

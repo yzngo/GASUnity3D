@@ -137,8 +137,8 @@ namespace GameplayAbilitySystem.Interfaces {
         /// <summary>
         /// <para>
         /// Applies batched <see cref="GameplayEffect"/>.  This can be useful if e.g. an ability applies
-        /// a number of <see cref="GameplayEffect"/>, some with <see cref="EDurationPolicy.Instant"/> Instant modifiers, and some with 
-        /// <see cref="EDurationPolicy.Infinite"/> or <see cref="EDurationPolicy.HasDuration"/> modifiers.  
+        /// a number of <see cref="GameplayEffect"/>, some with <see cref="DurationPolicy.Instant"/> Instant modifiers, and some with 
+        /// <see cref="DurationPolicy.Infinite"/> or <see cref="DurationPolicy.Duration"/> modifiers.  
         /// By batching these <see cref="GameplayEffect"/>, we can ensure that all of these <see cref="GameplayEffect"/> happen
         /// with reference to the same base attribute value.  
         /// </para>

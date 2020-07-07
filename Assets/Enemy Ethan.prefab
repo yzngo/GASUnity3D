@@ -1770,6 +1770,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1781,6 +1782,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1976,21 +1978,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544bca395e0b0ef4d9dfece00bc3c242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PreviousAnimationEvent: {fileID: 0}
   CustomAnimationEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: GameplayAbilitySystem.CustomAnimationUnityEvent, Assembly-CSharp-firstpass,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   AnimationComplete:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   AnimationStarted:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &5555714685437361603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2007,25 +2004,15 @@ MonoBehaviour:
   _onGameplayAbilityActivated:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: GameplayAbilitySystem.Events.GenericAbilityEvent, Assembly-CSharp-firstpass,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _onGameplayAbilityEnded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: GameplayAbilitySystem.Events.GenericAbilityEvent, Assembly-CSharp-firstpass,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   _onGameplayEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: GameplayAbilitySystem.Events.GameplayEvent, Assembly-CSharp-firstpass,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  _activeGameplayEffectsContainer:
-    _activeCooldowns: []
   _onGameplayAbilityCommitted:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: GameplayAbilitySystem.Events.GenericAbilityEvent, Assembly-CSharp-firstpass,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &5555714685437361608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2038,17 +2025,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b4ca8122047dc4a9f205f9a7323c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attributeBaseValueChanged:
+  attributeBaseValueChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: GameplayAbilitySystem.Attributes.AttributeChangeDataEvent, Assembly-CSharp-firstpass,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  _attributeCurrentValueChanged:
+  attributeCurrentValueChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: GameplayAbilitySystem.Attributes.AttributeChangeDataEvent, Assembly-CSharp-firstpass,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  _attributes:
+  attributes:
   - _attributeType: {fileID: 11400000, guid: 8769ea8817563784a87cb6142aef671b, type: 2}
     _baseValue: 100
     _currentValue: 100
@@ -2064,8 +2047,8 @@ MonoBehaviour:
   - _attributeType: {fileID: 11400000, guid: 9513cbcc3a089f742b9c48ae4201b1db, type: 2}
     _baseValue: 20
     _currentValue: 20
-  _preAttributeBaseChangeHandler: {fileID: 0}
-  _preAttributeChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
+  preAttributeBaseChangeHandler: {fileID: 0}
+  preAttributeChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
     type: 2}
 --- !u!114 &7899279095716547604
 MonoBehaviour:
@@ -2934,7 +2917,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6587082090465148645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -2956,7 +2939,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6587082090465148645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
@@ -2971,11 +2954,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2813750359774979275}
     m_Modifications:
-    - target: {fileID: 5694074306757467403, guid: e05a0ff48b22f914d920b149824050af,
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
-      propertyPath: m_Name
-      value: Bar
-      objectReference: {fileID: 0}
+      propertyPath: AttributeSet
+      value: 
+      objectReference: {fileID: 5555714685437361608}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: AttributeType
+      value: 
+      objectReference: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a,
+        type: 2}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: MaxAttributeType
+      value: 
+      objectReference: {fileID: 11400000, guid: 8769ea8817563784a87cb6142aef671b,
+        type: 2}
     - target: {fileID: 2202905021266549665, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3081,23 +3076,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+    - target: {fileID: 5694074306757467403, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
-      propertyPath: AttributeSet
-      value: 
-      objectReference: {fileID: 5555714685437361608}
-    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
-        type: 3}
-      propertyPath: AttributeType
-      value: 
-      objectReference: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a,
-        type: 2}
-    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
-        type: 3}
-      propertyPath: MaxAttributeType
-      value: 
-      objectReference: {fileID: 11400000, guid: 8769ea8817563784a87cb6142aef671b,
-        type: 2}
+      propertyPath: m_Name
+      value: Bar
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e05a0ff48b22f914d920b149824050af, type: 3}
 --- !u!224 &1175243351360853813 stripped

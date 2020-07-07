@@ -13,10 +13,10 @@ namespace GameplayAbilitySystem.GameplayEffects {
             this.AttributeType = AttributeType;
         }
 
-        public Dictionary<EModifierOperationType, List<AggregatorModifier>> Mods { get; } = new Dictionary<EModifierOperationType, List<AggregatorModifier>>();
+        public Dictionary<ModifierOperationType, List<AggregatorModifier>> Mods { get; } = new Dictionary<ModifierOperationType, List<AggregatorModifier>>();
         public AggregatorEvent Dirtied { get; set; } = new AggregatorEvent();
 
-        public void AddAggregatorMod(float EvaluatedMagnitude, EModifierOperationType ModifierOperation) {
+        public void AddAggregatorMod(float EvaluatedMagnitude, ModifierOperationType ModifierOperation) {
             // If aggregator exists, check if we have a definition for this modifier operation
             if (!Mods.TryGetValue(ModifierOperation, out var aggregateMods)) {
                 aggregateMods = new List<AggregatorModifier>();
@@ -43,7 +43,7 @@ namespace GameplayAbilitySystem.GameplayEffects {
 
         public float GetAdditives() {
             var additive = 0f;
-            if (Mods.TryGetValue(EModifierOperationType.Add, out var AddModifier)) {
+            if (Mods.TryGetValue(ModifierOperationType.Add, out var AddModifier)) {
                 additive = SumMods(AddModifier);
             }
 
@@ -53,12 +53,12 @@ namespace GameplayAbilitySystem.GameplayEffects {
         public float GetMultipliers() {
             var multiplier = 1f;
             var divider = 1f;
-            if (Mods.TryGetValue(EModifierOperationType.Multiply, out var MultiplyModifiers)) {
-                multiplier = ProductMods(Mods[EModifierOperationType.Multiply]);
+            if (Mods.TryGetValue(ModifierOperationType.Multiply, out var MultiplyModifiers)) {
+                multiplier = ProductMods(Mods[ModifierOperationType.Multiply]);
             }
 
-            if (Mods.TryGetValue(EModifierOperationType.Divide, out var DivideModifier)) {
-                divider = ProductMods(Mods[EModifierOperationType.Divide]);
+            if (Mods.TryGetValue(ModifierOperationType.Divide, out var DivideModifier)) {
+                divider = ProductMods(Mods[ModifierOperationType.Divide]);
             }
 
             return multiplier / divider;
@@ -69,16 +69,16 @@ namespace GameplayAbilitySystem.GameplayEffects {
             float multiplicative = 1;
             float divisive = 1;
 
-            if (Mods.TryGetValue(EModifierOperationType.Add, out var AddModifier)) {
-                additive = SumMods(Mods[EModifierOperationType.Add]);
+            if (Mods.TryGetValue(ModifierOperationType.Add, out var AddModifier)) {
+                additive = SumMods(Mods[ModifierOperationType.Add]);
             }
 
-            if (Mods.TryGetValue(EModifierOperationType.Multiply, out var MultiplyModifier)) {
-                multiplicative = ProductMods(Mods[EModifierOperationType.Multiply]);
+            if (Mods.TryGetValue(ModifierOperationType.Multiply, out var MultiplyModifier)) {
+                multiplicative = ProductMods(Mods[ModifierOperationType.Multiply]);
             }
 
-            if (Mods.TryGetValue(EModifierOperationType.Divide, out var DivideModifier)) {
-                divisive = ProductMods(Mods[EModifierOperationType.Divide]);
+            if (Mods.TryGetValue(ModifierOperationType.Divide, out var DivideModifier)) {
+                divisive = ProductMods(Mods[ModifierOperationType.Divide]);
             }
 
             return (BaseValue + additive) * (multiplicative / divisive);

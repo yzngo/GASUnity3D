@@ -13,37 +13,37 @@ namespace GameplayAbilitySystem {
     [Serializable]
     public class GameplayEffectModifier : IGameplayEffectModifier {
         [SerializeField]
-        private AttributeType _attributeType = null;
+        private AttributeType attributeType = null;
 
         [SerializeField]
-        private EModifierOperationType _modifierOperationType = default;
+        private ModifierOperationType modifierOperationType = default;
         [Space(10)]
 
         [SerializeField]
-        private EMagnitudeCalculationTypes _magnitudeCalculationType = default;
+        private ModifierCalculationType magnitudeCalculationType = default;
 
         [SerializeField]
-        private float _scaledMagnitude = 0f;
+        private float scaledMagnitude = 0f;
         [Space(10)]
 
         [SerializeField]
-        private GameplayEffectModifierTagCollection _sourceTags = null;
+        private GameplayEffectModifierTagCollection sourceTags = null;
 
         [SerializeField]
-        private GameplayEffectModifierTagCollection _targetTags = null;
+        private GameplayEffectModifierTagCollection targetTags = null;
 
         /// <inheritdoc />
-        public AttributeType Attribute => _attributeType;
+        public AttributeType Attribute => attributeType;
         /// <inheritdoc />
-        public EModifierOperationType ModifierOperation => _modifierOperationType;
+        public ModifierOperationType ModifierOperation => modifierOperationType;
         /// <inheritdoc />
-        public float ScaledMagnitude => _scaledMagnitude;
+        public float ScaledMagnitude => scaledMagnitude;
         /// <inheritdoc />
-        public EMagnitudeCalculationTypes MagnitudeCalculationType => _magnitudeCalculationType;
+        public ModifierCalculationType ModifierCalculationType => magnitudeCalculationType;
         /// <inheritdoc />
-        public GameplayEffectModifierTagCollection SourceTags => _sourceTags;
+        public GameplayEffectModifierTagCollection SourceTags => sourceTags;
         /// <inheritdoc />
-        public GameplayEffectModifierTagCollection TargetTags => _targetTags;
+        public GameplayEffectModifierTagCollection TargetTags => targetTags;
 
         /// <inheritdoc />
         public bool AttemptCalculateMagnitude(out float EvaluatedMagnitude) {
@@ -53,7 +53,7 @@ namespace GameplayAbilitySystem {
         }
 
         public GameplayEffectModifier InitialiseEmpty() {
-            this._attributeType = null;
+            this.attributeType = null;
             return this;
         }
 

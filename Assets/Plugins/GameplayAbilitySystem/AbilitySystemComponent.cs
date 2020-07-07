@@ -146,11 +146,11 @@ namespace GameplayAbilitySystem {
 
         public async void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, IGameplayAbilitySystem Target, float Level)> BatchedGameplayEffects) {
 
-            var instantEffects = BatchedGameplayEffects.Where(x => x.Effect.GameplayEffectPolicy.DurationPolicy == Enums.EDurationPolicy.Instant);
+            var instantEffects = BatchedGameplayEffects.Where(x => x.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Instant);
             var durationalEffects = BatchedGameplayEffects.Where(
                 x =>
-                    x.Effect.GameplayEffectPolicy.DurationPolicy == Enums.EDurationPolicy.HasDuration ||
-                    x.Effect.GameplayEffectPolicy.DurationPolicy == Enums.EDurationPolicy.Infinite
+                    x.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Duration ||
+                    x.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Infinite
                     );
 
             // Apply instant effects
@@ -188,7 +188,7 @@ namespace GameplayAbilitySystem {
             // If this is an instant gameplay effect (i.e. it will modify the base value)
 
             // Handling Instant effects is different to handling HasDuration and Infinite effects
-            if (Effect.GameplayEffectPolicy.DurationPolicy == Enums.EDurationPolicy.Instant) {
+            if (Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Instant) {
                 Effect.ApplyInstantEffect(Target);
             } else {
                 // Durational effects require attention to many more things than instant effects

@@ -11,27 +11,27 @@ namespace GameplayAbilitySystem.Attributes {
     [RequireComponent(typeof(AbilitySystemComponent))]
     public class AttributeSet : MonoBehaviour, IAttributeSet {
         [SerializeField]
-        private AttributeChangeDataEvent _attributeBaseValueChanged = default;
+        private AttributeChangeDataEvent attributeBaseValueChanged = default;
         /// <inheritdoc />
-        public AttributeChangeDataEvent AttributeBaseValueChanged => _attributeBaseValueChanged;
+        public AttributeChangeDataEvent AttributeBaseValueChanged => attributeBaseValueChanged;
 
         /// <inheritDoc />
         [SerializeField]
-        private AttributeChangeDataEvent _attributeCurrentValueChanged = default;
-        public AttributeChangeDataEvent AttributeCurrentValueChanged => _attributeCurrentValueChanged;
+        private AttributeChangeDataEvent attributeCurrentValueChanged = default;
+        public AttributeChangeDataEvent AttributeCurrentValueChanged => attributeCurrentValueChanged;
 
         /// <inheritdoc />
         [SerializeField]
-        private List<Attribute> _attributes;
-        public List<Attribute> Attributes { get => _attributes; set => _attributes = value; }
+        private List<Attribute> attributes;
+        public List<Attribute> Attributes { get => attributes; set => attributes = value; }
 
         [SerializeField]
-        private BaseAttributeChangeHandler _preAttributeBaseChangeHandler = default;
-        public BaseAttributeChangeHandler PreAttributeBaseChangeHandler => _preAttributeBaseChangeHandler;
+        private BaseAttributeChangeHandler preAttributeBaseChangeHandler = default;
+        public BaseAttributeChangeHandler PreAttributeBaseChangeHandler => preAttributeBaseChangeHandler;
 
         [SerializeField]
-        private BaseAttributeChangeHandler _preAttributeChangeHandler = default;
-        public BaseAttributeChangeHandler PreAttributeChangeHandler => _preAttributeChangeHandler;
+        private BaseAttributeChangeHandler preAttributeChangeHandler = default;
+        public BaseAttributeChangeHandler PreAttributeChangeHandler => preAttributeChangeHandler;
 
         /// <inheritdoc />
         public AbilitySystemComponent GetOwningAbilitySystem() {
@@ -45,16 +45,16 @@ namespace GameplayAbilitySystem.Attributes {
 
         /// <inheritdoc />
         public void PreAttributeBaseChange(IAttribute Attribute, ref float newMagnitude) {
-            if (_preAttributeBaseChangeHandler != null) {
-                _preAttributeBaseChangeHandler.OnAttributeChange(this, Attribute, ref newMagnitude);
+            if (preAttributeBaseChangeHandler != null) {
+                preAttributeBaseChangeHandler.OnAttributeChange(this, Attribute, ref newMagnitude);
             }
             return;
         }
 
         /// <inheritdoc />
         public void PreAttributeChange(IAttribute Attribute, ref float NewValue) {
-            if (_preAttributeChangeHandler != null) {
-                _preAttributeChangeHandler.OnAttributeChange(this, Attribute, ref NewValue);
+            if (preAttributeChangeHandler != null) {
+                preAttributeChangeHandler.OnAttributeChange(this, Attribute, ref NewValue);
             }
             return;
         }

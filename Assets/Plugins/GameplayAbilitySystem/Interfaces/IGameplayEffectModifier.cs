@@ -21,16 +21,16 @@ namespace GameplayAbilitySystem.Interfaces {
         /// The operation (add, multiply, etc.) to apply to the attribute
         /// </summary>
         /// <value></value>
-        EModifierOperationType ModifierOperation { get; }
+        ModifierOperationType ModifierOperation { get; }
 
         /// <summary>
         /// How the modification value is obtained
         /// </summary>
         /// <value></value>
-        EMagnitudeCalculationTypes MagnitudeCalculationType { get; }
+        ModifierCalculationType ModifierCalculationType { get; }
 
         /// <summary>
-        /// Modification value for ScalableFloat type <see cref="EMagnitudeCalculationTypes"/>
+        /// Modification value for ScalableFloat type <see cref="Enums.ModifierCalculationType"/>
         /// </summary>
         /// <value></value>
         float ScaledMagnitude { get; }

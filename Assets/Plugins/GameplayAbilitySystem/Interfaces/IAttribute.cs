@@ -14,12 +14,14 @@ namespace GameplayAbilitySystem.Interfaces {
 
         /// <summary>
         /// The base value of the attribute, unaffected by e.g. buffs
+        /// 基值是角色的恒值
         /// </summary>
         /// <value></value>
         float BaseValue { get; }
 
         /// <summary>
         /// This current value of the attribute, after application of temporary effects, e.g. buffs
+        /// 当前值是临时修改值,buff过期后会回到原来的值
         /// </summary>
         /// <value></value>        
         float CurrentValue { get; }
