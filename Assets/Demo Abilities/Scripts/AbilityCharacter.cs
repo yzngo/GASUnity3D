@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GAS.ExtensionMethods;
-using GAS.Statics;
 using GAS;
 using GAS.Abilities;
 using UniRx.Async;
@@ -40,7 +39,6 @@ public class AbilityCharacter : MonoBehaviour
         //     Debug.Log(item.Effect.GameplayEffectPolicy.DurationMagnitude - item.CooldownTimeElapsed);
         // }
     }
-
     public void CastAbility(int n)
     {
         if (n >= this.Abilities.Count) return;
@@ -59,7 +57,7 @@ public class AbilityCharacter : MonoBehaviour
         if (SelfAbilitySystem.TryActivateAbility(Ability))
         {
             // Send gameplay event to this player with information on target etc
-            AbilitySystemStatics.SendGameplayEventToComponent(SelfAbilitySystem, eventTag, gameplayEventData);
+            SelfAbilitySystem.HandleGameplayEvent(eventTag, gameplayEventData);
         }
     }
 

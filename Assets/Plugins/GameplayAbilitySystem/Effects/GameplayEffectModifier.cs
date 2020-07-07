@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using GAS.Statics;
 using GAS.Attributes;
 using GAS.Enums;
 using GAS.GameplayEffects;
