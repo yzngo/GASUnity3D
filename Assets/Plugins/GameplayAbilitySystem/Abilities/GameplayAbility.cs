@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GAS.Events;
 using GAS.Interfaces;
 using GAS.GameplayEffects;
 using UnityEngine;

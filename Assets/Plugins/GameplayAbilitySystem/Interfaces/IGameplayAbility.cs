@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GAS;
 using GAS.Abilities.AbilityActivations;
-using GAS.Events;
+using GAS.Abilities;
 using GAS.GameplayEffects;
 using UnityEngine;
 using UnityEngine.Events;

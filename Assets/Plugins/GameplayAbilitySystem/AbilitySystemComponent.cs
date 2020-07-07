@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GAS.ExtensionMethods;
 using GAS.Abilities;
-using GAS.Events;
 using GAS.GameplayEffects;
 using GAS.Interfaces;
 using UnityEngine;

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GAS.Events;
 using GAS.ExtensionMethods;
 using GAS.GameplayEffects;
 using GAS.Interfaces;

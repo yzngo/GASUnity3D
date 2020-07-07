@@ -6,7 +6,6 @@ using GAS.ExtensionMethods;
 using GAS.Statics;
 using GAS;
 using GAS.Abilities;
-using GAS.Events;
 using UniRx.Async;
 using UnityEngine;
 using System;

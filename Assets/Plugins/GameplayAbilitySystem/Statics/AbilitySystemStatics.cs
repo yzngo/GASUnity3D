@@ -1,7 +1,7 @@
 using System;
 using GAS;
 using GAS.Enums;
-using GAS.Events;
+using GAS.Abilities;
 
 namespace GAS.Statics {
     public class AbilitySystemStatics {

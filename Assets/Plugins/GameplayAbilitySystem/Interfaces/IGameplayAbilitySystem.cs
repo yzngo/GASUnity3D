@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using GAS.Abilities;
 using GAS.Attributes;
-using GAS.Events;
 using GAS.GameplayEffects;
 using UnityEngine;
 using UnityEngine.Events;

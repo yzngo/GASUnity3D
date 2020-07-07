@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace GAS.Events {
+namespace GAS.Abilities {
     [Serializable]
     public class GenericAbilityEvent : UnityEvent<IGameplayAbility> {
 
