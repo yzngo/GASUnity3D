@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693dcab1d31af7744b28f721da4f30d4, type: 3}
   m_Name: Ability.Magic.Heal
   m_EditorClassIdentifier: 
-  Comment: Healing Ability
+  Comment: "\u6CBB\u7597\u672F"
