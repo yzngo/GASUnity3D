@@ -102,7 +102,7 @@ namespace GAS.GameplayEffects {
                 modifier.AttemptCalculateMagnitude(out var EvaluatedMagnitude);
 
                 // Check if we already have an entry for this gameplay effect attribute modifier
-                var attributeAggregatorMap = ActiveEffectAttributeAggregator.AddOrGet(effectData);
+                var attributeAggregatorMap = ActiveEffectAttributeAggregator.Get(effectData);
                 if (modifier.Attribute != null) {
                     // If aggregator for this attribute doesn't exist, add it.
                     if (!attributeAggregatorMap.TryGetValue(modifier.Attribute, out var aggregator)) {
@@ -255,7 +255,6 @@ namespace GAS.GameplayEffects {
             var baseAttributeValue = AbilitySystem.GetNumericAttributeBase(attributeType);
             var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
             AbilitySystem.SetNumericAttributeCurrent(attributeType, newCurrentAttributeValue);
-
         }
 
         public IEnumerable<ActiveGameplayEffectData> GetMatchingEffectsForActiveEffect(ActiveGameplayEffectData effectData) {

@@ -5,6 +5,8 @@ using UnityEngine.Events;
 using GAS.Attributes;
 
 namespace GAS.GameplayEffects {
+    
+    // 某个属性的聚合器 (HP的聚合器, MP的聚合器, etc.)
     public class Aggregator {
         private AttributeType attributeType;
 
@@ -80,26 +82,27 @@ namespace GAS.GameplayEffects {
             if (modifiers.TryGetValue(ModifierOperationType.Divide, out var DivideModifier)) {
                 divisive = ProductModifier(modifiers[ModifierOperationType.Divide]);
             }
-
             return (baseValue + additive) * (multiplicative / divisive);
         }
-    }
 
-    public class AggregatorModifier {
-        // 计算出的数量值
-        public readonly float EvaluatedMagnitude;
-        // public float Stacks { get; private set; }
 
-        public AggregatorModifier(float evaluatedMagnitude, float Stacks = 1) {
-            // this.Stacks = Stacks;
-            this.EvaluatedMagnitude = evaluatedMagnitude;
+        public class AggregatorModifier {
+            // 计算出的数量值
+            public readonly float EvaluatedMagnitude;
+            // public float Stacks { get; private set; }
+
+            public AggregatorModifier(float evaluatedMagnitude, float Stacks = 1) {
+                // this.Stacks = Stacks;
+                this.EvaluatedMagnitude = evaluatedMagnitude;
+            }
+
         }
-
     }
 
-    public class AggregatorEvent : UnityEvent<Aggregator, AttributeType> {
 
-    }
+    // public class AggregatorEvent : UnityEvent<Aggregator, AttributeType> {
+
+    // }
 
     public static partial class ExtensionMethods {
         public static float Evaluate(this IEnumerable<Aggregator> aggregators, float baseValue) {

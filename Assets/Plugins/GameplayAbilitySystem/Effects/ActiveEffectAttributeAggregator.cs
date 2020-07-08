@@ -12,7 +12,7 @@ namespace GAS.GameplayEffects {
             this.Map.Remove(EffectData);
         }
 
-        public Dictionary<AttributeType, Aggregator> AddOrGet(ActiveGameplayEffectData EffectData) {
+        public Dictionary<AttributeType, Aggregator> Get(ActiveGameplayEffectData EffectData) {
             if (!Map.TryGetValue(EffectData, out var attributeAggregatorMap)) {
                 attributeAggregatorMap = new Dictionary<AttributeType, Aggregator>();
                 Map.Add(EffectData, attributeAggregatorMap);
