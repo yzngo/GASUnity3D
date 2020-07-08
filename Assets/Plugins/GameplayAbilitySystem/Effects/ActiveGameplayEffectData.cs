@@ -11,6 +11,7 @@ namespace GAS.GameplayEffects {
     public class ActiveGameplayEffectData {
         private GameplayEffect gameplayEffect = default;
         private float startWorldTime;                  //激活时间, Time.time
+        private float timeOfLastPeriodicApplication = 0;
 
         /// The actual GameplayEffect
         public GameplayEffect Effect { get => gameplayEffect; }
@@ -20,11 +21,12 @@ namespace GAS.GameplayEffects {
 
         public ActiveGameplayEffectData(GameplayEffect effect, IGameplayAbilitySystem instigator, IGameplayAbilitySystem target) {
             gameplayEffect = effect;
-            this.startWorldTime = Time.time;
-            this.Instigator = instigator;
-            this.Target = target;
-            if (!this.Effect.Period.ExecuteOnApplication) {
-                this._timeOfLastPeriodicApplication = Time.time;
+            startWorldTime = Time.time;
+            Instigator = instigator;
+            Target = target;
+            
+            if (!Effect.Period.ExecuteOnApplication) {
+                timeOfLastPeriodicApplication = Time.time;
             }
         }
 
@@ -50,10 +52,9 @@ namespace GAS.GameplayEffects {
         /// <value>Cooldown time remaining</value>
         public float CooldownTimeRemaining { get => Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration ? CooldownTimeTotal - CooldownTimeElapsed : 0; }
 
-        private float _timeOfLastPeriodicApplication = 0;
 
-        public float TimeSincePreviousPeriodicApplication { get => Time.time - _timeOfLastPeriodicApplication; }
-        public float TimeUntilNextPeriodicApplication { get => _timeOfLastPeriodicApplication + Effect.Period.Period - Time.time; }
+        public float TimeSincePreviousPeriodicApplication { get => Time.time - timeOfLastPeriodicApplication; }
+        public float TimeUntilNextPeriodicApplication { get => timeOfLastPeriodicApplication + Effect.Period.Period - Time.time; }
 
         private Dictionary<AttributeType, Aggregator> PeriodicEffectModificationsToDate = new Dictionary<AttributeType, Aggregator>();
 
@@ -95,7 +96,7 @@ namespace GAS.GameplayEffects {
         /// </summary>
         /// <param name="offset">Overflow time</param>
         public void ResetPeriodicTime(float offset = 0) {
-            this._timeOfLastPeriodicApplication = Time.time - offset;
+            this.timeOfLastPeriodicApplication = Time.time - offset;
         }
 
         public void AddPeriodicEffectAttributeModifiers() {
