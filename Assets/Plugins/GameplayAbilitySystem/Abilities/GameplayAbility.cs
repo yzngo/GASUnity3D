@@ -20,8 +20,8 @@ namespace GAS.Abilities {
         // [SerializeField] private GenericAbilityEvent _onGameplayAbilityEnded = new GenericAbilityEvent();
         [SerializeField] private AbstractAbilityActivation _abilityLogic = null;
 
-        public IAbilityTags Tags => _tags;
-        public IGameplayCost Cost => _gameplayCost;
+        public GameplayAbilityTags Tags => _tags;
+        public GameplayCost Cost => _gameplayCost;
         public List<GameplayEffect> Cooldowns => _cooldownsToApply;
         /// Defines what the ability actually does
         public AbstractAbilityActivation AbilityLogic => _abilityLogic;
@@ -76,6 +76,22 @@ namespace GAS.Abilities {
         }
 
 
+
+        public void EndAbility(AbilitySystemComponent ASC) {
+            // _onGameplayAbilityEnded.Invoke(this);
+
+            // Ability finished.  Remove all listeners.
+            // _onGameplayAbilityEnded.RemoveAllListeners();
+            // TODO: Remove tags added by this ability
+            // TODO: Cancel all tasks?
+            // TODO: Remove gameplay cues
+            // TODO: Cancel ability
+            // TODO: Remove blocking/cancelling Gameplay Tags
+
+            // Tell ability system ability has ended
+            ASC.NotifyAbilityEnded(this);
+        }
+
         /// <summary>
         /// Applies cooldown. Cooldown is applied even if the ability is already
         /// on cooldown
@@ -86,28 +102,8 @@ namespace GAS.Abilities {
             }
         }
 
-        public void EndAbility(AbilitySystemComponent ASC) {
-            // _onGameplayAbilityEnded.Invoke(this);
-
-            // Ability finished.  Remove all listeners.
-            // _onGameplayAbilityEnded.RemoveAllListeners();
-
-            // TODO: Remove tags added by this ability
-
-            // TODO: Cancel all tasks?
-
-            // TODO: Remove gameplay cues
-
-            // TODO: Cancel ability
-
-            // TODO: Remove blocking/cancelling Gameplay Tags
-
-            // Tell ability system ability has ended
-            ASC.NotifyAbilityEnded(this);
-        }
-
         public (float CooldownElapsed, float CooldownTotal) CalculateCooldown(AbilitySystemComponent ASC) {
-            List<GameplayTag> cooldownTags = GetCooldownTags();
+            List<GameplayTag> cooldownTags = Tags.CooldownTags.Added;
 
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
             ActiveGameplayEffectData dominantCooldownEffect = ASC.ActiveEffectsContainer
@@ -124,7 +120,7 @@ namespace GAS.Abilities {
             return (dominantCooldownEffect.CooldownTimeElapsed, dominantCooldownEffect.CooldownTimeTotal);
         }
 
-        // Checks to see if the target GAS has the required resources to cast the ability
+        // Checks to see if the target GAS has the required cost resource to cast the ability
         private bool CheckCost(AbilitySystemComponent ASC) {
             // Check the modifiers on the ability cost GameEffect
             var modifiers = Cost.CostGameplayEffect.CalculateModifierEffect();
@@ -151,11 +147,6 @@ namespace GAS.Abilities {
         private bool AbilityOffCooldown(AbilitySystemComponent ASC) {
             (var elapsed, var total) = CalculateCooldown(ASC);
             return total == 0f;
-        }
-
-        // Get the cooldown tags associated with this ability
-        private List<GameplayTag> GetCooldownTags() {
-            return _tags.CooldownTags.Added;
         }
     }
 }

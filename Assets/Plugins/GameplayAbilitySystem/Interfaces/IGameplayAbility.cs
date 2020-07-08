@@ -17,13 +17,13 @@ namespace GAS.Interfaces {
         /// Tags that this ability has/provides
         /// </summary>
         /// <value></value>
-        IAbilityTags Tags { get; }
+        GameplayAbilityTags Tags { get; }
 
         /// <summary>
         /// Cost of using this ability
         /// </summary>
         /// <value></value>
-        IGameplayCost Cost { get; }
+        GameplayCost Cost { get; }
 
         /// <summary>
         /// Cooldowns associated with this ability
