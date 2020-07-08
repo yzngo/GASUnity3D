@@ -271,15 +271,15 @@ namespace GAS.GameplayEffects {
                     break;
 
                 case StackingType.AggregatedBySource:
-                    matchingStackedActiveEffects = this.ActiveEffectAttributeAggregator
+                    matchingStackedActiveEffects = ActiveEffectAttributeAggregator
                                         .GetAllActiveEffects()
                                         .Where(x => x.Instigator == effectData.Instigator && x.Effect == effectData.Effect);
                     break;
 
                 case StackingType.AggregatedByTarget:
-                    matchingStackedActiveEffects = this.ActiveEffectAttributeAggregator
+                    matchingStackedActiveEffects = ActiveEffectAttributeAggregator
                                         .GetAllActiveEffects()
-                                        .Where(x => x.Effect == effectData.Effect);
+                                        .Where(x => x.Target == effectData.Target && x.Effect == effectData.Effect);
                     break;
             }
 
