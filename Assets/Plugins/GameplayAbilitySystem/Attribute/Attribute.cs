@@ -19,19 +19,19 @@ namespace GAS.Attributes
 
         public AttributeType AttributeType => _attributeType;
 
-        public void SetAttributeCurrentValue(IAttributeSet attributeSet, ref float newValue) {
-            attributeSet.PreAttributeChange(this, ref newValue);
-            _currentValue = newValue;
-            attributeSet.AttributeCurrentValueChanged.Invoke(new AttributeChangeData()
+        public void SetCurrentValue(IAttributeSet set, ref float value) {
+            set.PreAttributeChange(this, ref value);
+            _currentValue = value;
+            set.AttributeCurrentValueChanged.Invoke(new AttributeChangeData()
             {
                 Attribute = this
             });
         }
 
-        public void SetAttributeBaseValue(IAttributeSet attributeSet, ref float newValue) {
-            attributeSet.PreAttributeBaseChange(this, ref newValue);
-            _baseValue = newValue;
-            attributeSet.AttributeBaseValueChanged.Invoke(new AttributeChangeData()
+        public void SetBaseValue(IAttributeSet set, ref float value) {
+            set.PreAttributeBaseChange(this, ref value);
+            _baseValue = value;
+            set.AttributeBaseValueChanged.Invoke(new AttributeChangeData()
             {
                 Attribute = this
             });

@@ -122,9 +122,9 @@ namespace GAS.GameplayEffects {
 
                 var oldAttributeValue = 0f;
                 if (!operateOnCurrentValue) {
-                    oldAttributeValue = abilitySystem.GetNumericAttributeBase(attribute.Key);
+                    oldAttributeValue = abilitySystem.GetBaseValue(attribute.Key);
                 } else {
-                    oldAttributeValue = abilitySystem.GetNumericAttributeCurrent(attribute.Key);
+                    oldAttributeValue = abilitySystem.GetCurrentValue(attribute.Key);
                 }
 
                 var newAttributeValue = (oldAttributeValue + addition) * (multiplication / division);
@@ -146,7 +146,7 @@ namespace GAS.GameplayEffects {
 
             // Finally, For each attribute, apply the new modified values
             foreach (var attribute in attributeModifications) {
-                target.SetNumericAttributeBase(attribute.Key, attribute.Value.NewAttribueValue);
+                target.SetBaseValue(attribute.Key, attribute.Value.NewAttribueValue);
 
                 // mark the corresponding aggregator as dirty so we can recalculate the current values
                 var aggregators = target.ActiveEffectsContainer.ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(attribute.Key);
@@ -155,7 +155,7 @@ namespace GAS.GameplayEffects {
                     target.ActiveEffectsContainer.UpdateAttribute(aggregators, attribute.Key);
                 } else {
                     // No aggregators, so set current value = base value
-                    target.SetNumericAttributeCurrent(attribute.Key, target.GetNumericAttributeBase(attribute.Key));
+                    target.SetCurrentValue(attribute.Key, target.GetBaseValue(attribute.Key));
                 }
             }
         }

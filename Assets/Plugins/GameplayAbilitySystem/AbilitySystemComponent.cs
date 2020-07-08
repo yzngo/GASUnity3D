@@ -206,28 +206,15 @@ namespace GAS {
             return Task.FromResult(Effect);
         }
 
-        public float GetNumericAttributeBase(AttributeType AttributeType) {
-            var attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType);
-            if (attribute == null) return 0;
-            return attribute.BaseValue;
-        }
-
-        public float GetNumericAttributeCurrent(AttributeType attributeType) {
-            return attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == attributeType).CurrentValue;
-        }
-
-        public void SetNumericAttributeBase(AttributeType attributeType, float baseValue) {
-            Attribute attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == attributeType);
-            float newValue = baseValue;
-            attribute.SetAttributeBaseValue(attributeSet, ref newValue);
-        }
-
-        public void SetNumericAttributeCurrent(AttributeType attributeType, float newValue) {
-            var attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == attributeType);
-            attribute.SetAttributeCurrentValue(attributeSet, ref newValue);
-        }
+// attribute -----------------------------------------------------------------------------
+        public float GetBaseValue(AttributeType type) => GetAttributeByType(type).BaseValue;
+        public float GetCurrentValue(AttributeType type) => GetAttributeByType(type).CurrentValue;
+        public void SetBaseValue(AttributeType type, float value) => GetAttributeByType(type).SetBaseValue(attributeSet, ref value);
+        public void SetCurrentValue(AttributeType type, float value) => GetAttributeByType(type).SetCurrentValue(attributeSet, ref value);
+        private Attribute GetAttributeByType(AttributeType type) => attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == type);
     }
 
+//----------------------------------------------------------------------------------------
     [System.Serializable]
     public class GenericGameplayEffectEvent : UnityEvent<GameplayEffect> {
 

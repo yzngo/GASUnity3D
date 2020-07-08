@@ -32,6 +32,6 @@ namespace GAS.Interfaces {
         /// </summary>
         /// <param name="attributeSet"><see cref="IAttributeSet"/> this attribute belongs to</param>
         /// <param name="newValue">New value of the attribute</param>
-        void SetAttributeCurrentValue(IAttributeSet attributeSet, ref float newValue);
+        void SetCurrentValue(IAttributeSet attributeSet, ref float newValue);
     }
 }

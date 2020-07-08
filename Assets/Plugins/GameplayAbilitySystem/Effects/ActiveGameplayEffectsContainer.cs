@@ -246,9 +246,9 @@ namespace GAS.GameplayEffects {
 
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
-                    var current = ASC.GetNumericAttributeBase(modifier.Attribute);
-                    if (current < 0) ASC.SetNumericAttributeBase(modifier.Attribute, 0f);
-                    ASC.SetNumericAttributeCurrent(modifier.Attribute, current);
+                    var current = ASC.GetBaseValue(modifier.Attribute);
+                    if (current < 0) ASC.SetBaseValue(modifier.Attribute, 0f);
+                    ASC.SetCurrentValue(modifier.Attribute, current);
                 } else {
                     UpdateAttribute(aggregators, modifier.Attribute);
                 }
@@ -257,9 +257,9 @@ namespace GAS.GameplayEffects {
         }
 
         public void UpdateAttribute(IEnumerable<Aggregator> aggregator, AttributeType attributeType) {
-            var baseAttributeValue = ASC.GetNumericAttributeBase(attributeType);
+            var baseAttributeValue = ASC.GetBaseValue(attributeType);
             var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
-            ASC.SetNumericAttributeCurrent(attributeType, newCurrentAttributeValue);
+            ASC.SetCurrentValue(attributeType, newCurrentAttributeValue);
         }
 
         private IEnumerable<ActiveGameplayEffectData> GetMatchingStackedEffectsByEffect(ActiveGameplayEffectData effectData) {
