@@ -9,6 +9,7 @@ namespace GAS.GameplayEffects {
     /// 激活的游戏效果的数据集, 用于跟踪活动中的effect
     [Serializable]
     public class ActiveGameplayEffectData {
+// base data
         private GameplayEffect gameplayEffect = default;
         private float startWorldTime;                  //激活时间, Time.time
         private float timeOfLastPeriodicApplication = 0;
@@ -18,48 +19,51 @@ namespace GAS.GameplayEffects {
         public float StartWorldTime { get => startWorldTime; }
         public IGameplayAbilitySystem Instigator { get; private set; }      // 发起者
         public IGameplayAbilitySystem Target { get; private set; }          // 目标对象
-
+// ctor
         public ActiveGameplayEffectData(GameplayEffect effect, IGameplayAbilitySystem instigator, IGameplayAbilitySystem target) {
             gameplayEffect = effect;
             startWorldTime = Time.time;
             Instigator = instigator;
             Target = target;
-            
+
             if (!Effect.Period.ExecuteOnApplication) {
                 timeOfLastPeriodicApplication = Time.time;
             }
         }
 
-        bool _bForceRemoveEffect = false;
+// force remove?
+        // 若强制移除, 则 = true
+        private bool forceRemoveEffect = false;
+        public bool ForceRemoveEffect => forceRemoveEffect;
 
-        public bool bForceRemoveEffect => _bForceRemoveEffect;
-
-        /// <summary>
+// cooldown
         /// The cooldown time that has already elapsed for this gameplay effect
-        /// </summary>
-        /// <value>Cooldown time elapsed</value>
-        public float CooldownTimeElapsed { get => Time.time - startWorldTime; }
-
+        public float CooldownTimeElapsed => Time.time - startWorldTime;
         /// <summary>
         /// The total cooldown time for this gameplay effect
         /// </summary>
         /// <value>Cooldown time total</value>
-        public float CooldownTimeTotal { get => Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration ? Effect.GameplayEffectPolicy.DurationMagnitude : 0; }
-
+        public float CooldownTimeTotal => 
+                Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration ? 
+                                            Effect.GameplayEffectPolicy.DurationMagnitude : 0;
         /// <summary>
         /// The cooldown time that is remaining for this gameplay effect
         /// </summary>
         /// <value>Cooldown time remaining</value>
-        public float CooldownTimeRemaining { get => Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration ? CooldownTimeTotal - CooldownTimeElapsed : 0; }
+        public float CooldownTimeRemaining => 
+                Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration ? 
+                                            CooldownTimeTotal - CooldownTimeElapsed : 0;
 
-
-        public float TimeSincePreviousPeriodicApplication { get => Time.time - timeOfLastPeriodicApplication; }
-        public float TimeUntilNextPeriodicApplication { get => timeOfLastPeriodicApplication + Effect.Period.Period - Time.time; }
+// period
+        // 对于周期性的effect而言, 自从上次应用效果之后流逝的时间
+        public float TimeSincePreviousPeriodicApplication => Time.time - timeOfLastPeriodicApplication;
+        // 对于周期性的effect而言, 到下次应用还需要的时间
+        public float TimeUntilNextPeriodicApplication => timeOfLastPeriodicApplication + Effect.Period.Period - Time.time;
 
         private Dictionary<AttributeType, Aggregator> PeriodicEffectModificationsToDate = new Dictionary<AttributeType, Aggregator>();
 
 
-        [SerializeField] private int _stacks;
+        // [SerializeField] private int _stacks;
 
 
 
@@ -85,7 +89,7 @@ namespace GAS.GameplayEffects {
 
         public void ForceEndEffect() {
             EndEffect();
-            _bForceRemoveEffect = true;
+            forceRemoveEffect = true;
         }
 
         /// <summary>

@@ -146,7 +146,7 @@ namespace GAS.GameplayEffects {
             while (!durationExpired) {
                 await UniTask.DelayFrame(0);
 
-                if (effectData.bForceRemoveEffect) {
+                if (effectData.ForceRemoveEffect) {
                     durationExpired = true;
                 } else if (effectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration) {
                     // Check whether required time has expired

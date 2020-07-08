@@ -5,9 +5,9 @@ namespace GAS.GameplayEffects {
     public class StackingPolicy {
         public StackingType StackingType;
         public int StackLimit;
-        public StackRefreshPolicy StackDurationRefreshPolicy;   // 时间差值
-        public StackRefreshPolicy StackPeriodResetPolicy;       // 更长的时间段
-        public StackExpirationPolicy StackExpirationPolicy;
+        public StackRefreshPolicy StackDurationRefreshPolicy;   // 时间刷新策略
+        public StackRefreshPolicy StackPeriodResetPolicy;       // 周期刷新策略
+        public StackExpirationPolicy StackExpirationPolicy;     // 过期策略
     }
 
     public enum StackingType {
@@ -17,14 +17,14 @@ namespace GAS.GameplayEffects {
     }
 
     public enum StackRefreshPolicy {
-        RefreshOnSuccessfulApplication, 
-        NeverRefresh
+        RefreshOnSuccessfulApplication,     // 成功施放之后刷新
+        NeverRefresh                        // 永不刷新
     }
 
     public enum StackExpirationPolicy {
-        ClearEntireStack, 
-        RemoveSingleStackAndRefreshDuration, 
-        RefreshDuration
+        ClearEntireStack,                       // 清空整个栈
+        RemoveSingleStackAndRefreshDuration,    // 移除一个元素且刷新时间
+        RefreshDuration                         // 刷新时间
     }
 }
 
