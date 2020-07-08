@@ -5,19 +5,22 @@ using System.Collections.Generic;
 using GAS.Attributes;
 
 namespace GAS.GameplayEffects {
-    /// <summary>
-    /// This class is used to keep track of active <see cref="GameplayEffect"/>.  
-    /// </summary>
+
+    /// 激活的游戏效果的数据集, 用于跟踪活动中的effect
     [Serializable]
     public class ActiveGameplayEffectData {
-        [SerializeField] private GameplayEffect gameplayEffect = default;
+        private GameplayEffect gameplayEffect = default;
+        private float startWorldTime;                  //激活时间, Time.time
 
         /// The actual GameplayEffect
         public GameplayEffect Effect { get => gameplayEffect; }
+        public float StartWorldTime { get => startWorldTime; }
+        public IGameplayAbilitySystem Instigator { get; private set; }      // 发起者
+        public IGameplayAbilitySystem Target { get; private set; }          // 目标对象
 
         public ActiveGameplayEffectData(GameplayEffect effect, IGameplayAbilitySystem instigator, IGameplayAbilitySystem target) {
-            this.gameplayEffect = effect;
-            this._startWorldTime = Time.time;
+            gameplayEffect = effect;
+            this.startWorldTime = Time.time;
             this.Instigator = instigator;
             this.Target = target;
             if (!this.Effect.Period.ExecuteOnApplication) {
@@ -33,7 +36,7 @@ namespace GAS.GameplayEffects {
         /// The cooldown time that has already elapsed for this gameplay effect
         /// </summary>
         /// <value>Cooldown time elapsed</value>
-        public float CooldownTimeElapsed { get => Time.time - _startWorldTime; }
+        public float CooldownTimeElapsed { get => Time.time - startWorldTime; }
 
         /// <summary>
         /// The total cooldown time for this gameplay effect
@@ -54,15 +57,11 @@ namespace GAS.GameplayEffects {
 
         private Dictionary<AttributeType, Aggregator> PeriodicEffectModificationsToDate = new Dictionary<AttributeType, Aggregator>();
 
-        public IGameplayAbilitySystem Instigator { get; private set; }
-        public IGameplayAbilitySystem Target { get; private set; }
 
         [SerializeField] private int _stacks;
 
 
-        [SerializeField] private float _startWorldTime;
 
-        public float StartWorldTime { get => _startWorldTime; }
         public void CheckOngoingTagRequirements() {
 
         }
@@ -76,11 +75,11 @@ namespace GAS.GameplayEffects {
         /// </summary>
         /// <param name="offset">Overflow time</param>
         public void ResetDuration(float offset = 0) {
-            this._startWorldTime = Time.time;
+            this.startWorldTime = Time.time;
         }
 
         public void EndEffect() {
-            this._startWorldTime = Time.time - CooldownTimeTotal;
+            this.startWorldTime = Time.time - CooldownTimeTotal;
         }
 
         public void ForceEndEffect() {
