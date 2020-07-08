@@ -11,7 +11,6 @@ namespace GAS {
         public GameplayEffect CostGameplayEffect => _costGameplayEffect;
 
         /// <inheritdoc />
-        [SerializeField]
-        private GameplayEffect _costGameplayEffect = null;
+        [SerializeField] private GameplayEffect _costGameplayEffect = null;
     }
 }

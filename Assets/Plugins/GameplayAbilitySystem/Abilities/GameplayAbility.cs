@@ -11,34 +11,14 @@ namespace GAS.Abilities {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability")]
     public class GameplayAbility : ScriptableObject, IGameplayAbility {
 
-        [SerializeField]
-        private GameplayAbilityTags _tags = new GameplayAbilityTags();
-
-        [SerializeField]
-        private GameplayCost _gameplayCost = new GameplayCost();
-
-        [SerializeField]
-        private List<GameplayEffect> _cooldownsToApply = new List<GameplayEffect>();
-
-        [SerializeField]
-        private List<GameplayEffect> _effectsToApplyOnExecution = new List<GameplayEffect>();
-
-
-        [SerializeField]
-        private GenericAbilityEvent _onGameplayAbilityCommitted = new GenericAbilityEvent();
-
-
-        [SerializeField]
-        private GenericAbilityEvent _onGameplayAbilityCancelled = new GenericAbilityEvent();
-
-
-        [SerializeField]
-        private GenericAbilityEvent _onGameplayAbilityEnded = new GenericAbilityEvent();
-
-        [SerializeField]
-        private AbstractAbilityActivation _abilityLogic = null;
-
-
+        [SerializeField] private GameplayAbilityTags _tags = new GameplayAbilityTags();
+        [SerializeField] private GameplayCost _gameplayCost = new GameplayCost();
+        [SerializeField] private List<GameplayEffect> _cooldownsToApply = new List<GameplayEffect>();
+        [SerializeField] private List<GameplayEffect> _effectsToApplyOnExecution = new List<GameplayEffect>();
+        [SerializeField] private GenericAbilityEvent _onGameplayAbilityCommitted = new GenericAbilityEvent();
+        [SerializeField] private GenericAbilityEvent _onGameplayAbilityCancelled = new GenericAbilityEvent();
+        [SerializeField] private GenericAbilityEvent _onGameplayAbilityEnded = new GenericAbilityEvent();
+        [SerializeField] private AbstractAbilityActivation _abilityLogic = null;
 
         /// <inheritdoc />
         public IAbilityTags Tags => _tags;
@@ -55,12 +35,6 @@ namespace GAS.Abilities {
         public GenericAbilityEvent OnGameplayAbilityEnded => _onGameplayAbilityEnded;
         /// <inheritdoc />
         public AbstractAbilityActivation AbilityLogic => _abilityLogic;
-
-
-
-        void Start() {
-        }
-
 
         /// <inheritdoc />
         public virtual void ActivateAbility(IGameplayAbilitySystem AbilitySystem) {
@@ -144,7 +118,6 @@ namespace GAS.Abilities {
             // Tell ability system ability has ended
             AbilitySystem.NotifyAbilityEnded(this);
         }
-
 
         /// <inheritdoc />
         public bool PlayerHasResourceToCast(IGameplayAbilitySystem AbilitySystem) {
