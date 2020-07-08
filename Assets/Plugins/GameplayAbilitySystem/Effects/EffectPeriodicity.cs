@@ -10,6 +10,5 @@ namespace GAS.GameplayEffects {
         public bool ExecuteOnApplication;   // 应用时即执行
         public GameplayEffect ApplyGameEffectOnExecute;     //执行时应用的effect
     }
-
 }
 
