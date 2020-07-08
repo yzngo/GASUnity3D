@@ -21,8 +21,8 @@ namespace GAS.GameplayEffects {
         public GameplayEffectPolicy GameplayEffectPolicy => gameplayEffectPolicy;
         public GameplayEffectTags GameplayEffectTags => gameplayEffectTags;
         public EffectPeriodicity Periodicity => periodicity;
-        public StackingPolicy StackingPolicy => stackingPolicy;
         public List<GameplayCue> GameplayCues => gameplayCues;
+        public StackingPolicy StackingPolicy => stackingPolicy;
         public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedTags.Added;
         // public IEnumerable<(GameplayTag Tag, GameplayEffect Effect)> GrantedEffectTags => GrantedTags.Select(x => (x, this));
 
@@ -48,18 +48,11 @@ namespace GAS.GameplayEffects {
 
             tags.AddRange(gameplayEffectTags.GrantedTags.Added);
             tags.AddRange(gameplayEffectTags.AssetTags.Added);
-
             return tags;
         }
 
-
-        public bool ApplicationRequirementsPass(AbilitySystemComponent AbilitySystem) {
-            // return _gameplayEffectTags.ApplicationTagRequirements.RequirePresence;
-
-            return true;
-        }
-
         public Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> CalculateModifierEffect(Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> Existing = null) {
+            
             Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> modifierTotals;
             if (Existing == null) {
                 modifierTotals = new Dictionary<AttributeType, Dictionary<ModifierOperationType, float>>();
@@ -104,14 +97,17 @@ namespace GAS.GameplayEffects {
                         break;
                 }
             }
-
             return modifierTotals;
         }
 
-        public Dictionary<AttributeType, AttributeModificationValues> CalculateAttributeModification(IGameplayAbilitySystem AbilitySystem, Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> Modifiers, bool operateOnCurrentValue = false) {
+        public Dictionary<AttributeType, AttributeModificationValues> CalculateAttributeModification(
+                    IGameplayAbilitySystem abilitySystem, 
+                    Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> modifiers, 
+                    bool operateOnCurrentValue = false
+        ) {
             var attributeModification = new Dictionary<AttributeType, AttributeModificationValues>();
 
-            foreach (var attribute in Modifiers) {
+            foreach (var attribute in modifiers) {
                 if (!attribute.Value.TryGetValue(ModifierOperationType.Add, out var addition)) {
                     addition = 0;
                 }
@@ -126,9 +122,9 @@ namespace GAS.GameplayEffects {
 
                 var oldAttributeValue = 0f;
                 if (!operateOnCurrentValue) {
-                    oldAttributeValue = AbilitySystem.GetNumericAttributeBase(attribute.Key);
+                    oldAttributeValue = abilitySystem.GetNumericAttributeBase(attribute.Key);
                 } else {
-                    oldAttributeValue = AbilitySystem.GetNumericAttributeCurrent(attribute.Key);
+                    oldAttributeValue = abilitySystem.GetNumericAttributeCurrent(attribute.Key);
                 }
 
                 var newAttributeValue = (oldAttributeValue + addition) * (multiplication / division);
@@ -137,39 +133,38 @@ namespace GAS.GameplayEffects {
                     values = new AttributeModificationValues();
                     attributeModification.Add(attribute.Key, values);
                 }
-
                 values.NewAttribueValue += newAttributeValue;
                 values.OldAttributeValue += oldAttributeValue;
-
             }
-
             return attributeModification;
         }
 
-        public void ApplyInstantEffect(IGameplayAbilitySystem Target) {
+        public void ApplyInstantEffect(IGameplayAbilitySystem target) {
             // Modify base attribute values.  Collect the overall change for each modifier
             var modifierTotals = this.CalculateModifierEffect();
-            var attributeModifications = this.CalculateAttributeModification(Target, modifierTotals);
+            var attributeModifications = this.CalculateAttributeModification(target, modifierTotals);
 
             // Finally, For each attribute, apply the new modified values
             foreach (var attribute in attributeModifications) {
-                Target.SetNumericAttributeBase(attribute.Key, attribute.Value.NewAttribueValue);
+                target.SetNumericAttributeBase(attribute.Key, attribute.Value.NewAttribueValue);
 
                 // mark the corresponding aggregator as dirty so we can recalculate the current values
-                var aggregators = Target.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(attribute.Key);
+                var aggregators = target.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(attribute.Key);
                 // Target.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator.Select(x => x.Value[attribute.Key]).AttributeAggregatorMap.TryGetValue(attribute.Key, out var aggregator);
                 if (aggregators.Count() != 0) {
-                    Target.ActiveGameplayEffectsContainer.UpdateAttribute(aggregators, attribute.Key);
+                    target.ActiveGameplayEffectsContainer.UpdateAttribute(aggregators, attribute.Key);
                 } else {
                     // No aggregators, so set current value = base value
-                    Target.SetNumericAttributeCurrent(attribute.Key, Target.GetNumericAttributeBase(attribute.Key));
+                    target.SetNumericAttributeCurrent(attribute.Key, target.GetNumericAttributeBase(attribute.Key));
                 }
             }
         }
 
+        // public bool ApplicationRequirementsPass(AbilitySystemComponent AbilitySystem) {
+            // return _gameplayEffectTags.ApplicationTagRequirements.RequirePresence;
+        // 
+        //     return true;
+        // }
     }
-
-
-
 }
 

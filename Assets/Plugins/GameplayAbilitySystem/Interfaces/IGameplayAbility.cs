@@ -23,13 +23,13 @@ namespace GAS.Interfaces {
         /// Cost of using this ability
         /// </summary>
         /// <value></value>
-        IGameplayCost GameplayCost { get; }
+        IGameplayCost Cost { get; }
 
         /// <summary>
         /// Cooldowns associated with this ability
         /// </summary>
         /// <value></value>
-        List<GameplayEffect> CooldownsToApply { get; }
+        List<GameplayEffect> Cooldowns { get; }
 
         /// <summary>
         /// This is called whenever this ability ends.
@@ -37,7 +37,7 @@ namespace GAS.Interfaces {
         /// was responsible for using this ability.
         /// </summary>
         /// <value></value>
-        GenericAbilityEvent OnGameplayAbilityEnded { get; }
+        // GenericAbilityEvent OnGameplayAbilityEnded { get; }
 
         /// <summary>
         /// This is called whenever this ability is commited.
@@ -45,7 +45,7 @@ namespace GAS.Interfaces {
         /// was responsible for using this ability.
         /// </summary>
         /// <value></value>
-        GenericAbilityEvent OnGameplayAbilityCommitted { get; }
+        // GenericAbilityEvent OnGameplayAbilityCommitted { get; }
 
         /// <summary>
         /// This is called whenever this ability is cancelled.
@@ -53,7 +53,7 @@ namespace GAS.Interfaces {
         /// was responsible for using this ability.
         /// </summary>
         /// <value></value>
-        GenericAbilityEvent OnGameplayAbilityCancelled { get; }
+        // GenericAbilityEvent OnGameplayAbilityCancelled { get; }
 
         /// <summary>
         /// Defines what the ability actually does
