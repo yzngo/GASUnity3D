@@ -174,7 +174,7 @@ namespace GAS.GameplayEffects {
                 var gameplayCues = effectData.Effect.GameplayCues;
                 foreach (var cue in gameplayCues) {
                     cue.HandleGameplayCue(
-                        effectData.Target.Actor.gameObject, 
+                        effectData.Target.gameObject, 
                         new GameplayCues.GameplayCueParameters(null, null, null), 
                         EGameplayCueEvent.OnExecute
                     );
@@ -229,7 +229,7 @@ namespace GAS.GameplayEffects {
             var gameplayCues = effectData.Effect.GameplayCues;
             foreach (var cue in gameplayCues) {
                 cue.HandleGameplayCue(
-                    effectData.Target.Actor.gameObject, 
+                    effectData.Target.gameObject, 
                     new GameplayCues.GameplayCueParameters(null, null, null), 
                     EGameplayCueEvent.OnRemove
                 );

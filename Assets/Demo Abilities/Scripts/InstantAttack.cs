@@ -19,7 +19,7 @@ namespace GAS.Abilities.AbilityActivations {
         public string CompletionAnimatorStateFullHash;
 
         public override async void ActivateAbility(AbilitySystemComponent ASC, IGameplayAbility Ability) {
-            var abilitySystemActor = ASC.Actor;
+            var abilitySystemActor = ASC.transform;
             var animationEventSystemComponent = abilitySystemActor.GetComponent<AnimationEventSystem>();
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();
 

@@ -197,7 +197,7 @@ namespace GAS {
             // Execute gameplay cue
             for (var i = 0; i < gameplayCues.Count; i++) {
                 var cue = gameplayCues[i];
-                cue.HandleGameplayCue(Target.Actor.gameObject, new GameplayCueParameters(null, null, null), EGameplayCueEvent.OnActive);
+                cue.HandleGameplayCue(Target.gameObject, new GameplayCueParameters(null, null, null), EGameplayCueEvent.OnActive);
             }
 
             return Task.FromResult(Effect);
