@@ -10,8 +10,13 @@ namespace GAS.GameplayEffects {
     /// </summary>
     [Serializable]
     public class ActiveGameplayEffectData {
+        [SerializeField] private GameplayEffect gameplayEffect = default;
+
+        /// The actual GameplayEffect
+        public GameplayEffect Effect { get => gameplayEffect; }
+
         public ActiveGameplayEffectData(GameplayEffect effect, IGameplayAbilitySystem instigator, IGameplayAbilitySystem target) {
-            this._gameplayEffect = effect;
+            this.gameplayEffect = effect;
             this._startWorldTime = Time.time;
             this.Instigator = instigator;
             this.Target = target;
@@ -23,14 +28,6 @@ namespace GAS.GameplayEffects {
         bool _bForceRemoveEffect = false;
 
         public bool bForceRemoveEffect => _bForceRemoveEffect;
-
-        /// <summary>
-        /// The actual <see cref="GameplayEffect"/>. 
-        /// </summary>
-        /// <value></value>
-        [SerializeField]
-        public GameplayEffect Effect { get => _gameplayEffect; }
-
 
         /// <summary>
         /// The cooldown time that has already elapsed for this gameplay effect
@@ -60,14 +57,10 @@ namespace GAS.GameplayEffects {
         public IGameplayAbilitySystem Instigator { get; private set; }
         public IGameplayAbilitySystem Target { get; private set; }
 
-        [SerializeField]
-        private int _stacks;
+        [SerializeField] private int _stacks;
 
-        [SerializeField]
-        private GameplayEffect _gameplayEffect;
 
-        [SerializeField]
-        private float _startWorldTime;
+        [SerializeField] private float _startWorldTime;
 
         public float StartWorldTime { get => _startWorldTime; }
         public void CheckOngoingTagRequirements() {
