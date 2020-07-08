@@ -153,6 +153,7 @@ namespace GAS.Interfaces {
         IEnumerable<(GameplayTag Tag, ActiveGameplayEffectData GrantingEffect)> ActiveTagsByActiveGameplayEffect { get; }
     }
 
+    [System.Serializable]
     public class GenericGameplayEffectEvent : UnityEvent<GameplayEffect> {
 
     }

@@ -19,49 +19,48 @@ namespace GAS {
     public class AbilitySystemComponent : MonoBehaviour, IGameplayAbilitySystem {
         public Transform TargettingLocation;
 
-        [SerializeField]
-        private GenericAbilityEvent _onGameplayAbilityActivated = new GenericAbilityEvent();
+        // [HideInInspector,SerializeField] private GameplayEvent onGameplayEvent = new GameplayEvent();
+        // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
+        // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
+        // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
+        // [HideInInspector,SerializeField] private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
+        // [HideInInspector,SerializeField] private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
+        
+        private GameplayEvent onGameplayEvent = new GameplayEvent();
+        private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
+        private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
+        private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
+        private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
+        private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
+
+        private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
+        private ActiveGameplayEffectsContainer activeGameplayEffectsContainer;
+
         /// <inheritdoc />
-        public GenericAbilityEvent OnGameplayAbilityActivated => _onGameplayAbilityActivated;
+        public GameplayEvent OnGameplayEvent => onGameplayEvent;
 
-        [SerializeField]
-        private GenericAbilityEvent _onGameplayAbilityEnded = new GenericAbilityEvent();
         /// <inheritdoc />
-        public GenericAbilityEvent OnGameplayAbilityEnded => _onGameplayAbilityEnded;
-
-        [SerializeField]
-        private GameplayEvent _onGameplayEvent = new GameplayEvent();
+        public GenericAbilityEvent OnGameplayAbilityCommitted => onGameplayAbilityCommitted;
+        /// <inheritdoc /> 
+        public GenericAbilityEvent OnGameplayAbilityActivated => onGameplayAbilityActivated;
         /// <inheritdoc />
-        public GameplayEvent OnGameplayEvent => _onGameplayEvent;
+        public GenericAbilityEvent OnGameplayAbilityEnded => onGameplayAbilityEnded;
 
-        [SerializeField]
-        protected ActiveGameplayEffectsContainer _activeGameplayEffectsContainer;
         /// <inheritdoc />
-        public ActiveGameplayEffectsContainer ActiveGameplayEffectsContainer => _activeGameplayEffectsContainer;
-
-        [SerializeField]
-        protected List<IGameplayAbility> _runningAbilities = new List<IGameplayAbility>();
+        public GenericGameplayEffectEvent OnEffectAdded => onEffectAdded;
         /// <inheritdoc />
-        public List<IGameplayAbility> RunningAbilities => _runningAbilities;
+        public GenericGameplayEffectEvent OnEffectRemoved => onEffectRemoved;
 
-        [SerializeField]
-        protected GenericGameplayEffectEvent _onEffectAdded = new GenericGameplayEffectEvent();
         /// <inheritdoc />
-        public GenericGameplayEffectEvent OnEffectAdded => _onEffectAdded;
+        public List<IGameplayAbility> RunningAbilities => runningAbilities;
 
-        [SerializeField]
-        protected GenericGameplayEffectEvent _onEffectRemoved = new GenericGameplayEffectEvent();
         /// <inheritdoc />
-        public GenericGameplayEffectEvent OnEffectRemoved => _onEffectRemoved;
+        public ActiveGameplayEffectsContainer ActiveGameplayEffectsContainer => activeGameplayEffectsContainer;
 
-        [SerializeField]
-        private GenericAbilityEvent _onGameplayAbilityCommitted = new GenericAbilityEvent();
-        /// <inheritdoc />
-        public GenericAbilityEvent OnGameplayAbilityCommitted => _onGameplayAbilityCommitted;
 
-        private Animator _animator;
+        private Animator animator;
 
-        public Animator Animator => _animator;
+        public Animator Animator => animator;
 
         public IEnumerable<GameplayTag> ActiveTags {
             get {
@@ -73,7 +72,7 @@ namespace GAS {
             }
         }
 
-        private IEnumerable<GameplayTag> AbilityGrantedTags => this._runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
+        private IEnumerable<GameplayTag> AbilityGrantedTags => this.runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
 
         public IEnumerable<(GameplayTag Tag, ActiveGameplayEffectData GrantingEffect)> ActiveTagsByActiveGameplayEffect {
             get {
@@ -92,9 +91,10 @@ namespace GAS {
         }
 
         public void Awake() {
-            this._activeGameplayEffectsContainer = new ActiveGameplayEffectsContainer(this);
-            this._animator = this.GetComponent<Animator>();
+            this.activeGameplayEffectsContainer = new ActiveGameplayEffectsContainer(this);
+            this.animator = this.GetComponent<Animator>();
         }
+
         /// <inheritdoc />
         public Transform GetActor() {
             return this.transform;
@@ -118,14 +118,14 @@ namespace GAS {
 
         /// <inheritdoc />
         public void NotifyAbilityEnded(GameplayAbility ability) {
-            _runningAbilities.Remove(ability);
+            runningAbilities.Remove(ability);
         }
 
         /// <inheritdoc />
         public bool TryActivateAbility(GameplayAbility Ability) {
             if (!this.CanActivateAbility(Ability)) return false;
             if (!Ability.IsAbilityActivatable(this)) return false;
-            _runningAbilities.Add(Ability);
+            runningAbilities.Add(Ability);
             Ability.CommitAbility(this);
 
             return true;
@@ -134,7 +134,7 @@ namespace GAS {
         /// <inheritdoc />
         public bool CanActivateAbility(IGameplayAbility Ability) {
             // Check if this ability is already active on this ASC
-            if (_runningAbilities.Contains(Ability)) {
+            if (runningAbilities.Contains(Ability)) {
                 return false;
             }
 

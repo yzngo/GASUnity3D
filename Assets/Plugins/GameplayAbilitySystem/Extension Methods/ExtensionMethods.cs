@@ -32,14 +32,14 @@ namespace GAS.ExtensionMethods {
         /// <summary>
         /// Waits for event to execute, then returns when T returned by event matches the comparer.
         /// </summary>
-        /// <param name="evt">UnityEvent to wait for</param>
+        /// <param name="event">UnityEvent to wait for</param>
         /// <param name="compareFunc">Function to define how to compare the returned value from the Event to some other value</param>
-        public static async Task<T> WaitForEvent<T>(this UnityEvent<T> evt, Func<T, bool> compareFunc, CancellationToken cts = default(CancellationToken)) {
+        public static async Task<T> WaitForEvent<T>(this UnityEvent<T> @event, Func<T, bool> compareFunc, CancellationToken cts = default(CancellationToken)) {
             T val = default(T);
             UnityAction<T> method = new UnityAction<T>((x) => {
                 val = x;
             });
-            evt.AddListener(method);
+            @event.AddListener(method);
 
             while (!compareFunc(val)) {
                 await UniTask.DelayFrame(0);
@@ -47,7 +47,7 @@ namespace GAS.ExtensionMethods {
                     return (default(T));
                 }
             }
-            evt.RemoveListener(method);
+            @event.RemoveListener(method);
             return val;
         }
 

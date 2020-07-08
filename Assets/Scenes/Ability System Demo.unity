@@ -1576,6 +1576,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ethan
       objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793603, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: onGameplayAbilityActivated.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793603, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: onGameplayAbilityActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793603, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: onGameplayAbilityActivated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793603, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: onGameplayAbilityActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2368979380633877767, guid: 6abd691f7e8403745ad594b75a550b12,
+        type: 3}
+    - target: {fileID: 7899279095267793603, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: onGameplayAbilityActivated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LookAt
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793603, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: onGameplayAbilityActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Transform, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793603, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: onGameplayAbilityActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 7899279095716712560}
     - target: {fileID: 7899279095267793605, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: Abilities.Array.data[0].AbilityTarget

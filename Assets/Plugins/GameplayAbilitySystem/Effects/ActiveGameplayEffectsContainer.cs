@@ -31,7 +31,7 @@ namespace GAS.GameplayEffects {
         public ActiveGameplayEffectsEvent ActiveGameplayEffectAdded = new ActiveGameplayEffectsEvent();
 
 
-        //todo async 异步?
+        //todo async å¼‚æ­¥?
         // public async Task<ActiveGameplayEffectData> ApplyGameEffect(ActiveGameplayEffectData EffectData) {
 
         public ActiveGameplayEffectData ApplyGameEffect(ActiveGameplayEffectData EffectData) {
