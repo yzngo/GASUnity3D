@@ -71,7 +71,7 @@ namespace GAS.GameplayEffects {
                 // We only need to do timed checks for durational abilities
                 if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration
                     || EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite) {
-                    var removalTime = EffectData.Effect.GameplayEffectPolicy.DurationMagnitude * 1000.0f;
+                    // var removalTime = EffectData.Effect.GameplayEffectPolicy.DurationMagnitude * 1000.0f;
                     CheckGameplayEffectForTimedEffects(EffectData);
                 }
 
