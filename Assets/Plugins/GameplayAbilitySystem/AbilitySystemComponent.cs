@@ -11,6 +11,8 @@ using GAS.Interfaces;
 
 namespace GAS {
 
+    /// The ASC is the primary component of the GAS. Every game object 
+    /// that needs to participate with the GAS needs to have this component attached.
     [AddComponentMenu("Gameplay Ability System/Ability System")]
     public class AbilitySystemComponent : MonoBehaviour {
 
@@ -18,30 +20,14 @@ namespace GAS {
         [SerializeField] private Transform targetPoint = default;
         public Transform TargetPoint => targetPoint;
 
-        // [HideInInspector,SerializeField] private GameplayEvent onGameplayEvent = new GameplayEvent();
-        // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
-        // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
-        // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
-        // [HideInInspector,SerializeField] private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
-        // [HideInInspector,SerializeField] private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
-
-        private GameplayEvent onGameplayEvent = new GameplayEvent();
-        private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
-        private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
-        private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
-        private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
-        private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
-        private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
-        private ActiveGameplayEffectsContainer activeGameplayEffectsContainer;
-
         // Called when a GameplayEvent is executed
         public GameplayEvent OnGameplayEvent => onGameplayEvent;
 
-        // Called when a GameplayAbility is activated(激活) 
+        // Called when an Ability is activated(激活) on this ASC
         public GenericAbilityEvent OnGameplayAbilityActivated => onGameplayAbilityActivated;
-        // Called when a GameplayAbility is committed(提交)
+        // Called when an Ability is committed(提交) on this ASC
         public GenericAbilityEvent OnGameplayAbilityCommitted => onGameplayAbilityCommitted;
-        // Called when a GameplayAbility ends
+        // Called when an Ability ends
         public GenericAbilityEvent OnGameplayAbilityEnded => onGameplayAbilityEnded;
 
         /// Called when an effect is added
@@ -54,6 +40,16 @@ namespace GAS {
 
         // Lists all active GameplayEffect
         public ActiveGameplayEffectsContainer ActiveGameplayEffectsContainer => activeGameplayEffectsContainer;
+
+
+        private GameplayEvent onGameplayEvent = new GameplayEvent();
+        private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
+        private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
+        private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
+        private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
+        private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
+        private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
+        private ActiveGameplayEffectsContainer activeGameplayEffectsContainer;
 
 
         private Animator animator;

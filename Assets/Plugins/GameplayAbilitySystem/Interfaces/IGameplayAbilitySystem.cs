@@ -9,25 +9,7 @@ using System.Threading.Tasks;
 
 namespace GAS.Interfaces {
 
-    /// <summary>
-    /// The <see cref="AbilitySystemComponent"/> is the primary component of the Gameplay Ability System.
-    /// Every component that needs to participate with the Ability System (such as receiving or dealing damage)
-    /// needs to have this component.
-    /// </summary>
     public interface IGameplayAbilitySystem {
-        /// <summary>
-        /// Called when a <see cref="IGameplayAbility"/> is activated on this <see cref="AbilitySystemComponent"/>.
-        /// Activation may or may not result in the ability actually running.  
-        /// </summary>
-        /// <value></value>
-        GenericAbilityEvent OnGameplayAbilityActivated { get; }
-
-        /// <summary>
-        /// Called when a <see cref="IGameplayAbility"/> is committed on this <see cref="AbilitySystemComponent"/>.
-        /// This indicates that the resource/cooldown for the ability have been commited and the ability will be executed
-        /// </summary>
-        /// <value></value>
-        GenericAbilityEvent OnGameplayAbilityCommitted { get; }
 
         /// <summary>
         /// Called when a <see cref="IGameplayAbility"/> ends <see cref="AbilitySystemComponent"/> (e.g. <see cref="IGameplayAbility.EndAbility(AbilitySystemComponent)"/> is called)
