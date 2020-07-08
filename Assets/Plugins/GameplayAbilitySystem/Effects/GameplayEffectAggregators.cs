@@ -6,22 +6,23 @@ using GAS.Attributes;
 
 namespace GAS.GameplayEffects {
     public class Aggregator {
-        private AttributeType AttributeType;
+        private AttributeType attributeType;
 
-        public Aggregator(AttributeType AttributeType) {
-            this.AttributeType = AttributeType;
+        public Aggregator(AttributeType attributeType) {
+            this.attributeType = attributeType;
         }
 
-        public Dictionary<ModifierOperationType, List<AggregatorModifier>> Mods { get; } = new Dictionary<ModifierOperationType, List<AggregatorModifier>>();
-        public AggregatorEvent Dirtied { get; set; } = new AggregatorEvent();
+        private Dictionary<ModifierOperationType, List<AggregatorModifier>> modifiers
+                                            = new Dictionary<ModifierOperationType, List<AggregatorModifier>>();
+        public AggregatorEvent dirtied = new AggregatorEvent();
 
-        public void AddAggregatorMod(float EvaluatedMagnitude, ModifierOperationType ModifierOperation) {
+        public void AddAggregatorModifier(float evaluatedMagnitude, ModifierOperationType modifierOperation) {
             // If aggregator exists, check if we have a definition for this modifier operation
-            if (!Mods.TryGetValue(ModifierOperation, out var aggregateMods)) {
-                aggregateMods = new List<AggregatorModifier>();
-                Mods.Add(ModifierOperation, aggregateMods);
+            if (!modifiers.TryGetValue(modifierOperation, out var aggregatorModifier)) {
+                aggregatorModifier = new List<AggregatorModifier>();
+                modifiers.Add(modifierOperation, aggregatorModifier);
             }
-            aggregateMods.Add(new AggregatorModifier(EvaluatedMagnitude));
+            aggregatorModifier.Add(new AggregatorModifier(evaluatedMagnitude));
         }
 
         public void MarkDirty() {
@@ -29,7 +30,7 @@ namespace GAS.GameplayEffects {
         }
 
         protected void OnDirtied() {
-            Dirtied?.Invoke(this, this.AttributeType);
+            dirtied?.Invoke(this, this.attributeType);
         }
 
         public float SumMods(List<AggregatorModifier> Mods) {
@@ -42,7 +43,7 @@ namespace GAS.GameplayEffects {
 
         public float GetAdditives() {
             var additive = 0f;
-            if (Mods.TryGetValue(ModifierOperationType.Add, out var AddModifier)) {
+            if (modifiers.TryGetValue(ModifierOperationType.Add, out var AddModifier)) {
                 additive = SumMods(AddModifier);
             }
 
@@ -52,12 +53,12 @@ namespace GAS.GameplayEffects {
         public float GetMultipliers() {
             var multiplier = 1f;
             var divider = 1f;
-            if (Mods.TryGetValue(ModifierOperationType.Multiply, out var MultiplyModifiers)) {
-                multiplier = ProductMods(Mods[ModifierOperationType.Multiply]);
+            if (modifiers.TryGetValue(ModifierOperationType.Multiply, out var MultiplyModifiers)) {
+                multiplier = ProductMods(modifiers[ModifierOperationType.Multiply]);
             }
 
-            if (Mods.TryGetValue(ModifierOperationType.Divide, out var DivideModifier)) {
-                divider = ProductMods(Mods[ModifierOperationType.Divide]);
+            if (modifiers.TryGetValue(ModifierOperationType.Divide, out var DivideModifier)) {
+                divider = ProductMods(modifiers[ModifierOperationType.Divide]);
             }
 
             return multiplier / divider;
@@ -68,16 +69,16 @@ namespace GAS.GameplayEffects {
             float multiplicative = 1;
             float divisive = 1;
 
-            if (Mods.TryGetValue(ModifierOperationType.Add, out var AddModifier)) {
-                additive = SumMods(Mods[ModifierOperationType.Add]);
+            if (modifiers.TryGetValue(ModifierOperationType.Add, out var AddModifier)) {
+                additive = SumMods(modifiers[ModifierOperationType.Add]);
             }
 
-            if (Mods.TryGetValue(ModifierOperationType.Multiply, out var MultiplyModifier)) {
-                multiplicative = ProductMods(Mods[ModifierOperationType.Multiply]);
+            if (modifiers.TryGetValue(ModifierOperationType.Multiply, out var MultiplyModifier)) {
+                multiplicative = ProductMods(modifiers[ModifierOperationType.Multiply]);
             }
 
-            if (Mods.TryGetValue(ModifierOperationType.Divide, out var DivideModifier)) {
-                divisive = ProductMods(Mods[ModifierOperationType.Divide]);
+            if (modifiers.TryGetValue(ModifierOperationType.Divide, out var DivideModifier)) {
+                divisive = ProductMods(modifiers[ModifierOperationType.Divide]);
             }
 
             return (BaseValue + additive) * (multiplicative / divisive);
@@ -88,13 +89,15 @@ namespace GAS.GameplayEffects {
     }
 
     public class AggregatorModifier {
-        public AggregatorModifier(float EvaluatedMagnitude, float Stacks = 1) {
+        // 计算出的数量值
+        public readonly float EvaluatedMagnitude;
+        public float Stacks { get; private set; }
+
+        public AggregatorModifier(float evaluatedMagnitude, float Stacks = 1) {
             this.Stacks = Stacks;
-            this.EvaluatedMagnitude = EvaluatedMagnitude;
+            this.EvaluatedMagnitude = evaluatedMagnitude;
         }
 
-        public float Stacks { get; private set; }
-        public readonly float EvaluatedMagnitude;
     }
 
     public class AggregatorEvent : UnityEvent<Aggregator, AttributeType> {
@@ -102,12 +105,12 @@ namespace GAS.GameplayEffects {
     }
 
     public static partial class ExtensionMethods {
-        public static float Evaluate(this IEnumerable<Aggregator> Aggregators, float BaseValue) {
-            var additives = Aggregators.Select(x => x.GetAdditives()).Sum();
-            var multipliers = Aggregators
+        public static float Evaluate(this IEnumerable<Aggregator> aggregators, float baseValue) {
+            var additives = aggregators.Select(x => x.GetAdditives()).Sum();
+            var multipliers = aggregators
                                     .Select(x => x.GetMultipliers())
                                     .Aggregate(1f, (result, item) => result * item);
-            return (BaseValue + additives) * multipliers;
+            return (baseValue + additives) * multipliers;
         }
     }
 

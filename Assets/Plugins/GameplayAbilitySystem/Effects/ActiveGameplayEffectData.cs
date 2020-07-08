@@ -118,7 +118,7 @@ namespace GAS.GameplayEffects {
                     PeriodicEffectModificationsToDate.Add(modifier.Attribute, aggregator);
                 }
 
-                aggregator.AddAggregatorMod(EvaluatedMagnitude, modifier.ModifierOperation);
+                aggregator.AddAggregatorModifier(EvaluatedMagnitude, modifier.ModifierOperation);
 
                 // Recalculate new value by recomputing all aggregators
                 var aggregators = Target.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator

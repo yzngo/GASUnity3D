@@ -31,7 +31,7 @@ namespace GAS.GameplayEffects {
         public ActiveGameplayEffectsEvent ActiveGameplayEffectAdded = new ActiveGameplayEffectsEvent();
 
 
-        //todo async å¼‚æ­¥?
+        //todo async 异步?
         // public async Task<ActiveGameplayEffectData> ApplyGameEffect(ActiveGameplayEffectData EffectData) {
 
         public ActiveGameplayEffectData ApplyGameEffect(ActiveGameplayEffectData EffectData) {
@@ -81,28 +81,28 @@ namespace GAS.GameplayEffects {
             return EffectData;
         }
 
-        private void OnActiveGameplayEffectAdded(ActiveGameplayEffectData EffectData) {
-            ActiveGameplayEffectAdded?.Invoke(AbilitySystem, EffectData);
+        private void OnActiveGameplayEffectAdded(ActiveGameplayEffectData effectData) {
+            ActiveGameplayEffectAdded?.Invoke(AbilitySystem, effectData);
         }
 
-        private void ModifyActiveGameplayEffect(ActiveGameplayEffectData EffectData, Action<GameplayEffectModifier> action) {
-            foreach (var modifier in EffectData.Effect.GameplayEffectPolicy.Modifiers) {
+        private void ModifyActiveGameplayEffect(ActiveGameplayEffectData effectData, Action<GameplayEffectModifier> action) {
+            foreach (var modifier in effectData.Effect.GameplayEffectPolicy.Modifiers) {
                 action(modifier);
             }
 
             // If there are no gameplay effect modifiers, we need to add or get an empty entry
-            if (EffectData.Effect.GameplayEffectPolicy.Modifiers.Count == 0) {
+            if (effectData.Effect.GameplayEffectPolicy.Modifiers.Count == 0) {
                 action((new GameplayEffectModifier()).InitialiseEmpty());
             }
         }
 
-        private void AddActiveGameplayEffect(ActiveGameplayEffectData EffectData) {
-            ModifyActiveGameplayEffect(EffectData, modifier => {
+        private void AddActiveGameplayEffect(ActiveGameplayEffectData effectData) {
+            ModifyActiveGameplayEffect(effectData, modifier => {
                 // We only apply if the effect has execute on application
                 modifier.AttemptCalculateMagnitude(out var EvaluatedMagnitude);
 
                 // Check if we already have an entry for this gameplay effect attribute modifier
-                var attributeAggregatorMap = ActiveEffectAttributeAggregator.AddOrGet(EffectData);
+                var attributeAggregatorMap = ActiveEffectAttributeAggregator.AddOrGet(effectData);
                 if (modifier.Attribute != null) {
                     // If aggregator for this attribute doesn't exist, add it.
                     if (!attributeAggregatorMap.TryGetValue(modifier.Attribute, out var aggregator)) {
@@ -113,8 +113,8 @@ namespace GAS.GameplayEffects {
 
                     // If this is a periodic effect, we don't add any attributes here.  They will be
                     // added as required on period expiry and stored in a separate structure
-                    if (EffectData.Effect.Period.Period <= 0) {
-                        aggregator.AddAggregatorMod(EvaluatedMagnitude, modifier.ModifierOperation);
+                    if (effectData.Effect.Period.Period <= 0) {
+                        aggregator.AddAggregatorModifier(EvaluatedMagnitude, modifier.ModifierOperation);
                     }
 
                     // Recalculate new value by recomputing all aggregators
@@ -128,7 +128,7 @@ namespace GAS.GameplayEffects {
             // Add cooldown effect as well.  Application of cooldown effect
             // is different to other game effects, because we don't take
             // attribute modifiers into account
-            OnActiveGameplayEffectAdded(EffectData);
+            OnActiveGameplayEffectAdded(effectData);
         }
 
 
@@ -139,58 +139,58 @@ namespace GAS.GameplayEffects {
         /// The main advantage of checking every frame is we can manipulate the WorldStartTime to
         /// effectively "refresh" the effect or end it at will.
         /// </summary>
-        /// <param name="EffectData"></param>
+        /// <param name="effectData"></param>
         /// <returns> </returns>
-        private async Task WaitForEffectExpiryTime(ActiveGameplayEffectData EffectData) {
+        private async Task WaitForEffectExpiryTime(ActiveGameplayEffectData effectData) {
             bool durationExpired = false;
             while (!durationExpired) {
                 await UniTask.DelayFrame(0);
 
-                if (EffectData.bForceRemoveEffect) {
+                if (effectData.bForceRemoveEffect) {
                     durationExpired = true;
-                } else if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration) {
+                } else if (effectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration) {
                     // Check whether required time has expired
                     // We only need to do this for effects with a finite duration
-                    durationExpired = EffectData.CooldownTimeRemaining <= 0 ? true : false;
-                } else if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite) {
-                    durationExpired = EffectData.StartWorldTime <= 0 ? true : false;
+                    durationExpired = effectData.CooldownTimeRemaining <= 0 ? true : false;
+                } else if (effectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite) {
+                    durationExpired = effectData.StartWorldTime <= 0 ? true : false;
                 }
 
 
                 // Periodic effects only occur if the period is > 0
-                if (EffectData.Effect.Period.Period > 0) {
-                    CheckAndApplyPeriodicEffect(EffectData);
+                if (effectData.Effect.Period.Period > 0) {
+                    CheckAndApplyPeriodicEffect(effectData);
                 }
 
                 if (durationExpired) { // This effect is due for expiry
-                    ApplyStackExpirationPolicy(EffectData, ref durationExpired);
+                    ApplyStackExpirationPolicy(effectData, ref durationExpired);
                 }
 
             }
         }
 
-        private void CheckAndApplyPeriodicEffect(ActiveGameplayEffectData EffectData) {
-            var TimeUntilNextPeriodicApplication = EffectData.TimeUntilNextPeriodicApplication;
-            if (EffectData.TimeUntilNextPeriodicApplication <= 0) {
+        private void CheckAndApplyPeriodicEffect(ActiveGameplayEffectData effectData) {
+            var TimeUntilNextPeriodicApplication = effectData.TimeUntilNextPeriodicApplication;
+            if (effectData.TimeUntilNextPeriodicApplication <= 0) {
                 // Apply gameplay effect defined for period.  
-                if (EffectData.Effect.Period.ApplyGameEffectOnExecute != null) {
-                    EffectData.Instigator.ApplyGameEffectToTarget(EffectData.Effect.Period.ApplyGameEffectOnExecute, EffectData.Target);
+                if (effectData.Effect.Period.ApplyGameEffectOnExecute != null) {
+                    effectData.Instigator.ApplyGameEffectToTarget(effectData.Effect.Period.ApplyGameEffectOnExecute, effectData.Target);
                 }
-                var gameplayCues = EffectData.Effect.GameplayCues;
+                var gameplayCues = effectData.Effect.GameplayCues;
                 foreach (var cue in gameplayCues) {
-                    cue.HandleGameplayCue(EffectData.Target.GetActor().gameObject, new GameplayCues.GameplayCueParameters(null, null, null), EGameplayCueEvent.OnExecute);
+                    cue.HandleGameplayCue(effectData.Target.GetActor().gameObject, new GameplayCues.GameplayCueParameters(null, null, null), EGameplayCueEvent.OnExecute);
                 }
 
-                EffectData.AddPeriodicEffectAttributeModifiers();
-                EffectData.ResetPeriodicTime();
+                effectData.AddPeriodicEffectAttributeModifiers();
+                effectData.ResetPeriodicTime();
             }
         }
-        private void ApplyStackExpirationPolicy(ActiveGameplayEffectData EffectData, ref bool durationExpired) {
+        private void ApplyStackExpirationPolicy(ActiveGameplayEffectData effectData, ref bool durationExpired) {
             IEnumerable<ActiveGameplayEffectData> matchingEffects;
 
-            switch (EffectData.Effect.StackingPolicy.StackExpirationPolicy) {
+            switch (effectData.Effect.StackingPolicy.StackExpirationPolicy) {
                 case StackExpirationPolicy.ClearEntireStack: // Remove all effects which match
-                    matchingEffects = GetMatchingEffectsForActiveEffect(EffectData);
+                    matchingEffects = GetMatchingEffectsForActiveEffect(effectData);
                     if (matchingEffects == null) break;
                     foreach (var effect in matchingEffects) {
                         effect.EndEffect();
@@ -198,7 +198,7 @@ namespace GAS.GameplayEffects {
                     break;
                 case StackExpirationPolicy.RemoveSingleStackAndRefreshDuration:
                     // Remove this effect, and reset all other durations to max
-                    matchingEffects = GetMatchingEffectsForActiveEffect(EffectData);
+                    matchingEffects = GetMatchingEffectsForActiveEffect(effectData);
                     if (matchingEffects == null) break;
 
                     foreach (var effect in matchingEffects) {
@@ -210,11 +210,11 @@ namespace GAS.GameplayEffects {
                         effect.ResetDuration(timeOverflow);
                     }
                     // This effect was going to expire anyway, but we put this here to be explicit to future code readers
-                    EffectData.EndEffect();
+                    effectData.EndEffect();
                     break;
                 case StackExpirationPolicy.RefreshDuration:
                     // Refreshing duration on expiry basically means the effect can never expire
-                    matchingEffects = GetMatchingEffectsForActiveEffect(EffectData);
+                    matchingEffects = GetMatchingEffectsForActiveEffect(effectData);
                     if (matchingEffects == null) break;
                     foreach (var effect in matchingEffects) {
                         effect.ResetDuration();
@@ -223,17 +223,17 @@ namespace GAS.GameplayEffects {
                     break;
             }
         }
-        private async void CheckGameplayEffectForTimedEffects(ActiveGameplayEffectData EffectData) {
-            await WaitForEffectExpiryTime(EffectData);
-            var gameplayCues = EffectData.Effect.GameplayCues;
+        private async void CheckGameplayEffectForTimedEffects(ActiveGameplayEffectData effectData) {
+            await WaitForEffectExpiryTime(effectData);
+            var gameplayCues = effectData.Effect.GameplayCues;
             foreach (var cue in gameplayCues) {
-                cue.HandleGameplayCue(EffectData.Target.GetActor().gameObject, new GameplayCues.GameplayCueParameters(null, null, null), EGameplayCueEvent.OnRemove);
+                cue.HandleGameplayCue(effectData.Target.GetActor().gameObject, new GameplayCues.GameplayCueParameters(null, null, null), EGameplayCueEvent.OnRemove);
             }
             // There could be multiple stacked effects, due to multiple casts
             // Remove one instance of this effect from the active list
-            ModifyActiveGameplayEffect(EffectData, modifier => {
+            ModifyActiveGameplayEffect(effectData, modifier => {
 
-                AbilitySystem.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator.RemoveEffect(EffectData);
+                AbilitySystem.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator.RemoveEffect(effectData);
                 if (modifier.Attribute == null) return;
 
                 // Find all remaining aggregators of the same type and recompute values
@@ -251,17 +251,17 @@ namespace GAS.GameplayEffects {
 
         }
 
-        public void UpdateAttribute(IEnumerable<Aggregator> Aggregator, AttributeType AttributeType) {
-            var baseAttributeValue = AbilitySystem.GetNumericAttributeBase(AttributeType);
-            var newCurrentAttributeValue = Aggregator.Evaluate(baseAttributeValue);
-            AbilitySystem.SetNumericAttributeCurrent(AttributeType, newCurrentAttributeValue);
+        public void UpdateAttribute(IEnumerable<Aggregator> aggregator, AttributeType attributeType) {
+            var baseAttributeValue = AbilitySystem.GetNumericAttributeBase(attributeType);
+            var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
+            AbilitySystem.SetNumericAttributeCurrent(attributeType, newCurrentAttributeValue);
 
         }
 
-        public IEnumerable<ActiveGameplayEffectData> GetMatchingEffectsForActiveEffect(ActiveGameplayEffectData EffectData) {
+        public IEnumerable<ActiveGameplayEffectData> GetMatchingEffectsForActiveEffect(ActiveGameplayEffectData effectData) {
             IEnumerable<ActiveGameplayEffectData> matchingStackedActiveEffects = null;
 
-            switch (EffectData.Effect.StackingPolicy.StackingType) {
+            switch (effectData.Effect.StackingPolicy.StackingType) {
                 // Stacking Type None:
                 // Add effect as a separate instance. 
                 case StackingType.None:
@@ -270,13 +270,13 @@ namespace GAS.GameplayEffects {
                 case StackingType.AggregatedBySource:
                     matchingStackedActiveEffects = this.ActiveEffectAttributeAggregator
                                         .GetActiveEffects()
-                                        .Where(x => x.Instigator == EffectData.Instigator && x.Effect == EffectData.Effect);
+                                        .Where(x => x.Instigator == effectData.Instigator && x.Effect == effectData.Effect);
                     break;
 
                 case StackingType.AggregatedByTarget:
                     matchingStackedActiveEffects = this.ActiveEffectAttributeAggregator
                                         .GetActiveEffects()
-                                        .Where(x => x.Effect == EffectData.Effect);
+                                        .Where(x => x.Effect == effectData.Effect);
                     break;
             }
 
