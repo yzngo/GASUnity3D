@@ -31,16 +31,17 @@ namespace GAS.Abilities {
         // public GenericAbilityEvent OnGameplayAbilityCancelled => _onGameplayAbilityCancelled;
         // public GenericAbilityEvent OnGameplayAbilityEnded => _onGameplayAbilityEnded;
 
-        public void ActivateAbility(AbilitySystemComponent ASC) {
-            _abilityLogic.ActivateAbility(ASC, this);
-            ApplyCooldown(ASC);
-        }
-
         public bool IsAbilityActivatable(AbilitySystemComponent ASC) {
             // Player must be "Idle" to begin ability activation
             if (ASC.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base.Idle")) return false;
             return CheckCost(ASC) && AbilityOffCooldown(ASC) && IsTagsSatisfied(ASC);
         }
+
+        public void ActivateAbility(AbilitySystemComponent ASC) {
+            _abilityLogic.ActivateAbility(ASC, this);
+            ApplyCooldown(ASC);
+        }
+
 
         public bool CommitAbility(AbilitySystemComponent ASC) {
             ActivateAbility(ASC);
@@ -96,9 +97,9 @@ namespace GAS.Abilities {
         /// Applies cooldown. Cooldown is applied even if the ability is already
         /// on cooldown
         /// </summary>
-        protected void ApplyCooldown(AbilitySystemComponent abilitySystem) {
-            foreach (var cooldownEffect in Cooldowns) {
-                abilitySystem.ApplyGameEffectToTarget(cooldownEffect, abilitySystem);
+        protected void ApplyCooldown(AbilitySystemComponent ASC) {
+            foreach (var cooldown in Cooldowns) {
+                ASC.ApplyEffectToTarget(cooldown, ASC);
             }
         }
 

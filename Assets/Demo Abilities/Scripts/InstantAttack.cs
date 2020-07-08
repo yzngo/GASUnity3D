@@ -32,7 +32,7 @@ namespace GAS.Abilities.AbilityActivations {
             if (ExecuteEffectEvent != null) {
                 await animationEventSystemComponent.CustomAnimationEvent.WaitForEvent((x) => x == ExecuteEffectEvent);
             }
-            _ = ASC.ApplyGameEffectToTarget(TargetGameplayEffect, gameplayEventData.Target);
+            _ = ASC.ApplyEffectToTarget(TargetGameplayEffect, gameplayEventData.Target);
 
 
             var beh = animatorComponent.GetBehaviour<AnimationBehaviourEventSystem>();

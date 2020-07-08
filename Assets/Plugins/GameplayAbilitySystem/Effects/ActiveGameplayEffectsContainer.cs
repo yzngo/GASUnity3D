@@ -169,7 +169,7 @@ namespace GAS.GameplayEffects {
             if (effectData.TimeUntilNextPeriodicApplication <= 0) {
                 // Apply gameplay effect defined for period.  
                 if (effectData.Effect.Periodicity.EffectOnExecute != null) {
-                    effectData.Instigator.ApplyGameEffectToTarget(effectData.Effect.Periodicity.EffectOnExecute, effectData.Target);
+                    effectData.Instigator.ApplyEffectToTarget(effectData.Effect.Periodicity.EffectOnExecute, effectData.Target);
                 }
                 var gameplayCues = effectData.Effect.GameplayCues;
                 foreach (var cue in gameplayCues) {

@@ -64,7 +64,7 @@ namespace GAS.Abilities.AbilityActivations {
 
         private async void SeekTargetAndDestroy(AbilitySystemComponent ASC, GameplayEventData gameplayEventData, GameObject projectile) {
             await projectile.GetComponent<Projectile>().SeekTarget(gameplayEventData.Target.TargetPoint, gameplayEventData.Target.gameObject);
-            _ = ASC.ApplyGameEffectToTarget(TargetGameplayEffect, gameplayEventData.Target);
+            _ = ASC.ApplyEffectToTarget(TargetGameplayEffect, gameplayEventData.Target);
             DestroyImmediate(projectile);
         }
 
