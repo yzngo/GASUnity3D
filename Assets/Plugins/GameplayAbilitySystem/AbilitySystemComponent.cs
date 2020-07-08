@@ -38,7 +38,7 @@ namespace GAS {
         // public List<IGameplayAbility> RunningAbilities => runningAbilities;
 
         // Lists all active GameplayEffect
-        public ActiveGameplayEffectsContainer ActiveEffectsContainer => activeGameplayEffectsContainer;
+        public ActiveGameplayEffectsContainer ActiveEffectsContainer => activeEffectsContainer;
 
         private GameplayEvent onGameplayEvent = new GameplayEvent();
         // private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
@@ -47,7 +47,7 @@ namespace GAS {
         private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
         private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
         private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
-        private ActiveGameplayEffectsContainer activeGameplayEffectsContainer;
+        private ActiveGameplayEffectsContainer activeEffectsContainer;
 
         private Animator animator;
         public Animator Animator => animator;
@@ -64,16 +64,20 @@ namespace GAS {
 
         private IEnumerable<GameplayTag> AbilityGrantedTags => runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
 
+        public void Awake() {
+            activeEffectsContainer = new ActiveGameplayEffectsContainer(this);
+            animator = GetComponent<Animator>();
+            attributeSet = GetComponent<AttributeSet>();
+        }
 
-
-        public void HandleGameplayEvent(GameplayTag EventTag, GameplayEventData Payload) {
+        // public void HandleGameplayEvent(GameplayTag EventTag, GameplayEventData Payload) {
             /**
              * TODO: Handle triggered abilities
              * Search component for all abilities that are automatically triggered from a gameplay event
              */
 
-            OnGameplayEvent.Invoke(EventTag, Payload);
-        }
+            // OnGameplayEvent.Invoke(EventTag, Payload);
+        // }
 
         public void NotifyAbilityEnded(GameplayAbility ability) {
             runningAbilities.Remove(ability);
@@ -189,11 +193,6 @@ namespace GAS {
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));
         }
 
-        public void Awake() {
-            activeGameplayEffectsContainer = new ActiveGameplayEffectsContainer(this);
-            animator = GetComponent<Animator>();
-            attributeSet = GetComponent<AttributeSet>();
-        }
 // attribute -----------------------------------------------------------------------------
         public float GetBaseValue(AttributeType type) => GetAttributeByType(type).BaseValue;
         public float GetCurrentValue(AttributeType type) => GetAttributeByType(type).CurrentValue;
