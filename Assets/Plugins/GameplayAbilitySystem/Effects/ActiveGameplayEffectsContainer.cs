@@ -227,17 +227,21 @@ namespace GAS.GameplayEffects {
             await WaitForEffectExpiryTime(effectData);
             var gameplayCues = effectData.Effect.GameplayCues;
             foreach (var cue in gameplayCues) {
-                cue.HandleGameplayCue(effectData.Target.GetActor().gameObject, new GameplayCues.GameplayCueParameters(null, null, null), EGameplayCueEvent.OnRemove);
+                cue.HandleGameplayCue(
+                    effectData.Target.GetActor().gameObject, 
+                    new GameplayCues.GameplayCueParameters(null, null, null), 
+                    EGameplayCueEvent.OnRemove
+                );
             }
             // There could be multiple stacked effects, due to multiple casts
             // Remove one instance of this effect from the active list
             ModifyActiveGameplayEffect(effectData, modifier => {
 
-                AbilitySystem.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator.RemoveEffect(effectData);
+                ActiveEffectAttributeAggregator.RemoveEffect(effectData);
                 if (modifier.Attribute == null) return;
 
                 // Find all remaining aggregators of the same type and recompute values
-                var aggregators = AbilitySystem.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(modifier.Attribute);
+                var aggregators = ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(modifier.Attribute);
 
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {

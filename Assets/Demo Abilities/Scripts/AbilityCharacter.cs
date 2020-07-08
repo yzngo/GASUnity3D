@@ -28,12 +28,10 @@ public class AbilityCharacter : MonoBehaviour
 
     public void CastAbility(int n)
     {
-        Debug.Log(n);
         if (n >= this.Abilities.Count) return;
         if (this.Abilities[n] == null) return;
         if (this.Abilities[n].Ability == null) return;
         if (this.Abilities[n].AbilityTarget == null) return;
-        Debug.Log(n);
         var Ability = this.Abilities[n].Ability;
         var Target = this.Abilities[n].AbilityTarget;
         var eventTag = Ability.Tags.AbilityTags.Added.Count > 0 ? Ability.Tags.AbilityTags.Added[0] : new GameplayTag();
