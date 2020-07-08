@@ -172,7 +172,11 @@ namespace GAS.GameplayEffects {
                 }
                 var gameplayCues = effectData.Effect.GameplayCues;
                 foreach (var cue in gameplayCues) {
-                    cue.HandleGameplayCue(effectData.Target.GetActor().gameObject, new GameplayCues.GameplayCueParameters(null, null, null), EGameplayCueEvent.OnExecute);
+                    cue.HandleGameplayCue(
+                        effectData.Target.GetActor().gameObject, 
+                        new GameplayCues.GameplayCueParameters(null, null, null), 
+                        EGameplayCueEvent.OnExecute
+                    );
                 }
 
                 effectData.AddPeriodicEffectAttributeModifiers();
@@ -218,6 +222,7 @@ namespace GAS.GameplayEffects {
                     break;
             }
         }
+
         private async void CheckGameplayEffectForTimedEffects(ActiveGameplayEffectData effectData) {
             await WaitForEffectExpiryTime(effectData);
             var gameplayCues = effectData.Effect.GameplayCues;
