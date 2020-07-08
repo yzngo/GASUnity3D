@@ -100,9 +100,9 @@ namespace GAS.GameplayEffects {
                 aggregator.AddAggregatorModifier(EvaluatedMagnitude, modifier.ModifierOperation);
 
                 // Recalculate new value by recomputing all aggregators
-                var aggregators = Target.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator
+                var aggregators = Target.ActiveEffectsContainer.ActiveEffectAttributeAggregator
                                     .GetAggregatorsForAttribute(modifier.Attribute);
-                Target.ActiveGameplayEffectsContainer.UpdateAttribute(aggregators, modifier.Attribute);
+                Target.ActiveEffectsContainer.UpdateAttribute(aggregators, modifier.Attribute);
             }
         }
 

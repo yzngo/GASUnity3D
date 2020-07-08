@@ -38,8 +38,7 @@ namespace GAS {
         // public List<IGameplayAbility> RunningAbilities => runningAbilities;
 
         // Lists all active GameplayEffect
-        public ActiveGameplayEffectsContainer ActiveGameplayEffectsContainer => activeGameplayEffectsContainer;
-        public Transform Actor => transform;
+        public ActiveGameplayEffectsContainer ActiveEffectsContainer => activeGameplayEffectsContainer;
 
         private GameplayEvent onGameplayEvent = new GameplayEvent();
         // private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
@@ -56,7 +55,7 @@ namespace GAS {
 
         public IEnumerable<GameplayTag> ActiveTags {
             get {
-                return this.ActiveGameplayEffectsContainer
+                return this.ActiveEffectsContainer
                             .ActiveEffectAttributeAggregator
                             .GetAllActiveEffects()
                             .SelectMany(x => x.Effect.GameplayEffectTags.GrantedTags.Added)
@@ -68,7 +67,7 @@ namespace GAS {
 
         public IEnumerable<(GameplayTag Tag, ActiveGameplayEffectData GrantingEffect)> ActiveTagsByActiveGameplayEffect {
             get {
-                var activeEffects = this.ActiveGameplayEffectsContainer
+                var activeEffects = this.ActiveEffectsContainer
                             .ActiveEffectAttributeAggregator
                             .GetAllActiveEffects();
 
@@ -167,7 +166,7 @@ namespace GAS {
                 // Durational effects require attention to many more things than instant effects
                 // Such as stacking and effect durations
                 var EffectData = new ActiveGameplayEffectData(Effect, this, Target);
-                _ = Target.ActiveGameplayEffectsContainer.ApplyGameEffect(EffectData);
+                _ = Target.ActiveEffectsContainer.ApplyGameEffect(EffectData);
             }
 
             // Remove all effects which have tags defined as "Remove Gameplay Effects With Tag". 
