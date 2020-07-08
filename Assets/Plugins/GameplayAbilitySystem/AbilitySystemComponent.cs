@@ -212,19 +212,19 @@ namespace GAS {
             return attribute.BaseValue;
         }
 
-        public float GetNumericAttributeCurrent(AttributeType AttributeType) {
-            return attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType).CurrentValue;
+        public float GetNumericAttributeCurrent(AttributeType attributeType) {
+            return attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == attributeType).CurrentValue;
         }
 
-        public void SetNumericAttributeBase(AttributeType AttributeType, float modifier) {
-            var attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType);
-            var newValue = modifier;
+        public void SetNumericAttributeBase(AttributeType attributeType, float baseValue) {
+            Attribute attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == attributeType);
+            float newValue = baseValue;
             attribute.SetAttributeBaseValue(attributeSet, ref newValue);
         }
 
-        public void SetNumericAttributeCurrent(AttributeType AttributeType, float NewValue) {
-            var attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType);
-            attribute.SetAttributeCurrentValue(attributeSet, ref NewValue);
+        public void SetNumericAttributeCurrent(AttributeType attributeType, float newValue) {
+            var attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == attributeType);
+            attribute.SetAttributeCurrentValue(attributeSet, ref newValue);
         }
     }
 

@@ -2,41 +2,36 @@ using GAS.Attributes;
 using GAS.Interfaces;
 using UnityEngine;
 
-namespace GAS.Attributes {
-
-    /// <inheritdoc />
+namespace GAS.Attributes 
+{
     [AddComponentMenu("Ability System/Attributes/Attribute")]
     [System.Serializable]
     public class Attribute : IAttribute {
-        [SerializeField] AttributeType _attributeType;
+        [SerializeField] AttributeType _attributeType = default;
 
-        [SerializeField] float _baseValue;
+        [SerializeField] float _baseValue = default;
 
-        [SerializeField] float _currentValue;
+        [SerializeField] float _currentValue = default;
 
-        /// <inheritdoc />
-        public float BaseValue { get => _baseValue; }
+        public float BaseValue => _baseValue;
 
-        /// <inheritdoc />
-        public float CurrentValue { get => _currentValue; }
+        public float CurrentValue => _currentValue;
 
-        /// <inheritdoc />
-        public AttributeType AttributeType { get => _attributeType; set => _attributeType = AttributeType; }
+        public AttributeType AttributeType => _attributeType;
 
-        /// <inheritdoc />
-        public void SetAttributeCurrentValue(IAttributeSet AttributeSet, ref float NewValue) {
-            AttributeSet.PreAttributeChange(this, ref NewValue);
-            _currentValue = NewValue;
-            AttributeSet.AttributeCurrentValueChanged.Invoke(new AttributeChangeData()
+        public void SetAttributeCurrentValue(IAttributeSet attributeSet, ref float newValue) {
+            attributeSet.PreAttributeChange(this, ref newValue);
+            _currentValue = newValue;
+            attributeSet.AttributeCurrentValueChanged.Invoke(new AttributeChangeData()
             {
                 Attribute = this
             });
         }
 
-        public void SetAttributeBaseValue(IAttributeSet AttributeSet, ref float NewValue) {
-            AttributeSet.PreAttributeBaseChange(this, ref NewValue);
-            _baseValue = NewValue;
-            AttributeSet.AttributeBaseValueChanged.Invoke(new AttributeChangeData()
+        public void SetAttributeBaseValue(IAttributeSet attributeSet, ref float newValue) {
+            attributeSet.PreAttributeBaseChange(this, ref newValue);
+            _baseValue = newValue;
+            attributeSet.AttributeBaseValueChanged.Invoke(new AttributeChangeData()
             {
                 Attribute = this
             });
