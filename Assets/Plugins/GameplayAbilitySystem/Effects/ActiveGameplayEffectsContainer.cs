@@ -10,7 +10,6 @@ using UniRx.Async;
 using System.Threading.Tasks;
 using UnityEngine;
 using GAS.GameplayCues;
-using GAS.Enums;
 
 namespace GAS.GameplayEffects {
     [Serializable]

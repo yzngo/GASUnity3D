@@ -3,7 +3,6 @@ using System;
 using GAS.Interfaces;
 using System.Collections.Generic;
 using GAS.Attributes;
-using GAS.Enums;
 
 namespace GAS.GameplayEffects {
     /// <summary>

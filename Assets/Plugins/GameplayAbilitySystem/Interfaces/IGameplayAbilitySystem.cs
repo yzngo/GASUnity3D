@@ -5,7 +5,6 @@ using GAS.Attributes;
 using GAS.GameplayEffects;
 using UnityEngine;
 using UnityEngine.Events;
-using GAS.Enums;
 using System.Threading.Tasks;
 
 namespace GAS.Interfaces {

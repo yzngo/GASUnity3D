@@ -1,5 +1,4 @@
 using GAS.Interfaces;
-using GAS.Enums;
 
 namespace GAS.GameplayEffects {
     public struct GameplayModifierEvaluatedData {

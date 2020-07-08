@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using GAS.Interfaces;
 using GAS;
 using GAS.Attributes;
-using GAS.Enums;
 using UnityEngine;
 using GAS.GameplayCues;
 

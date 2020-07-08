@@ -1,4 +1,4 @@
-namespace GAS.Enums {
+namespace GAS.GameplayEffects {
     public enum ModifierOperationType {
         Add, 
         Multiply, 

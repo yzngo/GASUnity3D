@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Collections.Generic;
-using GAS.Enums;
 using GAS.GameplayEffects;
 
 namespace GAS.Interfaces

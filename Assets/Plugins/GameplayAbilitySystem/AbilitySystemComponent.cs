@@ -11,7 +11,6 @@ using GAS.Interfaces;
 using UnityEngine;
 using GAS.Attributes;
 using UnityEngine.Events;
-using GAS.Enums;
 using GAS.GameplayCues;
 
 namespace GAS {

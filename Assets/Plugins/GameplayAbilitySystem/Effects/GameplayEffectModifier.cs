@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using GAS.Attributes;
-using GAS.Enums;
 using GAS.GameplayEffects;
 using GAS.Interfaces;
 using UnityEngine;
