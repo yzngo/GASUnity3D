@@ -53,9 +53,12 @@ namespace GAS {
         private Animator animator;
         public Animator Animator => animator;
 
+        private AttributeSet attributeSet;
+        public AttributeSet AttributeSet => attributeSet;
+
         public IEnumerable<GameplayTag> ActiveTags {
             get {
-                return this.ActiveEffectsContainer
+                return ActiveEffectsContainer
                             .ActiveEffectAttributeAggregator
                             .GetAllActiveEffects()
                             .SelectMany(x => x.Effect.GameplayEffectTags.GrantedTags.Added)
@@ -63,11 +66,11 @@ namespace GAS {
             }
         }
 
-        private IEnumerable<GameplayTag> AbilityGrantedTags => this.runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
+        private IEnumerable<GameplayTag> AbilityGrantedTags => runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
 
         public IEnumerable<(GameplayTag Tag, ActiveGameplayEffectData GrantingEffect)> ActiveTagsByActiveGameplayEffect {
             get {
-                var activeEffects = this.ActiveEffectsContainer
+                var activeEffects = ActiveEffectsContainer
                             .ActiveEffectAttributeAggregator
                             .GetAllActiveEffects();
 
@@ -83,7 +86,8 @@ namespace GAS {
 
         public void Awake() {
             activeGameplayEffectsContainer = new ActiveGameplayEffectsContainer(this);
-            animator = this.GetComponent<Animator>();
+            animator = GetComponent<Animator>();
+            attributeSet = GetComponent<AttributeSet>();
         }
 
 
@@ -101,7 +105,7 @@ namespace GAS {
         }
 
         public bool TryActivateAbility(GameplayAbility Ability) {
-            if (!this.CanActivateAbility(Ability)) return false;
+            if (!CanActivateAbility(Ability)) return false;
             if (!Ability.IsAbilityActivatable(this)) return false;
             runningAbilities.Add(Ability);
             Ability.CommitAbility(this);
@@ -203,26 +207,22 @@ namespace GAS {
         }
 
         public float GetNumericAttributeBase(AttributeType AttributeType) {
-            var attributeSet = this.GetComponent<AttributeSet>();
             var attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType);
             if (attribute == null) return 0;
             return attribute.BaseValue;
         }
 
         public float GetNumericAttributeCurrent(AttributeType AttributeType) {
-            var attributeSet = this.GetComponent<AttributeSet>();
             return attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType).CurrentValue;
         }
 
         public void SetNumericAttributeBase(AttributeType AttributeType, float modifier) {
-            var attributeSet = this.GetComponent<AttributeSet>();
             var attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType);
             var newValue = modifier;
             attribute.SetAttributeBaseValue(attributeSet, ref newValue);
         }
 
         public void SetNumericAttributeCurrent(AttributeType AttributeType, float NewValue) {
-            var attributeSet = this.GetComponent<AttributeSet>();
             var attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType);
             attribute.SetAttributeCurrentValue(attributeSet, ref NewValue);
         }
