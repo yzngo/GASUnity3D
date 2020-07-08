@@ -15,8 +15,8 @@ namespace GAS.GameplayEffects {
         private float timeOfLastPeriodicApplication = 0;
 
         /// The actual GameplayEffect
-        public GameplayEffect Effect { get => gameplayEffect; }
-        public float StartWorldTime { get => startWorldTime; }
+        public GameplayEffect Effect => gameplayEffect;
+        public float StartWorldTime => startWorldTime;
         public IGameplayAbilitySystem Instigator { get; private set; }      // 发起者
         public IGameplayAbilitySystem Target { get; private set; }          // 目标对象
 // ctor
