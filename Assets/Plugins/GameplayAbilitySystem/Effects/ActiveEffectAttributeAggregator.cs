@@ -36,7 +36,7 @@ namespace GAS.GameplayEffects {
                                 .Select(x => x.Value[Attribute]);
 
             var periodic = Map
-                            .Where(x => x.Key.Effect.Period.Period > 0)
+                            .Where(x => x.Key.Effect.Periodicity.Period > 0)
                             .Select(x => x.Key.GetPeriodicAggregatorForAttribute(Attribute))
                             .Where(x => x != null);
 

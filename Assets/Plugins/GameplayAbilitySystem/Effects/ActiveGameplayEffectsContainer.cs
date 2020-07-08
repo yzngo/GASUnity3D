@@ -32,7 +32,6 @@ namespace GAS.GameplayEffects {
 
         private ActiveGameplayEffectsEvent ActiveGameplayEffectAdded = new ActiveGameplayEffectsEvent();
 
-
         //todo async 异步?
         // public async Task<ActiveGameplayEffectData> ApplyGameEffect(ActiveGameplayEffectData EffectData) {
         public ActiveGameplayEffectData ApplyGameEffect(ActiveGameplayEffectData EffectData) {
@@ -77,8 +76,6 @@ namespace GAS.GameplayEffects {
                 }
 
             }
-
-
             return EffectData;
         }
 
@@ -93,38 +90,36 @@ namespace GAS.GameplayEffects {
 
             // If there are no gameplay effect modifiers, we need to add or get an empty entry
             if (effectData.Effect.GameplayEffectPolicy.Modifiers.Count == 0) {
-                action((new GameplayEffectModifier()).InitialiseEmpty());
+                action((new GameplayEffectModifier()).InitializeEmpty());
             }
         }
 
         private void AddActiveGameplayEffect(ActiveGameplayEffectData effectData) {
             ModifyActiveGameplayEffect(effectData, modifier => {
                 // We only apply if the effect has execute on application
-                modifier.AttemptCalculateMagnitude(out var EvaluatedMagnitude);
+                modifier.AttemptCalculateMagnitude(out var evaluatedMagnitude);
 
                 // Check if we already have an entry for this gameplay effect attribute modifier
                 var attributeAggregatorMap = ActiveEffectAttributeAggregator.AddorGet(effectData);
+
                 if (modifier.Attribute != null) {
                     // If aggregator for this attribute doesn't exist, add it.
-                    if (!attributeAggregatorMap.TryGetValue(modifier.Attribute, out var aggregator)) {
+                    if (!attributeAggregatorMap.TryGetValue(modifier.Attribute, out Aggregator aggregator)) {
                         aggregator = new Aggregator(modifier.Attribute);
-                        // aggregator.Dirtied.AddListener(UpdateAttribute);
                         attributeAggregatorMap.Add(modifier.Attribute, aggregator);
                     }
 
-                    // If this is a periodic effect, we don't add any attributes here.  They will be
-                    // added as required on period expiry and stored in a separate structure
-                    if (effectData.Effect.Period.Period <= 0) {
-                        aggregator.AddAggregatorModifier(EvaluatedMagnitude, modifier.ModifierOperation);
+                    // If this is a periodic effect, we don't add any attributes here. 
+                    // They will be added as required on period expiry and stored in a separate structure
+                    if (effectData.Effect.Periodicity.Period <= 0) {
+                        aggregator.AddAggregatorModifier(evaluatedMagnitude, modifier.ModifierOperation);
                     }
 
                     // Recalculate new value by recomputing all aggregators
-                    var aggregators = AbilitySystem.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(modifier.Attribute);
-                    AbilitySystem.ActiveGameplayEffectsContainer.UpdateAttribute(aggregators, modifier.Attribute);
+                    var aggregators = ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(modifier.Attribute);
+                    UpdateAttribute(aggregators, modifier.Attribute);
                 }
-
             });
-
 
             // Add cooldown effect as well.  Application of cooldown effect
             // is different to other game effects, because we don't take
@@ -159,7 +154,7 @@ namespace GAS.GameplayEffects {
 
 
                 // Periodic effects only occur if the period is > 0
-                if (effectData.Effect.Period.Period > 0) {
+                if (effectData.Effect.Periodicity.Period > 0) {
                     CheckAndApplyPeriodicEffect(effectData);
                 }
 
@@ -174,8 +169,8 @@ namespace GAS.GameplayEffects {
             var TimeUntilNextPeriodicApplication = effectData.TimeUntilNextPeriodicApplication;
             if (effectData.TimeUntilNextPeriodicApplication <= 0) {
                 // Apply gameplay effect defined for period.  
-                if (effectData.Effect.Period.ApplyGameEffectOnExecute != null) {
-                    effectData.Instigator.ApplyGameEffectToTarget(effectData.Effect.Period.ApplyGameEffectOnExecute, effectData.Target);
+                if (effectData.Effect.Periodicity.ApplyGameEffectOnExecute != null) {
+                    effectData.Instigator.ApplyGameEffectToTarget(effectData.Effect.Periodicity.ApplyGameEffectOnExecute, effectData.Target);
                 }
                 var gameplayCues = effectData.Effect.GameplayCues;
                 foreach (var cue in gameplayCues) {

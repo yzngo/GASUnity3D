@@ -26,7 +26,7 @@ namespace GAS.GameplayEffects {
             Instigator = instigator;
             Target = target;
 
-            if (!Effect.Period.ExecuteOnApplication) {
+            if (!Effect.Periodicity.ExecuteOnApplication) {
                 timeOfLastPeriodicApplication = Time.time;
             }
         }
@@ -58,7 +58,7 @@ namespace GAS.GameplayEffects {
         // 对于周期性的effect而言, 自从上次应用效果之后流逝的时间
         public float TimeSincePreviousPeriodicApplication => Time.time - timeOfLastPeriodicApplication;
         // 对于周期性的effect而言, 到下次应用还需要的时间
-        public float TimeUntilNextPeriodicApplication => timeOfLastPeriodicApplication + Effect.Period.Period - Time.time;
+        public float TimeUntilNextPeriodicApplication => timeOfLastPeriodicApplication + Effect.Periodicity.Period - Time.time;
         private Dictionary<AttributeType, Aggregator> PeriodicEffectModificationsToDate = new Dictionary<AttributeType, Aggregator>();
 
 // reset time

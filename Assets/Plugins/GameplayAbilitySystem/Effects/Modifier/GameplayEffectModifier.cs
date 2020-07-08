@@ -41,7 +41,7 @@ namespace GAS.GameplayEffects {
             return true;
         }
 
-        public GameplayEffectModifier InitialiseEmpty() {
+        public GameplayEffectModifier InitializeEmpty() {
             this.attributeType = null;
             return this;
         }

@@ -16,7 +16,7 @@ namespace GAS.GameplayEffects {
 
         [SerializeField] GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
 
-        public EffectPeriodicity Period;
+        public EffectPeriodicity Periodicity;
 
         [SerializeField] public List<GameplayCue> GameplayCues = new List<GameplayCue>();
 
