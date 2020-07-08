@@ -17,50 +17,50 @@ namespace GAS {
     /// <inheritdoc />
     [AddComponentMenu("Gameplay Ability System/Ability System")]
     public class AbilitySystemComponent : MonoBehaviour, IGameplayAbilitySystem {
-        [SerializeField] private Transform targetPoint;
+
+        // 自身的目标点
+        [SerializeField] private Transform targetPoint = default;
         public Transform TargetPoint => targetPoint;
-        
+
         // [HideInInspector,SerializeField] private GameplayEvent onGameplayEvent = new GameplayEvent();
-        // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
         // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
+        // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
         // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
         // [HideInInspector,SerializeField] private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
         // [HideInInspector,SerializeField] private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
 
         private GameplayEvent onGameplayEvent = new GameplayEvent();
-        private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
         private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
+        private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
         private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
         private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
         private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
-
         private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
         private ActiveGameplayEffectsContainer activeGameplayEffectsContainer;
 
-        /// <inheritdoc />
+        // Called when a GameplayEvent is executed
         public GameplayEvent OnGameplayEvent => onGameplayEvent;
 
-        /// <inheritdoc />
-        public GenericAbilityEvent OnGameplayAbilityCommitted => onGameplayAbilityCommitted;
-        /// <inheritdoc /> 
+        // Called when a GameplayAbility is activated(激活) 
         public GenericAbilityEvent OnGameplayAbilityActivated => onGameplayAbilityActivated;
-        /// <inheritdoc />
+        // Called when a GameplayAbility is committed(提交)
+        public GenericAbilityEvent OnGameplayAbilityCommitted => onGameplayAbilityCommitted;
+        // Called when a GameplayAbility ends
         public GenericAbilityEvent OnGameplayAbilityEnded => onGameplayAbilityEnded;
 
-        /// <inheritdoc />
+        /// Called when an effect is added
         public GenericGameplayEffectEvent OnEffectAdded => onEffectAdded;
-        /// <inheritdoc />
+        /// Called when an effect is removed
         public GenericGameplayEffectEvent OnEffectRemoved => onEffectRemoved;
 
-        /// <inheritdoc />
+        /// List of running abilities that have not ended 
         public List<IGameplayAbility> RunningAbilities => runningAbilities;
 
-        /// <inheritdoc />
+        // Lists all active GameplayEffect
         public ActiveGameplayEffectsContainer ActiveGameplayEffectsContainer => activeGameplayEffectsContainer;
 
 
         private Animator animator;
-
         public Animator Animator => animator;
 
         public IEnumerable<GameplayTag> ActiveTags {
