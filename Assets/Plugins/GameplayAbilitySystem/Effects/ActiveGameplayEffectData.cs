@@ -6,7 +6,7 @@ using GAS.Attributes;
 
 namespace GAS.GameplayEffects {
 
-    /// 激活的游戏效果的数据集, 用于跟踪活动中的effect
+    /// 激活的某个游戏效果的数据集, 用于跟踪活动中的effect
     [Serializable]
     public class ActiveGameplayEffectData {
 // base data

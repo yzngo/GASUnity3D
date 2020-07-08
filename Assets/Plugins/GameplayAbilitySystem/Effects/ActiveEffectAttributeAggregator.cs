@@ -4,12 +4,16 @@ using GAS.Attributes;
 using UniRx.Async;
 
 namespace GAS.GameplayEffects {
+
+    // 激活的effect的属性聚合器
+    // This is used to keep track of all the "temporary" attribute modifiers,
+    // so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
     public class ActiveEffectAttributeAggregator {
         private Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>> Map = 
             new Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>>();
 
 
-        public Dictionary<AttributeType, Aggregator> ADDorGet(ActiveGameplayEffectData EffectData) {
+        public Dictionary<AttributeType, Aggregator> AddorGet(ActiveGameplayEffectData EffectData) {
             if (!Map.TryGetValue(EffectData, out var attributeAggregatorMap)) {
                 attributeAggregatorMap = new Dictionary<AttributeType, Aggregator>();
                 Map.Add(EffectData, attributeAggregatorMap);

@@ -12,6 +12,8 @@ using UnityEngine;
 using GAS.GameplayCues;
 
 namespace GAS.GameplayEffects {
+
+    // 所有激活的effect的容器
     [Serializable]
     public class ActiveGameplayEffectsContainer {
 
@@ -33,7 +35,6 @@ namespace GAS.GameplayEffects {
 
         //todo async 异步?
         // public async Task<ActiveGameplayEffectData> ApplyGameEffect(ActiveGameplayEffectData EffectData) {
-
         public ActiveGameplayEffectData ApplyGameEffect(ActiveGameplayEffectData EffectData) {
             // Durational effect.  Add granted modifiers to active list
             var existingStacks = -1;
@@ -102,7 +103,7 @@ namespace GAS.GameplayEffects {
                 modifier.AttemptCalculateMagnitude(out var EvaluatedMagnitude);
 
                 // Check if we already have an entry for this gameplay effect attribute modifier
-                var attributeAggregatorMap = ActiveEffectAttributeAggregator.ADDorGet(effectData);
+                var attributeAggregatorMap = ActiveEffectAttributeAggregator.AddorGet(effectData);
                 if (modifier.Attribute != null) {
                     // If aggregator for this attribute doesn't exist, add it.
                     if (!attributeAggregatorMap.TryGetValue(modifier.Attribute, out var aggregator)) {
