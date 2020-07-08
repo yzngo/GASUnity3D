@@ -10,6 +10,7 @@ using UniRx.Async;
 using System.Threading.Tasks;
 using UnityEngine;
 using GAS.GameplayCues;
+using GAS.Enums;
 
 namespace GAS.GameplayEffects {
     [Serializable]
@@ -69,8 +70,8 @@ namespace GAS.GameplayEffects {
                 AddActiveGameplayEffect(EffectData);
                 ActiveGameplayEffectAdded?.Invoke(AbilitySystem, EffectData);
                 // We only need to do timed checks for durational abilities
-                if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Duration
-                    || EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Infinite) {
+                if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration
+                    || EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite) {
                     var removalTime = EffectData.Effect.GameplayEffectPolicy.DurationMagnitude * 1000.0f;
                     CheckGameplayEffectForTimedEffects(EffectData);
                 }
@@ -148,11 +149,11 @@ namespace GAS.GameplayEffects {
 
                 if (EffectData.bForceRemoveEffect) {
                     durationExpired = true;
-                } else if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Duration) {
+                } else if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration) {
                     // Check whether required time has expired
                     // We only need to do this for effects with a finite duration
                     durationExpired = EffectData.CooldownTimeRemaining <= 0 ? true : false;
-                } else if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == Enums.DurationPolicy.Infinite) {
+                } else if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite) {
                     durationExpired = EffectData.StartWorldTime <= 0 ? true : false;
                 }
 
