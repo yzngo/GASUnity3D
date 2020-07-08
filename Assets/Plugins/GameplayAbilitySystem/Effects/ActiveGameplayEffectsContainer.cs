@@ -38,7 +38,7 @@ namespace GAS.GameplayEffects {
             // Durational effect.  Add granted modifiers to active list
             var existingStacks = -1;
             var maxStacks = EffectData.Effect.StackingPolicy.StackLimit;
-            IEnumerable<ActiveGameplayEffectData> matchingStackedActiveEffects = GetMatchingEffectsForActiveEffect(EffectData);
+            IEnumerable<ActiveGameplayEffectData> matchingStackedActiveEffects = GetMatchingStackedEffectsByEffect(EffectData);
 
             switch (EffectData.Effect.StackingPolicy.StackDurationRefreshPolicy) {
                 case StackRefreshPolicy.RefreshOnSuccessfulApplication: // We refresh all instances of this game effect
@@ -190,7 +190,7 @@ namespace GAS.GameplayEffects {
 
             switch (effectData.Effect.StackingPolicy.StackExpirationPolicy) {
                 case StackExpirationPolicy.ClearEntireStack: // Remove all effects which match
-                    matchingEffects = GetMatchingEffectsForActiveEffect(effectData);
+                    matchingEffects = GetMatchingStackedEffectsByEffect(effectData);
                     if (matchingEffects == null) break;
                     foreach (var effect in matchingEffects) {
                         effect.EndEffect();
@@ -198,7 +198,7 @@ namespace GAS.GameplayEffects {
                     break;
                 case StackExpirationPolicy.RemoveSingleStackAndRefreshDuration:
                     // Remove this effect, and reset all other durations to max
-                    matchingEffects = GetMatchingEffectsForActiveEffect(effectData);
+                    matchingEffects = GetMatchingStackedEffectsByEffect(effectData);
                     if (matchingEffects == null) break;
 
                     foreach (var effect in matchingEffects) {
@@ -214,7 +214,7 @@ namespace GAS.GameplayEffects {
                     break;
                 case StackExpirationPolicy.RefreshDuration:
                     // Refreshing duration on expiry basically means the effect can never expire
-                    matchingEffects = GetMatchingEffectsForActiveEffect(effectData);
+                    matchingEffects = GetMatchingStackedEffectsByEffect(effectData);
                     if (matchingEffects == null) break;
                     foreach (var effect in matchingEffects) {
                         effect.ResetDuration();
@@ -262,7 +262,7 @@ namespace GAS.GameplayEffects {
             AbilitySystem.SetNumericAttributeCurrent(attributeType, newCurrentAttributeValue);
         }
 
-        public IEnumerable<ActiveGameplayEffectData> GetMatchingEffectsForActiveEffect(ActiveGameplayEffectData effectData) {
+        private IEnumerable<ActiveGameplayEffectData> GetMatchingStackedEffectsByEffect(ActiveGameplayEffectData effectData) {
             IEnumerable<ActiveGameplayEffectData> matchingStackedActiveEffects = null;
 
             switch (effectData.Effect.StackingPolicy.StackingType) {
