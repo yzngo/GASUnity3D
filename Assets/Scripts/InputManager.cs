@@ -9,14 +9,12 @@ public class InputManager : MonoBehaviour {
 
     public List<InputHandler> Inputs = new List<InputHandler>();
 
-    // Start is called before the first frame update
     void Awake() {
         if (!ActiveInputComponents.Find(x => x == this)) {
             ActiveInputComponents.Add(this.gameObject);
         }
     }
 
-    // Update is called once per frame
     void Update() {
         for (int i = 0; i < Inputs.Count; i++) {
             bool triggerEvent = false;

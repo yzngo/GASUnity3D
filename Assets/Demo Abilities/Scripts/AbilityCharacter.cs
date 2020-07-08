@@ -1,32 +1,18 @@
-﻿using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using GAS.ExtensionMethods;
+﻿using System.Collections.Generic;
 using GAS;
 using GAS.Abilities;
-using UniRx.Async;
 using UnityEngine;
 using System;
 
 public class AbilityCharacter : MonoBehaviour
 {
-    public GAS.AbilitySystemComponent SelfAbilitySystem { get; private set; }
+    public AbilitySystemComponent SelfAbilitySystem { get; private set; }
 
     public List<CastingAbilityContainer> Abilities = new List<CastingAbilityContainer>();
 
-    // Start is called before the first frame update
     void Start()
     {
-        SelfAbilitySystem = GetComponent<GAS.AbilitySystemComponent>();
-    }
-
-
-
-    public void CastAbility1()
-    {
-
-
+        SelfAbilitySystem = GetComponent<AbilitySystemComponent>();
     }
 
     public (float CooldownElapsed, float CooldownTotal) GetCooldownOfAbility(int n)
@@ -39,13 +25,15 @@ public class AbilityCharacter : MonoBehaviour
         //     Debug.Log(item.Effect.GameplayEffectPolicy.DurationMagnitude - item.CooldownTimeElapsed);
         // }
     }
+
     public void CastAbility(int n)
     {
+        Debug.Log(n);
         if (n >= this.Abilities.Count) return;
         if (this.Abilities[n] == null) return;
         if (this.Abilities[n].Ability == null) return;
         if (this.Abilities[n].AbilityTarget == null) return;
-
+        Debug.Log(n);
         var Ability = this.Abilities[n].Ability;
         var Target = this.Abilities[n].AbilityTarget;
         var eventTag = Ability.Tags.AbilityTags.Added.Count > 0 ? Ability.Tags.AbilityTags.Added[0] : new GameplayTag();
@@ -68,5 +56,5 @@ public class CastingAbilityContainer
 {
     public GameplayAbility Ability;
 
-    public GAS.AbilitySystemComponent AbilityTarget;
+    public AbilitySystemComponent AbilityTarget;
 }
