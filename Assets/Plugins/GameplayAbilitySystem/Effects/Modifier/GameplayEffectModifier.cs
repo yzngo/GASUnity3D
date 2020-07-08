@@ -13,7 +13,7 @@ namespace GAS.GameplayEffects {
 
         [Space(10)]
         [SerializeField] private ModifierCalculationType magnitudeCalculationType = default;
-
+        // Modification value for ScalableFloat type 
         [SerializeField] private float scaledMagnitude = 0f;
 
         [Space(10)]
@@ -35,9 +35,9 @@ namespace GAS.GameplayEffects {
         public GameplayEffectModifierTagCollection TargetTags => targetTags;
 
         /// <inheritdoc />
-        public bool AttemptCalculateMagnitude(out float EvaluatedMagnitude) {
+        public bool AttemptCalculateMagnitude(out float evaluatedMagnitude) {
             //TODO: PROPER IMPLEMENTATION
-            EvaluatedMagnitude = this.ScaledMagnitude;
+            evaluatedMagnitude = ScaledMagnitude;
             return true;
         }
 
