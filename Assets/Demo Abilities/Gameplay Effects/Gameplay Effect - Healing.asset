@@ -45,8 +45,7 @@ MonoBehaviour:
   Periodicity:
     Period: 3
     ExecuteOnApplication: 1
-    ApplyGameEffectOnExecute: {fileID: 11400000, guid: 2f67849ecd9684d42a69798734a9ff04,
-      type: 2}
+    EffectOnExecute: {fileID: 11400000, guid: 2f67849ecd9684d42a69798734a9ff04, type: 2}
   GameplayCues:
   - {fileID: 11400000, guid: c2fdf7b8b6a3efe4bb8950654af72d18, type: 2}
   StackingPolicy:

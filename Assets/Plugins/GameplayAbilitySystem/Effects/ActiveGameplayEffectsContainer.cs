@@ -152,7 +152,6 @@ namespace GAS.GameplayEffects {
                     durationExpired = effectData.StartWorldTime <= 0 ? true : false;
                 }
 
-
                 // Periodic effects only occur if the period is > 0
                 if (effectData.Effect.Periodicity.Period > 0) {
                     CheckAndApplyPeriodicEffect(effectData);
@@ -166,11 +165,10 @@ namespace GAS.GameplayEffects {
         }
 
         private void CheckAndApplyPeriodicEffect(ActiveGameplayEffectData effectData) {
-            var TimeUntilNextPeriodicApplication = effectData.TimeUntilNextPeriodicApplication;
             if (effectData.TimeUntilNextPeriodicApplication <= 0) {
                 // Apply gameplay effect defined for period.  
-                if (effectData.Effect.Periodicity.ApplyGameEffectOnExecute != null) {
-                    effectData.Instigator.ApplyGameEffectToTarget(effectData.Effect.Periodicity.ApplyGameEffectOnExecute, effectData.Target);
+                if (effectData.Effect.Periodicity.EffectOnExecute != null) {
+                    effectData.Instigator.ApplyGameEffectToTarget(effectData.Effect.Periodicity.EffectOnExecute, effectData.Target);
                 }
                 var gameplayCues = effectData.Effect.GameplayCues;
                 foreach (var cue in gameplayCues) {
@@ -181,6 +179,7 @@ namespace GAS.GameplayEffects {
                 effectData.ResetPeriodicTime();
             }
         }
+
         private void ApplyStackExpirationPolicy(ActiveGameplayEffectData effectData, ref bool durationExpired) {
             IEnumerable<ActiveGameplayEffectData> matchingEffects;
 
