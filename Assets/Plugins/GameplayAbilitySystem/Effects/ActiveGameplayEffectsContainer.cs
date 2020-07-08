@@ -30,7 +30,7 @@ namespace GAS.GameplayEffects {
         /// <value></value>
         public ActiveEffectAttributeAggregator ActiveEffectAttributeAggregator { get; } = new ActiveEffectAttributeAggregator();
 
-        private ActiveGameplayEffectsEvent ActiveGameplayEffectAddedEvent = new ActiveGameplayEffectsEvent();
+        // private ActiveGameplayEffectsEvent ActiveGameplayEffectAddedEvent = new ActiveGameplayEffectsEvent();
 
         //todo async 异步?
         // public async Task<ActiveGameplayEffectData> ApplyGameEffect(ActiveGameplayEffectData EffectData) {
@@ -67,7 +67,8 @@ namespace GAS.GameplayEffects {
             existingStacks = matchingStackedActiveEffects?.Count() ?? -1;
             if (existingStacks < maxStacks) { // We can still add more stacks.
                 AddActiveGameplayEffect(EffectData);
-                ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, EffectData);
+                // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, EffectData);
+
                 // We only need to do timed checks for durational abilities
                 if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration
                     || EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite) {
@@ -80,7 +81,7 @@ namespace GAS.GameplayEffects {
         }
 
         private void OnActiveGameplayEffectAdded(ActiveGameplayEffectData effectData) {
-            ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, effectData);
+            // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, effectData);
         }
 
         private void ModifyActiveGameplayEffect(ActiveGameplayEffectData effectData, Action<GameplayEffectModifier> action) {
@@ -288,9 +289,8 @@ namespace GAS.GameplayEffects {
 
     }
 
-    
-    public class ActiveGameplayEffectsEvent : UnityEvent<IGameplayAbilitySystem, ActiveGameplayEffectData> {
+    // public class ActiveGameplayEffectsEvent : UnityEvent<IGameplayAbilitySystem, ActiveGameplayEffectData> {
 
-    }
+    // }
 }
 
