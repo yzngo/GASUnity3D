@@ -100,25 +100,25 @@ namespace GAS {
             return true;
         }
 
-        public async void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystemComponent Target, float Level)> batchedGameplayEffects) {
+        // public async void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystemComponent Target, float Level)> batchedGameplayEffects) {
 
-            var instantEffects = batchedGameplayEffects.Where(x => x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Instant);
-            var durationalEffects = batchedGameplayEffects.Where(
-                x =>
-                    x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration ||
-                    x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite
-                    );
-            // Apply instant effects
-            foreach (var item in instantEffects) {
-                await ApplyEffectToTarget(item.Effect, item.Target);
-            }
-            // Apply durational effects
-            foreach (var effect in durationalEffects) {
-                if (await ApplyEffectToTarget(effect.Effect, effect.Target)) {
+        //     var instantEffects = batchedGameplayEffects.Where(x => x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Instant);
+        //     var durationalEffects = batchedGameplayEffects.Where(
+        //         x =>
+        //             x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration ||
+        //             x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite
+        //             );
+        //     // Apply instant effects
+        //     foreach (var item in instantEffects) {
+        //         await ApplyEffectToTarget(item.Effect, item.Target);
+        //     }
+        //     // Apply durational effects
+        //     foreach (var effect in durationalEffects) {
+        //         if (await ApplyEffectToTarget(effect.Effect, effect.Target)) {
 
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
 
         public Task<GameplayEffect> ApplyEffectToTarget(GameplayEffect effect, AbilitySystemComponent target, float level = 0) {
             // TODO: Check to make sure all the attributes being modified by this gameplay effect exist on the target
