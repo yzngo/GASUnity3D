@@ -18,10 +18,10 @@ MonoBehaviour:
     modifiers: []
   gameplayEffectTags:
     effectTags:
+      _added: []
+    grantedToASCTags:
       _added:
       - {fileID: 11400000, guid: 9a5e97d4d3432d14c81810a21c7a29d3, type: 2}
-    grantedToASCTags:
-      _added: []
     ongoingRequiredTags:
       requirePresence: []
       requireAbsence: []
