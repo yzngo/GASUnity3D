@@ -17,18 +17,18 @@ MonoBehaviour:
     durationMagnitude: 20
     modifiers: []
   gameplayEffectTags:
-    assetTags:
+    effectTags:
       _added: []
-    grantedTags:
+    grantedToASCTags:
       _added:
       - {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
-    ongoingTagRequirements:
+    ongoingRequiredTags:
       requirePresence: []
       requireAbsence: []
-    applicationTagRequirements:
+    applyRequiredTags:
       requirePresence: []
       requireAbsence: []
-    removeGameplayEffectsWithTag:
+    beRemovedEffectsTags:
       _added: []
   periodicity:
     Period: 1

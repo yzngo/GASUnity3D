@@ -15,27 +15,27 @@ MonoBehaviour:
   gameplayEffectPolicy:
     durationPolicy: 1
     durationMagnitude: 0.5
-    _modifiers: []
+    modifiers: []
   gameplayEffectTags:
-    assetTags:
+    effectTags:
       _added:
       - {fileID: 11400000, guid: 9a5e97d4d3432d14c81810a21c7a29d3, type: 2}
-    grantedTags:
+    grantedToASCTags:
       _added: []
-    ongoingTagRequirements:
-      _requirePresence: []
-      _requireAbsence: []
-    applicationTagRequirements:
-      _requirePresence: []
-      _requireAbsence: []
-    removeGameplayEffectsWithTag:
+    ongoingRequiredTags:
+      requirePresence: []
+      requireAbsence: []
+    applyRequiredTags:
+      requirePresence: []
+      requireAbsence: []
+    beRemovedEffectsTags:
       _added: []
-  Period:
+  periodicity:
     Period: 0
     ExecuteOnApplication: 0
-    ApplyGameEffectOnExecute: {fileID: 0}
-  GameplayCues: []
-  StackingPolicy:
+    EffectOnExecute: {fileID: 0}
+  gameplayCues: []
+  stackingPolicy:
     StackingType: 0
     StackLimit: 0
     StackDurationRefreshPolicy: 0
