@@ -25,12 +25,12 @@ references:
   commentId: T:GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation
   fullName: GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation
   nameWithType: AbstractAbilityActivation
-- uid: GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,GameplayAbilitySystem.Interfaces.IGameplayAbility)
-  name: ActivateAbility(IGameplayAbilitySystem, IGameplayAbility)
+- uid: GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent,GameplayAbilitySystem.Interfaces.IGameplayAbility)
+  name: ActivateAbility(AbilitySystemComponent, IGameplayAbility)
   href: api/GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation.html#GameplayAbilitySystem_Abilities_AbilityActivations_AbstractAbilityActivation_ActivateAbility_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GameplayAbilitySystem_Interfaces_IGameplayAbility_
-  commentId: M:GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,GameplayAbilitySystem.Interfaces.IGameplayAbility)
-  fullName: GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem, GameplayAbilitySystem.Interfaces.IGameplayAbility)
-  nameWithType: AbstractAbilityActivation.ActivateAbility(IGameplayAbilitySystem, IGameplayAbility)
+  commentId: M:GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent,GameplayAbilitySystem.Interfaces.IGameplayAbility)
+  fullName: GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent, GameplayAbilitySystem.Interfaces.IGameplayAbility)
+  nameWithType: AbstractAbilityActivation.ActivateAbility(AbilitySystemComponent, IGameplayAbility)
 - uid: GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation.ActivateAbility*
   name: ActivateAbility
   href: api/GameplayAbilitySystem.Abilities.AbilityActivations.AbstractAbilityActivation.html#GameplayAbilitySystem_Abilities_AbilityActivations_AbstractAbilityActivation_ActivateAbility_
@@ -44,12 +44,12 @@ references:
   commentId: T:GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack
   fullName: GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack
   nameWithType: RangeAttack
-- uid: GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,GameplayAbilitySystem.Interfaces.IGameplayAbility)
-  name: ActivateAbility(IGameplayAbilitySystem, IGameplayAbility)
+- uid: GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent,GameplayAbilitySystem.Interfaces.IGameplayAbility)
+  name: ActivateAbility(AbilitySystemComponent, IGameplayAbility)
   href: api/GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack.html#GameplayAbilitySystem_Abilities_AbilityActivations_RangeAttack_ActivateAbility_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GameplayAbilitySystem_Interfaces_IGameplayAbility_
-  commentId: M:GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,GameplayAbilitySystem.Interfaces.IGameplayAbility)
-  fullName: GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem, GameplayAbilitySystem.Interfaces.IGameplayAbility)
-  nameWithType: RangeAttack.ActivateAbility(IGameplayAbilitySystem, IGameplayAbility)
+  commentId: M:GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent,GameplayAbilitySystem.Interfaces.IGameplayAbility)
+  fullName: GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent, GameplayAbilitySystem.Interfaces.IGameplayAbility)
+  nameWithType: RangeAttack.ActivateAbility(AbilitySystemComponent, IGameplayAbility)
 - uid: GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack.ActivateAbility*
   name: ActivateAbility
   href: api/GameplayAbilitySystem.Abilities.AbilityActivations.RangeAttack.html#GameplayAbilitySystem_Abilities_AbilityActivations_RangeAttack_ActivateAbility_
@@ -106,12 +106,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Abilities.GameplayAbility.AbilityLogic
   nameWithType: GameplayAbility.AbilityLogic
-- uid: GameplayAbilitySystem.Abilities.GameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: AbilityOffCooldown(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Abilities.GameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: AbilityOffCooldown(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_AbilityOffCooldown_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: GameplayAbility.AbilityOffCooldown(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: GameplayAbility.AbilityOffCooldown(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Abilities.GameplayAbility.AbilityOffCooldown*
   name: AbilityOffCooldown
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_AbilityOffCooldown_
@@ -119,12 +119,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Abilities.GameplayAbility.AbilityOffCooldown
   nameWithType: GameplayAbility.AbilityOffCooldown
-- uid: GameplayAbilitySystem.Abilities.GameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: ActivateAbility(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Abilities.GameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: ActivateAbility(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_ActivateAbility_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: GameplayAbility.ActivateAbility(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: GameplayAbility.ActivateAbility(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Abilities.GameplayAbility.ActivateAbility*
   name: ActivateAbility
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_ActivateAbility_
@@ -132,12 +132,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Abilities.GameplayAbility.ActivateAbility
   nameWithType: GameplayAbility.ActivateAbility
-- uid: GameplayAbilitySystem.Abilities.GameplayAbility.ApplyCooldown(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: ApplyCooldown(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Abilities.GameplayAbility.ApplyCooldown(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: ApplyCooldown(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_ApplyCooldown_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.ApplyCooldown(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.ApplyCooldown(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: GameplayAbility.ApplyCooldown(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.ApplyCooldown(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.ApplyCooldown(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: GameplayAbility.ApplyCooldown(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Abilities.GameplayAbility.ApplyCooldown*
   name: ApplyCooldown
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_ApplyCooldown_
@@ -171,12 +171,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Abilities.GameplayAbility.ApplyGameplayEffectToTarget
   nameWithType: GameplayAbility.ApplyGameplayEffectToTarget
-- uid: GameplayAbilitySystem.Abilities.GameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: CommitAbility(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Abilities.GameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: CommitAbility(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_CommitAbility_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: GameplayAbility.CommitAbility(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: GameplayAbility.CommitAbility(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Abilities.GameplayAbility.CommitAbility*
   name: CommitAbility
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_CommitAbility_
@@ -184,12 +184,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Abilities.GameplayAbility.CommitAbility
   nameWithType: GameplayAbility.CommitAbility
-- uid: GameplayAbilitySystem.Abilities.GameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: EndAbility(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Abilities.GameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: EndAbility(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_EndAbility_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: GameplayAbility.EndAbility(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: GameplayAbility.EndAbility(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Abilities.GameplayAbility.EndAbility*
   name: EndAbility
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_EndAbility_
@@ -236,12 +236,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Abilities.GameplayAbility.GetAbilityCooldownTags
   nameWithType: GameplayAbility.GetAbilityCooldownTags
-- uid: GameplayAbilitySystem.Abilities.GameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: IsAbilityActivatable(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Abilities.GameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: IsAbilityActivatable(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_IsAbilityActivatable_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: GameplayAbility.IsAbilityActivatable(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: GameplayAbility.IsAbilityActivatable(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Abilities.GameplayAbility.IsAbilityActivatable*
   name: IsAbilityActivatable
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_IsAbilityActivatable_
@@ -288,12 +288,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Abilities.GameplayAbility.OnGameplayAbilityEnded
   nameWithType: GameplayAbility.OnGameplayAbilityEnded
-- uid: GameplayAbilitySystem.Abilities.GameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: PlayerHasResourceToCast(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Abilities.GameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: PlayerHasResourceToCast(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_PlayerHasResourceToCast_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: GameplayAbility.PlayerHasResourceToCast(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Abilities.GameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Abilities.GameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: GameplayAbility.PlayerHasResourceToCast(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Abilities.GameplayAbility.PlayerHasResourceToCast*
   name: PlayerHasResourceToCast
   href: api/GameplayAbilitySystem.Abilities.GameplayAbility.html#GameplayAbilitySystem_Abilities_GameplayAbility_PlayerHasResourceToCast_
@@ -358,12 +358,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.AbilitySystemComponent.AddGameplayEffectToActiveList
   nameWithType: AbilitySystemComponent.AddGameplayEffectToActiveList
-- uid: GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect,GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,System.Single)
-  name: ApplyGameEffectToTarget(GameplayEffect, IGameplayAbilitySystem, Single)
+- uid: GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect,GameplayAbilitySystem.Interfaces.AbilitySystemComponent,System.Single)
+  name: ApplyGameEffectToTarget(GameplayEffect, AbilitySystemComponent, Single)
   href: api/GameplayAbilitySystem.AbilitySystemComponent.html#GameplayAbilitySystem_AbilitySystemComponent_ApplyGameEffectToTarget_GameplayAbilitySystem_GameplayEffects_GameplayEffect_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_System_Single_
-  commentId: M:GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect,GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,System.Single)
-  fullName: GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect, GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem, System.Single)
-  nameWithType: AbilitySystemComponent.ApplyGameEffectToTarget(GameplayEffect, IGameplayAbilitySystem, Single)
+  commentId: M:GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect,GameplayAbilitySystem.Interfaces.AbilitySystemComponent,System.Single)
+  fullName: GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect, GameplayAbilitySystem.Interfaces.AbilitySystemComponent, System.Single)
+  nameWithType: AbilitySystemComponent.ApplyGameEffectToTarget(GameplayEffect, AbilitySystemComponent, Single)
 - uid: GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget*
   name: ApplyGameEffectToTarget
   href: api/GameplayAbilitySystem.AbilitySystemComponent.html#GameplayAbilitySystem_AbilitySystemComponent_ApplyGameEffectToTarget_
@@ -1428,12 +1428,12 @@ references:
   commentId: T:GameplayAbilitySystem.GameplayCues.GameplayCueParameters
   fullName: GameplayAbilitySystem.GameplayCues.GameplayCueParameters
   nameWithType: GameplayCueParameters
-- uid: GameplayAbilitySystem.GameplayCues.GameplayCueParameters.#ctor(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,GameObject,GameObject)
-  name: GameplayCueParameters(IGameplayAbilitySystem, GameObject, GameObject)
+- uid: GameplayAbilitySystem.GameplayCues.GameplayCueParameters.#ctor(GameplayAbilitySystem.Interfaces.AbilitySystemComponent,GameObject,GameObject)
+  name: GameplayCueParameters(AbilitySystemComponent, GameObject, GameObject)
   href: api/GameplayAbilitySystem.GameplayCues.GameplayCueParameters.html#GameplayAbilitySystem_GameplayCues_GameplayCueParameters__ctor_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GameObject_GameObject_
-  commentId: M:GameplayAbilitySystem.GameplayCues.GameplayCueParameters.#ctor(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,GameObject,GameObject)
-  fullName: GameplayAbilitySystem.GameplayCues.GameplayCueParameters.GameplayCueParameters(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem, GameObject, GameObject)
-  nameWithType: GameplayCueParameters.GameplayCueParameters(IGameplayAbilitySystem, GameObject, GameObject)
+  commentId: M:GameplayAbilitySystem.GameplayCues.GameplayCueParameters.#ctor(GameplayAbilitySystem.Interfaces.AbilitySystemComponent,GameObject,GameObject)
+  fullName: GameplayAbilitySystem.GameplayCues.GameplayCueParameters.GameplayCueParameters(GameplayAbilitySystem.Interfaces.AbilitySystemComponent, GameObject, GameObject)
+  nameWithType: GameplayCueParameters.GameplayCueParameters(AbilitySystemComponent, GameObject, GameObject)
 - uid: GameplayAbilitySystem.GameplayCues.GameplayCueParameters.#ctor*
   name: GameplayCueParameters
   href: api/GameplayAbilitySystem.GameplayCues.GameplayCueParameters.html#GameplayAbilitySystem_GameplayCues_GameplayCueParameters__ctor_
@@ -1721,12 +1721,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.GameplayEffects.GameplayEffect.EffectExpired
   nameWithType: GameplayEffect.EffectExpired
-- uid: GameplayAbilitySystem.GameplayEffects.GameplayEffect.ExecuteEffect(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: ExecuteEffect(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.GameplayEffects.GameplayEffect.ExecuteEffect(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: ExecuteEffect(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.GameplayEffects.GameplayEffect.html#GameplayAbilitySystem_GameplayEffects_GameplayEffect_ExecuteEffect_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.GameplayEffects.GameplayEffect.ExecuteEffect(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.GameplayEffects.GameplayEffect.ExecuteEffect(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: GameplayEffect.ExecuteEffect(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.GameplayEffects.GameplayEffect.ExecuteEffect(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.GameplayEffects.GameplayEffect.ExecuteEffect(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: GameplayEffect.ExecuteEffect(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.GameplayEffects.GameplayEffect.ExecuteEffect*
   name: ExecuteEffect
   href: api/GameplayAbilitySystem.GameplayEffects.GameplayEffect.html#GameplayAbilitySystem_GameplayEffects_GameplayEffect_ExecuteEffect_
@@ -2312,12 +2312,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.AbilityLogic
   nameWithType: IGameplayAbility.AbilityLogic
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: AbilityOffCooldown(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: AbilityOffCooldown(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_AbilityOffCooldown_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: IGameplayAbility.AbilityOffCooldown(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.AbilityOffCooldown(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: IGameplayAbility.AbilityOffCooldown(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.AbilityOffCooldown*
   name: AbilityOffCooldown
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_AbilityOffCooldown_
@@ -2325,12 +2325,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.AbilityOffCooldown
   nameWithType: IGameplayAbility.AbilityOffCooldown
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: ActivateAbility(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: ActivateAbility(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_ActivateAbility_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: IGameplayAbility.ActivateAbility(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.ActivateAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: IGameplayAbility.ActivateAbility(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.ActivateAbility*
   name: ActivateAbility
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_ActivateAbility_
@@ -2338,12 +2338,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.ActivateAbility
   nameWithType: IGameplayAbility.ActivateAbility
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: CommitAbility(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: CommitAbility(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_CommitAbility_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: IGameplayAbility.CommitAbility(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.CommitAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: IGameplayAbility.CommitAbility(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.CommitAbility*
   name: CommitAbility
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_CommitAbility_
@@ -2351,12 +2351,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.CommitAbility
   nameWithType: IGameplayAbility.CommitAbility
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: EndAbility(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: EndAbility(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_EndAbility_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: IGameplayAbility.EndAbility(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.EndAbility(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: IGameplayAbility.EndAbility(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.EndAbility*
   name: EndAbility
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_EndAbility_
@@ -2403,12 +2403,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.GetAbilityCooldownTags
   nameWithType: IGameplayAbility.GetAbilityCooldownTags
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: IsAbilityActivatable(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: IsAbilityActivatable(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_IsAbilityActivatable_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: IGameplayAbility.IsAbilityActivatable(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.IsAbilityActivatable(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: IGameplayAbility.IsAbilityActivatable(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.IsAbilityActivatable*
   name: IsAbilityActivatable
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_IsAbilityActivatable_
@@ -2455,12 +2455,12 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.OnGameplayAbilityEnded
   nameWithType: IGameplayAbility.OnGameplayAbilityEnded
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  name: PlayerHasResourceToCast(IGameplayAbilitySystem)
+- uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  name: PlayerHasResourceToCast(AbilitySystemComponent)
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_PlayerHasResourceToCast_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem)
-  nameWithType: IGameplayAbility.PlayerHasResourceToCast(IGameplayAbilitySystem)
+  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.PlayerHasResourceToCast(GameplayAbilitySystem.Interfaces.AbilitySystemComponent)
+  nameWithType: IGameplayAbility.PlayerHasResourceToCast(AbilitySystemComponent)
 - uid: GameplayAbilitySystem.Interfaces.IGameplayAbility.PlayerHasResourceToCast*
   name: PlayerHasResourceToCast
   href: api/GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_PlayerHasResourceToCast_
@@ -2481,194 +2481,194 @@ references:
   isSpec: "True"
   fullName: GameplayAbilitySystem.Interfaces.IGameplayAbility.Tags
   nameWithType: IGameplayAbility.Tags
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem
-  name: IGameplayAbilitySystem
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html
-  commentId: T:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem
-  nameWithType: IGameplayAbilitySystem
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ActiveGameplayEffects
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent
+  name: AbilitySystemComponent
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html
+  commentId: T:GameplayAbilitySystem.Interfaces.AbilitySystemComponent
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent
+  nameWithType: AbilitySystemComponent
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ActiveGameplayEffects
   name: ActiveGameplayEffects
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_ActiveGameplayEffects
-  commentId: P:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ActiveGameplayEffects
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ActiveGameplayEffects
-  nameWithType: IGameplayAbilitySystem.ActiveGameplayEffects
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ActiveGameplayEffects*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_ActiveGameplayEffects
+  commentId: P:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ActiveGameplayEffects
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ActiveGameplayEffects
+  nameWithType: AbilitySystemComponent.ActiveGameplayEffects
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ActiveGameplayEffects*
   name: ActiveGameplayEffects
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_ActiveGameplayEffects_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ActiveGameplayEffects
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_ActiveGameplayEffects_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ActiveGameplayEffects
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ActiveGameplayEffects
-  nameWithType: IGameplayAbilitySystem.ActiveGameplayEffects
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.AddGameplayEffectToActiveList(GameplayAbilitySystem.GameplayEffects.GameplayEffect)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ActiveGameplayEffects
+  nameWithType: AbilitySystemComponent.ActiveGameplayEffects
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.AddGameplayEffectToActiveList(GameplayAbilitySystem.GameplayEffects.GameplayEffect)
   name: AddGameplayEffectToActiveList(GameplayEffect)
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_AddGameplayEffectToActiveList_GameplayAbilitySystem_GameplayEffects_GameplayEffect_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.AddGameplayEffectToActiveList(GameplayAbilitySystem.GameplayEffects.GameplayEffect)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.AddGameplayEffectToActiveList(GameplayAbilitySystem.GameplayEffects.GameplayEffect)
-  nameWithType: IGameplayAbilitySystem.AddGameplayEffectToActiveList(GameplayEffect)
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.AddGameplayEffectToActiveList*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_AddGameplayEffectToActiveList_GameplayAbilitySystem_GameplayEffects_GameplayEffect_
+  commentId: M:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.AddGameplayEffectToActiveList(GameplayAbilitySystem.GameplayEffects.GameplayEffect)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.AddGameplayEffectToActiveList(GameplayAbilitySystem.GameplayEffects.GameplayEffect)
+  nameWithType: AbilitySystemComponent.AddGameplayEffectToActiveList(GameplayEffect)
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.AddGameplayEffectToActiveList*
   name: AddGameplayEffectToActiveList
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_AddGameplayEffectToActiveList_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.AddGameplayEffectToActiveList
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_AddGameplayEffectToActiveList_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.AddGameplayEffectToActiveList
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.AddGameplayEffectToActiveList
-  nameWithType: IGameplayAbilitySystem.AddGameplayEffectToActiveList
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect,GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,System.Single)
-  name: ApplyGameEffectToTarget(GameplayEffect, IGameplayAbilitySystem, Single)
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_ApplyGameEffectToTarget_GameplayAbilitySystem_GameplayEffects_GameplayEffect_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_System_Single_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect,GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,System.Single)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect, GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem, System.Single)
-  nameWithType: IGameplayAbilitySystem.ApplyGameEffectToTarget(GameplayEffect, IGameplayAbilitySystem, Single)
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ApplyGameEffectToTarget*
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.AddGameplayEffectToActiveList
+  nameWithType: AbilitySystemComponent.AddGameplayEffectToActiveList
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect,GameplayAbilitySystem.Interfaces.AbilitySystemComponent,System.Single)
+  name: ApplyGameEffectToTarget(GameplayEffect, AbilitySystemComponent, Single)
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_ApplyGameEffectToTarget_GameplayAbilitySystem_GameplayEffects_GameplayEffect_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_System_Single_
+  commentId: M:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect,GameplayAbilitySystem.Interfaces.AbilitySystemComponent,System.Single)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect, GameplayAbilitySystem.Interfaces.AbilitySystemComponent, System.Single)
+  nameWithType: AbilitySystemComponent.ApplyGameEffectToTarget(GameplayEffect, AbilitySystemComponent, Single)
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ApplyGameEffectToTarget*
   name: ApplyGameEffectToTarget
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_ApplyGameEffectToTarget_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ApplyGameEffectToTarget
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_ApplyGameEffectToTarget_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ApplyGameEffectToTarget
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.ApplyGameEffectToTarget
-  nameWithType: IGameplayAbilitySystem.ApplyGameEffectToTarget
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.CanActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.ApplyGameEffectToTarget
+  nameWithType: AbilitySystemComponent.ApplyGameEffectToTarget
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.CanActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
   name: CanActivateAbility(GameplayAbility)
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_CanActivateAbility_GameplayAbilitySystem_Abilities_GameplayAbility_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.CanActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.CanActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
-  nameWithType: IGameplayAbilitySystem.CanActivateAbility(GameplayAbility)
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.CanActivateAbility*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_CanActivateAbility_GameplayAbilitySystem_Abilities_GameplayAbility_
+  commentId: M:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.CanActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.CanActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
+  nameWithType: AbilitySystemComponent.CanActivateAbility(GameplayAbility)
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.CanActivateAbility*
   name: CanActivateAbility
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_CanActivateAbility_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.CanActivateAbility
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_CanActivateAbility_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.CanActivateAbility
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.CanActivateAbility
-  nameWithType: IGameplayAbilitySystem.CanActivateAbility
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetActor
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.CanActivateAbility
+  nameWithType: AbilitySystemComponent.CanActivateAbility
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetActor
   name: GetActor()
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GetActor
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetActor
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetActor()
-  nameWithType: IGameplayAbilitySystem.GetActor()
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetActor*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GetActor
+  commentId: M:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetActor
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetActor()
+  nameWithType: AbilitySystemComponent.GetActor()
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetActor*
   name: GetActor
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GetActor_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetActor
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GetActor_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetActor
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetActor
-  nameWithType: IGameplayAbilitySystem.GetActor
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetNumericAttribute(GameplayAbilitySystem.Attributes.AttributeType)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetActor
+  nameWithType: AbilitySystemComponent.GetActor
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetNumericAttribute(GameplayAbilitySystem.Attributes.AttributeType)
   name: GetNumericAttribute(AttributeType)
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GetNumericAttribute_GameplayAbilitySystem_Attributes_AttributeType_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetNumericAttribute(GameplayAbilitySystem.Attributes.AttributeType)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetNumericAttribute(GameplayAbilitySystem.Attributes.AttributeType)
-  nameWithType: IGameplayAbilitySystem.GetNumericAttribute(AttributeType)
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetNumericAttribute*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GetNumericAttribute_GameplayAbilitySystem_Attributes_AttributeType_
+  commentId: M:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetNumericAttribute(GameplayAbilitySystem.Attributes.AttributeType)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetNumericAttribute(GameplayAbilitySystem.Attributes.AttributeType)
+  nameWithType: AbilitySystemComponent.GetNumericAttribute(AttributeType)
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetNumericAttribute*
   name: GetNumericAttribute
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GetNumericAttribute_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetNumericAttribute
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_GetNumericAttribute_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetNumericAttribute
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.GetNumericAttribute
-  nameWithType: IGameplayAbilitySystem.GetNumericAttribute
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.HandleGameplayEvent(GameplayAbilitySystem.GameplayTag,GameplayAbilitySystem.Events.GameplayEventData)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.GetNumericAttribute
+  nameWithType: AbilitySystemComponent.GetNumericAttribute
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.HandleGameplayEvent(GameplayAbilitySystem.GameplayTag,GameplayAbilitySystem.Events.GameplayEventData)
   name: HandleGameplayEvent(GameplayTag, GameplayEventData)
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_HandleGameplayEvent_GameplayAbilitySystem_GameplayTag_GameplayAbilitySystem_Events_GameplayEventData_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.HandleGameplayEvent(GameplayAbilitySystem.GameplayTag,GameplayAbilitySystem.Events.GameplayEventData)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.HandleGameplayEvent(GameplayAbilitySystem.GameplayTag, GameplayAbilitySystem.Events.GameplayEventData)
-  nameWithType: IGameplayAbilitySystem.HandleGameplayEvent(GameplayTag, GameplayEventData)
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.HandleGameplayEvent*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_HandleGameplayEvent_GameplayAbilitySystem_GameplayTag_GameplayAbilitySystem_Events_GameplayEventData_
+  commentId: M:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.HandleGameplayEvent(GameplayAbilitySystem.GameplayTag,GameplayAbilitySystem.Events.GameplayEventData)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.HandleGameplayEvent(GameplayAbilitySystem.GameplayTag, GameplayAbilitySystem.Events.GameplayEventData)
+  nameWithType: AbilitySystemComponent.HandleGameplayEvent(GameplayTag, GameplayEventData)
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.HandleGameplayEvent*
   name: HandleGameplayEvent
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_HandleGameplayEvent_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.HandleGameplayEvent
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_HandleGameplayEvent_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.HandleGameplayEvent
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.HandleGameplayEvent
-  nameWithType: IGameplayAbilitySystem.HandleGameplayEvent
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.NotifyAbilityEnded(GameplayAbilitySystem.Abilities.GameplayAbility)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.HandleGameplayEvent
+  nameWithType: AbilitySystemComponent.HandleGameplayEvent
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.NotifyAbilityEnded(GameplayAbilitySystem.Abilities.GameplayAbility)
   name: NotifyAbilityEnded(GameplayAbility)
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_NotifyAbilityEnded_GameplayAbilitySystem_Abilities_GameplayAbility_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.NotifyAbilityEnded(GameplayAbilitySystem.Abilities.GameplayAbility)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.NotifyAbilityEnded(GameplayAbilitySystem.Abilities.GameplayAbility)
-  nameWithType: IGameplayAbilitySystem.NotifyAbilityEnded(GameplayAbility)
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.NotifyAbilityEnded*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_NotifyAbilityEnded_GameplayAbilitySystem_Abilities_GameplayAbility_
+  commentId: M:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.NotifyAbilityEnded(GameplayAbilitySystem.Abilities.GameplayAbility)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.NotifyAbilityEnded(GameplayAbilitySystem.Abilities.GameplayAbility)
+  nameWithType: AbilitySystemComponent.NotifyAbilityEnded(GameplayAbility)
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.NotifyAbilityEnded*
   name: NotifyAbilityEnded
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_NotifyAbilityEnded_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.NotifyAbilityEnded
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_NotifyAbilityEnded_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.NotifyAbilityEnded
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.NotifyAbilityEnded
-  nameWithType: IGameplayAbilitySystem.NotifyAbilityEnded
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityActivated
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.NotifyAbilityEnded
+  nameWithType: AbilitySystemComponent.NotifyAbilityEnded
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityActivated
   name: OnGameplayAbilityActivated
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityActivated
-  commentId: P:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityActivated
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityActivated
-  nameWithType: IGameplayAbilitySystem.OnGameplayAbilityActivated
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityActivated*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityActivated
+  commentId: P:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityActivated
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityActivated
+  nameWithType: AbilitySystemComponent.OnGameplayAbilityActivated
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityActivated*
   name: OnGameplayAbilityActivated
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityActivated_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityActivated
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityActivated_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityActivated
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityActivated
-  nameWithType: IGameplayAbilitySystem.OnGameplayAbilityActivated
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityCommitted
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityActivated
+  nameWithType: AbilitySystemComponent.OnGameplayAbilityActivated
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityCommitted
   name: OnGameplayAbilityCommitted
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityCommitted
-  commentId: P:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityCommitted
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityCommitted
-  nameWithType: IGameplayAbilitySystem.OnGameplayAbilityCommitted
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityCommitted*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityCommitted
+  commentId: P:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityCommitted
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityCommitted
+  nameWithType: AbilitySystemComponent.OnGameplayAbilityCommitted
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityCommitted*
   name: OnGameplayAbilityCommitted
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityCommitted_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityCommitted
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityCommitted_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityCommitted
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityCommitted
-  nameWithType: IGameplayAbilitySystem.OnGameplayAbilityCommitted
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityEnded
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityCommitted
+  nameWithType: AbilitySystemComponent.OnGameplayAbilityCommitted
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityEnded
   name: OnGameplayAbilityEnded
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityEnded
-  commentId: P:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityEnded
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityEnded
-  nameWithType: IGameplayAbilitySystem.OnGameplayAbilityEnded
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityEnded*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityEnded
+  commentId: P:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityEnded
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityEnded
+  nameWithType: AbilitySystemComponent.OnGameplayAbilityEnded
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityEnded*
   name: OnGameplayAbilityEnded
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityEnded_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityEnded
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayAbilityEnded_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityEnded
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayAbilityEnded
-  nameWithType: IGameplayAbilitySystem.OnGameplayAbilityEnded
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayEvent
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayAbilityEnded
+  nameWithType: AbilitySystemComponent.OnGameplayAbilityEnded
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayEvent
   name: OnGameplayEvent
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayEvent
-  commentId: P:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayEvent
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayEvent
-  nameWithType: IGameplayAbilitySystem.OnGameplayEvent
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayEvent*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayEvent
+  commentId: P:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayEvent
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayEvent
+  nameWithType: AbilitySystemComponent.OnGameplayEvent
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayEvent*
   name: OnGameplayEvent
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayEvent_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayEvent
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_OnGameplayEvent_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayEvent
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.OnGameplayEvent
-  nameWithType: IGameplayAbilitySystem.OnGameplayEvent
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.RunningAbilities
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.OnGameplayEvent
+  nameWithType: AbilitySystemComponent.OnGameplayEvent
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.RunningAbilities
   name: RunningAbilities
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_RunningAbilities
-  commentId: P:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.RunningAbilities
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.RunningAbilities
-  nameWithType: IGameplayAbilitySystem.RunningAbilities
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.RunningAbilities*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_RunningAbilities
+  commentId: P:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.RunningAbilities
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.RunningAbilities
+  nameWithType: AbilitySystemComponent.RunningAbilities
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.RunningAbilities*
   name: RunningAbilities
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_RunningAbilities_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.RunningAbilities
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_RunningAbilities_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.RunningAbilities
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.RunningAbilities
-  nameWithType: IGameplayAbilitySystem.RunningAbilities
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.TryActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.RunningAbilities
+  nameWithType: AbilitySystemComponent.RunningAbilities
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.TryActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
   name: TryActivateAbility(GameplayAbility)
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_TryActivateAbility_GameplayAbilitySystem_Abilities_GameplayAbility_
-  commentId: M:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.TryActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.TryActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
-  nameWithType: IGameplayAbilitySystem.TryActivateAbility(GameplayAbility)
-- uid: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.TryActivateAbility*
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_TryActivateAbility_GameplayAbilitySystem_Abilities_GameplayAbility_
+  commentId: M:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.TryActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.TryActivateAbility(GameplayAbilitySystem.Abilities.GameplayAbility)
+  nameWithType: AbilitySystemComponent.TryActivateAbility(GameplayAbility)
+- uid: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.TryActivateAbility*
   name: TryActivateAbility
-  href: api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_TryActivateAbility_
-  commentId: Overload:GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.TryActivateAbility
+  href: api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html#GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_TryActivateAbility_
+  commentId: Overload:GameplayAbilitySystem.Interfaces.AbilitySystemComponent.TryActivateAbility
   isSpec: "True"
-  fullName: GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.TryActivateAbility
-  nameWithType: IGameplayAbilitySystem.TryActivateAbility
+  fullName: GameplayAbilitySystem.Interfaces.AbilitySystemComponent.TryActivateAbility
+  nameWithType: AbilitySystemComponent.TryActivateAbility
 - uid: GameplayAbilitySystem.Interfaces.IGameplayCooldown
   name: IGameplayCooldown
   href: api/GameplayAbilitySystem.Interfaces.IGameplayCooldown.html

@@ -18,8 +18,8 @@ namespace GAS.GameplayEffects {
     public class ActiveGameplayEffectsContainer {
 
         // 拥有此effect的ASC
-        private IGameplayAbilitySystem AbilitySystem;
-        public ActiveGameplayEffectsContainer(IGameplayAbilitySystem AbilitySystem) {
+        private AbilitySystemComponent AbilitySystem;
+        public ActiveGameplayEffectsContainer(AbilitySystemComponent AbilitySystem) {
             this.AbilitySystem = AbilitySystem;
         }
 
@@ -289,7 +289,7 @@ namespace GAS.GameplayEffects {
 
     }
 
-    // public class ActiveGameplayEffectsEvent : UnityEvent<IGameplayAbilitySystem, ActiveGameplayEffectData> {
+    // public class ActiveGameplayEffectsEvent : UnityEvent<AbilitySystemComponent, ActiveGameplayEffectData> {
 
     // }
 }

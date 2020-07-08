@@ -17,10 +17,10 @@ namespace GAS.GameplayEffects {
         /// The actual GameplayEffect
         public GameplayEffect Effect => gameplayEffect;
         public float StartWorldTime => startWorldTime;
-        public IGameplayAbilitySystem Instigator { get; private set; }      // 发起者
-        public IGameplayAbilitySystem Target { get; private set; }          // 目标对象
+        public AbilitySystemComponent Instigator { get; private set; }      // 发起者
+        public AbilitySystemComponent Target { get; private set; }          // 目标对象
 // ctor
-        public ActiveGameplayEffectData(GameplayEffect effect, IGameplayAbilitySystem instigator, IGameplayAbilitySystem target) {
+        public ActiveGameplayEffectData(GameplayEffect effect, AbilitySystemComponent instigator, AbilitySystemComponent target) {
             gameplayEffect = effect;
             startWorldTime = Time.time;
             Instigator = instigator;

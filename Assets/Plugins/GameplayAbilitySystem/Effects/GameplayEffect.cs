@@ -26,7 +26,7 @@ namespace GAS.GameplayEffects {
         public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedTags.Added;
         // public IEnumerable<(GameplayTag Tag, GameplayEffect Effect)> GrantedEffectTags => GrantedTags.Select(x => (x, this));
 
-        public bool ApplicationTagRequirementMet(IGameplayAbilitySystem AbilitySystem) {
+        public bool ApplicationTagRequirementMet(AbilitySystemComponent AbilitySystem) {
             var requiredTagsPresent = true;
             var ignoredTagsAbsent = true;
 
@@ -101,7 +101,7 @@ namespace GAS.GameplayEffects {
         }
 
         public Dictionary<AttributeType, AttributeModificationValues> CalculateAttributeModification(
-                    IGameplayAbilitySystem abilitySystem, 
+                    AbilitySystemComponent abilitySystem, 
                     Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> modifiers, 
                     bool operateOnCurrentValue = false
         ) {
@@ -139,7 +139,7 @@ namespace GAS.GameplayEffects {
             return attributeModification;
         }
 
-        public void ApplyInstantEffect(IGameplayAbilitySystem target) {
+        public void ApplyInstantEffect(AbilitySystemComponent target) {
             // Modify base attribute values.  Collect the overall change for each modifier
             var modifierTotals = this.CalculateModifierEffect();
             var attributeModifications = this.CalculateAttributeModification(target, modifierTotals);

@@ -11,7 +11,7 @@ namespace GAS.GameplayCues {
         public int GameplayEffectLevel = 1;
         public int AbilityLevel = 1;
 
-        public GameplayCueParameters(IGameplayAbilitySystem Instigator, GameObject EffectCauser, GameObject SourceObject) {
+        public GameplayCueParameters(AbilitySystemComponent Instigator, GameObject EffectCauser, GameObject SourceObject) {
             this.Instigator = Instigator;
             this.EffectCauser = EffectCauser;
             this.SourceObject = SourceObject;
@@ -21,7 +21,7 @@ namespace GAS.GameplayCues {
         /// Returns the component that instigated the gameplay cue
         /// </summary>
         /// <returns>Instigating component</returns>
-        public IGameplayAbilitySystem Instigator { get; }
+        public AbilitySystemComponent Instigator { get; }
 
         /// <summary>
         /// The actual component that caused the effect, e.g. projectile

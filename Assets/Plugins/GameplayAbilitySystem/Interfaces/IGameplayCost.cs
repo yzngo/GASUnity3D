@@ -4,7 +4,7 @@ namespace GAS.Interfaces {
     /// <summary>
     /// Represents the cost of a <see cref="IGameplayAbility"/>.
     /// The <see cref="GameplayEffect"/> defines the actual cost of the ability by describing which <see cref="IAttribute"/> are reduced on the 
-    /// casting <see cref="IGameplayAbilitySystem"/> (e.g. mana)
+    /// casting <see cref="AbilitySystemComponent"/> (e.g. mana)
     /// </summary>
     public interface IGameplayCost {
         /// <summary>

@@ -73,7 +73,7 @@
   
   <h1 id="GameplayAbilitySystem_AbilitySystemComponent" data-uid="GameplayAbilitySystem.AbilitySystemComponent" class="text-break">Class AbilitySystemComponent
   </h1>
-  <div class="markdown level0 summary"><p>The <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a> is the primary component of the Gameplay Ability System.
+  <div class="markdown level0 summary"><p>The <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a> is the primary component of the Gameplay Ability System.
 Every component that needs to participate with the Ability System (such as receiving or dealing damage)
 needs to have this component.</p>
 </div>
@@ -85,13 +85,13 @@ needs to have this component.</p>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a></div>
+    <div><a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="GameplayAbilitySystem.html">GameplayAbilitySystem</a></h6>
   <h6><strong>Assembly</strong>: Assembly-CSharp-firstpass.dll</h6>
   <h5 id="GameplayAbilitySystem_AbilitySystemComponent_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class AbilitySystemComponent : MonoBehaviour, IGameplayAbilitySystem</code></pre>
+    <pre><code class="lang-csharp hljs">public class AbilitySystemComponent : MonoBehaviour, AbilitySystemComponent</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
@@ -164,7 +164,7 @@ needs to have this component.</p>
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_ActiveGameplayEffects_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.ActiveGameplayEffects*"></a>
   <h4 id="GameplayAbilitySystem_AbilitySystemComponent_ActiveGameplayEffects" data-uid="GameplayAbilitySystem.AbilitySystemComponent.ActiveGameplayEffects">ActiveGameplayEffects</h4>
-  <div class="markdown level1 summary"><p>Lists all active <a class="xref" href="GameplayAbilitySystem.GameplayEffects.GameplayEffect.html">GameplayEffect</a> on this <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a></p>
+  <div class="markdown level1 summary"><p>Lists all active <a class="xref" href="GameplayAbilitySystem.GameplayEffects.GameplayEffect.html">GameplayEffect</a> on this <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -195,7 +195,7 @@ needs to have this component.</p>
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_OnGameplayAbilityActivated_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.OnGameplayAbilityActivated*"></a>
   <h4 id="GameplayAbilitySystem_AbilitySystemComponent_OnGameplayAbilityActivated" data-uid="GameplayAbilitySystem.AbilitySystemComponent.OnGameplayAbilityActivated">OnGameplayAbilityActivated</h4>
-  <div class="markdown level1 summary"><p>Called when a <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbility.html">IGameplayAbility</a> is activated on this <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a>.
+  <div class="markdown level1 summary"><p>Called when a <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbility.html">IGameplayAbility</a> is activated on this <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a>.
 Activation may or may not result in the ability actually running.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -227,7 +227,7 @@ Activation may or may not result in the ability actually running.</p>
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_OnGameplayAbilityCommitted_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.OnGameplayAbilityCommitted*"></a>
   <h4 id="GameplayAbilitySystem_AbilitySystemComponent_OnGameplayAbilityCommitted" data-uid="GameplayAbilitySystem.AbilitySystemComponent.OnGameplayAbilityCommitted">OnGameplayAbilityCommitted</h4>
-  <div class="markdown level1 summary"><p>Called when a <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbility.html">IGameplayAbility</a> is committed on this <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a>.
+  <div class="markdown level1 summary"><p>Called when a <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbility.html">IGameplayAbility</a> is committed on this <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a>.
 This indicates that the resource/cooldown for the ability have been commited and the ability will be executed</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -259,7 +259,7 @@ This indicates that the resource/cooldown for the ability have been commited and
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_OnGameplayAbilityEnded_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.OnGameplayAbilityEnded*"></a>
   <h4 id="GameplayAbilitySystem_AbilitySystemComponent_OnGameplayAbilityEnded" data-uid="GameplayAbilitySystem.AbilitySystemComponent.OnGameplayAbilityEnded">OnGameplayAbilityEnded</h4>
-  <div class="markdown level1 summary"><p>Called when a <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbility.html">IGameplayAbility</a> ends <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a> (e.g. <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_EndAbility_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_">EndAbility(IGameplayAbilitySystem)</a> is called)
+  <div class="markdown level1 summary"><p>Called when a <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbility.html">IGameplayAbility</a> ends <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a> (e.g. <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbility.html#GameplayAbilitySystem_Interfaces_IGameplayAbility_EndAbility_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_">EndAbility(AbilitySystemComponent)</a> is called)
 This indicates that the resource/cooldown for the ability have been commited and the ability will be executed</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -291,7 +291,7 @@ This indicates that the resource/cooldown for the ability have been commited and
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_OnGameplayEvent_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.OnGameplayEvent*"></a>
   <h4 id="GameplayAbilitySystem_AbilitySystemComponent_OnGameplayEvent" data-uid="GameplayAbilitySystem.AbilitySystemComponent.OnGameplayEvent">OnGameplayEvent</h4>
-  <div class="markdown level1 summary"><p>This event is called when a <a class="xref" href="GameplayAbilitySystem.Events.GameplayEvent.html">GameplayEvent</a> is executed this <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a></p>
+  <div class="markdown level1 summary"><p>This event is called when a <a class="xref" href="GameplayAbilitySystem.Events.GameplayEvent.html">GameplayEvent</a> is executed this <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -322,7 +322,7 @@ This indicates that the resource/cooldown for the ability have been commited and
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_RunningAbilities_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.RunningAbilities*"></a>
   <h4 id="GameplayAbilitySystem_AbilitySystemComponent_RunningAbilities" data-uid="GameplayAbilitySystem.AbilitySystemComponent.RunningAbilities">RunningAbilities</h4>
-  <div class="markdown level1 summary"><p>List of running abilities that have not ended on this <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a></p>
+  <div class="markdown level1 summary"><p>List of running abilities that have not ended on this <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -355,7 +355,7 @@ This indicates that the resource/cooldown for the ability have been commited and
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_AddGameplayEffectToActiveList_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.AddGameplayEffectToActiveList*"></a>
   <h4 id="GameplayAbilitySystem_AbilitySystemComponent_AddGameplayEffectToActiveList_GameplayAbilitySystem_GameplayEffects_GameplayEffect_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.AddGameplayEffectToActiveList(GameplayAbilitySystem.GameplayEffects.GameplayEffect)">AddGameplayEffectToActiveList(GameplayEffect)</h4>
-  <div class="markdown level1 summary"><p>Applies a <a class="xref" href="GameplayAbilitySystem.GameplayEffects.GameplayEffect.html">GameplayEffect</a> to this <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a></p>
+  <div class="markdown level1 summary"><p>Applies a <a class="xref" href="GameplayAbilitySystem.GameplayEffects.GameplayEffect.html">GameplayEffect</a> to this <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -382,20 +382,20 @@ This indicates that the resource/cooldown for the ability have been commited and
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/sjai013/UnityGameplayAbilitySystem/new/master/apiSpec/new?filename=GameplayAbilitySystem_AbilitySystemComponent_ApplyGameEffectToTarget_GameplayAbilitySystem_GameplayEffects_GameplayEffect_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_System_Single_.md&amp;value=---%0Auid%3A%20GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect%2CGameplayAbilitySystem.Interfaces.IGameplayAbilitySystem%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/sjai013/UnityGameplayAbilitySystem/new/master/apiSpec/new?filename=GameplayAbilitySystem_AbilitySystemComponent_ApplyGameEffectToTarget_GameplayAbilitySystem_GameplayEffects_GameplayEffect_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_System_Single_.md&amp;value=---%0Auid%3A%20GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect%2CGameplayAbilitySystem.Interfaces.AbilitySystemComponent%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/sjai013/UnityGameplayAbilitySystem/blob/master/Assets/Plugins/GameplayAbilitySystem/AbilitySystemComponent.cs/#L120">View Source</a>
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_ApplyGameEffectToTarget_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget*"></a>
-  <h4 id="GameplayAbilitySystem_AbilitySystemComponent_ApplyGameEffectToTarget_GameplayAbilitySystem_GameplayEffects_GameplayEffect_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_System_Single_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect,GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem,System.Single)">ApplyGameEffectToTarget(GameplayEffect, IGameplayAbilitySystem, Single)</h4>
-  <div class="markdown level1 summary"><p>Applies a <a class="xref" href="GameplayAbilitySystem.GameplayEffects.GameplayEffect.html">GameplayEffect</a> to the target <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a>.
+  <h4 id="GameplayAbilitySystem_AbilitySystemComponent_ApplyGameEffectToTarget_GameplayAbilitySystem_GameplayEffects_GameplayEffect_GameplayAbilitySystem_Interfaces_IGameplayAbilitySystem_System_Single_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.ApplyGameEffectToTarget(GameplayAbilitySystem.GameplayEffects.GameplayEffect,GameplayAbilitySystem.Interfaces.AbilitySystemComponent,System.Single)">ApplyGameEffectToTarget(GameplayEffect, AbilitySystemComponent, Single)</h4>
+  <div class="markdown level1 summary"><p>Applies a <a class="xref" href="GameplayAbilitySystem.GameplayEffects.GameplayEffect.html">GameplayEffect</a> to the target <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a>.
 The overall effect may be modulated by the Level.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GameplayEffect ApplyGameEffectToTarget(GameplayEffect Effect, IGameplayAbilitySystem Target, float Level = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public GameplayEffect ApplyGameEffectToTarget(GameplayEffect Effect, AbilitySystemComponent Target, float Level = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -414,7 +414,7 @@ The overall effect may be modulated by the Level.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a></td>
+        <td><a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a></td>
         <td><span class="parametername">Target</span></td>
         <td><p>Target on which effect is to be applied</p>
 </td>
@@ -502,7 +502,7 @@ The overall effect may be modulated by the Level.</p>
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_GetActor_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.GetActor*"></a>
   <h4 id="GameplayAbilitySystem_AbilitySystemComponent_GetActor" data-uid="GameplayAbilitySystem.AbilitySystemComponent.GetActor">GetActor()</h4>
-  <div class="markdown level1 summary"><p>Gets the parent <see cref="!:Transform"></see> of this <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a></p>
+  <div class="markdown level1 summary"><p>Gets the parent <see cref="!:Transform"></see> of this <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -583,7 +583,7 @@ The overall effect may be modulated by the Level.</p>
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_HandleGameplayEvent_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.HandleGameplayEvent*"></a>
   <h4 id="GameplayAbilitySystem_AbilitySystemComponent_HandleGameplayEvent_GameplayAbilitySystem_GameplayTag_GameplayAbilitySystem_Events_GameplayEventData_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.HandleGameplayEvent(GameplayAbilitySystem.GameplayTag,GameplayAbilitySystem.Events.GameplayEventData)">HandleGameplayEvent(GameplayTag, GameplayEventData)</h4>
-  <div class="markdown level1 summary"><p>Responds to a Gameplay Event on this <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a></p>
+  <div class="markdown level1 summary"><p>Responds to a Gameplay Event on this <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -623,7 +623,7 @@ The overall effect may be modulated by the Level.</p>
   </span>
   <a id="GameplayAbilitySystem_AbilitySystemComponent_NotifyAbilityEnded_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.NotifyAbilityEnded*"></a>
   <h4 id="GameplayAbilitySystem_AbilitySystemComponent_NotifyAbilityEnded_GameplayAbilitySystem_Abilities_GameplayAbility_" data-uid="GameplayAbilitySystem.AbilitySystemComponent.NotifyAbilityEnded(GameplayAbilitySystem.Abilities.GameplayAbility)">NotifyAbilityEnded(GameplayAbility)</h4>
-  <div class="markdown level1 summary"><p>Notifies this <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a> that the specified <a class="xref" href="GameplayAbilitySystem.Abilities.GameplayAbility.html">GameplayAbility</a> has ended</p>
+  <div class="markdown level1 summary"><p>Notifies this <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a> that the specified <a class="xref" href="GameplayAbilitySystem.Abilities.GameplayAbility.html">GameplayAbility</a> has ended</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -714,7 +714,7 @@ The overall effect may be modulated by the Level.</p>
   </div>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a>
+      <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a>
   </div>
 </article>
           </div>

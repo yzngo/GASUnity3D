@@ -32,12 +32,12 @@ namespace GAS.Interfaces {
         float ScaledMagnitude { get; }
 
         /// <summary>
-        /// <see cref="GameplayTag"/> that must be present/must not be present on the source of the <see cref="IGameplayAbilitySystem"/>
+        /// <see cref="GameplayTag"/> that must be present/must not be present on the source of the <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <value></value>
         GameplayEffectModifierTagCollection SourceTags { get; }
 
-        /// <see cref="GameplayTag"/> that must be present/must not be present on the target of the <see cref="IGameplayAbilitySystem"/>
+        /// <see cref="GameplayTag"/> that must be present/must not be present on the target of the <see cref="AbilitySystemComponent"/>
         GameplayEffectModifierTagCollection TargetTags { get; }
 
         bool AttemptCalculateMagnitude(out float evaluatedMagnitude);

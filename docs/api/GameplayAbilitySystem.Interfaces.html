@@ -78,7 +78,7 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="GameplayAbilitySystem.Interfaces.GameplayEffectModifierTagCollection.html">GameplayEffectModifierTagCollection</a></h4>
-      <section><p>Defines tags that must be present/must not be present on a <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a></p>
+      <section><p>Defines tags that must be present/must not be present on a <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a></p>
 </section>
     <h3 id="interfaces">Interfaces
   </h3>
@@ -104,8 +104,8 @@ This will usually include <a class="xref" href="GameplayAbilitySystem.Interfaces
       <section><p>This interfaces defines Gameplay Abilities.  Gameplay Abilities represent &quot;things&quot; that players can cast, etc.
 E.g. a <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbility.html">IGameplayAbility</a> might represent a fireball ability which the player casts and which damages a target</p>
 </section>
-      <h4><a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a></h4>
-      <section><p>The <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a> is the primary component of the Gameplay Ability System.
+      <h4><a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a></h4>
+      <section><p>The <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a> is the primary component of the Gameplay Ability System.
 Every component that needs to participate with the Ability System (such as receiving or dealing damage)
 needs to have this component.</p>
 </section>
@@ -117,7 +117,7 @@ shared cooldowns (e.g. a global cooldown shared by all abilities, and a <a class
       <h4><a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayCost.html">IGameplayCost</a></h4>
       <section><p>Represents the cost of a <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbility.html">IGameplayAbility</a>.
 The <a class="xref" href="GameplayAbilitySystem.GameplayEffects.GameplayEffect.html">GameplayEffect</a> defines the actual cost of the ability by describing which <a class="xref" href="GameplayAbilitySystem.Interfaces.IAttribute.html">IAttribute</a> are reduced on the
-casting <a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html">IGameplayAbilitySystem</a> (e.g. mana)</p>
+casting <a class="xref" href="GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html">AbilitySystemComponent</a> (e.g. mana)</p>
 </section>
       <h4><a class="xref" href="GameplayAbilitySystem.Interfaces.IGameplayEffectModifier.html">IGameplayEffectModifier</a></h4>
       <section><p>This class defines how a  <a class="xref" href="GameplayAbilitySystem.GameplayEffects.GameplayEffect.html">GameplayEffect</a> modifies attributes (e.g. doing damage, healing)</p>

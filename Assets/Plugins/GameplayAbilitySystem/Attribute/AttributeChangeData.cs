@@ -36,7 +36,7 @@ namespace GAS.Attributes {
         // /// <summary>
         // /// The target of this effect
         // /// </summary>
-        // public IGameplayAbilitySystem Target;
+        // public AbilitySystemComponent Target;
 
     }
 

@@ -41,14 +41,14 @@ namespace GAS.Interfaces
         GameplayEffectAddRemoveTagContainer AssetTags { get; }
 
         /// <summary>
-        /// <see cref="GameplayTag"/> that are given to the <see cref="IGameplayAbilitySystem"/>
+        /// <see cref="GameplayTag"/> that are given to the <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <value></value>
         GameplayEffectAddRemoveTagContainer GrantedTags { get; }
 
         /// <summary>
-        /// <see cref="GameplayTag"/> that are required on the <see cref="IGameplayAbilitySystem"/> for the <see cref="GameplayEffect"> to have an effect.  
-        /// If these <see cref="GameplayTag"/> are not on the <see cref="IGameplayAbilitySystem"/>, the effect is "disabled" until these <see cref="GameplayTag"/> are present.
+        /// <see cref="GameplayTag"/> that are required on the <see cref="AbilitySystemComponent"/> for the <see cref="GameplayEffect"> to have an effect.  
+        /// If these <see cref="GameplayTag"/> are not on the <see cref="AbilitySystemComponent"/>, the effect is "disabled" until these <see cref="GameplayTag"/> are present.
         /// </summary>
         /// <value></value>
         GameplayEffectRequireIgnoreTagContainer OngoingTagRequirements { get; }

@@ -33,7 +33,7 @@ namespace GAS.Interfaces {
 
         /// <summary>
         /// This is called whenever this ability ends.
-        /// This event does not pass on details of which <see cref="IGameplayAbilitySystem"/> 
+        /// This event does not pass on details of which <see cref="AbilitySystemComponent"/> 
         /// was responsible for using this ability.
         /// </summary>
         /// <value></value>
@@ -41,7 +41,7 @@ namespace GAS.Interfaces {
 
         /// <summary>
         /// This is called whenever this ability is commited.
-        /// This event does not pass on details of which <see cref="IGameplayAbilitySystem"/> 
+        /// This event does not pass on details of which <see cref="AbilitySystemComponent"/> 
         /// was responsible for using this ability.
         /// </summary>
         /// <value></value>
@@ -49,7 +49,7 @@ namespace GAS.Interfaces {
 
         /// <summary>
         /// This is called whenever this ability is cancelled.
-        /// This event does not pass on details of which <see cref="IGameplayAbilitySystem"/> 
+        /// This event does not pass on details of which <see cref="AbilitySystemComponent"/> 
         /// was responsible for using this ability.
         /// </summary>
         /// <value></value>
@@ -62,31 +62,31 @@ namespace GAS.Interfaces {
         AbstractAbilityActivation AbilityLogic { get; }
 
         /// <summary>
-        /// Ends this ability on the target <see cref="IGameplayAbilitySystem"/>
+        /// Ends this ability on the target <see cref="AbilitySystemComponent"/>
         /// </summary>
-        /// <param name="AbilitySystem">The target <see cref="IGameplayAbilitySystem"/></param>
-        void EndAbility(IGameplayAbilitySystem AbilitySystem);
+        /// <param name="AbilitySystem">The target <see cref="AbilitySystemComponent"/></param>
+        void EndAbility(AbilitySystemComponent AbilitySystem);
 
         /// <summary>
-        /// Activates this ability on the target <see cref="IGameplayAbilitySystem"/>
+        /// Activates this ability on the target <see cref="AbilitySystemComponent"/>
         /// </summary>
-        /// <param name="AbilitySystem">The target <see cref="IGameplayAbilitySystem"/></param>
-        void ActivateAbility(IGameplayAbilitySystem AbilitySystem);
+        /// <param name="AbilitySystem">The target <see cref="AbilitySystemComponent"/></param>
+        void ActivateAbility(AbilitySystemComponent AbilitySystem);
 
         /// <summary>
-        /// Check if this ability can be activated by <see cref="IGameplayAbilitySystem"/>
+        /// Check if this ability can be activated by <see cref="AbilitySystemComponent"/>
         /// </summary>
-        /// <param name="AbilitySystem">The target <see cref="IGameplayAbilitySystem"/></param>
+        /// <param name="AbilitySystem">The target <see cref="AbilitySystemComponent"/></param>
         /// <returns></returns>
-        bool IsAbilityActivatable(IGameplayAbilitySystem AbilitySystem);
+        bool IsAbilityActivatable(AbilitySystemComponent AbilitySystem);
 
         /// <summary>
-        /// Commits the <see cref="IGameplayAbilitySystem"/> on the target <see cref="IGameplayAbilitySystem"/>
+        /// Commits the <see cref="AbilitySystemComponent"/> on the target <see cref="AbilitySystemComponent"/>
         /// </summary>
-        /// <param name="AbilitySystem">The target <see cref="IGameplayAbilitySystem"/></param>
+        /// <param name="AbilitySystem">The target <see cref="AbilitySystemComponent"/></param>
         /// <returns></returns>
-        bool CommitAbility(IGameplayAbilitySystem AbilitySystem);
+        bool CommitAbility(AbilitySystemComponent AbilitySystem);
 
-        (float CooldownElapsed, float CooldownTotal) CalculateCooldown(IGameplayAbilitySystem AbilitySystem);
+        (float CooldownElapsed, float CooldownTotal) CalculateCooldown(AbilitySystemComponent AbilitySystem);
     }
 }

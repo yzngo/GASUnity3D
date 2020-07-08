@@ -605,10 +605,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.yml",
+      "source_relative_path": "api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/GameplayAbilitySystem.Interfaces.IGameplayAbilitySystem.html",
+          "relative_path": "api/GameplayAbilitySystem.Interfaces.AbilitySystemComponent.html",
           "hash": "/jGMwdCEZCHIW9hZwJMsOw=="
         }
       },

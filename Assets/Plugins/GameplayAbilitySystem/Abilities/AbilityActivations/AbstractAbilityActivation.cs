@@ -5,6 +5,6 @@ using UnityEngine;
 
 namespace GAS.Abilities.AbilityActivations {
     public abstract class AbstractAbilityActivation : ScriptableObject {
-        public abstract void ActivateAbility(IGameplayAbilitySystem AbilitySystem, IGameplayAbility Ability);
+        public abstract void ActivateAbility(AbilitySystemComponent AbilitySystem, IGameplayAbility Ability);
     }
 }

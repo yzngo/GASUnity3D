@@ -1,24 +1,20 @@
 ﻿using System.Linq;
-using System.Runtime.CompilerServices;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GAS.ExtensionMethods;
 using GAS.Abilities;
 using GAS.GameplayEffects;
-using GAS.Interfaces;
 using UnityEngine;
 using GAS.Attributes;
-using UnityEngine.Events;
 using GAS.GameplayCues;
+using UnityEngine.Events;
+using GAS.Interfaces;
 
 namespace GAS {
-    /// <inheritdoc />
-    [AddComponentMenu("Gameplay Ability System/Ability System")]
-    public class AbilitySystemComponent : MonoBehaviour, IGameplayAbilitySystem {
 
-        // 自身的目标点
+    [AddComponentMenu("Gameplay Ability System/Ability System")]
+    public class AbilitySystemComponent : MonoBehaviour {
+
+        // 自己身上作为目标的点
         [SerializeField] private Transform targetPoint = default;
         public Transform TargetPoint => targetPoint;
 
@@ -96,18 +92,10 @@ namespace GAS {
             this.animator = this.GetComponent<Animator>();
         }
 
-        /// <inheritdoc />
         public Transform GetActor() {
             return this.transform;
         }
 
-        void Update() {
-
-        }
-
-
-
-        /// <inheritdoc />
         public void HandleGameplayEvent(GameplayTag EventTag, GameplayEventData Payload) {
             /**
              * TODO: Handle triggered abilities
@@ -117,12 +105,10 @@ namespace GAS {
             OnGameplayEvent.Invoke(EventTag, Payload);
         }
 
-        /// <inheritdoc />
         public void NotifyAbilityEnded(GameplayAbility ability) {
             runningAbilities.Remove(ability);
         }
 
-        /// <inheritdoc />
         public bool TryActivateAbility(GameplayAbility Ability) {
             if (!this.CanActivateAbility(Ability)) return false;
             if (!Ability.IsAbilityActivatable(this)) return false;
@@ -132,7 +118,6 @@ namespace GAS {
             return true;
         }
 
-        /// <inheritdoc />
         public bool CanActivateAbility(IGameplayAbility Ability) {
             // Check if this ability is already active on this ASC
             if (runningAbilities.Contains(Ability)) {
@@ -143,7 +128,7 @@ namespace GAS {
             return true;
         }
 
-        public async void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, IGameplayAbilitySystem Target, float Level)> BatchedGameplayEffects) {
+        public async void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystemComponent Target, float Level)> BatchedGameplayEffects) {
 
             var instantEffects = BatchedGameplayEffects.Where(x => x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Instant);
             var durationalEffects = BatchedGameplayEffects.Where(
@@ -169,8 +154,7 @@ namespace GAS {
 
         }
 
-        /// <inheritdoc />
-        public Task<GameplayEffect> ApplyGameEffectToTarget(GameplayEffect Effect, IGameplayAbilitySystem Target, float Level = 0) {
+        public Task<GameplayEffect> ApplyGameEffectToTarget(GameplayEffect Effect, AbilitySystemComponent Target, float Level = 0) {
             // TODO: Check to make sure all the attributes being modified by this gameplay effect exist on the target
 
             // TODO: Get list of tags owned by target
@@ -229,8 +213,6 @@ namespace GAS {
             return Task.FromResult(Effect);
         }
 
-
-        /// <inheritdoc />
         public float GetNumericAttributeBase(AttributeType AttributeType) {
             var attributeSet = this.GetComponent<AttributeSet>();
             var attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType);
@@ -238,7 +220,6 @@ namespace GAS {
             return attribute.BaseValue;
         }
 
-        /// <inheritdoc />
         public float GetNumericAttributeCurrent(AttributeType AttributeType) {
             var attributeSet = this.GetComponent<AttributeSet>();
             return attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType).CurrentValue;
@@ -256,10 +237,10 @@ namespace GAS {
             var attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == AttributeType);
             attribute.SetAttributeCurrentValue(attributeSet, ref NewValue);
         }
-
     }
 
+    [System.Serializable]
+    public class GenericGameplayEffectEvent : UnityEvent<GameplayEffect> {
 
-
-
+    }
 }

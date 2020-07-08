@@ -22,7 +22,7 @@ namespace GAS.Abilities.AbilityActivations {
         public string ProjectileFireTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void ActivateAbility(IGameplayAbilitySystem AbilitySystem, IGameplayAbility Ability) {
+        public override async void ActivateAbility(AbilitySystemComponent AbilitySystem, IGameplayAbility Ability) {
             var abilitySystemActor = AbilitySystem.GetActor();
             var animationEventSystemComponent = abilitySystemActor.GetComponent<AnimationEventSystem>();
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();
@@ -62,7 +62,7 @@ namespace GAS.Abilities.AbilityActivations {
             Ability.EndAbility(AbilitySystem);
         }
 
-        private async void SeekTargetAndDestroy(IGameplayAbilitySystem AbilitySystem, GameplayEventData gameplayEventData, GameObject projectile) {
+        private async void SeekTargetAndDestroy(AbilitySystemComponent AbilitySystem, GameplayEventData gameplayEventData, GameObject projectile) {
             await projectile.GetComponent<Projectile>().SeekTarget(gameplayEventData.Target.TargetPoint, gameplayEventData.Target.gameObject);
             _ = AbilitySystem.ApplyGameEffectToTarget(TargetGameplayEffect, gameplayEventData.Target);
             DestroyImmediate(projectile);
