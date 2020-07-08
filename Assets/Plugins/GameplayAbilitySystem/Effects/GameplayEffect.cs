@@ -12,17 +12,17 @@ namespace GAS.GameplayEffects {
     // 改变自己或别人的Attributes 和GameplayTags的途径
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class GameplayEffect : ScriptableObject {
-        [SerializeField] GameplayEffectPolicy gameplayEffectPolicy = new GameplayEffectPolicy();
+        [SerializeField] private GameplayEffectPolicy gameplayEffectPolicy = new GameplayEffectPolicy();
+        [SerializeField] private GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
+        [SerializeField] private EffectPeriodicity periodicity = new EffectPeriodicity();
+        [SerializeField] private List<GameplayCue> gameplayCues = new List<GameplayCue>();
+        [SerializeField] private StackingPolicy stackingPolicy = new StackingPolicy();
 
-        [SerializeField] GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
-
-        public EffectPeriodicity Periodicity;
-
-        [SerializeField] public List<GameplayCue> GameplayCues = new List<GameplayCue>();
-
-        public StackingPolicy StackingPolicy = new StackingPolicy();
-        public GameplayEffectTags GameplayEffectTags { get => gameplayEffectTags; }
-        public GameplayEffectPolicy GameplayEffectPolicy { get => gameplayEffectPolicy; }
+        public GameplayEffectPolicy GameplayEffectPolicy => gameplayEffectPolicy;
+        public GameplayEffectTags GameplayEffectTags => gameplayEffectTags;
+        public EffectPeriodicity Periodicity => periodicity;
+        public StackingPolicy StackingPolicy => stackingPolicy;
+        public List<GameplayCue> GameplayCues => gameplayCues;
 
         public IEnumerable<(GameplayTag Tag, GameplayEffect Effect)> GrantedEffectTags => this.GrantedTags.Select(x => (x, this));
 

@@ -49,13 +49,13 @@ MonoBehaviour:
       requireAbsence: []
     removeGameplayEffectsWithTag:
       _added: []
-  Period:
+  periodicity:
     Period: 0
     ExecuteOnApplication: 0
-    ApplyGameEffectOnExecute: {fileID: 0}
-  GameplayCues:
+    EffectOnExecute: {fileID: 0}
+  gameplayCues:
   - {fileID: 11400000, guid: 576d4a44a75bd1941b1ac46abc36be6d, type: 2}
-  StackingPolicy:
+  stackingPolicy:
     StackingType: 0
     StackLimit: 0
     StackDurationRefreshPolicy: 0

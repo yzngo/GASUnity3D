@@ -32,13 +32,13 @@ MonoBehaviour:
       _added:
       - Tag: {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
         StacksToRemove: 0
-  Periodicity:
+  periodicity:
     Period: 3
     ExecuteOnApplication: 1
     EffectOnExecute: {fileID: 11400000, guid: 2f67849ecd9684d42a69798734a9ff04, type: 2}
-  GameplayCues:
+  gameplayCues:
   - {fileID: 11400000, guid: c2fdf7b8b6a3efe4bb8950654af72d18, type: 2}
-  StackingPolicy:
+  stackingPolicy:
     StackingType: 0
     StackLimit: 0
     StackDurationRefreshPolicy: 0
