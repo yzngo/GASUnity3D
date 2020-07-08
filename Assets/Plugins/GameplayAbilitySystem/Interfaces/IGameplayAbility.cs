@@ -64,29 +64,29 @@ namespace GAS.Interfaces {
         /// <summary>
         /// Ends this ability on the target <see cref="AbilitySystemComponent"/>
         /// </summary>
-        /// <param name="AbilitySystem">The target <see cref="AbilitySystemComponent"/></param>
-        void EndAbility(AbilitySystemComponent AbilitySystem);
+        /// <param name="ASC">The target <see cref="AbilitySystemComponent"/></param>
+        void EndAbility(AbilitySystemComponent ASC);
 
         /// <summary>
         /// Activates this ability on the target <see cref="AbilitySystemComponent"/>
         /// </summary>
-        /// <param name="AbilitySystem">The target <see cref="AbilitySystemComponent"/></param>
-        void ActivateAbility(AbilitySystemComponent AbilitySystem);
+        /// <param name="ASC">The target <see cref="AbilitySystemComponent"/></param>
+        void ActivateAbility(AbilitySystemComponent ASC);
 
         /// <summary>
         /// Check if this ability can be activated by <see cref="AbilitySystemComponent"/>
         /// </summary>
-        /// <param name="AbilitySystem">The target <see cref="AbilitySystemComponent"/></param>
+        /// <param name="ASC">The target <see cref="AbilitySystemComponent"/></param>
         /// <returns></returns>
-        bool IsAbilityActivatable(AbilitySystemComponent AbilitySystem);
+        bool IsAbilityActivatable(AbilitySystemComponent ASC);
 
         /// <summary>
         /// Commits the <see cref="AbilitySystemComponent"/> on the target <see cref="AbilitySystemComponent"/>
         /// </summary>
-        /// <param name="AbilitySystem">The target <see cref="AbilitySystemComponent"/></param>
+        /// <param name="ASC">The target <see cref="AbilitySystemComponent"/></param>
         /// <returns></returns>
-        bool CommitAbility(AbilitySystemComponent AbilitySystem);
+        bool CommitAbility(AbilitySystemComponent ASC);
 
-        (float CooldownElapsed, float CooldownTotal) CalculateCooldown(AbilitySystemComponent AbilitySystem);
+        (float CooldownElapsed, float CooldownTotal) CalculateCooldown(AbilitySystemComponent ASC);
     }
 }

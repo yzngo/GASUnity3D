@@ -24,28 +24,27 @@ namespace GAS {
         public GameplayEvent OnGameplayEvent => onGameplayEvent;
 
         // Called when an Ability is activated(激活) on this ASC
-        public GenericAbilityEvent OnGameplayAbilityActivated => onGameplayAbilityActivated;
+        // public GenericAbilityEvent OnGameplayAbilityActivated => onGameplayAbilityActivated;
         // Called when an Ability is committed(提交) on this ASC
-        public GenericAbilityEvent OnGameplayAbilityCommitted => onGameplayAbilityCommitted;
+        // public GenericAbilityEvent OnGameplayAbilityCommitted => onGameplayAbilityCommitted;
         // Called when an Ability ends
-        public GenericAbilityEvent OnGameplayAbilityEnded => onGameplayAbilityEnded;
-
+        // public GenericAbilityEvent OnGameplayAbilityEnded => onGameplayAbilityEnded;
         /// Called when an effect is added
-        public GenericGameplayEffectEvent OnEffectAdded => onEffectAdded;
+        // public GenericGameplayEffectEvent OnEffectAdded => onEffectAdded;
         /// Called when an effect is removed
-        public GenericGameplayEffectEvent OnEffectRemoved => onEffectRemoved;
+        // public GenericGameplayEffectEvent OnEffectRemoved => onEffectRemoved;
 
         /// List of running abilities that have not ended 
-        public List<IGameplayAbility> RunningAbilities => runningAbilities;
+        // public List<IGameplayAbility> RunningAbilities => runningAbilities;
 
         // Lists all active GameplayEffect
         public ActiveGameplayEffectsContainer ActiveGameplayEffectsContainer => activeGameplayEffectsContainer;
-
+        public Transform Actor => transform;
 
         private GameplayEvent onGameplayEvent = new GameplayEvent();
-        private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
-        private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
-        private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
+        // private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
+        // private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
+        // private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
         private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
         private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
         private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
@@ -84,13 +83,10 @@ namespace GAS {
         }
 
         public void Awake() {
-            this.activeGameplayEffectsContainer = new ActiveGameplayEffectsContainer(this);
-            this.animator = this.GetComponent<Animator>();
+            activeGameplayEffectsContainer = new ActiveGameplayEffectsContainer(this);
+            animator = this.GetComponent<Animator>();
         }
 
-        public Transform GetActor() {
-            return this.transform;
-        }
 
         public void HandleGameplayEvent(GameplayTag EventTag, GameplayEventData Payload) {
             /**
@@ -119,8 +115,6 @@ namespace GAS {
             if (runningAbilities.Contains(Ability)) {
                 return false;
             }
-
-
             return true;
         }
 
@@ -203,7 +197,7 @@ namespace GAS {
             // Execute gameplay cue
             for (var i = 0; i < gameplayCues.Count; i++) {
                 var cue = gameplayCues[i];
-                cue.HandleGameplayCue(Target.GetActor().gameObject, new GameplayCueParameters(null, null, null), EGameplayCueEvent.OnActive);
+                cue.HandleGameplayCue(Target.Actor.gameObject, new GameplayCueParameters(null, null, null), EGameplayCueEvent.OnActive);
             }
 
             return Task.FromResult(Effect);

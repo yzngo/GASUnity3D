@@ -18,9 +18,9 @@ namespace GAS.GameplayEffects {
     public class ActiveGameplayEffectsContainer {
 
         // 拥有此effect的ASC
-        private AbilitySystemComponent AbilitySystem;
-        public ActiveGameplayEffectsContainer(AbilitySystemComponent AbilitySystem) {
-            this.AbilitySystem = AbilitySystem;
+        private AbilitySystemComponent ASC;
+        public ActiveGameplayEffectsContainer(AbilitySystemComponent ASC) {
+            this.ASC = ASC;
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace GAS.GameplayEffects {
                 var gameplayCues = effectData.Effect.GameplayCues;
                 foreach (var cue in gameplayCues) {
                     cue.HandleGameplayCue(
-                        effectData.Target.GetActor().gameObject, 
+                        effectData.Target.Actor.gameObject, 
                         new GameplayCues.GameplayCueParameters(null, null, null), 
                         EGameplayCueEvent.OnExecute
                     );
@@ -229,7 +229,7 @@ namespace GAS.GameplayEffects {
             var gameplayCues = effectData.Effect.GameplayCues;
             foreach (var cue in gameplayCues) {
                 cue.HandleGameplayCue(
-                    effectData.Target.GetActor().gameObject, 
+                    effectData.Target.Actor.gameObject, 
                     new GameplayCues.GameplayCueParameters(null, null, null), 
                     EGameplayCueEvent.OnRemove
                 );
@@ -246,9 +246,9 @@ namespace GAS.GameplayEffects {
 
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
-                    var current = AbilitySystem.GetNumericAttributeBase(modifier.Attribute);
-                    if (current < 0) AbilitySystem.SetNumericAttributeBase(modifier.Attribute, 0f);
-                    AbilitySystem.SetNumericAttributeCurrent(modifier.Attribute, current);
+                    var current = ASC.GetNumericAttributeBase(modifier.Attribute);
+                    if (current < 0) ASC.SetNumericAttributeBase(modifier.Attribute, 0f);
+                    ASC.SetNumericAttributeCurrent(modifier.Attribute, current);
                 } else {
                     UpdateAttribute(aggregators, modifier.Attribute);
                 }
@@ -257,9 +257,9 @@ namespace GAS.GameplayEffects {
         }
 
         public void UpdateAttribute(IEnumerable<Aggregator> aggregator, AttributeType attributeType) {
-            var baseAttributeValue = AbilitySystem.GetNumericAttributeBase(attributeType);
+            var baseAttributeValue = ASC.GetNumericAttributeBase(attributeType);
             var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
-            AbilitySystem.SetNumericAttributeCurrent(attributeType, newCurrentAttributeValue);
+            ASC.SetNumericAttributeCurrent(attributeType, newCurrentAttributeValue);
         }
 
         private IEnumerable<ActiveGameplayEffectData> GetMatchingStackedEffectsByEffect(ActiveGameplayEffectData effectData) {
