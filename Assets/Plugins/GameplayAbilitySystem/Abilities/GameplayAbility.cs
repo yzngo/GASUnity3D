@@ -23,31 +23,39 @@ namespace GAS.Abilities {
         public IAbilityTags Tags => _tags;
         public IGameplayCost Cost => _gameplayCost;
         public List<GameplayEffect> Cooldowns => _cooldownsToApply;
+        /// Defines what the ability actually does
+        public AbstractAbilityActivation AbilityLogic => _abilityLogic;
+
         // public List<GameplayEffect> EffectsToApplyOnExecution => _effectsToApplyOnExecution;
         // public GenericAbilityEvent OnGameplayAbilityCommitted => _onGameplayAbilityCommitted;
         // public GenericAbilityEvent OnGameplayAbilityCancelled => _onGameplayAbilityCancelled;
         // public GenericAbilityEvent OnGameplayAbilityEnded => _onGameplayAbilityEnded;
-        public AbstractAbilityActivation AbilityLogic => _abilityLogic;
 
-        public virtual void ActivateAbility(IGameplayAbilitySystem AbilitySystem) {
+        public void ActivateAbility(IGameplayAbilitySystem AbilitySystem) {
             _abilityLogic.ActivateAbility(AbilitySystem, this);
             ApplyCooldown(AbilitySystem);
         }
 
-        public virtual bool IsAbilityActivatable(IGameplayAbilitySystem AbilitySystem) {
+        public bool IsAbilityActivatable(IGameplayAbilitySystem AbilitySystem) {
             // Player must be "Idle" to begin ability activation
             if (AbilitySystem.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base.Idle")) return false;
-            return PlayerHasResourceToCast(AbilitySystem) && AbilityOffCooldown(AbilitySystem) && TagRequirementsMet(AbilitySystem);
+            return PlayerHasResourceToCast(AbilitySystem) && AbilityOffCooldown(AbilitySystem) && IsTagsSatisfied(AbilitySystem);
         }
 
-        private bool TagRequirementsMet(IGameplayAbilitySystem AbilitySystem) {
+        public bool CommitAbility(IGameplayAbilitySystem AbilitySystem) {
+            ActivateAbility(AbilitySystem);
+            AbilitySystem.OnGameplayAbilityActivated.Invoke(this);
+            ApplyCost(AbilitySystem);
+            return true;
+        }
+
+        private bool IsTagsSatisfied(IGameplayAbilitySystem AbilitySystem) {
             // Checks to make sure Source ability system doesn't have prohibited tags
             var activeTags = AbilitySystem.ActiveTags;
-            var hasActivationRequiredTags = true;
-            var hasActivationBlockedTags = false;
-            var hasSourceRequiredTags = false;
-            var hasSourceBlockedTags = false;
-
+            bool hasActivationRequiredTags = true;
+            bool hasActivationBlockedTags = false;
+            bool hasSourceRequiredTags = false;
+            bool hasSourceBlockedTags = false;
 
             if (Tags.ActivationRequiredTags.Added.Count > 0) {
                 hasActivationRequiredTags = !Tags.ActivationRequiredTags.Added.Except(activeTags).Any();
@@ -64,7 +72,6 @@ namespace GAS.Abilities {
             if (Tags.SourceBlockedTags.Added.Count > 0) {
                 hasSourceBlockedTags = activeTags.Any(x => Tags.SourceBlockedTags.Added.Contains(x));
             }
-
             return !hasActivationBlockedTags && hasActivationRequiredTags;
         }
 
@@ -108,34 +115,6 @@ namespace GAS.Abilities {
             AbilitySystem.NotifyAbilityEnded(this);
         }
 
-        public bool PlayerHasResourceToCast(IGameplayAbilitySystem AbilitySystem) {
-            // Check the modifiers on the ability cost GameEffect
-            var modifiers = Cost.CostGameplayEffect.CalculateModifierEffect();
-            var attributeModification = Cost.CostGameplayEffect.CalculateAttributeModification(
-                    AbilitySystem, modifiers, operateOnCurrentValue: true);
-
-            foreach (var attribute in attributeModification) {
-                if (attribute.Value.NewAttribueValue < 0) return false;
-            }
-            return true;
-        }
-
-        public bool CommitAbility(IGameplayAbilitySystem AbilitySystem) {
-            ActivateAbility(AbilitySystem);
-            AbilitySystem.OnGameplayAbilityActivated.Invoke(this);
-            ApplyCost(AbilitySystem);
-            return true;
-        }
-
-        public bool AbilityOffCooldown(IGameplayAbilitySystem AbilitySystem) {
-            (var elapsed, var total) = CalculateCooldown(AbilitySystem);
-            return total == 0f;
-        }
-
-        public List<GameplayTag> GetAbilityCooldownTags() {
-            return _tags.CooldownTags.Added;
-        }
-
         public (float CooldownElapsed, float CooldownTotal) CalculateCooldown(IGameplayAbilitySystem AbilitySystem) {
             var cooldownTags = GetAbilityCooldownTags();
 
@@ -153,6 +132,32 @@ namespace GAS.Abilities {
             }
             return (dominantCooldownEffect.CooldownTimeElapsed, dominantCooldownEffect.CooldownTimeTotal);
         }
+
+        // Checks to see if the target GAS has the required resources to cast the ability
+        private bool PlayerHasResourceToCast(IGameplayAbilitySystem AbilitySystem) {
+            // Check the modifiers on the ability cost GameEffect
+            var modifiers = Cost.CostGameplayEffect.CalculateModifierEffect();
+            var attributeModification = Cost.CostGameplayEffect.CalculateAttributeModification(
+                    AbilitySystem, modifiers, operateOnCurrentValue: true);
+
+            foreach (var attribute in attributeModification) {
+                if (attribute.Value.NewAttribueValue < 0) return false;
+            }
+            return true;
+        }
+
+
+        // Checks to see if the GAS is off cooldown
+        private bool AbilityOffCooldown(IGameplayAbilitySystem AbilitySystem) {
+            (var elapsed, var total) = CalculateCooldown(AbilitySystem);
+            return total == 0f;
+        }
+
+        // Get the cooldown tags associated with this ability
+        private List<GameplayTag> GetAbilityCooldownTags() {
+            return _tags.CooldownTags.Added;
+        }
+
 
     }
 }

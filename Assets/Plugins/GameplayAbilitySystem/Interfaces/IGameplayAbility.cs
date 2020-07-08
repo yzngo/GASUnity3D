@@ -81,30 +81,12 @@ namespace GAS.Interfaces {
         bool IsAbilityActivatable(IGameplayAbilitySystem AbilitySystem);
 
         /// <summary>
-        /// Checks to see if the target <see cref="IGameplayAbilitySystem"/> has the required resources to cast this ability
-        /// </summary>
-        /// <returns>True if the target <see cref="IGameplayAbilitySystem"/> has required resources, false otherwise</returns>
-        bool PlayerHasResourceToCast(IGameplayAbilitySystem AbilitySystem);
-
-        /// <summary>
-        /// Checks to see if the <see cref="IGameplayAbilitySystem"/> is off cooldown on the target <see cref="IGameplayAbilitySystem"/>
-        /// </summary>
-        /// <param name="AbilitySystem">The target <see cref="IGameplayAbilitySystem"/></param>
-        /// <returns></returns>
-        bool AbilityOffCooldown(IGameplayAbilitySystem AbilitySystem);
-
-        /// <summary>
         /// Commits the <see cref="IGameplayAbilitySystem"/> on the target <see cref="IGameplayAbilitySystem"/>
         /// </summary>
         /// <param name="AbilitySystem">The target <see cref="IGameplayAbilitySystem"/></param>
         /// <returns></returns>
         bool CommitAbility(IGameplayAbilitySystem AbilitySystem);
 
-        /// <summary>
-        /// The cooldown tags associated with this <see cref="IGameplayAbility"/>
-        /// </summary>
-        /// <returns></returns>
-        List<GameplayTag> GetAbilityCooldownTags();
         (float CooldownElapsed, float CooldownTotal) CalculateCooldown(IGameplayAbilitySystem AbilitySystem);
     }
 }
