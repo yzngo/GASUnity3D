@@ -14,6 +14,8 @@ using GAS.GameplayCues;
 namespace GAS.GameplayEffects {
     [Serializable]
     public class ActiveGameplayEffectsContainer {
+
+        // 拥有此effect的ASC
         private IGameplayAbilitySystem AbilitySystem;
         public ActiveGameplayEffectsContainer(IGameplayAbilitySystem AbilitySystem) {
             this.AbilitySystem = AbilitySystem;
@@ -26,9 +28,7 @@ namespace GAS.GameplayEffects {
         /// <value></value>
         public ActiveEffectAttributeAggregator ActiveEffectAttributeAggregator { get; } = new ActiveEffectAttributeAggregator();
 
-        [SerializeField]
-
-        public ActiveGameplayEffectsEvent ActiveGameplayEffectAdded = new ActiveGameplayEffectsEvent();
+        private ActiveGameplayEffectsEvent ActiveGameplayEffectAdded = new ActiveGameplayEffectsEvent();
 
 
         //todo async 异步?
@@ -102,7 +102,7 @@ namespace GAS.GameplayEffects {
                 modifier.AttemptCalculateMagnitude(out var EvaluatedMagnitude);
 
                 // Check if we already have an entry for this gameplay effect attribute modifier
-                var attributeAggregatorMap = ActiveEffectAttributeAggregator.Get(effectData);
+                var attributeAggregatorMap = ActiveEffectAttributeAggregator.ADDorGet(effectData);
                 if (modifier.Attribute != null) {
                     // If aggregator for this attribute doesn't exist, add it.
                     if (!attributeAggregatorMap.TryGetValue(modifier.Attribute, out var aggregator)) {
@@ -268,13 +268,13 @@ namespace GAS.GameplayEffects {
 
                 case StackingType.AggregatedBySource:
                     matchingStackedActiveEffects = this.ActiveEffectAttributeAggregator
-                                        .GetActiveEffects()
+                                        .GetAllActiveEffects()
                                         .Where(x => x.Instigator == effectData.Instigator && x.Effect == effectData.Effect);
                     break;
 
                 case StackingType.AggregatedByTarget:
                     matchingStackedActiveEffects = this.ActiveEffectAttributeAggregator
-                                        .GetActiveEffects()
+                                        .GetAllActiveEffects()
                                         .Where(x => x.Effect == effectData.Effect);
                     break;
             }

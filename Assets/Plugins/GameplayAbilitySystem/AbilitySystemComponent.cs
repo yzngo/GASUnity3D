@@ -67,7 +67,7 @@ namespace GAS {
             get {
                 return this.ActiveGameplayEffectsContainer
                             .ActiveEffectAttributeAggregator
-                            .GetActiveEffects()
+                            .GetAllActiveEffects()
                             .SelectMany(x => x.Effect.GameplayEffectTags.GrantedTags.Added)
                             .Union(AbilityGrantedTags);
             }
@@ -79,7 +79,7 @@ namespace GAS {
             get {
                 var activeEffects = this.ActiveGameplayEffectsContainer
                             .ActiveEffectAttributeAggregator
-                            .GetActiveEffects();
+                            .GetAllActiveEffects();
 
                 if (activeEffects == null) return new List<(GameplayTag, ActiveGameplayEffectData)>();
 

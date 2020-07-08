@@ -36,7 +36,7 @@ namespace GAS.GameplayEffects {
         private bool forceRemoveEffect = false;
         public bool ForceRemoveEffect => forceRemoveEffect;
 
-// cooldown
+// cooldown time
         /// The cooldown time that has already elapsed for this gameplay effect
         public float CooldownTimeElapsed => Time.time - startWorldTime;
         /// <summary>
@@ -59,28 +59,20 @@ namespace GAS.GameplayEffects {
         public float TimeSincePreviousPeriodicApplication => Time.time - timeOfLastPeriodicApplication;
         // 对于周期性的effect而言, 到下次应用还需要的时间
         public float TimeUntilNextPeriodicApplication => timeOfLastPeriodicApplication + Effect.Period.Period - Time.time;
-
         private Dictionary<AttributeType, Aggregator> PeriodicEffectModificationsToDate = new Dictionary<AttributeType, Aggregator>();
 
-
-        // [SerializeField] private int _stacks;
-
-
-
-        public void CheckOngoingTagRequirements() {
-
-        }
-
-
-        /// <summary>
+// reset time
         /// Reset duration of this effect.
         /// Optionally, we can provide an offset to compensate for
         /// the fact that the reset did not happen at exactly 0
         /// and over time this could cause time drift
-        /// </summary>
-        /// <param name="offset">Overflow time</param>
         public void ResetDuration(float offset = 0) {
-            this.startWorldTime = Time.time;
+            this.startWorldTime = Time.time - offset;
+        }
+
+        /// Reset time at which last periodic application occured.
+        public void ResetPeriodicTime(float offset = 0) {
+            this.timeOfLastPeriodicApplication = Time.time - offset;
         }
 
         public void EndEffect() {
@@ -92,16 +84,6 @@ namespace GAS.GameplayEffects {
             forceRemoveEffect = true;
         }
 
-        /// <summary>
-        /// Reset time at which last periodic application occured.
-        /// Optionally, we can provide an offset to compensate for
-        /// the fact that the reset did not happen at exactly 0
-        /// and over time this could cause time drift
-        /// </summary>
-        /// <param name="offset">Overflow time</param>
-        public void ResetPeriodicTime(float offset = 0) {
-            this.timeOfLastPeriodicApplication = Time.time - offset;
-        }
 
         public void AddPeriodicEffectAttributeModifiers() {
             // Check out ActiveGameplayEffectContainer.AddActiveGameplayEffect to see how to populate the ActiveEffectAttributeAggregator object
@@ -128,6 +110,10 @@ namespace GAS.GameplayEffects {
             PeriodicEffectModificationsToDate.TryGetValue(Attribute, out var aggregator);
             return aggregator;
         }
+
+        // [SerializeField] private int _stacks;
+        // public void CheckOngoingTagRequirements() {
+        // }
     }
 }
 

@@ -183,7 +183,7 @@ namespace GAS.Abilities {
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
             var dominantCooldownEffect = AbilitySystem.ActiveGameplayEffectsContainer
                                     .ActiveEffectAttributeAggregator
-                                    .GetActiveEffects()
+                                    .GetAllActiveEffects()
                                     .Where(x => x.Effect.GrantedTags.Intersect(cooldownTags).Any())
                                     .DefaultIfEmpty()
                                     .OrderByDescending(x => x?.CooldownTimeRemaining)

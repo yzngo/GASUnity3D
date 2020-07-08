@@ -8,20 +8,20 @@ namespace GAS.GameplayEffects {
         private Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>> Map = 
             new Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>>();
 
-        public void RemoveEffect(ActiveGameplayEffectData EffectData) {
-            this.Map.Remove(EffectData);
-        }
 
-        public Dictionary<AttributeType, Aggregator> Get(ActiveGameplayEffectData EffectData) {
+        public Dictionary<AttributeType, Aggregator> ADDorGet(ActiveGameplayEffectData EffectData) {
             if (!Map.TryGetValue(EffectData, out var attributeAggregatorMap)) {
                 attributeAggregatorMap = new Dictionary<AttributeType, Aggregator>();
                 Map.Add(EffectData, attributeAggregatorMap);
             }
-
             return attributeAggregatorMap;
         }
 
-        public List<ActiveGameplayEffectData> GetActiveEffects() {
+        public void RemoveEffect(ActiveGameplayEffectData EffectData) {
+            this.Map.Remove(EffectData);
+        }
+
+        public List<ActiveGameplayEffectData> GetAllActiveEffects() {
             return Map.Keys.ToList();
         }
 
