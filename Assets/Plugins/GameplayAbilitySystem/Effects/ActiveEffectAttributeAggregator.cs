@@ -5,7 +5,8 @@ using UniRx.Async;
 
 namespace GAS.GameplayEffects {
     public class ActiveEffectAttributeAggregator {
-        Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>> Map = new Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>>();
+        private Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>> Map = 
+            new Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>>();
 
         public void RemoveEffect(ActiveGameplayEffectData EffectData) {
             this.Map.Remove(EffectData);
