@@ -14,7 +14,7 @@ namespace GAS.GameplayEffects {
 
         private Dictionary<ModifierOperationType, List<AggregatorModifier>> modifiers
                                             = new Dictionary<ModifierOperationType, List<AggregatorModifier>>();
-        public AggregatorEvent dirtied = new AggregatorEvent();
+        // public AggregatorEvent dirtied = new AggregatorEvent();
 
         public void AddAggregatorModifier(float evaluatedMagnitude, ModifierOperationType modifierOperation) {
             // If aggregator exists, check if we have a definition for this modifier operation
@@ -25,26 +25,26 @@ namespace GAS.GameplayEffects {
             aggregatorModifier.Add(new AggregatorModifier(evaluatedMagnitude));
         }
 
-        public void MarkDirty() {
-            this.OnDirtied();
+        // public void MarkDirty() {
+        //     this.OnDirtied();
+        // }
+
+        // protected void OnDirtied() {
+        //     dirtied?.Invoke(this, this.attributeType);
+        // }
+
+        public float SumModifier(List<AggregatorModifier> modifiers) {
+            return modifiers.Sum(x => x.EvaluatedMagnitude);
         }
 
-        protected void OnDirtied() {
-            dirtied?.Invoke(this, this.attributeType);
-        }
-
-        public float SumMods(List<AggregatorModifier> Mods) {
-            return Mods.Sum(x => x.EvaluatedMagnitude);
-        }
-
-        public float ProductMods(List<AggregatorModifier> Mods) {
-            return Mods.Select(x => x.EvaluatedMagnitude).Aggregate((result, item) => result * item);
+        public float ProductModifier(List<AggregatorModifier> modifiers) {
+            return modifiers.Select(x => x.EvaluatedMagnitude).Aggregate((result, item) => result * item);
         }
 
         public float GetAdditives() {
             var additive = 0f;
             if (modifiers.TryGetValue(ModifierOperationType.Add, out var AddModifier)) {
-                additive = SumMods(AddModifier);
+                additive = SumModifier(AddModifier);
             }
 
             return additive;
@@ -54,47 +54,44 @@ namespace GAS.GameplayEffects {
             var multiplier = 1f;
             var divider = 1f;
             if (modifiers.TryGetValue(ModifierOperationType.Multiply, out var MultiplyModifiers)) {
-                multiplier = ProductMods(modifiers[ModifierOperationType.Multiply]);
+                multiplier = ProductModifier(modifiers[ModifierOperationType.Multiply]);
             }
 
             if (modifiers.TryGetValue(ModifierOperationType.Divide, out var DivideModifier)) {
-                divider = ProductMods(modifiers[ModifierOperationType.Divide]);
+                divider = ProductModifier(modifiers[ModifierOperationType.Divide]);
             }
 
             return multiplier / divider;
         }
 
-        public float Evaluate(float BaseValue) {
+        public float Evaluate(float baseValue) {
             float additive = 0;
             float multiplicative = 1;
             float divisive = 1;
 
             if (modifiers.TryGetValue(ModifierOperationType.Add, out var AddModifier)) {
-                additive = SumMods(modifiers[ModifierOperationType.Add]);
+                additive = SumModifier(modifiers[ModifierOperationType.Add]);
             }
 
             if (modifiers.TryGetValue(ModifierOperationType.Multiply, out var MultiplyModifier)) {
-                multiplicative = ProductMods(modifiers[ModifierOperationType.Multiply]);
+                multiplicative = ProductModifier(modifiers[ModifierOperationType.Multiply]);
             }
 
             if (modifiers.TryGetValue(ModifierOperationType.Divide, out var DivideModifier)) {
-                divisive = ProductMods(modifiers[ModifierOperationType.Divide]);
+                divisive = ProductModifier(modifiers[ModifierOperationType.Divide]);
             }
 
-            return (BaseValue + additive) * (multiplicative / divisive);
+            return (baseValue + additive) * (multiplicative / divisive);
         }
-
-
-
     }
 
     public class AggregatorModifier {
         // 计算出的数量值
         public readonly float EvaluatedMagnitude;
-        public float Stacks { get; private set; }
+        // public float Stacks { get; private set; }
 
         public AggregatorModifier(float evaluatedMagnitude, float Stacks = 1) {
-            this.Stacks = Stacks;
+            // this.Stacks = Stacks;
             this.EvaluatedMagnitude = evaluatedMagnitude;
         }
 

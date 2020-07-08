@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
 using GAS.Attributes;
-using GAS.GameplayEffects;
 using GAS.Interfaces;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace GAS.GameplayEffects {
     /// <inheritdoc />
