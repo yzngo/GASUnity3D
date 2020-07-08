@@ -23,8 +23,8 @@ namespace GAS.GameplayEffects {
         public EffectPeriodicity Periodicity => periodicity;
         public StackingPolicy StackingPolicy => stackingPolicy;
         public List<GameplayCue> GameplayCues => gameplayCues;
-
-        public IEnumerable<(GameplayTag Tag, GameplayEffect Effect)> GrantedEffectTags => this.GrantedTags.Select(x => (x, this));
+        public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedTags.Added;
+        // public IEnumerable<(GameplayTag Tag, GameplayEffect Effect)> GrantedEffectTags => GrantedTags.Select(x => (x, this));
 
         public bool ApplicationTagRequirementMet(IGameplayAbilitySystem AbilitySystem) {
             var requiredTagsPresent = true;
@@ -52,7 +52,6 @@ namespace GAS.GameplayEffects {
             return tags;
         }
 
-        public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedTags.Added;
 
         public bool ApplicationRequirementsPass(AbilitySystemComponent AbilitySystem) {
             // return _gameplayEffectTags.ApplicationTagRequirements.RequirePresence;
