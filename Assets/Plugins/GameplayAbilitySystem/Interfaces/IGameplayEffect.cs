@@ -38,33 +38,33 @@ namespace GAS.Interfaces
         /// <see cref="GameplayTag"/> the <see cref="GameplayEffect"/> has
         /// </summary>
         /// <value></value>
-        GameplayEffectAddRemoveTagContainer AssetTags { get; }
+        GameplayEffectAddRemoveTagContainer EffectTags { get; }
 
         /// <summary>
         /// <see cref="GameplayTag"/> that are given to the <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <value></value>
-        GameplayEffectAddRemoveTagContainer GrantedTags { get; }
+        GameplayEffectAddRemoveTagContainer GrantedToASCTags { get; }
 
         /// <summary>
         /// <see cref="GameplayTag"/> that are required on the <see cref="AbilitySystemComponent"/> for the <see cref="GameplayEffect"> to have an effect.  
         /// If these <see cref="GameplayTag"/> are not on the <see cref="AbilitySystemComponent"/>, the effect is "disabled" until these <see cref="GameplayTag"/> are present.
         /// </summary>
         /// <value></value>
-        GameplayEffectRequireIgnoreTagContainer OngoingTagRequirements { get; }
+        GameplayEffectRequireIgnoreTagContainer OngoingRequiredTags { get; }
 
         /// <summary>
         /// These <see cref="GameplayTag"/> are required on the target to apply the <see cref="GameplayEffect"/>.  Once the <see cref="GameplayEffect"/> is applied,
         /// this has no effect.
         /// </summary>
         /// <value></value>
-        GameplayEffectRequireIgnoreTagContainer ApplicationTagRequirements { get; }
+        GameplayEffectRequireIgnoreTagContainer ApplyRequiredTags { get; }
 
         /// <summary>
         /// Removes any existing <see cref="GameplayEffect"/> that have these <see cref="GameplayTag"/>.
         /// </summary>
         /// <value></value>
-        GameplayEffectAddRemoveStacksTagContainer RemoveGameplayEffectsWithTag { get; }
+        GameplayEffectAddRemoveStacksTagContainer BeRemovedEffectsTags { get; }
     }
 
 }

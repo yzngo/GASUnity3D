@@ -19,23 +19,23 @@ namespace GAS.GameplayEffects {
         [SerializeField] private StackingPolicy stackingPolicy = new StackingPolicy();
 
         public GameplayEffectPolicy GameplayEffectPolicy => gameplayEffectPolicy;
-        public GameplayEffectTags GameplayEffectTags => gameplayEffectTags;
+        public GameplayEffectTags EffectTags => gameplayEffectTags;
         public EffectPeriodicity Periodicity => periodicity;
         public List<GameplayCue> GameplayCues => gameplayCues;
         public StackingPolicy StackingPolicy => stackingPolicy;
-        public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedTags.Added;
+        public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedToASCTags.Added;
         // public IEnumerable<(GameplayTag Tag, GameplayEffect Effect)> GrantedEffectTags => GrantedTags.Select(x => (x, this));
 
         public bool ApplicationTagRequirementMet(AbilitySystemComponent ASC) {
             var requiredTagsPresent = true;
             var ignoredTagsAbsent = true;
 
-            if (this.GameplayEffectTags.ApplicationTagRequirements.RequirePresence.Count > 0) {
-                requiredTagsPresent = ASC.ActiveTags.Any(x => this.GameplayEffectTags.ApplicationTagRequirements.RequirePresence.Contains(x));
+            if (EffectTags.ApplyRequiredTags.RequirePresence.Count > 0) {
+                requiredTagsPresent = ASC.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequirePresence.Contains(x));
             }
 
-            if (this.GameplayEffectTags.ApplicationTagRequirements.RequireAbsence.Count > 0) {
-                ignoredTagsAbsent = !ASC.ActiveTags.Any(x => this.GameplayEffectTags.ApplicationTagRequirements.RequireAbsence.Contains(x));
+            if (EffectTags.ApplyRequiredTags.RequireAbsence.Count > 0) {
+                ignoredTagsAbsent = !ASC.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequireAbsence.Contains(x));
             }
 
 
@@ -43,11 +43,11 @@ namespace GAS.GameplayEffects {
         }
 
         public List<GameplayTag> GetOwningTags() {
-            var tags = new List<GameplayTag>(gameplayEffectTags.GrantedTags.Added.Count
-                                            + gameplayEffectTags.AssetTags.Added.Count);
+            var tags = new List<GameplayTag>(gameplayEffectTags.GrantedToASCTags.Added.Count
+                                            + gameplayEffectTags.EffectTags.Added.Count);
 
-            tags.AddRange(gameplayEffectTags.GrantedTags.Added);
-            tags.AddRange(gameplayEffectTags.AssetTags.Added);
+            tags.AddRange(gameplayEffectTags.GrantedToASCTags.Added);
+            tags.AddRange(gameplayEffectTags.EffectTags.Added);
             return tags;
         }
 
@@ -61,7 +61,7 @@ namespace GAS.GameplayEffects {
                 modifierTotals = Existing;
             }
 
-            foreach (var modifier in this.GameplayEffectPolicy.Modifiers) {
+            foreach (var modifier in GameplayEffectPolicy.Modifiers) {
                 if (!modifierTotals.TryGetValue(modifier.Attribute, out var modifierType)) {
                     // This attribute hasn't been recorded before, so create a blank new record
                     modifierType = new Dictionary<ModifierOperationType, float>();
@@ -141,8 +141,8 @@ namespace GAS.GameplayEffects {
 
         public void ApplyInstantEffect(AbilitySystemComponent target) {
             // Modify base attribute values.  Collect the overall change for each modifier
-            var modifierTotals = this.CalculateModifierEffect();
-            var attributeModifications = this.CalculateAttributeModification(target, modifierTotals);
+            var modifierTotals = CalculateModifierEffect();
+            var attributeModifications = CalculateAttributeModification(target, modifierTotals);
 
             // Finally, For each attribute, apply the new modified values
             foreach (var attribute in attributeModifications) {

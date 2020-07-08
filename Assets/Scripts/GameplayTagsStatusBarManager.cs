@@ -19,7 +19,7 @@ public class GameplayTagsStatusBarManager : MonoBehaviour {
     }
 
     List<(GameplayTag Tag, ActiveGameplayEffectData EffectData, int stacks)> GetTagsToShow() {
-        var activeTags = AbilityCharacter.SelfAbilitySystem.ActiveTagsByActiveGameplayEffect;;
+        var activeTags = AbilityCharacter.ASC.GetTagsByActiveEffects();
         var effectsToShow = activeTags
                             .Where(x => availableTagsToShow
                                                     .ContainsKey(x.Tag))

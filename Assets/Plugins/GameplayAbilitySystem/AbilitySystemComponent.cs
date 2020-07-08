@@ -49,7 +49,6 @@ namespace GAS {
         private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
         private ActiveGameplayEffectsContainer activeGameplayEffectsContainer;
 
-
         private Animator animator;
         public Animator Animator => animator;
 
@@ -60,32 +59,11 @@ namespace GAS {
                 ActiveEffectsContainer
                             .ActiveEffectAttributeAggregator
                             .GetAllActiveEffects()
-                            .SelectMany(x => x.Effect.GameplayEffectTags.GrantedTags.Added)
+                            .SelectMany(x => x.Effect.EffectTags.GrantedToASCTags.Added)
                             .Union(AbilityGrantedTags);
 
         private IEnumerable<GameplayTag> AbilityGrantedTags => runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
 
-        public IEnumerable<(GameplayTag Tag, ActiveGameplayEffectData GrantingEffect)> ActiveTagsByActiveGameplayEffect {
-            get {
-                var activeEffects = ActiveEffectsContainer
-                            .ActiveEffectAttributeAggregator
-                            .GetAllActiveEffects();
-
-                if (activeEffects == null) return new List<(GameplayTag, ActiveGameplayEffectData)>();
-
-                var activeEffectsTags = activeEffects.SelectMany(x =>
-                     x.Effect.GrantedTags
-                     .Select(y => (y, x)));
-
-                return activeEffectsTags;
-            }
-        }
-
-        public void Awake() {
-            activeGameplayEffectsContainer = new ActiveGameplayEffectsContainer(this);
-            animator = GetComponent<Animator>();
-            attributeSet = GetComponent<AttributeSet>();
-        }
 
 
         public void HandleGameplayEvent(GameplayTag EventTag, GameplayEventData Payload) {
@@ -173,8 +151,8 @@ namespace GAS {
             // Remove all effects which have tags defined as "Remove Gameplay Effects With Tag". 
             // We do this by setting the expiry time on the effect to make it end prematurely
             // This is accomplished by finding all effects which grant these tags, and then adjusting start time
-            var tagsToRemove = Effect.GameplayEffectTags.RemoveGameplayEffectsWithTag.Added;
-            var activeGEs = Target.ActiveTagsByActiveGameplayEffect
+            var tagsToRemove = Effect.EffectTags.BeRemovedEffectsTags.Added;
+            var activeGEs = Target.GetTagsByActiveEffects()
                                     .Where(x => tagsToRemove.Any(y => x.Tag == y.Tag))
                                     .Join(tagsToRemove, x => x.Tag, x => x.Tag, (x, y) => new { Tag = x.Tag, EffectData = x.GrantingEffect, StacksToRemove = y.StacksToRemove })
                                     .OrderBy(x => x.EffectData.CooldownTimeRemaining);
@@ -203,6 +181,19 @@ namespace GAS {
             return Task.FromResult(Effect);
         }
 
+        public IEnumerable<(GameplayTag Tag, ActiveGameplayEffectData GrantingEffect)> GetTagsByActiveEffects()
+        {
+            var activeEffects = ActiveEffectsContainer.ActiveEffectAttributeAggregator.GetAllActiveEffects();
+            if (activeEffects == null) 
+                return new List<(GameplayTag, ActiveGameplayEffectData)>();
+            return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));
+        }
+
+        public void Awake() {
+            activeGameplayEffectsContainer = new ActiveGameplayEffectsContainer(this);
+            animator = GetComponent<Animator>();
+            attributeSet = GetComponent<AttributeSet>();
+        }
 // attribute -----------------------------------------------------------------------------
         public float GetBaseValue(AttributeType type) => GetAttributeByType(type).BaseValue;
         public float GetCurrentValue(AttributeType type) => GetAttributeByType(type).CurrentValue;
