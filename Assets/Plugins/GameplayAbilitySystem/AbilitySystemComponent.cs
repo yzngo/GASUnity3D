@@ -17,15 +17,16 @@ namespace GAS {
     /// <inheritdoc />
     [AddComponentMenu("Gameplay Ability System/Ability System")]
     public class AbilitySystemComponent : MonoBehaviour, IGameplayAbilitySystem {
-        public Transform TargettingLocation;
-
+        [SerializeField] private Transform targetPoint;
+        public Transform TargetPoint => targetPoint;
+        
         // [HideInInspector,SerializeField] private GameplayEvent onGameplayEvent = new GameplayEvent();
         // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
         // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
         // [HideInInspector,SerializeField] private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
         // [HideInInspector,SerializeField] private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
         // [HideInInspector,SerializeField] private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
-        
+
         private GameplayEvent onGameplayEvent = new GameplayEvent();
         private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
         private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 

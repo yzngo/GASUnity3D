@@ -21,11 +21,11 @@ public class Projectile : MonoBehaviour {
 
     }
 
-    public async Task SeekTarget(GameObject Target, GameObject TargetCollider) {
-        this.TargetCollider = TargetCollider;
+    public async Task SeekTarget(Transform target, GameObject targetCollider) {
+        this.TargetCollider = targetCollider;
         var t = 0f;
         while (!hasCollided) {
-            this.transform.LookAt(Target.transform);
+            this.transform.LookAt(target);
 
             this.transform.position += transform.forward * Time.deltaTime * SeekingSpeed * Speed.Evaluate(t);
             // Move closer to target

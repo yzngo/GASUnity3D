@@ -2138,19 +2138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955d1cc64d738074886242fa61f0bdf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargettingLocation: {fileID: 7899279095267886658}
-  _onGameplayAbilityActivated:
-    m_PersistentCalls:
-      m_Calls: []
-  _onGameplayAbilityEnded:
-    m_PersistentCalls:
-      m_Calls: []
-  _onGameplayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  _onGameplayAbilityCommitted:
-    m_PersistentCalls:
-      m_Calls: []
+  targetPoint: {fileID: 7899279095267886658}
 --- !u!114 &7899279095267793608
 MonoBehaviour:
   m_ObjectHideFlags: 0
