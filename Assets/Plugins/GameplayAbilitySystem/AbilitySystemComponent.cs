@@ -56,15 +56,12 @@ namespace GAS {
         private AttributeSet attributeSet;
         public AttributeSet AttributeSet => attributeSet;
 
-        public IEnumerable<GameplayTag> ActiveTags {
-            get {
-                return ActiveEffectsContainer
+        public IEnumerable<GameplayTag> ActiveTags =>
+                ActiveEffectsContainer
                             .ActiveEffectAttributeAggregator
                             .GetAllActiveEffects()
                             .SelectMany(x => x.Effect.GameplayEffectTags.GrantedTags.Added)
                             .Union(AbilityGrantedTags);
-            }
-        }
 
         private IEnumerable<GameplayTag> AbilityGrantedTags => runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
 
