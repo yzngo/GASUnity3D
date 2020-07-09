@@ -7,12 +7,10 @@ using System.Collections.Generic;
 namespace GameplayAbilitySystem.Abilities {
     [Serializable]
     public class GenericAbilityEvent : UnityEvent<IGameplayAbility> {
-
     }
 
     [Serializable]
     public class GameplayEvent : UnityEvent<GameplayTag, GameplayEventData> {
-
     }
 
     [Serializable]
@@ -26,8 +24,5 @@ namespace GameplayAbilitySystem.Abilities {
         public List<GameplayTag> TargetTags;
         public float EventMagnitude;
         // Target Data?
-
-
     }
-
 }

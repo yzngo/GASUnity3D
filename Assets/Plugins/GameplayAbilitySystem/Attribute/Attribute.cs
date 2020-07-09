@@ -4,21 +4,16 @@ using UnityEngine;
 
 namespace GameplayAbilitySystem.Attributes 
 {
-    [AddComponentMenu("Ability System/Attributes/Attribute")]
     [System.Serializable]
     public class Attribute
     {
-        [SerializeField] AttributeType _attributeType = default;
-
-        [SerializeField] float _baseValue = default;
-
-        [SerializeField] float _currentValue = default;
-
-        public float BaseValue => _baseValue;
-
-        public float CurrentValue => _currentValue;
+        [SerializeField] private AttributeType _attributeType = default;
+        [SerializeField] private float _baseValue = default;
+        [SerializeField] private float _currentValue = default;
 
         public AttributeType AttributeType => _attributeType;
+        public float BaseValue => _baseValue;
+        public float CurrentValue => _currentValue;
 
         public void SetCurrentValue(IAttributeSet set, ref float value) {
             set.PreAttributeChange(this, ref value);
