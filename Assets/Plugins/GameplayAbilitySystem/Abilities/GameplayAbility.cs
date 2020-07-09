@@ -125,12 +125,12 @@ namespace GameplayAbilitySystem.Abilities
         // Checks to see if the target GAS has the required cost resource to cast the ability
         private bool CheckCost(AbilitySystem abilitySystem) {
             // Check the modifiers on the ability cost GameEffect
-            var modifiers = Cost.CalculateModifierEffect();
-            var attributeModification = Cost.CalculateAttributeModification(
+            var modifiers = Cost.CalculateModifiers();
+            var attributeModification = Cost.CalculateAttributes(
                     abilitySystem, modifiers, operateOnCurrentValue: true);
 
             foreach (var attribute in attributeModification) {
-                if (attribute.Value.NewAttribueValue < 0) return false;
+                if (attribute.Value.newValue < 0) return false;
             }
             return true;
         }
@@ -140,8 +140,8 @@ namespace GameplayAbilitySystem.Abilities
         /// If player doesn't have the required resource, the resource goes to negative (or clamps to 0)
         /// </summary>
         private void ApplyCost(AbilitySystem abilitySystem) {
-            var modifiers = Cost.CalculateModifierEffect();
-            var attributeModification = Cost.CalculateAttributeModification(abilitySystem, modifiers);
+            var modifiers = Cost.CalculateModifiers();
+            var attributeModification = Cost.CalculateAttributes(abilitySystem, modifiers);
             Cost.ApplyInstantEffect(abilitySystem);
         }
 

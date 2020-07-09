@@ -9,6 +9,8 @@ using GameplayAbilitySystem.Cues;
 
 namespace GameplayAbilitySystem.Effects {
 
+    using TotalModifies = Dictionary<AttributeType, Dictionary<ModifierOperationType, float>>;
+
     // 改变自己或别人的Attributes 和GameplayTags的途径
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class GameplayEffect : ScriptableObject {
@@ -50,24 +52,21 @@ namespace GameplayAbilitySystem.Effects {
         //     return tags;
         // }
 
-        public Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> CalculateModifierEffect(Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> Existing = null) {
-            
-            Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> modifierTotals;
-            if (Existing == null) {
-                modifierTotals = new Dictionary<AttributeType, Dictionary<ModifierOperationType, float>>();
-
-            } else {
-                modifierTotals = Existing;
-            }
+        // 求[此effect]聚合之后的对所有属性的所有操作集合
+        // e.g.     HP ->  Add 100, Multi 0.5, Div 0.1
+        //          MP ->  Add 10,  Multi 0,   Div 0
+        public TotalModifies CalculateModifiers() 
+        {
+            var totalModifies = new TotalModifies();
 
             foreach (var modifier in Policy.Modifiers) {
-                if (!modifierTotals.TryGetValue(modifier.AttributeType, out var modifierType)) {
-                    // This attribute hasn't been recorded before, so create a blank new record
-                    modifierType = new Dictionary<ModifierOperationType, float>();
-                    modifierTotals.Add(modifier.AttributeType, modifierType);
+                // 当前attributeType的条目是否存在
+                if (!totalModifies.TryGetValue(modifier.AttributeType, out var typeModifiers)) {
+                    typeModifiers = new Dictionary<ModifierOperationType, float>();
+                    totalModifies.Add(modifier.AttributeType, typeModifiers);
                 }
-
-                if (!modifierType.TryGetValue(modifier.ModifierOperation, out var value)) {
+                // 当前attribute的operation条目是否存在
+                if (!typeModifiers.TryGetValue(modifier.ModifierOperation, out var value)) {
                     value = 0;
                     switch (modifier.ModifierOperation) {
                         case ModifierOperationType.Multiply:
@@ -80,72 +79,69 @@ namespace GameplayAbilitySystem.Effects {
                             value = 0;
                             break;
                     }
-                    modifierType.Add(modifier.ModifierOperation, value);
-
+                    typeModifiers.Add(modifier.ModifierOperation, value);
                 }
 
                 switch (modifier.ModifierOperation) {
                     case ModifierOperationType.Add:
-                        modifierTotals[modifier.AttributeType][modifier.ModifierOperation] += modifier.ScaledMagnitude;
+                        totalModifies[modifier.AttributeType][modifier.ModifierOperation] += modifier.ScaledMagnitude;
                         break;
                     case ModifierOperationType.Multiply:
-                        modifierTotals[modifier.AttributeType][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
+                        totalModifies[modifier.AttributeType][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
                         break;
                     case ModifierOperationType.Divide:
-                        modifierTotals[modifier.AttributeType][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
+                        totalModifies[modifier.AttributeType][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
                         break;
                 }
             }
-            return modifierTotals;
+            return totalModifies;
         }
 
-        public Dictionary<AttributeType, AttributeModificationValues> CalculateAttributeModification(
-                    AbilitySystem abilitySystem, 
-                    Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> modifiers, 
-                    bool operateOnCurrentValue = false
+        // e.g. HP -> oldValue 100 newValue 200
+        //      MP -> oldValue 200 newValue 189
+        public Dictionary<AttributeType, ModifyArrtibuteValues> CalculateAttributes(
+                            AbilitySystem abilitySystem, TotalModifies totalModifies, bool operateOnCurrentValue = false
         ) {
-            var attributeModification = new Dictionary<AttributeType, AttributeModificationValues>();
+            var totalCaculatedAttributes = new Dictionary<AttributeType, ModifyArrtibuteValues>();
 
-            foreach (var attribute in modifiers) {
-                if (!attribute.Value.TryGetValue(ModifierOperationType.Add, out var addition)) {
+            foreach (var modifyByType in totalModifies) {
+                if (!modifyByType.Value.TryGetValue(ModifierOperationType.Add, out var addition)) {
                     addition = 0;
                 }
-
-                if (!attribute.Value.TryGetValue(ModifierOperationType.Multiply, out var multiplication)) {
+                if (!modifyByType.Value.TryGetValue(ModifierOperationType.Multiply, out var multiplication)) {
                     multiplication = 1;
                 }
-
-                if (!attribute.Value.TryGetValue(ModifierOperationType.Divide, out var division)) {
+                if (!modifyByType.Value.TryGetValue(ModifierOperationType.Divide, out var division)) {
                     division = 1;
                 }
 
-                var oldAttributeValue = 0f;
+                var oldValue = 0f;
                 if (!operateOnCurrentValue) {
-                    oldAttributeValue = abilitySystem.GetBaseValue(attribute.Key);
+                    oldValue = abilitySystem.GetBaseValue(modifyByType.Key);
                 } else {
-                    oldAttributeValue = abilitySystem.GetCurrentValue(attribute.Key);
+                    oldValue = abilitySystem.GetCurrentValue(modifyByType.Key);
                 }
 
-                var newAttributeValue = (oldAttributeValue + addition) * (multiplication / division);
+                var newValue = (oldValue + addition) * (multiplication / division);
 
-                if (!attributeModification.TryGetValue(attribute.Key, out var values)) {
-                    values = new AttributeModificationValues();
-                    attributeModification.Add(attribute.Key, values);
+                if (!totalCaculatedAttributes.TryGetValue(modifyByType.Key, out ModifyArrtibuteValues values)) {
+                    values = new ModifyArrtibuteValues();
+                    totalCaculatedAttributes.Add(modifyByType.Key, values);
                 }
-                values.NewAttribueValue += newAttributeValue;
-                values.OldAttributeValue += oldAttributeValue;
+                values.newValue += newValue;
+                values.oldValue += oldValue;
             }
-            return attributeModification;
+            return totalCaculatedAttributes;
         }
 
         public void ApplyInstantEffect(AbilitySystem target) {
             // Modify base attribute values.  Collect the overall change for each modifier
-            var modifierTotals = CalculateModifierEffect();
-            var attributeModifications = CalculateAttributeModification(target, modifierTotals);
+            var modifierTotals = CalculateModifiers();
+            var attributeModifications = CalculateAttributes(target, modifierTotals);
 
             // Finally, For each attribute, apply the new modified values
             foreach (var attribute in attributeModifications) {
-                target.SetBaseValue(attribute.Key, attribute.Value.NewAttribueValue);
+                target.SetBaseValue(attribute.Key, attribute.Value.newValue);
 
                 // mark the corresponding aggregator as dirty so we can recalculate the current values
                 var aggregators = target.ActiveEffectsContainer.ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(attribute.Key);
