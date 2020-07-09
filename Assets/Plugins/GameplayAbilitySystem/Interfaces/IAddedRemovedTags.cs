@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using GAS;
+using AbilitySystem;
 
-namespace GAS.Interfaces {
+namespace AbilitySystem.Interfaces {
     /// <summary>
     /// List of added or removed tags.  We only have added tags for now, but maybe we might need removed tags in the future?
     /// </summary>

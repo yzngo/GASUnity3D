@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using GAS.Attributes;
+using AbilitySystem.Attributes;
 using UnityEngine;
 
 namespace AbilitySystemDemo

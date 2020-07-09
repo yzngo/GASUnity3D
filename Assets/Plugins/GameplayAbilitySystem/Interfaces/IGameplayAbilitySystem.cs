@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using GAS.Abilities;
-using GAS.Attributes;
-using GAS.GameplayEffects;
+using AbilitySystem.Abilities;
+using AbilitySystem.Attributes;
+using AbilitySystem.GameplayEffects;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Threading.Tasks;
 
-namespace GAS.Interfaces {
+namespace AbilitySystem.Interfaces {
 
     public interface IGameplayAbilitySystem {
 

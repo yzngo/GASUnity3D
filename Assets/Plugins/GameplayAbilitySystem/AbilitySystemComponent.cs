@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GAS.Abilities;
-using GAS.GameplayEffects;
+using AbilitySystem.Abilities;
+using AbilitySystem.GameplayEffects;
 using UnityEngine;
-using GAS.Attributes;
-using GAS.GameplayCues;
+using AbilitySystem.Attributes;
+using AbilitySystem.Cues;
 using UnityEngine.Events;
-using GAS.Interfaces;
+using AbilitySystem.Interfaces;
 
-namespace GAS {
+namespace AbilitySystem {
 
     /// The ASC is the primary component of the GAS. Every game object 
     /// that needs to participate with the GAS needs to have this component attached.
@@ -173,7 +173,7 @@ namespace GAS {
             // Execute gameplay cue
             for (var i = 0; i < gameplayCues.Count; i++) {
                 var cue = gameplayCues[i];
-                cue.HandleGameplayCue(target.gameObject, EGameplayCueEvent.OnActive);
+                cue.HandleCue(target.gameObject, CueEventMoment.OnActive);
             }
             return Task.FromResult(effect);
         }

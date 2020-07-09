@@ -2,16 +2,16 @@ using System.Threading;
 using System.Xml.Linq;
 using System.Linq;
 using System.Collections.Generic;
-using GAS.Interfaces;
-using GAS.Attributes;
+using AbilitySystem.Interfaces;
+using AbilitySystem.Attributes;
 using System;
 using UnityEngine.Events;
 using UniRx.Async;
 using System.Threading.Tasks;
 using UnityEngine;
-using GAS.GameplayCues;
+using AbilitySystem.Cues;
 
-namespace GAS.GameplayEffects {
+namespace AbilitySystem.GameplayEffects {
 
     // 所有激活的effect的容器
     [Serializable]
@@ -173,8 +173,8 @@ namespace GAS.GameplayEffects {
                 }
                 var gameplayCues = effectData.Effect.GameplayCues;
                 foreach (var cue in gameplayCues) {
-                    cue.HandleGameplayCue(
-                        effectData.Target.gameObject, EGameplayCueEvent.OnExecute
+                    cue.HandleCue(
+                        effectData.Target.gameObject, CueEventMoment.OnExecute
                     );
                 }
 
@@ -226,7 +226,7 @@ namespace GAS.GameplayEffects {
             await WaitForEffectExpiryTime(effectData);
             var gameplayCues = effectData.Effect.GameplayCues;
             foreach (var cue in gameplayCues) {
-                cue.HandleGameplayCue(effectData.Target.gameObject, EGameplayCueEvent.OnRemove);
+                cue.HandleCue(effectData.Target.gameObject, CueEventMoment.OnRemove);
             }
             // There could be multiple stacked effects, due to multiple casts
             // Remove one instance of this effect from the active list

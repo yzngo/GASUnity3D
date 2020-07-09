@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GAS;
-using GAS.Interfaces;
+using AbilitySystem;
+using AbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GAS.GameplayEffects {
+namespace AbilitySystem.GameplayEffects {
 
     [Serializable]
     public class GameplayEffectAddRemoveTagContainer : GameplayEffectTagContainer, IAddedRemovedTags {

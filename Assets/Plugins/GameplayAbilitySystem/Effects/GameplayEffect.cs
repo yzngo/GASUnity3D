@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using GAS.Interfaces;
-using GAS;
-using GAS.Attributes;
+using AbilitySystem.Interfaces;
+using AbilitySystem;
+using AbilitySystem.Attributes;
 using UnityEngine;
-using GAS.GameplayCues;
+using AbilitySystem.Cues;
 
-namespace GAS.GameplayEffects {
+namespace AbilitySystem.GameplayEffects {
 
     // 改变自己或别人的Attributes 和GameplayTags的途径
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]

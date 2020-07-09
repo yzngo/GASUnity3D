@@ -1,10 +1,10 @@
 using UnityEngine;
 using System;
-using GAS.Interfaces;
+using AbilitySystem.Interfaces;
 using System.Collections.Generic;
-using GAS.Attributes;
+using AbilitySystem.Attributes;
 
-namespace GAS.GameplayEffects {
+namespace AbilitySystem.GameplayEffects {
 
     /// 激活的某个游戏效果的数据集, 用于跟踪活动中的effect
     [Serializable]

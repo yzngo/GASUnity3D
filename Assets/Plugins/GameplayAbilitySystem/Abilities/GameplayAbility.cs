@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using GAS.Interfaces;
-using GAS.GameplayEffects;
+using AbilitySystem.Interfaces;
+using AbilitySystem.GameplayEffects;
 using UnityEngine;
-using GAS.Abilities.AbilityActivations;
+using AbilitySystem.Abilities.AbilityActivations;
 using System.Linq;
 
-namespace GAS.Abilities {
+namespace AbilitySystem.Abilities {
     /// <inheritdoc />
     [AddComponentMenu("Ability System/Ability")]
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability")]

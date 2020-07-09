@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using GAS.Interfaces;
+using AbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GAS.GameplayEffects {
+namespace AbilitySystem.GameplayEffects {
     // Effect的策略集合
     // - 时长 (立即生效, 区间+magnitude, 无穷)
     // - 修改器

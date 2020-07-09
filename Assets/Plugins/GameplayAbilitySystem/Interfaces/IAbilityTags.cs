@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using GAS.GameplayEffects;
+using AbilitySystem.GameplayEffects;
 
-namespace GAS.Interfaces {
+namespace AbilitySystem.Interfaces {
     public interface IAbilityTags {
         /// <summary>
         /// Any additional tags that the ability has

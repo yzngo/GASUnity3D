@@ -1,35 +1,35 @@
 using System;
 using UnityEngine;
 
-namespace GAS.GameplayCues {
+namespace AbilitySystem.Cues {
     [CreateAssetMenu(fileName = "GameplayCue", menuName = "Ability System/Gameplay Cue/Gameplay Cue")]
     public class GameplayCue : ScriptableObject {
 
-        [SerializeField] private BaseGameplayCueAction ExecuteAction;
+        [SerializeField] private BaseGameplayCueAction ExecuteAction = default;
 
-        [SerializeField] private BaseGameplayCueAction OnActiveAction;
+        [SerializeField] private BaseGameplayCueAction OnActiveAction = default;
 
-        [SerializeField] private BaseGameplayCueAction WhileActiveAction;
+        [SerializeField] private BaseGameplayCueAction WhileActiveAction = default;
 
-        [SerializeField] private BaseGameplayCueAction OnRemoveAction;
+        [SerializeField] private BaseGameplayCueAction OnRemoveAction = default;
 
-        public void HandleGameplayCue(GameObject Target, EGameplayCueEvent Event) {
-            switch (Event) {
-                case EGameplayCueEvent.OnExecute:
+        public void HandleCue(GameObject target, CueEventMoment moment) {
+            switch (moment) {
+                case CueEventMoment.OnExecute:
                     if (ExecuteAction == null) break;
-                    ExecuteAction.Action(Target);
+                    ExecuteAction.Action(target);
                     break;
-                case EGameplayCueEvent.OnActive:
+                case CueEventMoment.OnActive:
                     if (OnActiveAction == null) break;
-                    OnActiveAction.Action(Target);
+                    OnActiveAction.Action(target);
                     break;
-                case EGameplayCueEvent.WhileActive:
+                case CueEventMoment.WhileActive:
                     if (WhileActiveAction == null) break;
-                    WhileActiveAction.Action(Target);
+                    WhileActiveAction.Action(target);
                     break;
-                case EGameplayCueEvent.OnRemove:
+                case CueEventMoment.OnRemove:
                     if (OnRemoveAction == null) break;
-                    OnRemoveAction.Action(Target);
+                    OnRemoveAction.Action(target);
                     break;
             }
         }
@@ -39,7 +39,7 @@ namespace GAS.GameplayCues {
     /// <para>WhileActive/OnActive is called for Infinite effects</para>
     /// <para>Executed is called for Instant effects/on each tick</para>
     /// <para>WhileActive/OnActive/Removed is called for Duration effects</para>
-    public enum EGameplayCueEvent {
+    public enum CueEventMoment {
         OnExecute,  // Called when a GameplayCue is executed (e.g. instant/periodic/tick)
         OnActive, // Called when GameplayCue is first activated
         WhileActive, // Called *while* GameplayCue is active

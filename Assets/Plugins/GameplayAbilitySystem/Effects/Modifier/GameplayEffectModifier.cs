@@ -1,9 +1,9 @@
 using System;
-using GAS.Attributes;
-using GAS.Interfaces;
+using AbilitySystem.Attributes;
+using AbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GAS.GameplayEffects {
+namespace AbilitySystem.GameplayEffects {
     /// <inheritdoc />
     [Serializable]
     public class GameplayEffectModifier : IGameplayEffectModifier {

@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Collections.Generic;
-using GAS.GameplayEffects;
+using AbilitySystem.GameplayEffects;
 
-namespace GAS.Interfaces
+namespace AbilitySystem.Interfaces
 {
 
     /// <summary>

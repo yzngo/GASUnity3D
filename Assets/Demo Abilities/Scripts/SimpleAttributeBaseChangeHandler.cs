@@ -1,6 +1,6 @@
 using System.Linq;
-using GAS.Attributes;
-using GAS.Interfaces;
+using AbilitySystem.Attributes;
+using AbilitySystem.Interfaces;
 using UnityEngine;
 
 

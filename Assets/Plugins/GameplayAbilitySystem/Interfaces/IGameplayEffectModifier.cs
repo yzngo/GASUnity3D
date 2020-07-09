@@ -1,7 +1,7 @@
-using GAS.Attributes;
-using GAS.GameplayEffects;
+using AbilitySystem.Attributes;
+using AbilitySystem.GameplayEffects;
 
-namespace GAS.Interfaces {
+namespace AbilitySystem.Interfaces {
 
     /// <summary>
     /// This class defines how a  <see cref="GameplayEffect"/> modifies attributes (e.g. doing damage, healing)

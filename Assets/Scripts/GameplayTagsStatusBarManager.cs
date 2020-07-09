@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using GAS.GameplayEffects;
-using GAS;
+using AbilitySystem.GameplayEffects;
+using AbilitySystem;
 
 public class GameplayTagsStatusBarManager : MonoBehaviour {
     public AbilityCharacter AbilityCharacter;

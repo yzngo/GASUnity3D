@@ -1,4 +1,4 @@
-using GAS.Attributes;
+using AbilitySystem.Attributes;
 using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson

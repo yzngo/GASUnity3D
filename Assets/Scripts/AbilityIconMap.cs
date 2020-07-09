@@ -1,6 +1,6 @@
 
 using System;
-using GAS.Abilities;
+using AbilitySystem.Abilities;
 using UnityEngine;
 
 [Serializable]

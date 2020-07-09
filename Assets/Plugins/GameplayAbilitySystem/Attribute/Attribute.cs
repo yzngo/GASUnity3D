@@ -1,8 +1,8 @@
-using GAS.Attributes;
-using GAS.Interfaces;
+using AbilitySystem.Attributes;
+using AbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GAS.Attributes 
+namespace AbilitySystem.Attributes 
 {
     [AddComponentMenu("Ability System/Attributes/Attribute")]
     [System.Serializable]

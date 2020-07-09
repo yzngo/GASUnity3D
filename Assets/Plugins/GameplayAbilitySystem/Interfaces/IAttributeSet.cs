@@ -1,10 +1,10 @@
-using GAS.GameplayEffects;
+using AbilitySystem.GameplayEffects;
 using UnityEngine.Events;
-using GAS.Attributes;
+using AbilitySystem.Attributes;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GAS.Interfaces {
+namespace AbilitySystem.Interfaces {
     /// <summary>
     /// <para>
     /// An <see cref="IAttributeSet"/> defines the list of <see cref="IAttribute"/> that a player (that has an <see cref="AbilitySystemComponent"/>) possesses.  

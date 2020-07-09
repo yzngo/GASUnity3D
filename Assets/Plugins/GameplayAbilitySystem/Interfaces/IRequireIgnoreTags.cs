@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GAS.Interfaces {
+namespace AbilitySystem.Interfaces {
     /// <summary>
     /// List of tags that must be present, and list of tags that must not be present
     /// </summary>

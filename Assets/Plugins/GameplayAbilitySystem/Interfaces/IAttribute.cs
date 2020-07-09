@@ -1,6 +1,6 @@
-using GAS.Attributes;
+using AbilitySystem.Attributes;
 
-namespace GAS.Interfaces {
+namespace AbilitySystem.Interfaces {
     /// <summary>
     /// Attributes are used to define parameters (such as health, speed) for a character.
     /// </summary>

@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GAS;
-using GAS.Abilities.AbilityActivations;
-using GAS.Abilities;
-using GAS.GameplayEffects;
+using AbilitySystem;
+using AbilitySystem.Abilities.AbilityActivations;
+using AbilitySystem.Abilities;
+using AbilitySystem.GameplayEffects;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace GAS.Interfaces {
+namespace AbilitySystem.Interfaces {
     /// <summary>
     /// This interfaces defines Gameplay Abilities.  Gameplay Abilities represent "things" that players can cast, etc.
     /// E.g. a <see cref="IGameplayAbility"/> might represent a fireball ability which the player casts and which damages a target

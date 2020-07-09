@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GAS.GameplayCues {
+namespace AbilitySystem.Cues {
     /// <summary>
     /// Custom GameplayCue methods should derive from this and override the Action() method
     /// </summary>

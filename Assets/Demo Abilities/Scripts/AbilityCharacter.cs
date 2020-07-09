@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using GAS;
-using GAS.Abilities;
+using AbilitySystem;
+using AbilitySystem.Abilities;
 using UnityEngine;
 using System;
 

@@ -1,6 +1,6 @@
-using GAS.Interfaces;
+using AbilitySystem.Interfaces;
 
-namespace GAS.GameplayEffects {
+namespace AbilitySystem.GameplayEffects {
     // public struct GameplayModifierEvaluatedData {
     //     public IAttribute Attribute;
     //     public ModifierOperationType ModOperation;

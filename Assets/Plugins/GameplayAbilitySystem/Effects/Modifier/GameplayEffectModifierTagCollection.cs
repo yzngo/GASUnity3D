@@ -1,10 +1,10 @@
 
 using System;
 using System.Collections.Generic;
-using GAS;
-using GAS.Attributes;
+using AbilitySystem;
+using AbilitySystem.Attributes;
 
-namespace GAS.GameplayEffects {
+namespace AbilitySystem.GameplayEffects {
 
     /// <summary>
     /// Defines tags that must be present/must not be present on a <see cref="AbilitySystemComponent"/>

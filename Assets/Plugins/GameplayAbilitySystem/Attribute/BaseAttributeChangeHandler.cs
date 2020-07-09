@@ -1,8 +1,8 @@
-using GAS.Interfaces;
+using AbilitySystem.Interfaces;
 using UnityEngine;
 
 
-namespace GAS.Attributes {
+namespace AbilitySystem.Attributes {
 
     // 继承此类实现OnAttributeChange函数, 定义如何修改attribute
     public abstract class BaseAttributeChangeHandler : ScriptableObject {

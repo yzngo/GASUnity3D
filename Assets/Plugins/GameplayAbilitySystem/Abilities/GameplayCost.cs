@@ -1,9 +1,9 @@
 using System;
-using GAS.Interfaces;
-using GAS.GameplayEffects;
+using AbilitySystem.Interfaces;
+using AbilitySystem.GameplayEffects;
 using UnityEngine;
 
-namespace GAS {
+namespace AbilitySystem {
     [Serializable]
     public class GameplayCost : IGameplayCost {
         public GameplayEffect CostGameplayEffect => _costGameplayEffect;

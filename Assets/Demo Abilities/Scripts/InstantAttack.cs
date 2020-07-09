@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GAS.ExtensionMethods;
-using GAS.GameplayEffects;
-using GAS.Interfaces;
+using AbilitySystem.ExtensionMethods;
+using AbilitySystem.GameplayEffects;
+using AbilitySystem.Interfaces;
 using UniRx.Async;
 using UnityEngine;
 
-namespace GAS.Abilities.AbilityActivations {
+namespace AbilitySystem.Abilities.AbilityActivations {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Instant Attack")]
     public class InstantAttack : AbstractAbilityActivation {
 
