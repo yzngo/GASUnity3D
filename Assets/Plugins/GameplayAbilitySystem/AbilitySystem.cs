@@ -31,12 +31,10 @@ namespace GameplayAbilitySystem {
         private ActiveGameplayEffectsContainer activeEffectsContainer;
         public ActiveGameplayEffectsContainer ActiveEffectsContainer => activeEffectsContainer;
 
-
         private Animator animator;
         public Animator Animator => animator;
 
         private AttributeSet attributeSet;
-        // public AttributeSet AttributeSet => attributeSet;
 
         public IEnumerable<GameplayTag> ActiveTags =>
                 ActiveEffectsContainer

@@ -275,14 +275,8 @@ namespace GameplayAbilitySystem.GameplayEffects {
                                         .Where(x => x.Target == effectData.Target && x.Effect == effectData.Effect);
                     break;
             }
-
             return matchingStackedActiveEffects;
         }
-
     }
-
-    // public class ActiveGameplayEffectsEvent : UnityEvent<AbilitySystemComponent, ActiveGameplayEffectData> {
-
-    // }
 }
 
