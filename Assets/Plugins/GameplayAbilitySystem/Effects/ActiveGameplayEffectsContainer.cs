@@ -28,13 +28,13 @@ namespace GameplayAbilitySystem.Effects {
 
         //todo async 异步?
         // public async Task<ActiveGameplayEffectData> ApplyGameEffect(ActiveGameplayEffectData EffectData) {
-        public ActiveGameplayEffectData ApplyGameEffect(ActiveGameplayEffectData EffectData) {
+        public void ApplyGameEffect(ActivedEffectData effectData) {
             // Durational effect.  Add granted modifiers to active list
             var existingStacks = -1;
-            var maxStacks = EffectData.Effect.StackingPolicy.StackLimit;
-            IEnumerable<ActiveGameplayEffectData> matchingStackedActiveEffects = GetMatchingStackedEffectsByEffect(EffectData);
+            var maxStacks = effectData.Effect.StackingPolicy.StackLimit;
+            IEnumerable<ActivedEffectData> matchingStackedActiveEffects = GetMatchingStackedEffectsByEffect(effectData);
 
-            switch (EffectData.Effect.StackingPolicy.StackDurationRefreshPolicy) {
+            switch (effectData.Effect.StackingPolicy.StackDurationRefreshPolicy) {
                 case StackRefreshPolicy.RefreshOnSuccessfulApplication: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
@@ -46,7 +46,7 @@ namespace GameplayAbilitySystem.Effects {
 
             }
 
-            switch (EffectData.Effect.StackingPolicy.StackPeriodResetPolicy) {
+            switch (effectData.Effect.StackingPolicy.StackPeriodResetPolicy) {
                 case StackRefreshPolicy.RefreshOnSuccessfulApplication: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
@@ -60,25 +60,24 @@ namespace GameplayAbilitySystem.Effects {
 
             existingStacks = matchingStackedActiveEffects?.Count() ?? -1;
             if (existingStacks < maxStacks) { // We can still add more stacks.
-                AddActiveGameplayEffect(EffectData);
+                AddActiveGameplayEffect(effectData);
                 // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, EffectData);
 
                 // We only need to do timed checks for durational abilities
-                if (EffectData.Effect.Policy.DurationPolicy == DurationPolicy.Duration
-                    || EffectData.Effect.Policy.DurationPolicy == DurationPolicy.Infinite) {
+                if (effectData.Effect.Policy.DurationPolicy == DurationPolicy.Duration
+                    || effectData.Effect.Policy.DurationPolicy == DurationPolicy.Infinite) {
                     // var removalTime = EffectData.Effect.GameplayEffectPolicy.DurationMagnitude * 1000.0f;
-                    CheckGameplayEffectForTimedEffects(EffectData);
+                    CheckGameplayEffectForTimedEffects(effectData);
                 }
 
             }
-            return EffectData;
         }
 
-        private void OnActiveGameplayEffectAdded(ActiveGameplayEffectData effectData) {
+        private void OnActiveGameplayEffectAdded(ActivedEffectData effectData) {
             // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, effectData);
         }
 
-        private void ModifyActiveGameplayEffect(ActiveGameplayEffectData effectData, Action<GameplayEffectModifier> action) {
+        private void ModifyActiveGameplayEffect(ActivedEffectData effectData, Action<GameplayEffectModifier> action) {
             foreach (var modifier in effectData.Effect.Policy.Modifiers) {
                 action(modifier);
             }
@@ -89,7 +88,7 @@ namespace GameplayAbilitySystem.Effects {
             }
         }
 
-        private void AddActiveGameplayEffect(ActiveGameplayEffectData effectData) {
+        private void AddActiveGameplayEffect(ActivedEffectData effectData) {
             ModifyActiveGameplayEffect(effectData, modifier => {
                 // We only apply if the effect has execute on application
                 modifier.AttemptCalculateMagnitude(out var evaluatedMagnitude);
@@ -132,7 +131,7 @@ namespace GameplayAbilitySystem.Effects {
         /// </summary>
         /// <param name="effectData"></param>
         /// <returns> </returns>
-        private async Task WaitForEffectExpiryTime(ActiveGameplayEffectData effectData) {
+        private async Task WaitForEffectExpiryTime(ActivedEffectData effectData) {
             bool durationExpired = false;
             while (!durationExpired) {
                 await UniTask.DelayFrame(0);
@@ -159,7 +158,7 @@ namespace GameplayAbilitySystem.Effects {
             }
         }
 
-        private void CheckAndApplyPeriodicEffect(ActiveGameplayEffectData effectData) {
+        private void CheckAndApplyPeriodicEffect(ActivedEffectData effectData) {
             if (effectData.TimeUntilNextPeriodicApplication <= 0) {
                 // Apply gameplay effect defined for period.  
                 if (effectData.Effect.Periodicity.EffectOnExecute != null) {
@@ -175,8 +174,8 @@ namespace GameplayAbilitySystem.Effects {
             }
         }
 
-        private void ApplyStackExpirationPolicy(ActiveGameplayEffectData effectData, ref bool durationExpired) {
-            IEnumerable<ActiveGameplayEffectData> matchingEffects;
+        private void ApplyStackExpirationPolicy(ActivedEffectData effectData, ref bool durationExpired) {
+            IEnumerable<ActivedEffectData> matchingEffects;
 
             switch (effectData.Effect.StackingPolicy.StackExpirationPolicy) {
                 case StackExpirationPolicy.ClearEntireStack: // Remove all effects which match
@@ -214,7 +213,7 @@ namespace GameplayAbilitySystem.Effects {
             }
         }
 
-        private async void CheckGameplayEffectForTimedEffects(ActiveGameplayEffectData effectData) {
+        private async void CheckGameplayEffectForTimedEffects(ActivedEffectData effectData) {
             await WaitForEffectExpiryTime(effectData);
             var gameplayCues = effectData.Effect.GameplayCues;
             foreach (var cue in gameplayCues) {
@@ -248,8 +247,8 @@ namespace GameplayAbilitySystem.Effects {
             abilitySystem.SetCurrentValue(attributeType, newCurrentAttributeValue);
         }
 
-        private IEnumerable<ActiveGameplayEffectData> GetMatchingStackedEffectsByEffect(ActiveGameplayEffectData effectData) {
-            IEnumerable<ActiveGameplayEffectData> matchingStackedActiveEffects = null;
+        private IEnumerable<ActivedEffectData> GetMatchingStackedEffectsByEffect(ActivedEffectData effectData) {
+            IEnumerable<ActivedEffectData> matchingStackedActiveEffects = null;
 
             switch (effectData.Effect.StackingPolicy.StackingType) {
                 // Stacking Type None:

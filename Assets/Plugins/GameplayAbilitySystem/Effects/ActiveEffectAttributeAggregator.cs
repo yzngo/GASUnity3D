@@ -9,11 +9,11 @@ namespace GameplayAbilitySystem.Effects {
     // This is used to keep track of all the "temporary" attribute modifiers,
     // so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
     public class ActiveEffectAttributeAggregator {
-        private Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>> Map = 
-            new Dictionary<ActiveGameplayEffectData, Dictionary<AttributeType, Aggregator>>();
+        private Dictionary<ActivedEffectData, Dictionary<AttributeType, Aggregator>> Map = 
+            new Dictionary<ActivedEffectData, Dictionary<AttributeType, Aggregator>>();
 
 
-        public Dictionary<AttributeType, Aggregator> AddorGet(ActiveGameplayEffectData EffectData) {
+        public Dictionary<AttributeType, Aggregator> AddorGet(ActivedEffectData EffectData) {
             if (!Map.TryGetValue(EffectData, out var attributeAggregatorMap)) {
                 attributeAggregatorMap = new Dictionary<AttributeType, Aggregator>();
                 Map.Add(EffectData, attributeAggregatorMap);
@@ -21,11 +21,11 @@ namespace GameplayAbilitySystem.Effects {
             return attributeAggregatorMap;
         }
 
-        public void RemoveEffect(ActiveGameplayEffectData EffectData) {
+        public void RemoveEffect(ActivedEffectData EffectData) {
             this.Map.Remove(EffectData);
         }
 
-        public List<ActiveGameplayEffectData> GetAllActiveEffects() {
+        public List<ActivedEffectData> GetAllActiveEffects() {
             return Map.Keys.ToList();
         }
 

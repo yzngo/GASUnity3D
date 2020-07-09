@@ -20,7 +20,7 @@ public class GameplayTagsStatusBarManager : MonoBehaviour {
         abilitySystem = AbilityCharacter.GetComponent<AbilitySystem>();
     }
 
-    List<(GameplayTag Tag, ActiveGameplayEffectData EffectData, int stacks)> GetTagsToShow() {
+    List<(GameplayTag Tag, ActivedEffectData EffectData, int stacks)> GetTagsToShow() {
         var activeTags = abilitySystem.GetActiveEffectsTags();
         var effectsToShow = activeTags
                             .Where(x => availableTagsToShow
@@ -31,7 +31,7 @@ public class GameplayTagsStatusBarManager : MonoBehaviour {
         return effectsToShow;
     }
 
-    List<(GameplayTag Tag, ActiveGameplayEffectData EffectData, int stacks)> GetStackedGameplayTagsToShow() {
+    List<(GameplayTag Tag, ActivedEffectData EffectData, int stacks)> GetStackedGameplayTagsToShow() {
         var effectsToShow = GetTagsToShow()
                             .GroupBy(x => x.Tag)
                             .Select(x => (x.Last().Tag, x.Last().EffectData, x.Count()))

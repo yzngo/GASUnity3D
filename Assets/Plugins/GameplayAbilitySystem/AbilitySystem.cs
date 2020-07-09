@@ -117,16 +117,14 @@ namespace GameplayAbilitySystem {
         // The overall effect may be modulated by the Level.
         // level -> maybe used to affect the "strength" of the effect
         public Task<GameplayEffect> ApplyEffectToTarget(GameplayEffect effect, AbilitySystem target, float level = 0) {
-            // TODO: Check to make sure all the attributes being modified by this gameplay effect exist on the target
+            // Check to make sure all the attributes being modified by this effect exist on the target
             foreach(var modifiers in effect.Policy.Modifiers) {
                 if (!target.IsAttributeExist(modifiers.AttributeType)) {
                     return null;
                 }
             }
             // TODO: Get list of tags owned by target
-
-            // TODO: Check for immunity tags, and don't apply gameplay effect if target is immune (and also add Immunity Tags container to IGameplayEffect)
-
+            // TODO: Check for immunity tags, and don't apply effect if target is immune (and also add Immunity Tags container to IGameplayEffect)
             // TODO: Check to make sure Application Tag Requirements are met (i.e. target has all the required tags, and does not contain any prohibited tags )
             if (!effect.ApplicationTagRequirementMet(target)) {
                 return null;
@@ -141,8 +139,8 @@ namespace GameplayAbilitySystem {
             } else {
                 // Durational effects require attention to many more things than instant effects
                 // Such as stacking and effect durations
-                var EffectData = new ActiveGameplayEffectData(effect, this, target);
-                _ = target.ActiveEffectsContainer.ApplyGameEffect(EffectData);
+                var effectData = new ActivedEffectData(effect, this, target);
+                target.ActiveEffectsContainer.ApplyGameEffect(effectData);
             }
 
             // Remove all effects which have tags defined as "Remove Gameplay Effects With Tag". 
@@ -176,11 +174,11 @@ namespace GameplayAbilitySystem {
             return Task.FromResult(effect);
         }
 
-        public IEnumerable<(GameplayTag Tag, ActiveGameplayEffectData GrantingEffect)> GetActiveEffectsTags()
+        public IEnumerable<(GameplayTag Tag, ActivedEffectData GrantingEffect)> GetActiveEffectsTags()
         {
             var activeEffects = ActiveEffectsContainer.ActiveEffectAttributeAggregator.GetAllActiveEffects();
             if (activeEffects == null) 
-                return new List<(GameplayTag, ActiveGameplayEffectData)>();
+                return new List<(GameplayTag, ActivedEffectData)>();
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));
         }
 

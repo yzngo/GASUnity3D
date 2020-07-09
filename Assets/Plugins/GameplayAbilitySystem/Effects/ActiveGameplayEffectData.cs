@@ -8,7 +8,7 @@ namespace GameplayAbilitySystem.Effects {
 
     /// 激活的某个游戏效果的数据集, 用于跟踪活动中的effect
     [Serializable]
-    public class ActiveGameplayEffectData {
+    public class ActivedEffectData {
 // base data
         private GameplayEffect gameplayEffect = default;
         private float startWorldTime;                  //激活时间, Time.time
@@ -20,7 +20,7 @@ namespace GameplayAbilitySystem.Effects {
         public AbilitySystem Instigator { get; private set; }      // 发起者
         public AbilitySystem Target { get; private set; }          // 目标对象
 // ctor
-        public ActiveGameplayEffectData(GameplayEffect effect, AbilitySystem instigator, AbilitySystem target) {
+        public ActivedEffectData(GameplayEffect effect, AbilitySystem instigator, AbilitySystem target) {
             gameplayEffect = effect;
             startWorldTime = Time.time;
             Instigator = instigator;
