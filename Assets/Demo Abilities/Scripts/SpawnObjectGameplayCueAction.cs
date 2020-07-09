@@ -1,5 +1,6 @@
 
 using System;
+using AbilitySystem;
 using AbilitySystem.Cues;
 using UniRx.Async;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace AbilitySystemDemo {
         public Vector3 Scale = Vector3.one;
         public float DestroyInSeconds = -1;
 
-        public override async void Action(GameObject target) {
+        public override async void Action(AbilitySystemComponent target) {
 
             Time.timeScale = 0.5f;
             await UniTask.DelayFrame(5);

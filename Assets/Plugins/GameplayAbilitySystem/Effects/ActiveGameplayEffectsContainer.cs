@@ -173,9 +173,7 @@ namespace AbilitySystem.GameplayEffects {
                 }
                 var gameplayCues = effectData.Effect.GameplayCues;
                 foreach (var cue in gameplayCues) {
-                    cue.HandleCue(
-                        effectData.Target.gameObject, CueEventMomentType.OnExecute
-                    );
+                    cue.HandleCue(effectData.Target, CueEventMomentType.OnExecute);
                 }
 
                 effectData.AddPeriodicEffectAttributeModifiers();
@@ -226,7 +224,7 @@ namespace AbilitySystem.GameplayEffects {
             await WaitForEffectExpiryTime(effectData);
             var gameplayCues = effectData.Effect.GameplayCues;
             foreach (var cue in gameplayCues) {
-                cue.HandleCue(effectData.Target.gameObject, CueEventMomentType.OnRemove);
+                cue.HandleCue(effectData.Target, CueEventMomentType.OnRemove);
             }
             // There could be multiple stacked effects, due to multiple casts
             // Remove one instance of this effect from the active list

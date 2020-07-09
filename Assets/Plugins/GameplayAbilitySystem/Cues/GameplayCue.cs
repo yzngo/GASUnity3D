@@ -11,7 +11,7 @@ namespace AbilitySystem.Cues
         [SerializeField] private BaseCueAction WhileActiveAction = default;
         [SerializeField] private BaseCueAction OnRemoveAction = default;
 
-        public void HandleCue(GameObject target, CueEventMomentType moment) {
+        public void HandleCue(AbilitySystemComponent target, CueEventMomentType moment) {
             switch (moment) {
                 case CueEventMomentType.OnActive:
                     if (OnActiveAction == null) break;
