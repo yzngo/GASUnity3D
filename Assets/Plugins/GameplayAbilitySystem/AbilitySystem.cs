@@ -11,7 +11,7 @@ using GameplayAbilitySystem.Interfaces;
 
 namespace GameplayAbilitySystem {
 
-    /// The AbilitySytem is the primary component of the GAS. Every game object 
+    /// The AbilitySytem is the primary component. Every game object 
     /// that needs to participate with the GAS needs to have this component attached.
     [AddComponentMenu("Ability System/Ability System")]
     [RequireComponent(typeof(AttributeSet))]
@@ -21,9 +21,9 @@ namespace GameplayAbilitySystem {
         [SerializeField] private Transform targetPoint = default;
         public Transform TargetPoint => targetPoint;
 
-        // Called when a GameplayEvent is executed
-        private AbilityEvent onGameplayEvent = new AbilityEvent();
-        public AbilityEvent OnGameplayEvent => onGameplayEvent;
+        // Called when a AbilityEvent is executed
+        private AbilityEvent onAbilityEvent = new AbilityEvent();
+        public AbilityEvent OnAbilityEvent => onAbilityEvent;
 
         private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
 
@@ -79,7 +79,7 @@ namespace GameplayAbilitySystem {
             GameplayTag abilityTag = ability.Tags.AbilityTags.Added.Count > 0 ? ability.Tags.AbilityTags.Added[0] : new GameplayTag();
             var data = new AbilityEventData();
             data.Target = target;
-            onGameplayEvent?.Invoke(abilityTag, data);
+            onAbilityEvent?.Invoke(abilityTag, data);
             return true;
         }
 
@@ -95,20 +95,23 @@ namespace GameplayAbilitySystem {
         // with reference to the same base attribute value.
         public void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystem Target, float Level)> batchedGameplayEffects) {
 
-            var instantEffects = batchedGameplayEffects.Where(x => x.Effect.Policy.DurationPolicy == DurationPolicy.Instant);
-            var durationalEffects = batchedGameplayEffects.Where(
-                x =>
-                    x.Effect.Policy.DurationPolicy == DurationPolicy.Duration ||
-                    x.Effect.Policy.DurationPolicy == DurationPolicy.Infinite
-                    );
+            foreach(var effect in batchedGameplayEffects) {
+                ApplyEffectToTarget(effect.Effect, effect.Target, effect.Level);
+            }
+            // var instantEffects = batchedGameplayEffects.Where(x => x.Effect.Policy.DurationPolicy == DurationPolicy.Instant);
+            // var durationalEffects = batchedGameplayEffects.Where(
+            //     x =>
+            //         x.Effect.Policy.DurationPolicy == DurationPolicy.Duration ||
+            //         x.Effect.Policy.DurationPolicy == DurationPolicy.Infinite
+            //         );
             // Apply instant effects
-            foreach (var item in instantEffects) {
-                ApplyEffectToTarget(item.Effect, item.Target);
-            }
+            // foreach (var effect in instantEffects) {
+            //     ApplyEffectToTarget(effect.Effect, effect.Target);
+            // }
             // Apply durational effects
-            foreach (var effect in durationalEffects) {
-                ApplyEffectToTarget(effect.Effect, effect.Target);
-            }
+            // foreach (var effect in durationalEffects) {
+            //     ApplyEffectToTarget(effect.Effect, effect.Target);
+            // }
         }
         
         // effect也是ablity system管理
@@ -125,7 +128,7 @@ namespace GameplayAbilitySystem {
             // TODO: Get list of tags owned by target
             // TODO: Check for immunity tags, and don't apply effect if target is immune (and also add Immunity Tags container to IGameplayEffect)
             // TODO: Check to make sure Application Tag Requirements are met (i.e. target has all the required tags, and does not contain any prohibited tags )
-            if (!appliedEffect.ApplicationTagRequirementMet(target)) {
+            if (!appliedEffect.IsTagsRequiredMatch(target)) {
                 return ;
             }
 

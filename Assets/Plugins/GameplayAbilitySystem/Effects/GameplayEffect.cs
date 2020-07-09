@@ -24,9 +24,8 @@ namespace GameplayAbilitySystem.Effects {
         public List<GameplayCue> GameplayCues => gameplayCues;
         public StackingPolicy StackingPolicy => stackingPolicy;
         public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedToASCTags.Added;
-        // public IEnumerable<(GameplayTag Tag, GameplayEffect Effect)> GrantedEffectTags => GrantedTags.Select(x => (x, this));
 
-        public bool ApplicationTagRequirementMet(AbilitySystem abilitySystem) {
+        public bool IsTagsRequiredMatch(AbilitySystem abilitySystem) {
             var requiredTagsPresent = true;
             var ignoredTagsAbsent = true;
 
@@ -42,14 +41,14 @@ namespace GameplayAbilitySystem.Effects {
             return requiredTagsPresent && ignoredTagsAbsent;
         }
 
-        public List<GameplayTag> GetOwningTags() {
-            var tags = new List<GameplayTag>(gameplayEffectTags.GrantedToASCTags.Added.Count
-                                            + gameplayEffectTags.EffectTags.Added.Count);
+        // public List<GameplayTag> GetOwningTags() {
+        //     var tags = new List<GameplayTag>(gameplayEffectTags.GrantedToASCTags.Added.Count
+        //                                     + gameplayEffectTags.EffectTags.Added.Count);
 
-            tags.AddRange(gameplayEffectTags.GrantedToASCTags.Added);
-            tags.AddRange(gameplayEffectTags.EffectTags.Added);
-            return tags;
-        }
+        //     tags.AddRange(gameplayEffectTags.GrantedToASCTags.Added);
+        //     tags.AddRange(gameplayEffectTags.EffectTags.Added);
+        //     return tags;
+        // }
 
         public Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> CalculateModifierEffect(Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> Existing = null) {
             
