@@ -22,7 +22,7 @@ namespace GameplayAbilitySystem.Effects {
         [SerializeField] private GameplayEffectModifierTagCollection targetTags = null;
 
         /// <inheritdoc />
-        public AttributeType Attribute => attributeType;
+        public AttributeType AttributeType => attributeType;
         /// <inheritdoc />
         public ModifierOperationType ModifierOperation => modifierOperationType;
         /// <inheritdoc />

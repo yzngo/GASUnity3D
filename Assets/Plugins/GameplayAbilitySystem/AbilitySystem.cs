@@ -118,6 +118,11 @@ namespace GameplayAbilitySystem {
         // level -> maybe used to affect the "strength" of the effect
         public Task<GameplayEffect> ApplyEffectToTarget(GameplayEffect effect, AbilitySystem target, float level = 0) {
             // TODO: Check to make sure all the attributes being modified by this gameplay effect exist on the target
+            foreach(var modifiers in effect.Policy.Modifiers) {
+                if (!target.IsAttributeExist(modifiers.AttributeType)) {
+                    return null;
+                }
+            }
             // TODO: Get list of tags owned by target
 
             // TODO: Check for immunity tags, and don't apply gameplay effect if target is immune (and also add Immunity Tags container to IGameplayEffect)
@@ -181,6 +186,7 @@ namespace GameplayAbilitySystem {
 
 
 // attribute -----------------------------------------------------------------------------
+        public bool IsAttributeExist(AttributeType type) => attributeSet.Attributes.Exists( x => x.AttributeType == type);
         public float GetBaseValue(AttributeType type) => GetAttributeByType(type).BaseValue;
         public float GetCurrentValue(AttributeType type) => GetAttributeByType(type).CurrentValue;
         public void SetBaseValue(AttributeType type, float value) => GetAttributeByType(type).SetBaseValue(attributeSet, ref value);

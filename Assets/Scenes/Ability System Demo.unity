@@ -1564,6 +1564,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772122998}
   m_CullTransparentMesh: 0
+--- !u!114 &843129480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7899279095267793603, guid: fddc582aed5bbbd4ab4ac8025536d369,
+    type: 3}
+  m_PrefabInstance: {fileID: 863385731}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955d1cc64d738074886242fa61f0bdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &863385731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1585,12 +1597,12 @@ PrefabInstance:
         type: 3}
       propertyPath: Abilities.Array.data[1].target
       value: 
-      objectReference: {fileID: 7899279095716547601}
+      objectReference: {fileID: 843129480}
     - target: {fileID: 7899279095267793605, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: Abilities.Array.data[2].target
       value: 
-      objectReference: {fileID: 7899279095716547601}
+      objectReference: {fileID: 843129480}
     - target: {fileID: 7899279095267886754, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: m_LocalPosition.x

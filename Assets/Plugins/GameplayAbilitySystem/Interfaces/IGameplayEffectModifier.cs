@@ -11,7 +11,7 @@ namespace GameplayAbilitySystem.Interfaces {
         /// The attribute to modify
         /// </summary>
         /// <value></value>
-        AttributeType Attribute { get; }
+        AttributeType AttributeType { get; }
 
         /// <summary>
         /// The operation (add, multiply, etc.) to apply to the attribute

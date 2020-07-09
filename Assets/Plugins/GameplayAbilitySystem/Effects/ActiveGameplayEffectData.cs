@@ -91,18 +91,18 @@ namespace GameplayAbilitySystem.Effects {
                 modifier.AttemptCalculateMagnitude(out var EvaluatedMagnitude);
 
                 // If aggregator for this attribute doesn't exist, add it.
-                if (!PeriodicEffectModificationsToDate.TryGetValue(modifier.Attribute, out var aggregator)) {
-                    aggregator = new Aggregator(modifier.Attribute);
+                if (!PeriodicEffectModificationsToDate.TryGetValue(modifier.AttributeType, out var aggregator)) {
+                    aggregator = new Aggregator(modifier.AttributeType);
                     // aggregator.Dirtied.AddListener(UpdateAttribute);
-                    PeriodicEffectModificationsToDate.Add(modifier.Attribute, aggregator);
+                    PeriodicEffectModificationsToDate.Add(modifier.AttributeType, aggregator);
                 }
 
                 aggregator.AddAggregatorModifier(EvaluatedMagnitude, modifier.ModifierOperation);
 
                 // Recalculate new value by recomputing all aggregators
                 var aggregators = Target.ActiveEffectsContainer.ActiveEffectAttributeAggregator
-                                    .GetAggregatorsForAttribute(modifier.Attribute);
-                Target.ActiveEffectsContainer.UpdateAttribute(aggregators, modifier.Attribute);
+                                    .GetAggregatorsForAttribute(modifier.AttributeType);
+                Target.ActiveEffectsContainer.UpdateAttribute(aggregators, modifier.AttributeType);
             }
         }
 

@@ -62,10 +62,10 @@ namespace GameplayAbilitySystem.Effects {
             }
 
             foreach (var modifier in Policy.Modifiers) {
-                if (!modifierTotals.TryGetValue(modifier.Attribute, out var modifierType)) {
+                if (!modifierTotals.TryGetValue(modifier.AttributeType, out var modifierType)) {
                     // This attribute hasn't been recorded before, so create a blank new record
                     modifierType = new Dictionary<ModifierOperationType, float>();
-                    modifierTotals.Add(modifier.Attribute, modifierType);
+                    modifierTotals.Add(modifier.AttributeType, modifierType);
                 }
 
                 if (!modifierType.TryGetValue(modifier.ModifierOperation, out var value)) {
@@ -87,13 +87,13 @@ namespace GameplayAbilitySystem.Effects {
 
                 switch (modifier.ModifierOperation) {
                     case ModifierOperationType.Add:
-                        modifierTotals[modifier.Attribute][modifier.ModifierOperation] += modifier.ScaledMagnitude;
+                        modifierTotals[modifier.AttributeType][modifier.ModifierOperation] += modifier.ScaledMagnitude;
                         break;
                     case ModifierOperationType.Multiply:
-                        modifierTotals[modifier.Attribute][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
+                        modifierTotals[modifier.AttributeType][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
                         break;
                     case ModifierOperationType.Divide:
-                        modifierTotals[modifier.Attribute][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
+                        modifierTotals[modifier.AttributeType][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
                         break;
                 }
             }
