@@ -11,10 +11,10 @@ namespace GAS.GameplayCues {
         public int GameplayEffectLevel = 1;
         public int AbilityLevel = 1;
 
-        public GameplayCueParameters(AbilitySystemComponent Instigator, GameObject EffectCauser, GameObject SourceObject) {
-            this.Instigator = Instigator;
-            this.EffectCauser = EffectCauser;
-            this.SourceObject = SourceObject;
+        public GameplayCueParameters(AbilitySystemComponent instigator, GameObject effectCauser, GameObject sourceObject) {
+            this.Instigator = instigator;
+            this.EffectCauser = effectCauser;
+            this.SourceObject = sourceObject;
         }
 
         /// <summary>
@@ -25,7 +25,6 @@ namespace GAS.GameplayCues {
 
         /// <summary>
         /// The actual component that caused the effect, e.g. projectile
-        /// 
         /// </summary>
         /// <value></value>
         public GameObject EffectCauser { get; }

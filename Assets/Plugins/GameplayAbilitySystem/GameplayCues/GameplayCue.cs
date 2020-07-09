@@ -5,17 +5,13 @@ namespace GAS.GameplayCues {
     [CreateAssetMenu(fileName = "GameplayCue", menuName = "Ability System/Gameplay Cue/Gameplay Cue")]
     public class GameplayCue : ScriptableObject {
 
-        [SerializeField]
-        protected BaseGameplayCueAction ExecuteAction;
+        [SerializeField] protected BaseGameplayCueAction ExecuteAction;
 
-        [SerializeField]
-        protected BaseGameplayCueAction OnActiveAction;
+        [SerializeField] protected BaseGameplayCueAction OnActiveAction;
 
-        [SerializeField]
-        protected BaseGameplayCueAction WhileActiveAction;
+        [SerializeField] protected BaseGameplayCueAction WhileActiveAction;
 
-        [SerializeField]
-        protected BaseGameplayCueAction OnRemoveAction;
+        [SerializeField] protected BaseGameplayCueAction OnRemoveAction;
 
         public void HandleGameplayCue(GameObject Target, GameplayCueParameters Parameters, EGameplayCueEvent Event) {
             switch (Event) {
@@ -41,6 +37,9 @@ namespace GAS.GameplayCues {
 
 
     public enum EGameplayCueEvent {
-        OnExecute, OnActive, WhileActive, OnRemove
+        OnExecute, 
+        OnActive, 
+        WhileActive, 
+        OnRemove
     }
 }
