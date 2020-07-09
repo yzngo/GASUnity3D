@@ -15,16 +15,17 @@ namespace GameplayAbilitySystem.Attributes
         public float BaseValue => _baseValue;
         public float CurrentValue => _currentValue;
 
-        public void SetCurrentValue(AttributeSet set, ref float value) {
-            set.PreAttributeChange(this, ref value);
-            _currentValue = value;
-            set.AttributeCurrentValueChanged.Invoke(this);
+        public void SetBaseValue(AttributeSet set, ref float value) {
+            set.PreBaseChange(this, ref value);
+            _baseValue = value;
+            set.AfterBaseChanged.Invoke(this);
         }
 
-        public void SetBaseValue(AttributeSet set, ref float value) {
-            set.PreAttributeBaseChange(this, ref value);
-            _baseValue = value;
-            set.AttributeBaseValueChanged.Invoke(this);
+        public void SetCurrentValue(AttributeSet set, ref float value) {
+            set.PreCurrentChange(this, ref value);
+            _currentValue = value;
+            set.AfterCurrentChanged.Invoke(this);
         }
+
     }
 }

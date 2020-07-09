@@ -9,32 +9,18 @@ namespace GameplayAbilitySystem.Attributes
     [RequireComponent(typeof(AbilitySystem))]
     public sealed class AttributeSet : MonoBehaviour
     {
-        [SerializeField] private AttributeChangeEvent attributeBaseValueChanged = default;
-        [SerializeField] private AttributeChangeEvent attributeCurrentValueChanged = default;
         [SerializeField] private List<Attribute> attributes = default;
-
-        public AttributeChangeEvent AttributeBaseValueChanged => attributeBaseValueChanged;
-        public AttributeChangeEvent AttributeCurrentValueChanged => attributeCurrentValueChanged;
         public List<Attribute> Attributes => attributes;
+        
+        [SerializeField] private AttributeChangeHandler preBaseChangeHandler = default;
+        [SerializeField] private AttributeChangeHandler preCurrentChangeHandler = default;
+        [SerializeField] private AttributeChangeEvent afterBaseChanged = default;
+        [SerializeField] private AttributeChangeEvent afterCurrentChanged = default;
 
-        [SerializeField] private AttributeChangeHandler preAttributeBaseChangeHandler = default;
-        public AttributeChangeHandler PreAttributeBaseChangeHandler => preAttributeBaseChangeHandler;
+        public AttributeChangeEvent AfterBaseChanged => afterBaseChanged;
+        public AttributeChangeEvent AfterCurrentChanged => afterCurrentChanged;
 
-        [SerializeField] private AttributeChangeHandler preAttributeChangeHandler = default;
-        public AttributeChangeHandler PreAttributeChangeHandler => preAttributeChangeHandler;
-
-        public void PreAttributeBaseChange(Attribute attribute, ref float newValue) {
-            if (preAttributeBaseChangeHandler != null) {
-                preAttributeBaseChangeHandler.OnAttributeChange(this, attribute, ref newValue);
-            }
-            return;
-        }
-
-        public void PreAttributeChange(Attribute attribute, ref float newValue) {
-            if (preAttributeChangeHandler != null) {
-                preAttributeChangeHandler.OnAttributeChange(this, attribute, ref newValue);
-            }
-            return;
-        }
+        public void PreBaseChange(Attribute attribute, ref float newValue) => preBaseChangeHandler?.OnAttributeChange(this, attribute, ref newValue);
+        public void PreCurrentChange(Attribute attribute, ref float newValue) => preCurrentChangeHandler?.OnAttributeChange(this, attribute, ref newValue);
     }
 }

@@ -2013,12 +2013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b4ca8122047dc4a9f205f9a7323c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attributeBaseValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  attributeCurrentValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
   attributes:
   - _attributeType: {fileID: 11400000, guid: 8769ea8817563784a87cb6142aef671b, type: 2}
     _baseValue: 100
@@ -2035,9 +2029,16 @@ MonoBehaviour:
   - _attributeType: {fileID: 11400000, guid: 9513cbcc3a089f742b9c48ae4201b1db, type: 2}
     _baseValue: 20
     _currentValue: 20
-  preAttributeBaseChangeHandler: {fileID: 0}
-  preAttributeChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
+  preBaseChangeHandler: {fileID: 11400000, guid: 50647ac471124bf4bb71e322db6b76a8,
     type: 2}
+  preCurrentChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
+    type: 2}
+  afterBaseChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  afterCurrentChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7899279095716547604
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1581,6 +1581,33 @@ PrefabInstance:
       propertyPath: Abilities.Array.data[0].AbilityTarget
       value: 
       objectReference: {fileID: 7899279095716547601}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributeBaseValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributeBaseValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributeBaseValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: preBaseChangeHandler
+      value: 
+      objectReference: {fileID: 11400000, guid: 50647ac471124bf4bb71e322db6b76a8,
+        type: 2}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: preCurrentChangeHandler
+      value: 
+      objectReference: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
+        type: 2}
     - target: {fileID: 7899279095267886754, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3836,6 +3863,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Ethan
       objectReference: {fileID: 0}
+    - target: {fileID: 5555714685437361608, guid: 87613a41b93a7d44a9290c82c0dd98c2,
+        type: 3}
+      propertyPath: preBaseChangeHandler
+      value: 
+      objectReference: {fileID: 11400000, guid: 50647ac471124bf4bb71e322db6b76a8,
+        type: 2}
+    - target: {fileID: 5555714685437361608, guid: 87613a41b93a7d44a9290c82c0dd98c2,
+        type: 3}
+      propertyPath: preCurrentChangeHandler
+      value: 
+      objectReference: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
+        type: 2}
     - target: {fileID: 5555714685437583778, guid: 87613a41b93a7d44a9290c82c0dd98c2,
         type: 3}
       propertyPath: m_LocalPosition.x
