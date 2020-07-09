@@ -25,7 +25,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
 
             // Make sure we have enough resources.  End ability if we don't
 
-            (_, var abilityEventData) = await abilitySystem.OnAbilityEvent.WaitForEvent((gameplayTag, eventData) => gameplayTag == WaitForEventTag);
+            (_, var abilityEventData) = await abilitySystem.OnGameplayEvent.WaitForEvent((gameplayTag, eventData) => gameplayTag == WaitForEventTag);
             animatorComponent.SetTrigger(AnimationTriggerName);
             animatorComponent.SetTrigger(AnimationCompleteTriggerName);
 

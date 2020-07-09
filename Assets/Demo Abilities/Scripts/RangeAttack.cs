@@ -27,7 +27,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();
 
             // Make sure we have enough resources.  End ability if we don't
-            (_, var abilityEventData) = await abilitySystem.OnAbilityEvent.WaitForEvent((abilityTag, eventData) => abilityTag == WaitForEventTag);
+            (_, var abilityEventData) = await abilitySystem.OnGameplayEvent.WaitForEvent((abilityTag, eventData) => abilityTag == WaitForEventTag);
             animatorComponent.SetTrigger(AnimationTriggerName);
 
             List<GameObject> objectsSpawned = new List<GameObject>();
