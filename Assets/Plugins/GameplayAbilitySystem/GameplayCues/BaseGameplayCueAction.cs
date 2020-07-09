@@ -5,7 +5,7 @@ namespace GAS.GameplayCues {
     /// Custom GameplayCue methods should derive from this and override the Action() method
     /// </summary>
     public abstract class BaseGameplayCueAction : ScriptableObject {
-        public virtual void Action(GameObject target, GameplayCueParameters parameters) {
+        public virtual void Action(GameObject target) {
 
         }
     }

@@ -14,14 +14,14 @@ namespace AbilitySystemDemo {
         public Vector3 Scale = Vector3.one;
         public float DestroyInSeconds = -1;
 
-        public override async void Action(UnityEngine.GameObject Target, GameplayCueParameters Parameters) {
+        public override async void Action(GameObject target) {
 
             Time.timeScale = 0.5f;
             await UniTask.DelayFrame(5);
             Time.timeScale = 1;
 
             var gameObject = Instantiate(ObjectToSpawn);
-            gameObject.transform.SetParent(Target.transform);
+            gameObject.transform.SetParent(target.transform);
             gameObject.transform.localPosition = Position;
             gameObject.transform.localRotation = Rotation;
             gameObject.transform.localScale = Scale;

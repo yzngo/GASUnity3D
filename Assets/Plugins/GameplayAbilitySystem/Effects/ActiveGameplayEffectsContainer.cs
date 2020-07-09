@@ -174,9 +174,7 @@ namespace GAS.GameplayEffects {
                 var gameplayCues = effectData.Effect.GameplayCues;
                 foreach (var cue in gameplayCues) {
                     cue.HandleGameplayCue(
-                        effectData.Target.gameObject, 
-                        new GameplayCues.GameplayCueParameters(null, null, null), 
-                        EGameplayCueEvent.OnExecute
+                        effectData.Target.gameObject, EGameplayCueEvent.OnExecute
                     );
                 }
 
@@ -228,11 +226,7 @@ namespace GAS.GameplayEffects {
             await WaitForEffectExpiryTime(effectData);
             var gameplayCues = effectData.Effect.GameplayCues;
             foreach (var cue in gameplayCues) {
-                cue.HandleGameplayCue(
-                    effectData.Target.gameObject, 
-                    new GameplayCues.GameplayCueParameters(null, null, null), 
-                    EGameplayCueEvent.OnRemove
-                );
+                cue.HandleGameplayCue(effectData.Target.gameObject, EGameplayCueEvent.OnRemove);
             }
             // There could be multiple stacked effects, due to multiple casts
             // Remove one instance of this effect from the active list

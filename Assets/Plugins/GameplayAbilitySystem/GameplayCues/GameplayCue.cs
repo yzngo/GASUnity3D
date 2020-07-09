@@ -5,31 +5,31 @@ namespace GAS.GameplayCues {
     [CreateAssetMenu(fileName = "GameplayCue", menuName = "Ability System/Gameplay Cue/Gameplay Cue")]
     public class GameplayCue : ScriptableObject {
 
-        [SerializeField] protected BaseGameplayCueAction ExecuteAction;
+        [SerializeField] private BaseGameplayCueAction ExecuteAction;
 
-        [SerializeField] protected BaseGameplayCueAction OnActiveAction;
+        [SerializeField] private BaseGameplayCueAction OnActiveAction;
 
-        [SerializeField] protected BaseGameplayCueAction WhileActiveAction;
+        [SerializeField] private BaseGameplayCueAction WhileActiveAction;
 
-        [SerializeField] protected BaseGameplayCueAction OnRemoveAction;
+        [SerializeField] private BaseGameplayCueAction OnRemoveAction;
 
-        public void HandleGameplayCue(GameObject Target, GameplayCueParameters Parameters, EGameplayCueEvent Event) {
+        public void HandleGameplayCue(GameObject Target, EGameplayCueEvent Event) {
             switch (Event) {
                 case EGameplayCueEvent.OnExecute:
                     if (ExecuteAction == null) break;
-                    ExecuteAction.Action(Target, Parameters);
+                    ExecuteAction.Action(Target);
                     break;
                 case EGameplayCueEvent.OnActive:
                     if (OnActiveAction == null) break;
-                    OnActiveAction.Action(Target, Parameters);
+                    OnActiveAction.Action(Target);
                     break;
                 case EGameplayCueEvent.WhileActive:
                     if (WhileActiveAction == null) break;
-                    WhileActiveAction.Action(Target, Parameters);
+                    WhileActiveAction.Action(Target);
                     break;
                 case EGameplayCueEvent.OnRemove:
                     if (OnRemoveAction == null) break;
-                    OnRemoveAction.Action(Target, Parameters);
+                    OnRemoveAction.Action(Target);
                     break;
             }
         }
