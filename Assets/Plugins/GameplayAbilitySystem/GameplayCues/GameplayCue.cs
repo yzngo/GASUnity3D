@@ -4,7 +4,7 @@ using UnityEngine;
 namespace AbilitySystem.Cues 
 {
     [CreateAssetMenu(fileName = "GameplayCue", menuName = "Ability System/Gameplay Cue/Gameplay Cue")]
-    public class GameplayCue : ScriptableObject 
+    public sealed class GameplayCue : ScriptableObject 
     {
         [SerializeField] private BaseCueAction ExecuteAction = default;
         [SerializeField] private BaseCueAction OnActiveAction = default;
@@ -39,9 +39,9 @@ namespace AbilitySystem.Cues
     /// WhileActive/OnActive/OnRemove is called for Duration effects
     public enum CueEventMoment 
     {
-        OnActive, // Called when Cue is first activated
-        OnExecute,  // Called when a Cue is executed (e.g. instant/periodic/tick)
-        WhileActive, // Called *while* Cue is active
-        OnRemove    // Called when a Cue is removed
+        OnActive,       // Called when Cue is first activated
+        OnExecute,      // Called when a Cue is executed (e.g. instant/periodic/tick)
+        WhileActive,    // Called *while* Cue is active
+        OnRemove        // Called when a Cue is removed
     }
 }
