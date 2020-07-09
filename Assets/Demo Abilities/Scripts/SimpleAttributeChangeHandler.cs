@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace AbilitySystemDemo.Attributes {
     [CreateAssetMenu(fileName = "Simple Attribute Change Handler", menuName = "Ability System Demo/Attributes/Simple Attribute Change Handler")]
-    public class SimpleAttributeChangeHandler : BaseAttributeChangeHandler {
+    public class SimpleAttributeChangeHandler : AttributeChangeHandler {
         public AttributeType MaxHealth;
         public AttributeType Health;
         public AttributeType MaxMana;
         public AttributeType Mana;
 
-        public override void OnAttributeChange(IAttributeSet AttributeSet, Attribute Attribute, ref float Value) {
+        public override void OnAttributeChange(AttributeSet AttributeSet, Attribute Attribute, ref float Value) {
             if (Attribute.AttributeType == Health) {
                 HandleHealthChange(ref Value, AttributeSet.Attributes.First(x => x.AttributeType == MaxHealth).CurrentValue);
             } else if (Attribute.AttributeType == Mana) {

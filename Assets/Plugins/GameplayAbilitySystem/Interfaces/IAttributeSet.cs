@@ -64,17 +64,17 @@ namespace GameplayAbilitySystem.Interfaces {
         /// <summary>
         /// Gets the <see cref="AbilitySystem"/> that owns this Attribute Set
         /// </summary>
-        /// <returns>Ability System Component which owns this <see cref="IAttributeSet"/></returns>
+        /// <returns>Ability System Component which owns this <see cref="AttributeSet"/></returns>
         AbilitySystem GetOwningAbilitySystem();
 
         /// <summary>
-        /// List of <see cref="Attribute"/> that belong to this <see cref="IAttributeSet"/>
+        /// List of <see cref="Attribute"/> that belong to this <see cref="AttributeSet"/>
         /// </summary>
         /// <value>List of <see cref="Attribute"/> </value>
-        List<Attribute> Attributes { get; set; }
+        List<Attribute> Attributes { get;  }
 
-        BaseAttributeChangeHandler PreAttributeBaseChangeHandler { get; }
-        BaseAttributeChangeHandler PreAttributeChangeHandler { get; }
+        AttributeChangeHandler PreAttributeBaseChangeHandler { get; }
+        AttributeChangeHandler PreAttributeChangeHandler { get; }
 
 
     }

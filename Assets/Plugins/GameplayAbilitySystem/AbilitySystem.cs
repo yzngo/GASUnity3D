@@ -13,7 +13,7 @@ namespace GameplayAbilitySystem {
 
     /// The AbilitySytem is the primary component of the GAS. Every game object 
     /// that needs to participate with the GAS needs to have this component attached.
-    [AddComponentMenu("Gameplay Ability System/Ability System")]
+    [AddComponentMenu("Ability System/Ability System")]
     public class AbilitySystem : MonoBehaviour {
 
         // 自己身上作为目标的点
