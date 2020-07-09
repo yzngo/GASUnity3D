@@ -32,7 +32,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
             if (ExecuteEffectEvent != null) {
                 await animationEventSystemComponent.CustomAnimationEvent.WaitForEvent((x) => x == ExecuteEffectEvent);
             }
-            _ = abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, abilityEventData.Target);
+            abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, abilityEventData.Target);
 
 
             var beh = animatorComponent.GetBehaviour<AnimationBehaviourEventSystem>();

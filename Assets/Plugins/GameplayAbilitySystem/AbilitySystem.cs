@@ -93,7 +93,7 @@ namespace GameplayAbilitySystem {
         // some with instant modifiers, and some with infinite or duration modifiers.
         // By batching these effects, we can ensure that all these effect happen 
         // with reference to the same base attribute value.
-        public async void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystem Target, float Level)> batchedGameplayEffects) {
+        public void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystem Target, float Level)> batchedGameplayEffects) {
 
             var instantEffects = batchedGameplayEffects.Where(x => x.Effect.Policy.DurationPolicy == DurationPolicy.Instant);
             var durationalEffects = batchedGameplayEffects.Where(
@@ -103,12 +103,11 @@ namespace GameplayAbilitySystem {
                     );
             // Apply instant effects
             foreach (var item in instantEffects) {
-                await ApplyEffectToTarget(item.Effect, item.Target);
+                ApplyEffectToTarget(item.Effect, item.Target);
             }
             // Apply durational effects
             foreach (var effect in durationalEffects) {
-                if (await ApplyEffectToTarget(effect.Effect, effect.Target)) {
-                }
+                ApplyEffectToTarget(effect.Effect, effect.Target);
             }
         }
         
@@ -116,31 +115,29 @@ namespace GameplayAbilitySystem {
         // Apply a effect to the target
         // The overall effect may be modulated by the Level.
         // level -> maybe used to affect the "strength" of the effect
-        public Task<GameplayEffect> ApplyEffectToTarget(GameplayEffect appliedEffect, AbilitySystem target, float level = 0) {
+        public void ApplyEffectToTarget(GameplayEffect appliedEffect, AbilitySystem target, float level = 0) {
             // Check to make sure all the attributes being modified by this effect exist on the target
             foreach(var modifiers in appliedEffect.Policy.Modifiers) {
                 if (!target.IsAttributeExist(modifiers.AttributeType)) {
-                    return null;
+                    return ;
                 }
             }
             // TODO: Get list of tags owned by target
             // TODO: Check for immunity tags, and don't apply effect if target is immune (and also add Immunity Tags container to IGameplayEffect)
             // TODO: Check to make sure Application Tag Requirements are met (i.e. target has all the required tags, and does not contain any prohibited tags )
             if (!appliedEffect.ApplicationTagRequirementMet(target)) {
-                return null;
+                return ;
             }
-            // If this is a non-instant gameplay effect (i.e. it will modify the current value, not the base value)
 
-            // If this is an instant gameplay effect (i.e. it will modify the base value)
-
-            // Handling Instant effects is different to handling HasDuration and Infinite effects
+            // Handling Instant effects is different to handling HasDuration and Infinite effects, instant effect modify the base value
             if (appliedEffect.Policy.DurationPolicy == DurationPolicy.Instant) {
                 appliedEffect.ApplyInstantEffect(target);
             } else {
-                // Durational effects require attention to many more things than instant effects
+                // Durational effect require attention to many more things than instant effects
                 // Such as stacking and effect durations
+                // Durational effect modify the current value
                 var effectData = new ActivedEffectData(appliedEffect, this, target);
-                target.ActiveEffectsContainer.ApplySustainedEffect(effectData);
+                target.ActiveEffectsContainer.ApplyDurationalEffect(effectData);
             }
 
             // Remove all effects which have tags defined as "Be Removed Effects Tags". 
@@ -159,20 +156,19 @@ namespace GameplayAbilitySystem {
                 if (!stacks.ContainsKey(effect)) {
                     stacks.Add(effect, 0);
                 }
-                int stackValue = stacks[effect];
-                if (beRemovedEffect.StacksToRemove == 0 || stackValue < beRemovedEffect.StacksToRemove) {
+
+                if (beRemovedEffect.StacksToRemove == 0 || stacks[effect] < beRemovedEffect.StacksToRemove) {
                     beRemovedEffect.EffectData.ForceEndEffect();
                 }
                 stacks[effect]++;
             }
 
-            var gameplayCues = appliedEffect.GameplayCues;
             // Execute gameplay cue
+            var gameplayCues = appliedEffect.GameplayCues;
             for (var i = 0; i < gameplayCues.Count; i++) {
                 var cue = gameplayCues[i];
                 cue.HandleCue(target, CueEventMomentType.OnActive);
             }
-            return Task.FromResult(appliedEffect);
         }
 
         public IEnumerable<(GameplayTag Tag, ActivedEffectData GrantingEffect)> GetActiveEffectsTags()

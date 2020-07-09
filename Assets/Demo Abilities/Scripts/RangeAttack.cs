@@ -61,7 +61,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
 
         private async void SeekTargetAndDestroy(AbilitySystem abilitySystem, AbilitySystem target, GameObject projectile) {
             await projectile.GetComponent<Projectile>().SeekTarget(target.TargetPoint, target.gameObject);
-            _ = abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, target);
+            abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, target);
             DestroyImmediate(projectile);
         }
 

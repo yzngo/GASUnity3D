@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayEffectPolicy:
     durationPolicy: 1
-    durationMagnitude: 20
+    durationMagnitude: 30
     modifiers: []
   gameplayEffectTags:
     effectTags:
@@ -38,7 +38,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74a66fb2dcac9bd499073ecdc7d3cdd1, type: 2}
   stackingPolicy:
     StackingType: 1
-    StackLimit: 5
+    StackLimit: 8
     StackDurationRefreshPolicy: 0
     StackPeriodResetPolicy: 0
     StackExpirationPolicy: 1

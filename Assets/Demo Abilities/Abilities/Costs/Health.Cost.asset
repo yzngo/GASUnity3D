@@ -19,7 +19,7 @@ MonoBehaviour:
     - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
       modifierOperationType: 0
       magnitudeCalculationType: 0
-      scaledMagnitude: -15
+      scaledMagnitude: -4
       sourceTags:
         RequireTags: []
         IgnoreTags: []
@@ -29,7 +29,7 @@ MonoBehaviour:
     - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
       modifierOperationType: 1
       magnitudeCalculationType: 0
-      scaledMagnitude: 0.85
+      scaledMagnitude: 0.99
       sourceTags:
         RequireTags: []
         IgnoreTags: []
