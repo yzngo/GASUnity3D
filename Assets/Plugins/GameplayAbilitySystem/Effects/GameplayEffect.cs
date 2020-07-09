@@ -27,19 +27,17 @@ namespace GameplayAbilitySystem.Effects {
         public StackingPolicy StackingPolicy => stackingPolicy;
         public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedToASCTags.Added;
 
-        public bool IsTagsRequiredMatch(AbilitySystem abilitySystem) {
+        public bool IsTagsRequiredMatch(AbilitySystem target) {
             var requiredTagsPresent = true;
             var ignoredTagsAbsent = true;
 
             if (EffectTags.ApplyRequiredTags.RequirePresence.Count > 0) {
-                requiredTagsPresent = abilitySystem.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequirePresence.Contains(x));
+                requiredTagsPresent = target.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequirePresence.Contains(x));
             }
 
             if (EffectTags.ApplyRequiredTags.RequireAbsence.Count > 0) {
-                ignoredTagsAbsent = !abilitySystem.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequireAbsence.Contains(x));
+                ignoredTagsAbsent = !target.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequireAbsence.Contains(x));
             }
-
-
             return requiredTagsPresent && ignoredTagsAbsent;
         }
 
@@ -115,14 +113,13 @@ namespace GameplayAbilitySystem.Effects {
                     division = 1;
                 }
 
-                var oldValue = 0f;
+                float oldValue = 0f;
                 if (!operateOnCurrentValue) {
                     oldValue = target.GetBaseValue(changeByType.Key);
                 } else {
                     oldValue = target.GetCurrentValue(changeByType.Key);
                 }
-
-                var newValue = (oldValue + addition) * (multiplication / division);
+                float newValue = (oldValue + addition) * (multiplication / division);
 
                 if (!totalAttributeChange.TryGetValue(changeByType.Key, out ModifyArrtibuteValues values)) {
                     values = new ModifyArrtibuteValues();
