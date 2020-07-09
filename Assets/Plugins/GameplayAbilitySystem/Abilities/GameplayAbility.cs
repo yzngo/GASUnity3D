@@ -12,7 +12,7 @@ namespace AbilitySystem.Abilities {
     public class GameplayAbility : ScriptableObject, IGameplayAbility {
 
         [SerializeField] private GameplayAbilityTags _tags = new GameplayAbilityTags();
-        [SerializeField] private GameplayCost _gameplayCost = new GameplayCost();
+        [SerializeField] private GameplayEffect cost = default;
         [SerializeField] private List<GameplayEffect> _cooldownsToApply = new List<GameplayEffect>();
         // [SerializeField] private List<GameplayEffect> _effectsToApplyOnExecution = new List<GameplayEffect>();
         // [SerializeField] private GenericAbilityEvent _onGameplayAbilityCommitted = new GenericAbilityEvent();
@@ -21,7 +21,7 @@ namespace AbilitySystem.Abilities {
         [SerializeField] private AbstractAbilityActivation _abilityLogic = null;
 
         public GameplayAbilityTags Tags => _tags;
-        public GameplayCost Cost => _gameplayCost;
+        public GameplayEffect Cost => cost;
         public List<GameplayEffect> Cooldowns => _cooldownsToApply;
         /// Defines what the ability actually does
         public AbstractAbilityActivation AbilityLogic => _abilityLogic;
@@ -124,8 +124,8 @@ namespace AbilitySystem.Abilities {
         // Checks to see if the target GAS has the required cost resource to cast the ability
         private bool CheckCost(AbilitySystemComponent ASC) {
             // Check the modifiers on the ability cost GameEffect
-            var modifiers = Cost.CostGameplayEffect.CalculateModifierEffect();
-            var attributeModification = Cost.CostGameplayEffect.CalculateAttributeModification(
+            var modifiers = Cost.CalculateModifierEffect();
+            var attributeModification = Cost.CalculateAttributeModification(
                     ASC, modifiers, operateOnCurrentValue: true);
 
             foreach (var attribute in attributeModification) {
@@ -139,9 +139,9 @@ namespace AbilitySystem.Abilities {
         /// If player doesn't have the required resource, the resource goes to negative (or clamps to 0)
         /// </summary>
         private void ApplyCost(AbilitySystemComponent ASC) {
-            var modifiers = Cost.CostGameplayEffect.CalculateModifierEffect();
-            var attributeModification = Cost.CostGameplayEffect.CalculateAttributeModification(ASC, modifiers);
-            Cost.CostGameplayEffect.ApplyInstantEffect(ASC);
+            var modifiers = Cost.CalculateModifierEffect();
+            var attributeModification = Cost.CalculateAttributeModification(ASC, modifiers);
+            Cost.ApplyInstantEffect(ASC);
         }
 
         // Checks to see if the GAS is off cooldown

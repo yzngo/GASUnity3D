@@ -23,7 +23,7 @@ namespace AbilitySystem.Interfaces {
         /// Cost of using this ability
         /// </summary>
         /// <value></value>
-        GameplayCost Cost { get; }
+        GameplayEffect Cost { get; }
 
         /// <summary>
         /// Cooldowns associated with this ability
