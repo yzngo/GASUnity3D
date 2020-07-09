@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
     // Effect的策略集合
     // - 时长 (立即生效, 区间+magnitude, 无穷)
     // - 修改器

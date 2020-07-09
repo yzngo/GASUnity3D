@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
     [Serializable]
     public class GameplayEffectRequireIgnoreTagContainer : GameplayEffectTagContainer, IRequireIgnoreTags {
         [SerializeField]

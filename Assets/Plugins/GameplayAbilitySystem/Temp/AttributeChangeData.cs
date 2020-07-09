@@ -1,4 +1,4 @@
-using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Effects;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using GameplayAbilitySystem.Attributes;

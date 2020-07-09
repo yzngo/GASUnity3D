@@ -4,7 +4,7 @@ using System.Linq;
 using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
     [Serializable]
     public class GameplayEffectAddRemoveStacksTagContainer : GameplayEffectTagContainer {
         [SerializeField]

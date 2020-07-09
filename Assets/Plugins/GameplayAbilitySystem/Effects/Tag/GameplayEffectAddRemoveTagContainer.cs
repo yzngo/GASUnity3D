@@ -5,7 +5,7 @@ using GameplayAbilitySystem;
 using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
 
     [Serializable]
     public class GameplayEffectAddRemoveTagContainer : GameplayEffectTagContainer, IAddedRemovedTags {

@@ -1,6 +1,6 @@
 using System;
 using GameplayAbilitySystem.Interfaces;
-using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Effects;
 using UnityEngine;
 
 namespace GameplayAbilitySystem {

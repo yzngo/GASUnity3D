@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using GameplayAbilitySystem.Interfaces;
-using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using GameplayAbilitySystem.Abilities.AbilityActivations;
 using System.Linq;

@@ -1,5 +1,5 @@
 using GameplayAbilitySystem.Attributes;
-using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Effects;
 
 namespace GameplayAbilitySystem.Interfaces {
 

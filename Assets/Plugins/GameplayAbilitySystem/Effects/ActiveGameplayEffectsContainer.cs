@@ -1,25 +1,20 @@
-using System.Threading;
-using System.Xml.Linq;
 using System.Linq;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Interfaces;
 using GameplayAbilitySystem.Attributes;
 using System;
-using UnityEngine.Events;
 using UniRx.Async;
 using System.Threading.Tasks;
-using UnityEngine;
 using GameplayAbilitySystem.Cues;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
 
     // 所有激活的effect的容器
     [Serializable]
-    public class ActiveGameplayEffectsContainer {
+    public class ActiveEffectsContainer {
 
         // 拥有此effect的ASC
         private AbilitySystem abilitySystem;
-        public ActiveGameplayEffectsContainer(AbilitySystem abilitySystem) {
+        public ActiveEffectsContainer(AbilitySystem abilitySystem) {
             this.abilitySystem = abilitySystem;
         }
 

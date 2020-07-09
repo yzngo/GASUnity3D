@@ -7,7 +7,7 @@ using GameplayAbilitySystem.Attributes;
 using UnityEngine;
 using GameplayAbilitySystem.Cues;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
 
     // 改变自己或别人的Attributes 和GameplayTags的途径
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]

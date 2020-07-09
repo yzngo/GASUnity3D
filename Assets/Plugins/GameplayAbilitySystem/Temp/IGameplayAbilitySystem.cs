@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using GameplayAbilitySystem.Abilities;
 using GameplayAbilitySystem.Attributes;
-using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Threading.Tasks;

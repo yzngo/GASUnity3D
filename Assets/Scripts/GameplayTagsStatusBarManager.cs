@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Effects;
 using GameplayAbilitySystem;
 
 public class GameplayTagsStatusBarManager : MonoBehaviour {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameplayAbilitySystem.Abilities;
-using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using GameplayAbilitySystem.Attributes;
 using GameplayAbilitySystem.Cues;
@@ -28,8 +28,8 @@ namespace GameplayAbilitySystem {
         private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
 
         // Lists all active Effect
-        private ActiveGameplayEffectsContainer activeEffectsContainer;
-        public ActiveGameplayEffectsContainer ActiveEffectsContainer => activeEffectsContainer;
+        private ActiveEffectsContainer activeEffectsContainer;
+        public ActiveEffectsContainer ActiveEffectsContainer => activeEffectsContainer;
 
         private Animator animator;
         public Animator Animator => animator;
@@ -46,7 +46,7 @@ namespace GameplayAbilitySystem {
         private IEnumerable<GameplayTag> AbilityGrantedTags => runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
 
         public void Awake() {
-            activeEffectsContainer = new ActiveGameplayEffectsContainer(this);
+            activeEffectsContainer = new ActiveEffectsContainer(this);
             animator = GetComponent<Animator>();
             attributeSet = GetComponent<AttributeSet>();
         }

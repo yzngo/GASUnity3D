@@ -1,6 +1,6 @@
 using System;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
     [Serializable]
     public class StackingPolicy {
         public StackingType StackingType;

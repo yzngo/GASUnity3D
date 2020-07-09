@@ -4,7 +4,7 @@ using GameplayAbilitySystem.Interfaces;
 using System.Collections.Generic;
 using GameplayAbilitySystem.Attributes;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
 
     /// 激活的某个游戏效果的数据集, 用于跟踪活动中的effect
     [Serializable]

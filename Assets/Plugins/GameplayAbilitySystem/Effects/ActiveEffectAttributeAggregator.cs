@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GameplayAbilitySystem.Attributes;
 using UniRx.Async;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
 
     // 激活的effect的属性聚合器
     // This is used to keep track of all the "temporary" attribute modifiers,

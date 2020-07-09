@@ -2,7 +2,7 @@ using System;
 using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
 
     [Serializable]
     public class GameplayEffectTags : IGameplayEffectTags {

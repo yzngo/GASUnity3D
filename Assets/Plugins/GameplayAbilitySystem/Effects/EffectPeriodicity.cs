@@ -1,6 +1,6 @@
 using System;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
 
     // 周期性的effect的配置项
     // 例如DOT(damage over time)类型的effect可以应用period

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameplayAbilitySystem.ExtensionMethods;
-using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Effects;
 using GameplayAbilitySystem.Interfaces;
 using UniRx.Async;
 using UnityEngine;

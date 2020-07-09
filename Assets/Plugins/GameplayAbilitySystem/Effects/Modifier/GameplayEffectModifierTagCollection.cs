@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using GameplayAbilitySystem;
 using GameplayAbilitySystem.Attributes;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
 
     /// <summary>
     /// Defines tags that must be present/must not be present on a <see cref="AbilitySystem"/>

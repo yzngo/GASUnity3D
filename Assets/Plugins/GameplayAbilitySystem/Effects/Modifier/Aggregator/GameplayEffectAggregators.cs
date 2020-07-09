@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using GameplayAbilitySystem.Attributes;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
     
     // 某个属性的聚合器 (HP的聚合器, MP的聚合器, etc.)
     public class Aggregator {

@@ -3,7 +3,7 @@ using GameplayAbilitySystem.Attributes;
 using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.Effects {
     /// <inheritdoc />
     [Serializable]
     public class GameplayEffectModifier : IGameplayEffectModifier {

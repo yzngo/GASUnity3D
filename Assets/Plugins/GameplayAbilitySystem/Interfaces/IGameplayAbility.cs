@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using GameplayAbilitySystem;
 using GameplayAbilitySystem.Abilities.AbilityActivations;
 using GameplayAbilitySystem.Abilities;
-using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using UnityEngine.Events;
 
