@@ -35,11 +35,14 @@ namespace GAS.GameplayCues {
         }
     }
 
-
+    /// ?????
+    /// <para>WhileActive/OnActive is called for Infinite effects</para>
+    /// <para>Executed is called for Instant effects/on each tick</para>
+    /// <para>WhileActive/OnActive/Removed is called for Duration effects</para>
     public enum EGameplayCueEvent {
-        OnExecute, 
-        OnActive, 
-        WhileActive, 
-        OnRemove
+        OnExecute,  // Called when a GameplayCue is executed (e.g. instant/periodic/tick)
+        OnActive, // Called when GameplayCue is first activated
+        WhileActive, // Called *while* GameplayCue is active
+        OnRemove    // Called when a GameplayCue is removed
     }
 }
