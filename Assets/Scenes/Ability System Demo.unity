@@ -1578,9 +1578,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7899279095267793605, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
-      propertyPath: Abilities.Array.data[0].AbilityTarget
+      propertyPath: Abilities.Array.data[0].target
       value: 
       objectReference: {fileID: 7899279095716547601}
+    - target: {fileID: 7899279095267793605, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: Abilities.Array.data[1].target
+      value: 
+      objectReference: {fileID: 7899279095716547601}
+    - target: {fileID: 7899279095267793605, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: Abilities.Array.data[2].target
+      value: 
+      objectReference: {fileID: 7899279095716547601}
+    - target: {fileID: 7899279095267793605, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: Abilities.Array.data[0].ability
+      value: 
+      objectReference: {fileID: 11400000, guid: ae33e3a3cccb84e4fb4bfb4c2d5c089e,
+        type: 2}
+    - target: {fileID: 7899279095267793605, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: Abilities.Array.data[1].ability
+      value: 
+      objectReference: {fileID: 11400000, guid: 2583a21c4bcf5a240a37b1568534e68f,
+        type: 2}
     - target: {fileID: 7899279095267886754, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -12,7 +12,6 @@ namespace GameplayAbilitySystem.Effects {
     [Serializable]
     public class ActiveEffectsContainer {
 
-        // 拥有此effect的ASC
         private AbilitySystem abilitySystem;
         public ActiveEffectsContainer(AbilitySystem abilitySystem) {
             this.abilitySystem = abilitySystem;

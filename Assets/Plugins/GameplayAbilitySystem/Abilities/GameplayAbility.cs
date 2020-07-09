@@ -101,11 +101,12 @@ namespace GameplayAbilitySystem.Abilities
             }
         }
 
-        public (float CooldownElapsed, float CooldownTotal) CalculateCooldown(AbilitySystem abilitySystem) {
-            List<GameplayTag> cooldownTags = Tags.CooldownTags.Added;
+        public CoolDownInfo CalculateCooldown(AbilitySystem abilitySystem) {
 
+            CoolDownInfo info = new CoolDownInfo();
+            List<GameplayTag> cooldownTags = Tags.CooldownTags.Added;
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
-            ActiveGameplayEffectData dominantCooldownEffect = abilitySystem.ActiveEffectsContainer
+            ActiveGameplayEffectData maxCooldownEffect = abilitySystem.ActiveEffectsContainer
                                     .ActiveEffectAttributeAggregator
                                     .GetAllActiveEffects()
                                     .Where(x => x.Effect.GrantedTags.Intersect(cooldownTags).Any())
@@ -113,10 +114,12 @@ namespace GameplayAbilitySystem.Abilities
                                     .OrderByDescending(x => x?.CooldownTimeRemaining)
                                     .FirstOrDefault();
 
-            if (dominantCooldownEffect == null) {
-                return (0f, 0f);
+            if (maxCooldownEffect == null) {
+                return info;
             }
-            return (dominantCooldownEffect.CooldownTimeElapsed, dominantCooldownEffect.CooldownTimeTotal);
+            info.elapsed = maxCooldownEffect.CooldownTimeElapsed;
+            info.total = maxCooldownEffect.CooldownTimeTotal;
+            return info;
         }
 
         // Checks to see if the target GAS has the required cost resource to cast the ability
@@ -144,8 +147,9 @@ namespace GameplayAbilitySystem.Abilities
 
         // Checks to see if the GAS is off cooldown
         private bool AbilityOffCooldown(AbilitySystem abilitySystem) {
-            (var elapsed, var total) = CalculateCooldown(abilitySystem);
-            return total == 0f;
+            CoolDownInfo info = CalculateCooldown(abilitySystem);
+            // (var elapsed, var total) = CalculateCooldown(abilitySystem);
+            return info.total == 0f;
         }
     }
 }

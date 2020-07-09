@@ -87,6 +87,6 @@ namespace GameplayAbilitySystem.Interfaces {
         /// <returns></returns>
         bool CommitAbility(AbilitySystem abilitySystem);
 
-        (float CooldownElapsed, float CooldownTotal) CalculateCooldown(AbilitySystem abilitySystem);
+        CoolDownInfo CalculateCooldown(AbilitySystem abilitySystem);
     }
 }

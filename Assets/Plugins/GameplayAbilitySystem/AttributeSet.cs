@@ -13,8 +13,8 @@ namespace GameplayAbilitySystem.Attributes
 
         [SerializeField] private AttributeChangeHandler preBaseChangeHandler = default;
         [SerializeField] private AttributeChangeHandler preCurrentChangeHandler = default;
-        [SerializeField] private AttributeChangeEvent afterBaseChanged = default;
-        [SerializeField] private AttributeChangeEvent afterCurrentChanged = default;
+        private AttributeChangeEvent afterBaseChanged = new AttributeChangeEvent();
+        private AttributeChangeEvent afterCurrentChanged = new AttributeChangeEvent();
 
         public AttributeChangeEvent AfterBaseChanged => afterBaseChanged;
         public AttributeChangeEvent AfterCurrentChanged => afterCurrentChanged;

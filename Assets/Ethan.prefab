@@ -2171,12 +2171,6 @@ MonoBehaviour:
     type: 2}
   preCurrentChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
     type: 2}
-  afterBaseChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  afterCurrentChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &7899279095267793607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2251,12 +2245,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Abilities:
-  - Ability: {fileID: 11400000, guid: ae33e3a3cccb84e4fb4bfb4c2d5c089e, type: 2}
-    AbilityTarget: {fileID: 0}
-  - Ability: {fileID: 11400000, guid: 2583a21c4bcf5a240a37b1568534e68f, type: 2}
-    AbilityTarget: {fileID: 7899279095267793603}
-  - Ability: {fileID: 11400000, guid: 2ad2b404d2dbabc42ad72e779397634f, type: 2}
-    AbilityTarget: {fileID: 7899279095267793603}
+  - ability: {fileID: 11400000, guid: ae33e3a3cccb84e4fb4bfb4c2d5c089e, type: 2}
+    target: {fileID: 0}
+  - ability: {fileID: 11400000, guid: 2583a21c4bcf5a240a37b1568534e68f, type: 2}
+    target: {fileID: 0}
+  - ability: {fileID: 11400000, guid: 2ad2b404d2dbabc42ad72e779397634f, type: 2}
+    target: {fileID: 0}
 --- !u!114 &995664942
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,16 +10,18 @@ public class GameplayTagsStatusBarManager : MonoBehaviour {
     public List<GameplayTagIconMap> GameplayTagIcons;
 
     private Dictionary<GameplayTag, GameplayTagIconMap> availableTagsToShow;
+    private AbilitySystem abilitySystem;
 
     public GameplayTagsStatusBarManager() {
     }
 
     void Awake() {
         this.availableTagsToShow = GameplayTagIcons.ToDictionary(x => x.Tag);
+        abilitySystem = AbilityCharacter.GetComponent<AbilitySystem>();
     }
 
     List<(GameplayTag Tag, ActiveGameplayEffectData EffectData, int stacks)> GetTagsToShow() {
-        var activeTags = AbilityCharacter.AbilitySystem.GetActiveEffectsTags();
+        var activeTags = abilitySystem.GetActiveEffectsTags();
         var effectsToShow = activeTags
                             .Where(x => availableTagsToShow
                                                     .ContainsKey(x.Tag))
