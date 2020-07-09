@@ -116,9 +116,9 @@ namespace GameplayAbilitySystem {
         // Apply a effect to the target
         // The overall effect may be modulated by the Level.
         // level -> maybe used to affect the "strength" of the effect
-        public Task<GameplayEffect> ApplyEffectToTarget(GameplayEffect effect, AbilitySystem target, float level = 0) {
+        public Task<GameplayEffect> ApplyEffectToTarget(GameplayEffect appliedEffect, AbilitySystem target, float level = 0) {
             // Check to make sure all the attributes being modified by this effect exist on the target
-            foreach(var modifiers in effect.Policy.Modifiers) {
+            foreach(var modifiers in appliedEffect.Policy.Modifiers) {
                 if (!target.IsAttributeExist(modifiers.AttributeType)) {
                     return null;
                 }
@@ -126,7 +126,7 @@ namespace GameplayAbilitySystem {
             // TODO: Get list of tags owned by target
             // TODO: Check for immunity tags, and don't apply effect if target is immune (and also add Immunity Tags container to IGameplayEffect)
             // TODO: Check to make sure Application Tag Requirements are met (i.e. target has all the required tags, and does not contain any prohibited tags )
-            if (!effect.ApplicationTagRequirementMet(target)) {
+            if (!appliedEffect.ApplicationTagRequirementMet(target)) {
                 return null;
             }
             // If this is a non-instant gameplay effect (i.e. it will modify the current value, not the base value)
@@ -134,44 +134,48 @@ namespace GameplayAbilitySystem {
             // If this is an instant gameplay effect (i.e. it will modify the base value)
 
             // Handling Instant effects is different to handling HasDuration and Infinite effects
-            if (effect.Policy.DurationPolicy == DurationPolicy.Instant) {
-                effect.ApplyInstantEffect(target);
+            if (appliedEffect.Policy.DurationPolicy == DurationPolicy.Instant) {
+                appliedEffect.ApplyInstantEffect(target);
             } else {
                 // Durational effects require attention to many more things than instant effects
                 // Such as stacking and effect durations
-                var effectData = new ActivedEffectData(effect, this, target);
+                var effectData = new ActivedEffectData(appliedEffect, this, target);
                 target.ActiveEffectsContainer.ApplySustainedEffect(effectData);
             }
 
             // Remove all effects which have tags defined as "Be Removed Effects Tags". 
             // We do this by setting the expiry time on the effect to make it end prematurely
             // This is accomplished by finding all effects which grant these tags, and then adjusting start time
-            var tagsToRemove = effect.EffectTags.BeRemovedEffectsTags.Added;
-            var activeEffects = target.GetActiveEffectsTags()
+            var tagsToRemove = appliedEffect.EffectTags.BeRemovedEffectsTags.Added;
+            var beRemovedEffects = target.GetActiveEffectsTags()
                                     .Where(x => tagsToRemove.Any(y => x.Tag == y.Tag))
                                     .Join(tagsToRemove, x => x.Tag, x => x.Tag, (x, y) => new { Tag = x.Tag, EffectData = x.GrantingEffect, StacksToRemove = y.StacksToRemove })
                                     .OrderBy(x => x.EffectData.CooldownTimeRemaining);
 
             Dictionary<GameplayEffect, int> stacks = new Dictionary<GameplayEffect, int>();
 
-            foreach (var removedEffect in activeEffects) {
-                if (!stacks.ContainsKey(removedEffect.EffectData.Effect)) {
-                    stacks.Add(removedEffect.EffectData.Effect, 0);
+            Debug.Log("---------------------------------------------------------------");
+            foreach (var beRemovedEffect in beRemovedEffects) {
+                Debug.Log(beRemovedEffect.Tag.name);
+                var effect = beRemovedEffect.EffectData.Effect;
+                if (!stacks.ContainsKey(effect)) {
+                    stacks.Add(effect, 0);
                 }
-                int stackValue = stacks[removedEffect.EffectData.Effect];
-                if (removedEffect.StacksToRemove == 0 || stackValue < removedEffect.StacksToRemove) {
-                    removedEffect.EffectData.ForceEndEffect();
+                int stackValue = stacks[effect];
+                if (beRemovedEffect.StacksToRemove == 0 || stackValue < beRemovedEffect.StacksToRemove) {
+                    beRemovedEffect.EffectData.ForceEndEffect();
                 }
-                stacks[removedEffect.EffectData.Effect]++;
+                stacks[effect]++;
             }
+            Debug.Log("---------------------------------------------------------------");
 
-            var gameplayCues = effect.GameplayCues;
+            var gameplayCues = appliedEffect.GameplayCues;
             // Execute gameplay cue
             for (var i = 0; i < gameplayCues.Count; i++) {
                 var cue = gameplayCues[i];
                 cue.HandleCue(target, CueEventMomentType.OnActive);
             }
-            return Task.FromResult(effect);
+            return Task.FromResult(appliedEffect);
         }
 
         public IEnumerable<(GameplayTag Tag, ActivedEffectData GrantingEffect)> GetActiveEffectsTags()
