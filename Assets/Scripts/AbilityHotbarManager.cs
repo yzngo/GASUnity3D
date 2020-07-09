@@ -24,7 +24,7 @@ public class AbilityHotbarManager : MonoBehaviour {
     void Update() {
         for (int i = 0; i < AbilityButtons.Count; i++) {
             var button = AbilityButtons[i];
-            CoolDownInfo info = AbilityCharacter.GetCooldownOfAbility(i);
+            CoolDownInfo info = GetCooldownOfAbility(i);
             var remainingPercent = 0f;
             if (info.total != 0) {
                 remainingPercent = 1 - info.elapsed / info.total;
@@ -34,4 +34,13 @@ public class AbilityHotbarManager : MonoBehaviour {
 
     }
 
+    public CoolDownInfo GetCooldownOfAbility(int n)
+    {
+        if (n >= AbilityCharacter.Abilities.Count) {
+            return new CoolDownInfo();
+        }
+        GameplayAbility ability = AbilityCharacter.Abilities[n].ability;
+        CoolDownInfo cooldownInfo = ability.CalculateCooldown(AbilityCharacter.AbilitySystem);
+        return cooldownInfo;
+    }
 }

@@ -10,19 +10,19 @@ namespace GameplayAbilitySystem.Abilities {
     }
 
     [Serializable]
-    public class GameplayEvent : UnityEvent<GameplayTag, GameplayEventData> {
+    public class AbilityEvent : UnityEvent<GameplayTag, AbilityEventData> {
     }
 
     [Serializable]
-    public struct GameplayEventData {
-        public GameplayTag EventTag;
-        public AbilitySystem Instigator;
+    public struct AbilityEventData {
+        // public GameplayTag EventTag;
+        // public AbilitySystem Instigator;
         public AbilitySystem Target;
-        public object OptionalObject;
+        // public object OptionalObject;
         // Gameplay Effect handle?
-        public List<GameplayTag> InstigatorTags;
-        public List<GameplayTag> TargetTags;
-        public float EventMagnitude;
+        // public List<GameplayTag> InstigatorTags;
+        // public List<GameplayTag> TargetTags;
+        // public float EventMagnitude;
         // Target Data?
     }
 }

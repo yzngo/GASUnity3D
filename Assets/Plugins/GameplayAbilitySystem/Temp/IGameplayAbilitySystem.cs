@@ -25,7 +25,7 @@ namespace GameplayAbilitySystem.Interfaces {
         // List<IGameplayAbility> RunningAbilities { get; }
 
         /// <summary>
-        /// This event is called when a <see cref="GameplayEvent"/> is executed this <see cref="AbilitySystemComponent"/>
+        /// This event is called when a <see cref="AbilityEvent"/> is executed this <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <value></value>
         // GameplayEvent OnGameplayEvent { get; }

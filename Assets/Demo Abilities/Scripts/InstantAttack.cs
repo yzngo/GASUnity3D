@@ -25,14 +25,14 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
 
             // Make sure we have enough resources.  End ability if we don't
 
-            (_, var gameplayEventData) = await abilitySystem.OnGameplayEvent.WaitForEvent((gameplayTag, eventData) => gameplayTag == WaitForEventTag);
+            (_, var abilityEventData) = await abilitySystem.OnGameplayEvent.WaitForEvent((gameplayTag, eventData) => gameplayTag == WaitForEventTag);
             animatorComponent.SetTrigger(AnimationTriggerName);
             animatorComponent.SetTrigger(AnimationCompleteTriggerName);
 
             if (ExecuteEffectEvent != null) {
                 await animationEventSystemComponent.CustomAnimationEvent.WaitForEvent((x) => x == ExecuteEffectEvent);
             }
-            _ = abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, gameplayEventData.Target);
+            _ = abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, abilityEventData.Target);
 
 
             var beh = animatorComponent.GetBehaviour<AnimationBehaviourEventSystem>();

@@ -14,21 +14,11 @@ public class AbilityCharacter : MonoBehaviour
     }
 
     public List<CastingAbilityContainer> Abilities = new List<CastingAbilityContainer>();
-    private AbilitySystem abilitySystem;
+    public AbilitySystem AbilitySystem { get; private set; }
 
     void Start()
     {
-        abilitySystem = GetComponent<AbilitySystem>();
-    }
-
-    public CoolDownInfo GetCooldownOfAbility(int n)
-    {
-        if (n >= Abilities.Count) {
-            return new CoolDownInfo();
-        }
-        GameplayAbility ability = Abilities[n].ability;
-        CoolDownInfo cooldownInfo = ability.CalculateCooldown(abilitySystem);
-        return cooldownInfo;
+        AbilitySystem = GetComponent<AbilitySystem>();
     }
 
     public void CastAbility(int n)
@@ -37,18 +27,20 @@ public class AbilityCharacter : MonoBehaviour
         if (Abilities[n] == null) return;
         if (Abilities[n].ability == null) return;
         if (Abilities[n].target == null) return;
-        var Ability = Abilities[n].ability;
-        var Target = Abilities[n].target;
-        var eventTag = Ability.Tags.AbilityTags.Added.Count > 0 ? Ability.Tags.AbilityTags.Added[0] : new GameplayTag();
-        var eventData = new GameplayEventData();
-        eventData.EventTag = eventTag;
-        eventData.Target = Target;
+
+        GameplayAbility ability = Abilities[n].ability;
+        AbilitySystem target = Abilities[n].target;
+        GameplayTag abilityTag = ability.Tags.AbilityTags.Added.Count > 0 ? ability.Tags.AbilityTags.Added[0] : new GameplayTag();
+
+        AbilityEventData abilityEventData = new AbilityEventData();
+        // eventData.EventTag = eventTag;
+        abilityEventData.Target = target;
 
         // If ability can be activated
-        if (abilitySystem.TryActivateAbility(Ability))
+        if (AbilitySystem.TryActivateAbility(ability))
         {
             // Send gameplay event to this player with information on target etc
-            abilitySystem.OnGameplayEvent.Invoke(eventTag, eventData);
+            AbilitySystem.OnGameplayEvent.Invoke(abilityTag, abilityEventData);
         }
     }
 

@@ -13,7 +13,6 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
 
         public GameObject Projectile;
         public Vector3 ProjectilePositionOffset;
-
         public GameplayEffect TargetGameplayEffect;
         public AnimationEvent CastingInitiated;
         public AnimationEvent FireProjectile;
@@ -28,8 +27,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();
 
             // Make sure we have enough resources.  End ability if we don't
-
-            (_, var gameplayEventData) = await abilitySystem.OnGameplayEvent.WaitForEvent((gameplayTag, eventData) => gameplayTag == WaitForEventTag);
+            (_, var abilityEventData) = await abilitySystem.OnGameplayEvent.WaitForEvent((abilityTag, eventData) => abilityTag == WaitForEventTag);
             animatorComponent.SetTrigger(AnimationTriggerName);
 
             List<GameObject> objectsSpawned = new List<GameObject>();
@@ -49,10 +47,9 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
             await animationEventSystemComponent.CustomAnimationEvent.WaitForEvent((x) => x == FireProjectile);
 
 
-
             // Animation complete.  Spawn and send projectile at target
             if (instantiatedProjectile != null) {
-                SeekTargetAndDestroy(abilitySystem, gameplayEventData, instantiatedProjectile);
+                SeekTargetAndDestroy(abilitySystem, abilityEventData.Target, instantiatedProjectile);
             }
 
 
@@ -62,9 +59,9 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
             Ability.EndAbility(abilitySystem);
         }
 
-        private async void SeekTargetAndDestroy(AbilitySystem abilitySystem, GameplayEventData gameplayEventData, GameObject projectile) {
-            await projectile.GetComponent<Projectile>().SeekTarget(gameplayEventData.Target.TargetPoint, gameplayEventData.Target.gameObject);
-            _ = abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, gameplayEventData.Target);
+        private async void SeekTargetAndDestroy(AbilitySystem abilitySystem, AbilitySystem target, GameObject projectile) {
+            await projectile.GetComponent<Projectile>().SeekTarget(target.TargetPoint, target.gameObject);
+            _ = abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, target);
             DestroyImmediate(projectile);
         }
 

@@ -22,8 +22,8 @@ namespace GameplayAbilitySystem {
         public Transform TargetPoint => targetPoint;
 
         // Called when a GameplayEvent is executed
-        private GameplayEvent onGameplayEvent = new GameplayEvent();
-        public GameplayEvent OnGameplayEvent => onGameplayEvent;
+        private AbilityEvent onGameplayEvent = new AbilityEvent();
+        public AbilityEvent OnGameplayEvent => onGameplayEvent;
 
         private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
 
