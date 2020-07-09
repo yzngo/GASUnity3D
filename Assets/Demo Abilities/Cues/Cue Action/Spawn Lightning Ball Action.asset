@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b45c006d6c71954daab1ce6af98c39b, type: 3}
-  m_Name: Spawn Lightning Ball Gameplay Cue Action
+  m_Name: Spawn Lightning Ball Action
   m_EditorClassIdentifier: 
   ObjectToSpawn: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,
     type: 3}

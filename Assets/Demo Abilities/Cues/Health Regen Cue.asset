@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38d831ed4cecc204f96a38a796f398f7, type: 3}
-  m_Name: Health Regen GameplayCue
+  m_Name: Health Regen Cue
   m_EditorClassIdentifier: 
   ExecuteAction: {fileID: 11400000, guid: 920327ffe250a6a45bcf3e8b9dfb327e, type: 2}
   OnActiveAction: {fileID: 11400000, guid: 920327ffe250a6a45bcf3e8b9dfb327e, type: 2}

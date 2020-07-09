@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayEffectPolicy:
     durationPolicy: 1
-    durationMagnitude: 20
+    durationMagnitude: 2
     modifiers: []
   gameplayEffectTags:
     effectTags:
