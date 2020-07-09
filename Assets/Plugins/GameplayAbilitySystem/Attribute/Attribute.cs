@@ -15,6 +15,13 @@ namespace GameplayAbilitySystem.Attributes
         public float BaseValue => _baseValue;
         public float CurrentValue => _currentValue;
 
+        public Attribute(AttributeType type, float baseValue, float currentValue)
+        {
+            _attributeType = type;
+            _baseValue = baseValue;
+            _currentValue = currentValue;
+        }
+
         public void SetBaseValue(AttributeSet set, ref float value) {
             set.PreBaseChange(this, ref value);
             _baseValue = value;

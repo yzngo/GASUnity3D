@@ -11,7 +11,7 @@ namespace GameplayAbilitySystem.Attributes
     {
         [SerializeField] private List<Attribute> attributes = default;
         public List<Attribute> Attributes => attributes;
-        
+
         [SerializeField] private AttributeChangeHandler preBaseChangeHandler = default;
         [SerializeField] private AttributeChangeHandler preCurrentChangeHandler = default;
         [SerializeField] private AttributeChangeEvent afterBaseChanged = default;
@@ -22,5 +22,10 @@ namespace GameplayAbilitySystem.Attributes
 
         public void PreBaseChange(Attribute attribute, ref float newValue) => preBaseChangeHandler?.OnAttributeChange(this, attribute, ref newValue);
         public void PreCurrentChange(Attribute attribute, ref float newValue) => preCurrentChangeHandler?.OnAttributeChange(this, attribute, ref newValue);
+
+        public void AddAttribute(AttributeType type, float baseValue, float currentValue)
+        {
+            Attributes.Add( new Attribute(type, baseValue, currentValue) );            
+        }
     }
 }
