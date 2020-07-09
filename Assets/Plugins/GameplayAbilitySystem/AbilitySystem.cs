@@ -14,6 +14,7 @@ namespace GameplayAbilitySystem {
     /// The AbilitySytem is the primary component of the GAS. Every game object 
     /// that needs to participate with the GAS needs to have this component attached.
     [AddComponentMenu("Ability System/Ability System")]
+    [RequireComponent(typeof(AttributeSet))]
     public class AbilitySystem : MonoBehaviour {
 
         // 自己身上作为目标的点
@@ -21,20 +22,21 @@ namespace GameplayAbilitySystem {
         public Transform TargetPoint => targetPoint;
 
         // Called when a GameplayEvent is executed
+        private GameplayEvent onGameplayEvent = new GameplayEvent();
         public GameplayEvent OnGameplayEvent => onGameplayEvent;
 
+        private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
 
         // Lists all active Effect
-        public ActiveGameplayEffectsContainer ActiveEffectsContainer => activeEffectsContainer;
-        private GameplayEvent onGameplayEvent = new GameplayEvent();
-        private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
         private ActiveGameplayEffectsContainer activeEffectsContainer;
+        public ActiveGameplayEffectsContainer ActiveEffectsContainer => activeEffectsContainer;
+
 
         private Animator animator;
         public Animator Animator => animator;
 
         private AttributeSet attributeSet;
-        public AttributeSet AttributeSet => attributeSet;
+        // public AttributeSet AttributeSet => attributeSet;
 
         public IEnumerable<GameplayTag> ActiveTags =>
                 ActiveEffectsContainer
@@ -51,17 +53,10 @@ namespace GameplayAbilitySystem {
             attributeSet = GetComponent<AttributeSet>();
         }
 
-
-
-        // Notifies this AbilitySystem that the specified ability has ended
-        public void NotifyAbilityEnded(GameplayAbility ability) {
-            runningAbilities.Remove(ability);
-        }
-
         // Checks to see if the ability can be activated
         // DO NOT execute the ability
-        public bool CanActivateAbility(IGameplayAbility ability) {
-            // Check if this ability is already active on this ASC
+        public bool CanActivateAbility(GameplayAbility ability) {
+            // Check if this ability is already active on this Ability System
             if (runningAbilities.Contains(ability)) {
                 return false;
             }
@@ -75,6 +70,11 @@ namespace GameplayAbilitySystem {
             runningAbilities.Add(Ability);
             Ability.CommitAbility(this);
             return true;
+        }
+
+        // Notifies this AbilitySystem that the specified ability has ended
+        public void NotifyAbilityEnded(GameplayAbility ability) {
+            runningAbilities.Remove(ability);
         }
         
         // Apply batched effect.
@@ -167,6 +167,7 @@ namespace GameplayAbilitySystem {
                 return new List<(GameplayTag, ActiveGameplayEffectData)>();
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));
         }
+
 
 // attribute -----------------------------------------------------------------------------
         public float GetBaseValue(AttributeType type) => GetAttributeByType(type).BaseValue;

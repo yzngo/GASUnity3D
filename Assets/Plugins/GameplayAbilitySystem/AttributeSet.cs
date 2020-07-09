@@ -6,7 +6,6 @@ using UnityEngine;
 namespace GameplayAbilitySystem.Attributes 
 {
     [AddComponentMenu("Ability System/Attribute Set")]
-    [RequireComponent(typeof(AbilitySystem))]
     public sealed class AttributeSet : MonoBehaviour
     {
         [SerializeField] private List<Attribute> attributes = default;
@@ -25,7 +24,10 @@ namespace GameplayAbilitySystem.Attributes
 
         public void AddAttribute(AttributeType type, float baseValue, float currentValue)
         {
-            Attributes.Add( new Attribute(type, baseValue, currentValue) );            
+            if (attributes == null) {
+                attributes = new List<Attribute>();
+            }
+            attributes.Add( new Attribute(type, baseValue, currentValue) );            
         }
     }
 }
