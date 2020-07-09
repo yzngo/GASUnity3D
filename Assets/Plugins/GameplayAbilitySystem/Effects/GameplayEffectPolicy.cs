@@ -21,7 +21,7 @@ namespace GameplayAbilitySystem.Effects {
         [SerializeField] private List<GameplayEffectModifier> modifiers = new List<GameplayEffectModifier>();
 
         public DurationPolicy DurationPolicy => durationPolicy;
-        public float DurationMagnitude => durationMagnitude;
+        public float DurationValue => durationMagnitude;
         public List<GameplayEffectModifier> Modifiers => modifiers;
     }
 

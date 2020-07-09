@@ -64,8 +64,8 @@ namespace GameplayAbilitySystem.Effects {
                 // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, EffectData);
 
                 // We only need to do timed checks for durational abilities
-                if (EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration
-                    || EffectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite) {
+                if (EffectData.Effect.Policy.DurationPolicy == DurationPolicy.Duration
+                    || EffectData.Effect.Policy.DurationPolicy == DurationPolicy.Infinite) {
                     // var removalTime = EffectData.Effect.GameplayEffectPolicy.DurationMagnitude * 1000.0f;
                     CheckGameplayEffectForTimedEffects(EffectData);
                 }
@@ -79,12 +79,12 @@ namespace GameplayAbilitySystem.Effects {
         }
 
         private void ModifyActiveGameplayEffect(ActiveGameplayEffectData effectData, Action<GameplayEffectModifier> action) {
-            foreach (var modifier in effectData.Effect.GameplayEffectPolicy.Modifiers) {
+            foreach (var modifier in effectData.Effect.Policy.Modifiers) {
                 action(modifier);
             }
 
             // If there are no gameplay effect modifiers, we need to add or get an empty entry
-            if (effectData.Effect.GameplayEffectPolicy.Modifiers.Count == 0) {
+            if (effectData.Effect.Policy.Modifiers.Count == 0) {
                 action((new GameplayEffectModifier()).InitializeEmpty());
             }
         }
@@ -139,11 +139,11 @@ namespace GameplayAbilitySystem.Effects {
 
                 if (effectData.ForceRemoveEffect) {
                     durationExpired = true;
-                } else if (effectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration) {
+                } else if (effectData.Effect.Policy.DurationPolicy == DurationPolicy.Duration) {
                     // Check whether required time has expired
                     // We only need to do this for effects with a finite duration
                     durationExpired = effectData.CooldownTimeRemaining <= 0 ? true : false;
-                } else if (effectData.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite) {
+                } else if (effectData.Effect.Policy.DurationPolicy == DurationPolicy.Infinite) {
                     durationExpired = effectData.StartWorldTime <= 0 ? true : false;
                 }
 

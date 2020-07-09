@@ -18,7 +18,7 @@ namespace GameplayAbilitySystem.Effects {
         [SerializeField] private List<GameplayCue> gameplayCues = new List<GameplayCue>();
         [SerializeField] private StackingPolicy stackingPolicy = new StackingPolicy();
 
-        public GameplayEffectPolicy GameplayEffectPolicy => gameplayEffectPolicy;
+        public GameplayEffectPolicy Policy => gameplayEffectPolicy;
         public GameplayEffectTags EffectTags => gameplayEffectTags;
         public EffectPeriodicity Periodicity => periodicity;
         public List<GameplayCue> GameplayCues => gameplayCues;
@@ -61,7 +61,7 @@ namespace GameplayAbilitySystem.Effects {
                 modifierTotals = Existing;
             }
 
-            foreach (var modifier in GameplayEffectPolicy.Modifiers) {
+            foreach (var modifier in Policy.Modifiers) {
                 if (!modifierTotals.TryGetValue(modifier.Attribute, out var modifierType)) {
                     // This attribute hasn't been recorded before, so create a blank new record
                     modifierType = new Dictionary<ModifierOperationType, float>();

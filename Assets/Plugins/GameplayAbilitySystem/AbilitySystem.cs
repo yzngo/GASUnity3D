@@ -53,9 +53,14 @@ namespace GameplayAbilitySystem {
 
         // Checks to see if the ability can be activated
         // DO NOT execute the ability
+        // 激活之后后续流程交给ability
         public bool CanActivateAbility(GameplayAbility ability) {
             // Check if this ability is already active on this Ability System
             if (runningAbilities.Contains(ability)) {
+                return false;
+            }
+
+            if (!ability.IsAbilityActivatable(this)) {
                 return false;
             }
             return true;
@@ -63,10 +68,14 @@ namespace GameplayAbilitySystem {
 
         // Try to activate the ability
         public bool TryActivateAbility(GameplayAbility ability, AbilitySystem target = null) {
-            if (!CanActivateAbility(ability)) return false;
-            if (!ability.IsAbilityActivatable(this)) return false;
+            if (!CanActivateAbility(ability)) {
+                return false;
+            }
+            // 一个技能的生命周期是从[释放开始]到[释放结束], 之后的工作交给effect
+            // 技能仅仅是一个时序流程
             runningAbilities.Add(ability);
             ability.CommitAbility(this);
+
             GameplayTag abilityTag = ability.Tags.AbilityTags.Added.Count > 0 ? ability.Tags.AbilityTags.Added[0] : new GameplayTag();
             var data = new AbilityEventData();
             data.Target = target;
@@ -86,11 +95,11 @@ namespace GameplayAbilitySystem {
         // with reference to the same base attribute value.
         public async void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystem Target, float Level)> batchedGameplayEffects) {
 
-            var instantEffects = batchedGameplayEffects.Where(x => x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Instant);
+            var instantEffects = batchedGameplayEffects.Where(x => x.Effect.Policy.DurationPolicy == DurationPolicy.Instant);
             var durationalEffects = batchedGameplayEffects.Where(
                 x =>
-                    x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Duration ||
-                    x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Infinite
+                    x.Effect.Policy.DurationPolicy == DurationPolicy.Duration ||
+                    x.Effect.Policy.DurationPolicy == DurationPolicy.Infinite
                     );
             // Apply instant effects
             foreach (var item in instantEffects) {
@@ -102,13 +111,13 @@ namespace GameplayAbilitySystem {
                 }
             }
         }
-
+        
+        // effect也是ablity system管理
         // Apply a effect to the target
         // The overall effect may be modulated by the Level.
         // level -> maybe used to affect the "strength" of the effect
         public Task<GameplayEffect> ApplyEffectToTarget(GameplayEffect effect, AbilitySystem target, float level = 0) {
             // TODO: Check to make sure all the attributes being modified by this gameplay effect exist on the target
-
             // TODO: Get list of tags owned by target
 
             // TODO: Check for immunity tags, and don't apply gameplay effect if target is immune (and also add Immunity Tags container to IGameplayEffect)
@@ -122,7 +131,7 @@ namespace GameplayAbilitySystem {
             // If this is an instant gameplay effect (i.e. it will modify the base value)
 
             // Handling Instant effects is different to handling HasDuration and Infinite effects
-            if (effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Instant) {
+            if (effect.Policy.DurationPolicy == DurationPolicy.Instant) {
                 effect.ApplyInstantEffect(target);
             } else {
                 // Durational effects require attention to many more things than instant effects

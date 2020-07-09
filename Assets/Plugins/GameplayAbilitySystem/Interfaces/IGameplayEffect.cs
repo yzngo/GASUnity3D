@@ -20,7 +20,7 @@ namespace GameplayAbilitySystem.Interfaces
         /// Duration of the <see cref="GameplayEffect"/>, if this lasts for some finite time
         /// </summary>
         /// <value></value>
-        float DurationMagnitude { get; }
+        float DurationValue { get; }
 
         /// <summary>
         /// How the <see cref="GameplayEffect"/> affects attributes
