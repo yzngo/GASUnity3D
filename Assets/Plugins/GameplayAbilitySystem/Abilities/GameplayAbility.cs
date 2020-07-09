@@ -18,7 +18,7 @@ namespace AbilitySystem.Abilities {
         // [SerializeField] private GenericAbilityEvent _onGameplayAbilityCommitted = new GenericAbilityEvent();
         // [SerializeField] private GenericAbilityEvent _onGameplayAbilityCancelled = new GenericAbilityEvent();
         // [SerializeField] private GenericAbilityEvent _onGameplayAbilityEnded = new GenericAbilityEvent();
-        [SerializeField] private AbstractAbilityActivation _abilityLogic = null;
+        [SerializeField] private AbstractAbilityActivation _abilityLogic = default;
 
         public GameplayAbilityTags Tags => _tags;
         public GameplayEffect Cost => cost;
