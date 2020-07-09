@@ -15,7 +15,7 @@ namespace GameplayAbilitySystem.Interfaces {
     /// This will usually include <see cref="IAttribute"/>s such as Health, Mana, Speed, etc.
     /// </para>
     /// </summary>
-    public interface IAttributeSet {
+    // public interface IAttributeSet {
         /// <summary>
         /// Decides whether this attribute change should take effect
         /// </summary>
@@ -30,7 +30,7 @@ namespace GameplayAbilitySystem.Interfaces {
         /// </summary>
         /// <param name="IAttribute">Attribute which is changing</param>
         /// <param name="NewBaseValue">New value of the attribute.  This is passed as ref, so this method can modify it.</param>        
-        void PreAttributeBaseChange(Attribute Attribute, ref float NewBaseValue);
+        // void PreAttributeBaseChange(Attribute Attribute, ref float NewBaseValue);
 
         /// <summary>
         /// Called before modification to the current attribute value.  This should be used to enforce clamping rules
@@ -38,7 +38,7 @@ namespace GameplayAbilitySystem.Interfaces {
         /// </summary>
         /// <param name="IAttribute">Attribute which is changing</param>
         /// <param name="NewValue">New value of the attribute.  This is passed as ref, so this method can modify it.</param>
-        void PreAttributeChange(Attribute Attribute, ref float NewValue);
+        // void PreAttributeChange(Attribute Attribute, ref float NewValue);
 
         /// <summary>
         /// Called after modification to attribute.  This should be used to execute reactions to attribute change, such 
@@ -53,31 +53,31 @@ namespace GameplayAbilitySystem.Interfaces {
         /// Event called whenever a base attribute value changes
         /// </summary>
         /// <value>Event is raised with a payload of <see cref="AttributeChangeEvent"/></value>
-        AttributeChangeEvent AttributeBaseValueChanged { get; }
+        // AttributeChangeEvent AttributeBaseValueChanged { get; }
 
         /// <summary>
         /// Event called whenever a current attribute value changes
         /// </summary>
         /// <value>Event is raised with a payload of <see cref="AttributeChangeEvent"/></value>
-        AttributeChangeEvent AttributeCurrentValueChanged { get; }
+        // AttributeChangeEvent AttributeCurrentValueChanged { get; }
 
         /// <summary>
         /// Gets the <see cref="AbilitySystem"/> that owns this Attribute Set
         /// </summary>
         /// <returns>Ability System Component which owns this <see cref="AttributeSet"/></returns>
-        AbilitySystem GetOwningAbilitySystem();
+        // AbilitySystem GetOwningAbilitySystem();
 
         /// <summary>
         /// List of <see cref="Attribute"/> that belong to this <see cref="AttributeSet"/>
         /// </summary>
         /// <value>List of <see cref="Attribute"/> </value>
-        List<Attribute> Attributes { get;  }
+        // List<Attribute> Attributes { get;  }
 
-        AttributeChangeHandler PreAttributeBaseChangeHandler { get; }
-        AttributeChangeHandler PreAttributeChangeHandler { get; }
+        // AttributeChangeHandler PreAttributeBaseChangeHandler { get; }
+        // AttributeChangeHandler PreAttributeChangeHandler { get; }
 
 
-    }
+    // }
 
 
 }

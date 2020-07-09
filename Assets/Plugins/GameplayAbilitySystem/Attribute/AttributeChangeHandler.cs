@@ -8,7 +8,6 @@ namespace GameplayAbilitySystem.Attributes {
     public abstract class AttributeChangeHandler : ScriptableObject {
 
         public virtual void OnAttributeChange(AttributeSet attributeSet, Attribute attribute, ref float value) {
-
         }
     }
 }

@@ -11,7 +11,7 @@ namespace GameplayAbilitySystem.Attributes
     {
         [SerializeField] private AttributeChangeEvent attributeBaseValueChanged = default;
         [SerializeField] private AttributeChangeEvent attributeCurrentValueChanged = default;
-        [SerializeField] private List<Attribute> attributes;
+        [SerializeField] private List<Attribute> attributes = default;
 
         public AttributeChangeEvent AttributeBaseValueChanged => attributeBaseValueChanged;
         public AttributeChangeEvent AttributeCurrentValueChanged => attributeCurrentValueChanged;
