@@ -43,7 +43,7 @@ namespace GameplayAbilitySystem.Attributes {
         // }
 
         /// <inheritdoc />
-        public void PreAttributeBaseChange(IAttribute attribute, ref float newMagnitude) {
+        public void PreAttributeBaseChange(Attribute attribute, ref float newMagnitude) {
             if (preAttributeBaseChangeHandler != null) {
                 preAttributeBaseChangeHandler.OnAttributeChange(this, attribute, ref newMagnitude);
             }
@@ -51,7 +51,7 @@ namespace GameplayAbilitySystem.Attributes {
         }
 
         /// <inheritdoc />
-        public void PreAttributeChange(IAttribute attribute, ref float newValue) {
+        public void PreAttributeChange(Attribute attribute, ref float newValue) {
             if (preAttributeChangeHandler != null) {
                 preAttributeChangeHandler.OnAttributeChange(this, attribute, ref newValue);
             }

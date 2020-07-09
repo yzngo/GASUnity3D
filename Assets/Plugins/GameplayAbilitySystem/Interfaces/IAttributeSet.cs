@@ -30,7 +30,7 @@ namespace GameplayAbilitySystem.Interfaces {
         /// </summary>
         /// <param name="IAttribute">Attribute which is changing</param>
         /// <param name="NewBaseValue">New value of the attribute.  This is passed as ref, so this method can modify it.</param>        
-        void PreAttributeBaseChange(IAttribute Attribute, ref float NewBaseValue);
+        void PreAttributeBaseChange(Attribute Attribute, ref float NewBaseValue);
 
         /// <summary>
         /// Called before modification to the current attribute value.  This should be used to enforce clamping rules
@@ -38,7 +38,7 @@ namespace GameplayAbilitySystem.Interfaces {
         /// </summary>
         /// <param name="IAttribute">Attribute which is changing</param>
         /// <param name="NewValue">New value of the attribute.  This is passed as ref, so this method can modify it.</param>
-        void PreAttributeChange(IAttribute Attribute, ref float NewValue);
+        void PreAttributeChange(Attribute Attribute, ref float NewValue);
 
         /// <summary>
         /// Called after modification to attribute.  This should be used to execute reactions to attribute change, such 
@@ -68,9 +68,9 @@ namespace GameplayAbilitySystem.Interfaces {
         AbilitySystem GetOwningAbilitySystem();
 
         /// <summary>
-        /// List of <see cref="IAttribute"/> that belong to this <see cref="IAttributeSet"/>
+        /// List of <see cref="Attribute"/> that belong to this <see cref="IAttributeSet"/>
         /// </summary>
-        /// <value>List of <see cref="IAttribute"/> </value>
+        /// <value>List of <see cref="Attribute"/> </value>
         List<Attribute> Attributes { get; set; }
 
         BaseAttributeChangeHandler PreAttributeBaseChangeHandler { get; }

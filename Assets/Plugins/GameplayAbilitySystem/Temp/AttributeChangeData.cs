@@ -1,18 +1,17 @@
 using GameplayAbilitySystem.GameplayEffects;
-using GameplayAbilitySystem.Interfaces;
-using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using GameplayAbilitySystem.Attributes;
 
 namespace GameplayAbilitySystem.Attributes {
 
     /// <summary>
     /// Container for attribute change events
     /// </summary>
-    [Serializable]
+    [System.Serializable]
     public struct AttributeChangeData {
 
-        public IAttribute Attribute;
+        public Attribute Attribute;
 
 
     }

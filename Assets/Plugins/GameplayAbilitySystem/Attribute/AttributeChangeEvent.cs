@@ -7,6 +7,6 @@ using UnityEngine.Events;
 namespace GameplayAbilitySystem.Attributes {
 
     [Serializable]
-    public class AttributeChangeEvent : UnityEvent<IAttribute> {
+    public class AttributeChangeEvent : UnityEvent<Attribute> {
     }
 }

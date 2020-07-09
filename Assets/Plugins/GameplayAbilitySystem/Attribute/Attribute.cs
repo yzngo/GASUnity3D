@@ -6,7 +6,8 @@ namespace GameplayAbilitySystem.Attributes
 {
     [AddComponentMenu("Ability System/Attributes/Attribute")]
     [System.Serializable]
-    public class Attribute : IAttribute {
+    public class Attribute
+    {
         [SerializeField] AttributeType _attributeType = default;
 
         [SerializeField] float _baseValue = default;
