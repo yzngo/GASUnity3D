@@ -134,6 +134,7 @@ namespace GameplayAbilitySystem.Effects {
             return totalAttributeChange;
         }
 
+        // instant 一定改变base值
         public void ApplyInstantEffect(AbilitySystem target) {
             var totalModifies = CalculateModifiers();
             var totalAttributeChange = CalculateAttributes(target, totalModifies);
