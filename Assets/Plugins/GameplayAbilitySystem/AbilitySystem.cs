@@ -140,7 +140,7 @@ namespace GameplayAbilitySystem {
                 // Durational effects require attention to many more things than instant effects
                 // Such as stacking and effect durations
                 var effectData = new ActivedEffectData(effect, this, target);
-                target.ActiveEffectsContainer.ApplyGameEffect(effectData);
+                target.ActiveEffectsContainer.ApplySustainedEffect(effectData);
             }
 
             // Remove all effects which have tags defined as "Remove Gameplay Effects With Tag". 
