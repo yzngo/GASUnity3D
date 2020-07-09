@@ -143,26 +143,26 @@ namespace GameplayAbilitySystem {
                 target.ActiveEffectsContainer.ApplySustainedEffect(effectData);
             }
 
-            // Remove all effects which have tags defined as "Remove Gameplay Effects With Tag". 
+            // Remove all effects which have tags defined as "Be Removed Effects Tags". 
             // We do this by setting the expiry time on the effect to make it end prematurely
             // This is accomplished by finding all effects which grant these tags, and then adjusting start time
             var tagsToRemove = effect.EffectTags.BeRemovedEffectsTags.Added;
-            var activeGEs = target.GetActiveEffectsTags()
+            var activeEffects = target.GetActiveEffectsTags()
                                     .Where(x => tagsToRemove.Any(y => x.Tag == y.Tag))
                                     .Join(tagsToRemove, x => x.Tag, x => x.Tag, (x, y) => new { Tag = x.Tag, EffectData = x.GrantingEffect, StacksToRemove = y.StacksToRemove })
                                     .OrderBy(x => x.EffectData.CooldownTimeRemaining);
 
-            Dictionary<GameplayEffect, int> StacksRemoved = new Dictionary<GameplayEffect, int>();
-            foreach (var GE in activeGEs) {
-                if (!StacksRemoved.ContainsKey(GE.EffectData.Effect)) {
-                    StacksRemoved.Add(GE.EffectData.Effect, 0);
-                }
-                var stacksRemoved = StacksRemoved[GE.EffectData.Effect];
-                if (GE.StacksToRemove == 0 || stacksRemoved < GE.StacksToRemove) {
-                    GE.EffectData.ForceEndEffect();
-                }
+            Dictionary<GameplayEffect, int> stacks = new Dictionary<GameplayEffect, int>();
 
-                StacksRemoved[GE.EffectData.Effect]++;
+            foreach (var removedEffect in activeEffects) {
+                if (!stacks.ContainsKey(removedEffect.EffectData.Effect)) {
+                    stacks.Add(removedEffect.EffectData.Effect, 0);
+                }
+                int stackValue = stacks[removedEffect.EffectData.Effect];
+                if (removedEffect.StacksToRemove == 0 || stackValue < removedEffect.StacksToRemove) {
+                    removedEffect.EffectData.ForceEndEffect();
+                }
+                stacks[removedEffect.EffectData.Effect]++;
             }
 
             var gameplayCues = effect.GameplayCues;
