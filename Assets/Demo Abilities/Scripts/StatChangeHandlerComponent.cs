@@ -7,9 +7,9 @@ namespace AbilitySystemDemo
     {
         public AbstractStatChangeHandler StatChangeHandler;
 
-        public void Execute(AttributeChangeData Change)
+        public void Execute(Attribute attribute)
         {
-            StatChangeHandler.StatChanged(Change);
+            StatChangeHandler.StatChanged(attribute);
         }
     }
 }

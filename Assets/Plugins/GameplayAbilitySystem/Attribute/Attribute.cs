@@ -22,19 +22,13 @@ namespace GameplayAbilitySystem.Attributes
         public void SetCurrentValue(IAttributeSet set, ref float value) {
             set.PreAttributeChange(this, ref value);
             _currentValue = value;
-            set.AttributeCurrentValueChanged.Invoke(new AttributeChangeData()
-            {
-                Attribute = this
-            });
+            set.AttributeCurrentValueChanged.Invoke(this);
         }
 
         public void SetBaseValue(IAttributeSet set, ref float value) {
             set.PreAttributeBaseChange(this, ref value);
             _baseValue = value;
-            set.AttributeBaseValueChanged.Invoke(new AttributeChangeData()
-            {
-                Attribute = this
-            });
+            set.AttributeBaseValueChanged.Invoke(this);
         }
     }
 }

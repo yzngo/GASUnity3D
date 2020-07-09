@@ -6,7 +6,15 @@ using UnityEngine.Events;
 
 namespace GameplayAbilitySystem.Attributes {
 
+    /// <summary>
+    /// Container for attribute change events
+    /// </summary>
     [Serializable]
-    public class AttributeChangeEvent : UnityEvent<IAttribute> {
+    public struct AttributeChangeData {
+
+        public IAttribute Attribute;
+
+
     }
+
 }

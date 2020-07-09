@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using GameplayAbilitySystem.Attributes;
+﻿using GameplayAbilitySystem.Attributes;
 using UnityEngine;
 
 namespace AbilitySystemDemo
@@ -13,7 +10,7 @@ namespace AbilitySystemDemo
         public AttributeType HealthAttribute;
         public AttributeType SpeedAttribute;
 
-        public override void StatChanged(AttributeChangeData Change)
+        public override void StatChanged(Attribute attribute)
         {
             // If health was reduced, play a damage taken animation.  We could be fancy here and do
             // a check on the actual gameplay effect.  For example, this could have been a self-cast

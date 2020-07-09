@@ -6,7 +6,8 @@ namespace AbilitySystemDemo
 
     public abstract class AbstractStatChangeHandler : ScriptableObject
     {
-        public abstract void StatChanged(AttributeChangeData Change);
+        public abstract void StatChanged(Attribute attribute);
+        // public abstract void StatChanged(AttributeChangeData Change);
     }
 }
 
