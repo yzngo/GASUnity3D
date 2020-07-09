@@ -173,7 +173,7 @@ namespace AbilitySystem {
             // Execute gameplay cue
             for (var i = 0; i < gameplayCues.Count; i++) {
                 var cue = gameplayCues[i];
-                cue.HandleCue(target.gameObject, CueEventMoment.OnActive);
+                cue.HandleCue(target.gameObject, CueEventMomentType.OnActive);
             }
             return Task.FromResult(effect);
         }
