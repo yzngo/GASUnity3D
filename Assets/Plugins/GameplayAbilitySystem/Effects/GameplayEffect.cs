@@ -100,66 +100,58 @@ namespace GameplayAbilitySystem.Effects {
         // e.g. HP -> oldValue 100 newValue 200
         //      MP -> oldValue 200 newValue 189
         public Dictionary<AttributeType, ModifyArrtibuteValues> CalculateAttributes(
-                            AbilitySystem abilitySystem, TotalModifies totalModifies, bool operateOnCurrentValue = false
+                            AbilitySystem target, TotalModifies totalModifies, bool operateOnCurrentValue = false
         ) {
-            var totalCaculatedAttributes = new Dictionary<AttributeType, ModifyArrtibuteValues>();
+            var totalAttributeChange = new Dictionary<AttributeType, ModifyArrtibuteValues>();
 
-            foreach (var modifyByType in totalModifies) {
-                if (!modifyByType.Value.TryGetValue(ModifierOperationType.Add, out var addition)) {
+            foreach (var changeByType in totalModifies) {
+                if (!changeByType.Value.TryGetValue(ModifierOperationType.Add, out var addition)) {
                     addition = 0;
                 }
-                if (!modifyByType.Value.TryGetValue(ModifierOperationType.Multiply, out var multiplication)) {
+                if (!changeByType.Value.TryGetValue(ModifierOperationType.Multiply, out var multiplication)) {
                     multiplication = 1;
                 }
-                if (!modifyByType.Value.TryGetValue(ModifierOperationType.Divide, out var division)) {
+                if (!changeByType.Value.TryGetValue(ModifierOperationType.Divide, out var division)) {
                     division = 1;
                 }
 
                 var oldValue = 0f;
                 if (!operateOnCurrentValue) {
-                    oldValue = abilitySystem.GetBaseValue(modifyByType.Key);
+                    oldValue = target.GetBaseValue(changeByType.Key);
                 } else {
-                    oldValue = abilitySystem.GetCurrentValue(modifyByType.Key);
+                    oldValue = target.GetCurrentValue(changeByType.Key);
                 }
 
                 var newValue = (oldValue + addition) * (multiplication / division);
 
-                if (!totalCaculatedAttributes.TryGetValue(modifyByType.Key, out ModifyArrtibuteValues values)) {
+                if (!totalAttributeChange.TryGetValue(changeByType.Key, out ModifyArrtibuteValues values)) {
                     values = new ModifyArrtibuteValues();
-                    totalCaculatedAttributes.Add(modifyByType.Key, values);
+                    totalAttributeChange.Add(changeByType.Key, values);
                 }
                 values.newValue += newValue;
                 values.oldValue += oldValue;
             }
-            return totalCaculatedAttributes;
+            return totalAttributeChange;
         }
 
         public void ApplyInstantEffect(AbilitySystem target) {
-            // Modify base attribute values.  Collect the overall change for each modifier
-            var modifierTotals = CalculateModifiers();
-            var attributeModifications = CalculateAttributes(target, modifierTotals);
+            var totalModifies = CalculateModifiers();
+            var totalAttributeChange = CalculateAttributes(target, totalModifies);
 
-            // Finally, For each attribute, apply the new modified values
-            foreach (var attribute in attributeModifications) {
-                target.SetBaseValue(attribute.Key, attribute.Value.newValue);
+            // For each attribute, apply the new modified values
+            foreach (var changeByType in totalAttributeChange) {
+                target.SetBaseValue(changeByType.Key, changeByType.Value.newValue);
 
                 // mark the corresponding aggregator as dirty so we can recalculate the current values
-                var aggregators = target.ActiveEffectsContainer.ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(attribute.Key);
-                // Target.ActiveGameplayEffectsContainer.ActiveEffectAttributeAggregator.Select(x => x.Value[attribute.Key]).AttributeAggregatorMap.TryGetValue(attribute.Key, out var aggregator);
+                var aggregators = target.ActiveEffectsContainer.ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(changeByType.Key);
                 if (aggregators.Count() != 0) {
-                    target.ActiveEffectsContainer.UpdateAttribute(aggregators, attribute.Key);
+                    target.ActiveEffectsContainer.UpdateAttribute(aggregators, changeByType.Key);
                 } else {
                     // No aggregators, so set current value = base value
-                    target.SetCurrentValue(attribute.Key, target.GetBaseValue(attribute.Key));
+                    target.SetCurrentValue(changeByType.Key, target.GetBaseValue(changeByType.Key));
                 }
             }
         }
-
-        // public bool ApplicationRequirementsPass(AbilitySystemComponent abilitySystem) {
-            // return _gameplayEffectTags.ApplicationTagRequirements.RequirePresence;
-        // 
-        //     return true;
-        // }
     }
 }
 
