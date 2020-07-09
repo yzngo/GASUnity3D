@@ -7,7 +7,7 @@ using UnityEngine;
 namespace AbilitySystemDemo {
 
     [CreateAssetMenu(fileName = "Spawn Object Gameplay Cue", menuName = "Ability System Demo/Gameplay Cue/Spawn Object Gameplay Cue")]
-    class SpawnObjectGameplayCueAction : BaseGameplayCueAction {
+    class SpawnObjectGameplayCueAction : BaseCueAction {
         public GameObject ObjectToSpawn = default;
         public Vector3 Position = default;
         public Quaternion Rotation = default;

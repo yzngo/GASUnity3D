@@ -5,13 +5,13 @@ namespace AbilitySystem.Cues {
     [CreateAssetMenu(fileName = "GameplayCue", menuName = "Ability System/Gameplay Cue/Gameplay Cue")]
     public class GameplayCue : ScriptableObject {
 
-        [SerializeField] private BaseGameplayCueAction ExecuteAction = default;
+        [SerializeField] private BaseCueAction ExecuteAction = default;
 
-        [SerializeField] private BaseGameplayCueAction OnActiveAction = default;
+        [SerializeField] private BaseCueAction OnActiveAction = default;
 
-        [SerializeField] private BaseGameplayCueAction WhileActiveAction = default;
+        [SerializeField] private BaseCueAction WhileActiveAction = default;
 
-        [SerializeField] private BaseGameplayCueAction OnRemoveAction = default;
+        [SerializeField] private BaseCueAction OnRemoveAction = default;
 
         public void HandleCue(GameObject target, CueEventMoment moment) {
             switch (moment) {
