@@ -1,8 +1,8 @@
 using System;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
 
     [Serializable]
     public class GameplayEffectTags : IGameplayEffectTags {

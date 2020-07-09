@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Collections.Generic;
-using AbilitySystem.Attributes;
+using GameplayAbilitySystem.Attributes;
 using UniRx.Async;
 
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
 
     // 激活的effect的属性聚合器
     // This is used to keep track of all the "temporary" attribute modifiers,

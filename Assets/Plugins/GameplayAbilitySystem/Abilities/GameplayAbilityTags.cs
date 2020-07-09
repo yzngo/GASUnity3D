@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using AbilitySystem.GameplayEffects;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace AbilitySystem.Abilities {
+namespace GameplayAbilitySystem.Abilities {
     /// <inheritdoc />
     [Serializable]
     public class GameplayAbilityTags : IAbilityTags {

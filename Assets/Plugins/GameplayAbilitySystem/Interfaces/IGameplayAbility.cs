@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AbilitySystem;
-using AbilitySystem.Abilities.AbilityActivations;
-using AbilitySystem.Abilities;
-using AbilitySystem.GameplayEffects;
+using GameplayAbilitySystem;
+using GameplayAbilitySystem.Abilities.AbilityActivations;
+using GameplayAbilitySystem.Abilities;
+using GameplayAbilitySystem.GameplayEffects;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace AbilitySystem.Interfaces {
+namespace GameplayAbilitySystem.Interfaces {
     /// <summary>
     /// This interfaces defines Gameplay Abilities.  Gameplay Abilities represent "things" that players can cast, etc.
     /// E.g. a <see cref="IGameplayAbility"/> might represent a fireball ability which the player casts and which damages a target
@@ -33,7 +33,7 @@ namespace AbilitySystem.Interfaces {
 
         /// <summary>
         /// This is called whenever this ability ends.
-        /// This event does not pass on details of which <see cref="AbilitySystemComponent"/> 
+        /// This event does not pass on details of which <see cref="AbilitySystem"/> 
         /// was responsible for using this ability.
         /// </summary>
         /// <value></value>
@@ -41,7 +41,7 @@ namespace AbilitySystem.Interfaces {
 
         /// <summary>
         /// This is called whenever this ability is commited.
-        /// This event does not pass on details of which <see cref="AbilitySystemComponent"/> 
+        /// This event does not pass on details of which <see cref="AbilitySystem"/> 
         /// was responsible for using this ability.
         /// </summary>
         /// <value></value>
@@ -49,7 +49,7 @@ namespace AbilitySystem.Interfaces {
 
         /// <summary>
         /// This is called whenever this ability is cancelled.
-        /// This event does not pass on details of which <see cref="AbilitySystemComponent"/> 
+        /// This event does not pass on details of which <see cref="AbilitySystem"/> 
         /// was responsible for using this ability.
         /// </summary>
         /// <value></value>
@@ -62,31 +62,31 @@ namespace AbilitySystem.Interfaces {
         AbstractAbilityActivation AbilityLogic { get; }
 
         /// <summary>
-        /// Ends this ability on the target <see cref="AbilitySystemComponent"/>
+        /// Ends this ability on the target <see cref="AbilitySystem"/>
         /// </summary>
-        /// <param name="ASC">The target <see cref="AbilitySystemComponent"/></param>
-        void EndAbility(AbilitySystemComponent ASC);
+        /// <param name="abilitySystem">The target <see cref="AbilitySystem"/></param>
+        void EndAbility(AbilitySystem abilitySystem);
 
         /// <summary>
-        /// Activates this ability on the target <see cref="AbilitySystemComponent"/>
+        /// Activates this ability on the target <see cref="AbilitySystem"/>
         /// </summary>
-        /// <param name="ASC">The target <see cref="AbilitySystemComponent"/></param>
-        void ActivateAbility(AbilitySystemComponent ASC);
+        /// <param name="abilitySystem">The target <see cref="AbilitySystem"/></param>
+        void ActivateAbility(AbilitySystem abilitySystem);
 
         /// <summary>
-        /// Check if this ability can be activated by <see cref="AbilitySystemComponent"/>
+        /// Check if this ability can be activated by <see cref="AbilitySystem"/>
         /// </summary>
-        /// <param name="ASC">The target <see cref="AbilitySystemComponent"/></param>
+        /// <param name="abilitySystem">The target <see cref="AbilitySystem"/></param>
         /// <returns></returns>
-        bool IsAbilityActivatable(AbilitySystemComponent ASC);
+        bool IsAbilityActivatable(AbilitySystem abilitySystem);
 
         /// <summary>
-        /// Commits the <see cref="AbilitySystemComponent"/> on the target <see cref="AbilitySystemComponent"/>
+        /// Commits the <see cref="AbilitySystem"/> on the target <see cref="AbilitySystem"/>
         /// </summary>
-        /// <param name="ASC">The target <see cref="AbilitySystemComponent"/></param>
+        /// <param name="abilitySystem">The target <see cref="AbilitySystem"/></param>
         /// <returns></returns>
-        bool CommitAbility(AbilitySystemComponent ASC);
+        bool CommitAbility(AbilitySystem abilitySystem);
 
-        (float CooldownElapsed, float CooldownTotal) CalculateCooldown(AbilitySystemComponent ASC);
+        (float CooldownElapsed, float CooldownTotal) CalculateCooldown(AbilitySystem abilitySystem);
     }
 }

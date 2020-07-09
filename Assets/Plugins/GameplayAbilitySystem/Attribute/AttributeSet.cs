@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using AbilitySystem.GameplayEffects;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace AbilitySystem.Attributes {
+namespace GameplayAbilitySystem.Attributes {
 
     /// <inheritdoc />
     [AddComponentMenu("Gameplay Ability System/Attribute Set")]
     [System.Serializable]
-    [RequireComponent(typeof(AbilitySystemComponent))]
+    [RequireComponent(typeof(AbilitySystem))]
     public sealed class AttributeSet : MonoBehaviour, IAttributeSet {
         [SerializeField] private AttributeChangeEvent attributeBaseValueChanged = default;
         [SerializeField] private AttributeChangeEvent attributeCurrentValueChanged = default;
@@ -33,8 +33,8 @@ namespace AbilitySystem.Attributes {
         public BaseAttributeChangeHandler PreAttributeChangeHandler => preAttributeChangeHandler;
 
         /// <inheritdoc />
-        public AbilitySystemComponent GetOwningAbilitySystem() {
-            return this.GetComponent<AbilitySystemComponent>();
+        public AbilitySystem GetOwningAbilitySystem() {
+            return this.GetComponent<AbilitySystem>();
         }
 
         /// <inheritdoc />

@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using AbilitySystem.GameplayEffects;
-using AbilitySystem;
+using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem;
 
 public class GameplayTagsStatusBarManager : MonoBehaviour {
     public AbilityCharacter AbilityCharacter;
@@ -19,7 +19,7 @@ public class GameplayTagsStatusBarManager : MonoBehaviour {
     }
 
     List<(GameplayTag Tag, ActiveGameplayEffectData EffectData, int stacks)> GetTagsToShow() {
-        var activeTags = AbilityCharacter.ASC.GetActiveEffectsTags();
+        var activeTags = AbilityCharacter.AbilitySystem.GetActiveEffectsTags();
         var effectsToShow = activeTags
                             .Where(x => availableTagsToShow
                                                     .ContainsKey(x.Tag))

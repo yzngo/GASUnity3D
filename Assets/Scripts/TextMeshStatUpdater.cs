@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using AbilitySystem.Attributes;
+using GameplayAbilitySystem.Attributes;
 using TMPro;
 
 namespace AbilitySystemDemo

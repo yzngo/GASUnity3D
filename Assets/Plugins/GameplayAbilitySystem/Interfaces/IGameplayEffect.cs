@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Collections.Generic;
-using AbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.GameplayEffects;
 
-namespace AbilitySystem.Interfaces
+namespace GameplayAbilitySystem.Interfaces
 {
 
     /// <summary>
@@ -41,14 +41,14 @@ namespace AbilitySystem.Interfaces
         GameplayEffectAddRemoveTagContainer EffectTags { get; }
 
         /// <summary>
-        /// <see cref="GameplayTag"/> that are given to the <see cref="AbilitySystemComponent"/>
+        /// <see cref="GameplayTag"/> that are given to the <see cref="AbilitySystem"/>
         /// </summary>
         /// <value></value>
         GameplayEffectAddRemoveTagContainer GrantedToASCTags { get; }
 
         /// <summary>
-        /// <see cref="GameplayTag"/> that are required on the <see cref="AbilitySystemComponent"/> for the <see cref="GameplayEffect"> to have an effect.  
-        /// If these <see cref="GameplayTag"/> are not on the <see cref="AbilitySystemComponent"/>, the effect is "disabled" until these <see cref="GameplayTag"/> are present.
+        /// <see cref="GameplayTag"/> that are required on the <see cref="AbilitySystem"/> for the <see cref="GameplayEffect"> to have an effect.  
+        /// If these <see cref="GameplayTag"/> are not on the <see cref="AbilitySystem"/>, the effect is "disabled" until these <see cref="GameplayTag"/> are present.
         /// </summary>
         /// <value></value>
         GameplayEffectRequireIgnoreTagContainer OngoingRequiredTags { get; }

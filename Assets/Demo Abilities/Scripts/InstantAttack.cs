@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AbilitySystem.ExtensionMethods;
-using AbilitySystem.GameplayEffects;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.ExtensionMethods;
+using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Interfaces;
 using UniRx.Async;
 using UnityEngine;
 
-namespace AbilitySystem.Abilities.AbilityActivations {
+namespace GameplayAbilitySystem.Abilities.AbilityActivations {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Instant Attack")]
     public class InstantAttack : AbstractAbilityActivation {
 
@@ -18,28 +18,28 @@ namespace AbilitySystem.Abilities.AbilityActivations {
         public string AnimationCompleteTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void ActivateAbility(AbilitySystemComponent ASC, IGameplayAbility Ability) {
-            var abilitySystemActor = ASC.transform;
+        public override async void ActivateAbility(AbilitySystem abilitySystem, IGameplayAbility Ability) {
+            var abilitySystemActor = abilitySystem.transform;
             var animationEventSystemComponent = abilitySystemActor.GetComponent<AnimationEventSystem>();
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();
 
             // Make sure we have enough resources.  End ability if we don't
 
-            (_, var gameplayEventData) = await ASC.OnGameplayEvent.WaitForEvent((gameplayTag, eventData) => gameplayTag == WaitForEventTag);
+            (_, var gameplayEventData) = await abilitySystem.OnGameplayEvent.WaitForEvent((gameplayTag, eventData) => gameplayTag == WaitForEventTag);
             animatorComponent.SetTrigger(AnimationTriggerName);
             animatorComponent.SetTrigger(AnimationCompleteTriggerName);
 
             if (ExecuteEffectEvent != null) {
                 await animationEventSystemComponent.CustomAnimationEvent.WaitForEvent((x) => x == ExecuteEffectEvent);
             }
-            _ = ASC.ApplyEffectToTarget(TargetGameplayEffect, gameplayEventData.Target);
+            _ = abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, gameplayEventData.Target);
 
 
             var beh = animatorComponent.GetBehaviour<AnimationBehaviourEventSystem>();
             await beh.StateEnter.WaitForEvent((animator, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));
 
             // End Ability
-            Ability.EndAbility(ASC);
+            Ability.EndAbility(abilitySystem);
         }
 
     }

@@ -1,4 +1,4 @@
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
     public enum ModifierOperationType {
         Add, 
         Multiply, 

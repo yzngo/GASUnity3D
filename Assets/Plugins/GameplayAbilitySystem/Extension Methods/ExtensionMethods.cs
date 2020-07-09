@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UniRx.Async;
 
-namespace AbilitySystem.ExtensionMethods {
+namespace GameplayAbilitySystem.ExtensionMethods {
     public static class UnityEventExtensionMethods {
         /// <summary>
         /// Waits for event to execute, then returns.

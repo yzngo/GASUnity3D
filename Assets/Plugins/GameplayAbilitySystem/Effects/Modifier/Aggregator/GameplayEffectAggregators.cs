@@ -2,9 +2,9 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
-using AbilitySystem.Attributes;
+using GameplayAbilitySystem.Attributes;
 
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
     
     // 某个属性的聚合器 (HP的聚合器, MP的聚合器, etc.)
     public class Aggregator {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using AbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.GameplayEffects;
 
-namespace AbilitySystem.Interfaces {
+namespace GameplayAbilitySystem.Interfaces {
     /// <summary>
     /// This is used to represent cooldowns for a <see cref="IGameplayAbility"/>.  
     /// Multiple <see cref="IGameplayCooldown"/> can be set for an ability to represent multiple

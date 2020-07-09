@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using AbilitySystem;
+using GameplayAbilitySystem;
 
-namespace AbilitySystem.Interfaces {
+namespace GameplayAbilitySystem.Interfaces {
     /// <summary>
     /// List of added or removed tags.  We only have added tags for now, but maybe we might need removed tags in the future?
     /// </summary>

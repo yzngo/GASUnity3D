@@ -1,13 +1,13 @@
-using AbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.GameplayEffects;
 using UnityEngine.Events;
-using AbilitySystem.Attributes;
+using GameplayAbilitySystem.Attributes;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AbilitySystem.Interfaces {
+namespace GameplayAbilitySystem.Interfaces {
     /// <summary>
     /// <para>
-    /// An <see cref="IAttributeSet"/> defines the list of <see cref="IAttribute"/> that a player (that has an <see cref="AbilitySystemComponent"/>) possesses.  
+    /// An <see cref="IAttributeSet"/> defines the list of <see cref="IAttribute"/> that a player (that has an <see cref="AbilitySystem"/>) possesses.  
     /// The attributes themselves are assigned to the <see cref="IAttributeSet"/> by dragging <see cref="ScriptableObject"/> of type
     /// <see cref="IAttribute"/> to the <see cref="IAttributeSet"/> in the Unity Inspector.
     /// </para>
@@ -62,10 +62,10 @@ namespace AbilitySystem.Interfaces {
         AttributeChangeEvent AttributeCurrentValueChanged { get; }
 
         /// <summary>
-        /// Gets the <see cref="AbilitySystemComponent"/> that owns this Attribute Set
+        /// Gets the <see cref="AbilitySystem"/> that owns this Attribute Set
         /// </summary>
         /// <returns>Ability System Component which owns this <see cref="IAttributeSet"/></returns>
-        AbilitySystemComponent GetOwningAbilitySystem();
+        AbilitySystem GetOwningAbilitySystem();
 
         /// <summary>
         /// List of <see cref="IAttribute"/> that belong to this <see cref="IAttributeSet"/>

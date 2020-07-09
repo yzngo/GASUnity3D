@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace AbilitySystem.Cues 
+namespace GameplayAbilitySystem.Cues 
 {
     [CreateAssetMenu(fileName = "GameplayCue", menuName = "Ability System/Gameplay Cue/Gameplay Cue")]
     public sealed class GameplayCue : ScriptableObject 
@@ -11,7 +11,7 @@ namespace AbilitySystem.Cues
         [SerializeField] private BaseCueAction WhileActiveAction = default;
         [SerializeField] private BaseCueAction OnRemoveAction = default;
 
-        public void HandleCue(AbilitySystemComponent target, CueEventMomentType moment) {
+        public void HandleCue(AbilitySystem target, CueEventMomentType moment) {
             switch (moment) {
                 case CueEventMomentType.OnActive:
                     if (OnActiveAction == null) break;

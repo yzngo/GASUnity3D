@@ -1,20 +1,20 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AbilitySystem.Abilities;
-using AbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Abilities;
+using GameplayAbilitySystem.GameplayEffects;
 using UnityEngine;
-using AbilitySystem.Attributes;
-using AbilitySystem.Cues;
+using GameplayAbilitySystem.Attributes;
+using GameplayAbilitySystem.Cues;
 using UnityEngine.Events;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.Interfaces;
 
-namespace AbilitySystem {
+namespace GameplayAbilitySystem {
 
-    /// The ASC is the primary component of the GAS. Every game object 
+    /// The AbilitySytem is the primary component of the GAS. Every game object 
     /// that needs to participate with the GAS needs to have this component attached.
     [AddComponentMenu("Gameplay Ability System/Ability System")]
-    public class AbilitySystemComponent : MonoBehaviour {
+    public class AbilitySystem : MonoBehaviour {
 
         // 自己身上作为目标的点
         [SerializeField] private Transform targetPoint = default;
@@ -53,7 +53,7 @@ namespace AbilitySystem {
 
 
 
-        // Notifies this ASC that the specified ability has ended
+        // Notifies this AbilitySystem that the specified ability has ended
         public void NotifyAbilityEnded(GameplayAbility ability) {
             runningAbilities.Remove(ability);
         }
@@ -82,7 +82,7 @@ namespace AbilitySystem {
         // some with instant modifiers, and some with infinite or duration modifiers.
         // By batching these effects, we can ensure that all these effect happen 
         // with reference to the same base attribute value.
-        public async void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystemComponent Target, float Level)> batchedGameplayEffects) {
+        public async void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystem Target, float Level)> batchedGameplayEffects) {
 
             var instantEffects = batchedGameplayEffects.Where(x => x.Effect.GameplayEffectPolicy.DurationPolicy == DurationPolicy.Instant);
             var durationalEffects = batchedGameplayEffects.Where(
@@ -104,7 +104,7 @@ namespace AbilitySystem {
         // Apply a effect to the target
         // The overall effect may be modulated by the Level.
         // level -> maybe used to affect the "strength" of the effect
-        public Task<GameplayEffect> ApplyEffectToTarget(GameplayEffect effect, AbilitySystemComponent target, float level = 0) {
+        public Task<GameplayEffect> ApplyEffectToTarget(GameplayEffect effect, AbilitySystem target, float level = 0) {
             // TODO: Check to make sure all the attributes being modified by this gameplay effect exist on the target
 
             // TODO: Get list of tags owned by target

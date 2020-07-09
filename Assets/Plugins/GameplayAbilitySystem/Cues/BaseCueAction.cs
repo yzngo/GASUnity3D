@@ -1,11 +1,11 @@
 using UnityEngine;
-using AbilitySystem;
-namespace AbilitySystem.Cues {
+using GameplayAbilitySystem;
+namespace GameplayAbilitySystem.Cues {
 
     // Custom GameplayCue methods should derive from this and override the Action() method
     public abstract class BaseCueAction : ScriptableObject {
 
-        public virtual void Action(AbilitySystemComponent target) {
+        public virtual void Action(AbilitySystem target) {
         }
     }
 }

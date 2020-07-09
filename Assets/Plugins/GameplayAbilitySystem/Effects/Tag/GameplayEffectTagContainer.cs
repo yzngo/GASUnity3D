@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
     //多个标签的容器
     public abstract class GameplayEffectTagContainer {
         public abstract bool HasAny(IEnumerable<GameplayTag> Tags);

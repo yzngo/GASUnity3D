@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace AbilitySystem.Interfaces {
+namespace GameplayAbilitySystem.Interfaces {
     /// <summary>
     /// List of tags that must be present, and list of tags that must not be present
     /// </summary>

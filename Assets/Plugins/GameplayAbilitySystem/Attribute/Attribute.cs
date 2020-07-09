@@ -1,8 +1,8 @@
-using AbilitySystem.Attributes;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.Attributes;
+using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace AbilitySystem.Attributes 
+namespace GameplayAbilitySystem.Attributes 
 {
     [AddComponentMenu("Ability System/Attributes/Attribute")]
     [System.Serializable]

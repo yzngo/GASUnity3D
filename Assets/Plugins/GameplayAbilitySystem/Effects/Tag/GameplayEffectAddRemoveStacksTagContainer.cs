@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
     [Serializable]
     public class GameplayEffectAddRemoveStacksTagContainer : GameplayEffectTagContainer {
         [SerializeField]

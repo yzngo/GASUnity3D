@@ -1,7 +1,7 @@
-using AbilitySystem.Attributes;
-using AbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Attributes;
+using GameplayAbilitySystem.GameplayEffects;
 
-namespace AbilitySystem.Interfaces {
+namespace GameplayAbilitySystem.Interfaces {
 
     /// <summary>
     /// This class defines how a  <see cref="GameplayEffect"/> modifies attributes (e.g. doing damage, healing)
@@ -32,12 +32,12 @@ namespace AbilitySystem.Interfaces {
         float ScaledMagnitude { get; }
 
         /// <summary>
-        /// <see cref="GameplayTag"/> that must be present/must not be present on the source of the <see cref="AbilitySystemComponent"/>
+        /// <see cref="GameplayTag"/> that must be present/must not be present on the source of the <see cref="AbilitySystem"/>
         /// </summary>
         /// <value></value>
         GameplayEffectModifierTagCollection SourceTags { get; }
 
-        /// <see cref="GameplayTag"/> that must be present/must not be present on the target of the <see cref="AbilitySystemComponent"/>
+        /// <see cref="GameplayTag"/> that must be present/must not be present on the target of the <see cref="AbilitySystem"/>
         GameplayEffectModifierTagCollection TargetTags { get; }
 
         bool AttemptCalculateMagnitude(out float evaluatedMagnitude);

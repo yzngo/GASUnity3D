@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using AbilitySystem.ExtensionMethods;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.ExtensionMethods;
+using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace AbilitySystem.Abilities.AbilityActivations {
+namespace GameplayAbilitySystem.Abilities.AbilityActivations {
     public abstract class AbstractAbilityActivation : ScriptableObject {
-        public abstract void ActivateAbility(AbilitySystemComponent ASC, IGameplayAbility Ability);
+        public abstract void ActivateAbility(AbilitySystem abilitySystem, IGameplayAbility ability);
     }
 }

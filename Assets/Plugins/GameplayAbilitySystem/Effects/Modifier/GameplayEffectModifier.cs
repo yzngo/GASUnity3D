@@ -1,9 +1,9 @@
 using System;
-using AbilitySystem.Attributes;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.Attributes;
+using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
     /// <inheritdoc />
     [Serializable]
     public class GameplayEffectModifier : IGameplayEffectModifier {

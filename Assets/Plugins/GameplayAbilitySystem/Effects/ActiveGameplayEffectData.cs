@@ -1,10 +1,10 @@
 using UnityEngine;
 using System;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.Interfaces;
 using System.Collections.Generic;
-using AbilitySystem.Attributes;
+using GameplayAbilitySystem.Attributes;
 
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
 
     /// 激活的某个游戏效果的数据集, 用于跟踪活动中的effect
     [Serializable]
@@ -17,10 +17,10 @@ namespace AbilitySystem.GameplayEffects {
         /// The actual GameplayEffect
         public GameplayEffect Effect => gameplayEffect;
         public float StartWorldTime => startWorldTime;
-        public AbilitySystemComponent Instigator { get; private set; }      // 发起者
-        public AbilitySystemComponent Target { get; private set; }          // 目标对象
+        public AbilitySystem Instigator { get; private set; }      // 发起者
+        public AbilitySystem Target { get; private set; }          // 目标对象
 // ctor
-        public ActiveGameplayEffectData(GameplayEffect effect, AbilitySystemComponent instigator, AbilitySystemComponent target) {
+        public ActiveGameplayEffectData(GameplayEffect effect, AbilitySystem instigator, AbilitySystem target) {
             gameplayEffect = effect;
             startWorldTime = Time.time;
             Instigator = instigator;

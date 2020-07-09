@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
-using AbilitySystem;
-using AbilitySystem.Abilities;
+using GameplayAbilitySystem;
+using GameplayAbilitySystem.Abilities;
 using UnityEngine;
 using System;
 
 public class AbilityCharacter : MonoBehaviour
 {
-    public AbilitySystemComponent ASC { get; private set; }
+    public AbilitySystem AbilitySystem { get; private set; }
 
     public List<CastingAbilityContainer> Abilities = new List<CastingAbilityContainer>();
 
     void Start()
     {
-        ASC = GetComponent<AbilitySystemComponent>();
+        AbilitySystem = GetComponent<AbilitySystem>();
     }
 
     public (float CooldownElapsed, float CooldownTotal) GetCooldownOfAbility(int n)
     {
         if (n >= this.Abilities.Count) return (0f, 0f);
         var ability = this.Abilities[n].Ability;
-        return ability.CalculateCooldown(ASC);
+        return ability.CalculateCooldown(AbilitySystem);
         // foreach (var item in SelfAbilitySystem.ActiveGameplayEffectsContainer.ActiveCooldowns)
         // {
         //     Debug.Log(item.Effect.GameplayEffectPolicy.DurationMagnitude - item.CooldownTimeElapsed);
@@ -40,10 +40,10 @@ public class AbilityCharacter : MonoBehaviour
         eventData.Target = Target;
 
         // If ability can be activated
-        if (ASC.TryActivateAbility(Ability))
+        if (AbilitySystem.TryActivateAbility(Ability))
         {
             // Send gameplay event to this player with information on target etc
-            ASC.OnGameplayEvent.Invoke(eventTag, eventData);
+            AbilitySystem.OnGameplayEvent.Invoke(eventTag, eventData);
         }
     }
 
@@ -54,5 +54,5 @@ public class CastingAbilityContainer
 {
     public GameplayAbility Ability;
 
-    public AbilitySystemComponent AbilityTarget;
+    public AbilitySystem AbilityTarget;
 }

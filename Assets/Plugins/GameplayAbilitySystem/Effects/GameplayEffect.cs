@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using AbilitySystem.Interfaces;
-using AbilitySystem;
-using AbilitySystem.Attributes;
+using GameplayAbilitySystem.Interfaces;
+using GameplayAbilitySystem;
+using GameplayAbilitySystem.Attributes;
 using UnityEngine;
-using AbilitySystem.Cues;
+using GameplayAbilitySystem.Cues;
 
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
 
     // 改变自己或别人的Attributes 和GameplayTags的途径
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
@@ -26,16 +26,16 @@ namespace AbilitySystem.GameplayEffects {
         public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedToASCTags.Added;
         // public IEnumerable<(GameplayTag Tag, GameplayEffect Effect)> GrantedEffectTags => GrantedTags.Select(x => (x, this));
 
-        public bool ApplicationTagRequirementMet(AbilitySystemComponent ASC) {
+        public bool ApplicationTagRequirementMet(AbilitySystem abilitySystem) {
             var requiredTagsPresent = true;
             var ignoredTagsAbsent = true;
 
             if (EffectTags.ApplyRequiredTags.RequirePresence.Count > 0) {
-                requiredTagsPresent = ASC.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequirePresence.Contains(x));
+                requiredTagsPresent = abilitySystem.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequirePresence.Contains(x));
             }
 
             if (EffectTags.ApplyRequiredTags.RequireAbsence.Count > 0) {
-                ignoredTagsAbsent = !ASC.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequireAbsence.Contains(x));
+                ignoredTagsAbsent = !abilitySystem.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequireAbsence.Contains(x));
             }
 
 
@@ -101,7 +101,7 @@ namespace AbilitySystem.GameplayEffects {
         }
 
         public Dictionary<AttributeType, AttributeModificationValues> CalculateAttributeModification(
-                    AbilitySystemComponent abilitySystem, 
+                    AbilitySystem abilitySystem, 
                     Dictionary<AttributeType, Dictionary<ModifierOperationType, float>> modifiers, 
                     bool operateOnCurrentValue = false
         ) {
@@ -139,7 +139,7 @@ namespace AbilitySystem.GameplayEffects {
             return attributeModification;
         }
 
-        public void ApplyInstantEffect(AbilitySystemComponent target) {
+        public void ApplyInstantEffect(AbilitySystem target) {
             // Modify base attribute values.  Collect the overall change for each modifier
             var modifierTotals = CalculateModifierEffect();
             var attributeModifications = CalculateAttributeModification(target, modifierTotals);
@@ -160,7 +160,7 @@ namespace AbilitySystem.GameplayEffects {
             }
         }
 
-        // public bool ApplicationRequirementsPass(AbilitySystemComponent ASC) {
+        // public bool ApplicationRequirementsPass(AbilitySystemComponent abilitySystem) {
             // return _gameplayEffectTags.ApplicationTagRequirements.RequirePresence;
         // 
         //     return true;

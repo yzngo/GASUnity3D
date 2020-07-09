@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
     [Serializable]
     public class GameplayEffectRequireIgnoreTagContainer : GameplayEffectTagContainer, IRequireIgnoreTags {
         [SerializeField]

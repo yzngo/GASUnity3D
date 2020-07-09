@@ -1,9 +1,9 @@
 using System;
-using AbilitySystem.Interfaces;
-using AbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Interfaces;
+using GameplayAbilitySystem.GameplayEffects;
 using UnityEngine;
 
-namespace AbilitySystem {
+namespace GameplayAbilitySystem {
     [Serializable]
     public class GameplayCost {
 

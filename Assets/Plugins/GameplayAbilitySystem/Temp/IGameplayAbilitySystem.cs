@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using AbilitySystem.Abilities;
-using AbilitySystem.Attributes;
-using AbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Abilities;
+using GameplayAbilitySystem.Attributes;
+using GameplayAbilitySystem.GameplayEffects;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Threading.Tasks;
 
-namespace AbilitySystem.Interfaces {
+namespace GameplayAbilitySystem.Interfaces {
 
     // public interface IGameplayAbilitySystem {
 

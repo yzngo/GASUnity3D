@@ -1,6 +1,6 @@
 
 using System;
-using AbilitySystem.Abilities;
+using GameplayAbilitySystem.Abilities;
 using UnityEngine;
 
 [Serializable]

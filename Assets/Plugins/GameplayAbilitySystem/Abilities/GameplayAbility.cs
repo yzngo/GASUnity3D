@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using AbilitySystem.Interfaces;
-using AbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Interfaces;
+using GameplayAbilitySystem.GameplayEffects;
 using UnityEngine;
-using AbilitySystem.Abilities.AbilityActivations;
+using GameplayAbilitySystem.Abilities.AbilityActivations;
 using System.Linq;
 
-namespace AbilitySystem.Abilities 
+namespace GameplayAbilitySystem.Abilities 
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability")]
     public class GameplayAbility : ScriptableObject, IGameplayAbility 
@@ -29,28 +29,28 @@ namespace AbilitySystem.Abilities
         // public GenericAbilityEvent OnGameplayAbilityCancelled => _onGameplayAbilityCancelled;
         // public GenericAbilityEvent OnGameplayAbilityEnded => _onGameplayAbilityEnded;
 
-        public bool IsAbilityActivatable(AbilitySystemComponent ASC) {
+        public bool IsAbilityActivatable(AbilitySystem abilitySystem) {
             // Player must be "Idle" to begin ability activation
-            if (ASC.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base.Idle")) return false;
-            return CheckCost(ASC) && AbilityOffCooldown(ASC) && IsTagsSatisfied(ASC);
+            if (abilitySystem.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base.Idle")) return false;
+            return CheckCost(abilitySystem) && AbilityOffCooldown(abilitySystem) && IsTagsSatisfied(abilitySystem);
         }
 
-        public void ActivateAbility(AbilitySystemComponent ASC) {
-            AbilityLogic.ActivateAbility(ASC, this);
-            ApplyCooldown(ASC);
+        public void ActivateAbility(AbilitySystem abilitySystem) {
+            AbilityLogic.ActivateAbility(abilitySystem, this);
+            ApplyCooldown(abilitySystem);
         }
 
 
-        public bool CommitAbility(AbilitySystemComponent ASC) {
-            ActivateAbility(ASC);
+        public bool CommitAbility(AbilitySystem abilitySystem) {
+            ActivateAbility(abilitySystem);
             // AbilitySystem.OnGameplayAbilityActivated.Invoke(this);
-            ApplyCost(ASC);
+            ApplyCost(abilitySystem);
             return true;
         }
 
-        private bool IsTagsSatisfied(AbilitySystemComponent ASC) {
+        private bool IsTagsSatisfied(AbilitySystem abilitySystem) {
             // Checks to make sure Source ability system doesn't have prohibited tags
-            var activeTags = ASC.ActiveTags;
+            var activeTags = abilitySystem.ActiveTags;
             bool hasActivationRequiredTags = true;
             bool hasActivationBlockedTags = false;
             bool hasSourceRequiredTags = false;
@@ -76,7 +76,7 @@ namespace AbilitySystem.Abilities
 
 
 
-        public void EndAbility(AbilitySystemComponent ASC) {
+        public void EndAbility(AbilitySystem abilitySystem) {
             // _onGameplayAbilityEnded.Invoke(this);
 
             // Ability finished.  Remove all listeners.
@@ -88,24 +88,24 @@ namespace AbilitySystem.Abilities
             // TODO: Remove blocking/cancelling Gameplay Tags
 
             // Tell ability system ability has ended
-            ASC.NotifyAbilityEnded(this);
+            abilitySystem.NotifyAbilityEnded(this);
         }
 
         /// <summary>
         /// Applies cooldown. Cooldown is applied even if the ability is already
         /// on cooldown
         /// </summary>
-        protected void ApplyCooldown(AbilitySystemComponent ASC) {
+        protected void ApplyCooldown(AbilitySystem abilitySystem) {
             foreach (var cooldown in Cooldowns) {
-                ASC.ApplyEffectToTarget(cooldown, ASC);
+                abilitySystem.ApplyEffectToTarget(cooldown, abilitySystem);
             }
         }
 
-        public (float CooldownElapsed, float CooldownTotal) CalculateCooldown(AbilitySystemComponent ASC) {
+        public (float CooldownElapsed, float CooldownTotal) CalculateCooldown(AbilitySystem abilitySystem) {
             List<GameplayTag> cooldownTags = Tags.CooldownTags.Added;
 
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
-            ActiveGameplayEffectData dominantCooldownEffect = ASC.ActiveEffectsContainer
+            ActiveGameplayEffectData dominantCooldownEffect = abilitySystem.ActiveEffectsContainer
                                     .ActiveEffectAttributeAggregator
                                     .GetAllActiveEffects()
                                     .Where(x => x.Effect.GrantedTags.Intersect(cooldownTags).Any())
@@ -120,11 +120,11 @@ namespace AbilitySystem.Abilities
         }
 
         // Checks to see if the target GAS has the required cost resource to cast the ability
-        private bool CheckCost(AbilitySystemComponent ASC) {
+        private bool CheckCost(AbilitySystem abilitySystem) {
             // Check the modifiers on the ability cost GameEffect
             var modifiers = Cost.CalculateModifierEffect();
             var attributeModification = Cost.CalculateAttributeModification(
-                    ASC, modifiers, operateOnCurrentValue: true);
+                    abilitySystem, modifiers, operateOnCurrentValue: true);
 
             foreach (var attribute in attributeModification) {
                 if (attribute.Value.NewAttribueValue < 0) return false;
@@ -136,15 +136,15 @@ namespace AbilitySystem.Abilities
         /// Applies the ability cost, decreasing the specified cost resource from the player.
         /// If player doesn't have the required resource, the resource goes to negative (or clamps to 0)
         /// </summary>
-        private void ApplyCost(AbilitySystemComponent ASC) {
+        private void ApplyCost(AbilitySystem abilitySystem) {
             var modifiers = Cost.CalculateModifierEffect();
-            var attributeModification = Cost.CalculateAttributeModification(ASC, modifiers);
-            Cost.ApplyInstantEffect(ASC);
+            var attributeModification = Cost.CalculateAttributeModification(abilitySystem, modifiers);
+            Cost.ApplyInstantEffect(abilitySystem);
         }
 
         // Checks to see if the GAS is off cooldown
-        private bool AbilityOffCooldown(AbilitySystemComponent ASC) {
-            (var elapsed, var total) = CalculateCooldown(ASC);
+        private bool AbilityOffCooldown(AbilitySystem abilitySystem) {
+            (var elapsed, var total) = CalculateCooldown(abilitySystem);
             return total == 0f;
         }
     }

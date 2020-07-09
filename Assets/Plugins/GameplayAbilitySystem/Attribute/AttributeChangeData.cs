@@ -1,10 +1,10 @@
-using AbilitySystem.GameplayEffects;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.GameplayEffects;
+using GameplayAbilitySystem.Interfaces;
 using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 
-namespace AbilitySystem.Attributes {
+namespace GameplayAbilitySystem.Attributes {
 
     /// <summary>
     /// Container for attribute change events

@@ -1,4 +1,4 @@
-using AbilitySystem.Attributes;
+using GameplayAbilitySystem.Attributes;
 using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson

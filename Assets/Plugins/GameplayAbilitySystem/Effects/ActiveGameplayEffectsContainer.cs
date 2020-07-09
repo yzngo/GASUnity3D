@@ -2,25 +2,25 @@ using System.Threading;
 using System.Xml.Linq;
 using System.Linq;
 using System.Collections.Generic;
-using AbilitySystem.Interfaces;
-using AbilitySystem.Attributes;
+using GameplayAbilitySystem.Interfaces;
+using GameplayAbilitySystem.Attributes;
 using System;
 using UnityEngine.Events;
 using UniRx.Async;
 using System.Threading.Tasks;
 using UnityEngine;
-using AbilitySystem.Cues;
+using GameplayAbilitySystem.Cues;
 
-namespace AbilitySystem.GameplayEffects {
+namespace GameplayAbilitySystem.GameplayEffects {
 
     // 所有激活的effect的容器
     [Serializable]
     public class ActiveGameplayEffectsContainer {
 
         // 拥有此effect的ASC
-        private AbilitySystemComponent ASC;
-        public ActiveGameplayEffectsContainer(AbilitySystemComponent ASC) {
-            this.ASC = ASC;
+        private AbilitySystem abilitySystem;
+        public ActiveGameplayEffectsContainer(AbilitySystem abilitySystem) {
+            this.abilitySystem = abilitySystem;
         }
 
         /// <summary>
@@ -238,9 +238,9 @@ namespace AbilitySystem.GameplayEffects {
 
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
-                    var current = ASC.GetBaseValue(modifier.Attribute);
-                    if (current < 0) ASC.SetBaseValue(modifier.Attribute, 0f);
-                    ASC.SetCurrentValue(modifier.Attribute, current);
+                    var current = abilitySystem.GetBaseValue(modifier.Attribute);
+                    if (current < 0) abilitySystem.SetBaseValue(modifier.Attribute, 0f);
+                    abilitySystem.SetCurrentValue(modifier.Attribute, current);
                 } else {
                     UpdateAttribute(aggregators, modifier.Attribute);
                 }
@@ -249,9 +249,9 @@ namespace AbilitySystem.GameplayEffects {
         }
 
         public void UpdateAttribute(IEnumerable<Aggregator> aggregator, AttributeType attributeType) {
-            var baseAttributeValue = ASC.GetBaseValue(attributeType);
+            var baseAttributeValue = abilitySystem.GetBaseValue(attributeType);
             var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
-            ASC.SetCurrentValue(attributeType, newCurrentAttributeValue);
+            abilitySystem.SetCurrentValue(attributeType, newCurrentAttributeValue);
         }
 
         private IEnumerable<ActiveGameplayEffectData> GetMatchingStackedEffectsByEffect(ActiveGameplayEffectData effectData) {

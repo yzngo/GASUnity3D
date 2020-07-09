@@ -1,6 +1,6 @@
-using AbilitySystem.Attributes;
+using GameplayAbilitySystem.Attributes;
 
-namespace AbilitySystem.Interfaces {
+namespace GameplayAbilitySystem.Interfaces {
     /// <summary>
     /// Attributes are used to define parameters (such as health, speed) for a character.
     /// </summary>

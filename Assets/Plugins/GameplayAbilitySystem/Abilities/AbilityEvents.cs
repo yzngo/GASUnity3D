@@ -1,10 +1,10 @@
 using System;
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.Interfaces;
 using UnityEngine.Events;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace AbilitySystem.Abilities {
+namespace GameplayAbilitySystem.Abilities {
     [Serializable]
     public class GenericAbilityEvent : UnityEvent<IGameplayAbility> {
 
@@ -18,8 +18,8 @@ namespace AbilitySystem.Abilities {
     [Serializable]
     public struct GameplayEventData {
         public GameplayTag EventTag;
-        public AbilitySystemComponent Instigator;
-        public AbilitySystemComponent Target;
+        public AbilitySystem Instigator;
+        public AbilitySystem Target;
         public object OptionalObject;
         // Gameplay Effect handle?
         public List<GameplayTag> InstigatorTags;

@@ -1,8 +1,8 @@
-using AbilitySystem.Interfaces;
+using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
 
-namespace AbilitySystem.Attributes {
+namespace GameplayAbilitySystem.Attributes {
 
     // 继承此类实现OnAttributeChange函数, 定义如何修改attribute
     public abstract class BaseAttributeChangeHandler : ScriptableObject {
