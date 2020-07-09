@@ -88,7 +88,6 @@ namespace AbilitySystem {
             if (!Ability.IsAbilityActivatable(this)) return false;
             runningAbilities.Add(Ability);
             Ability.CommitAbility(this);
-
             return true;
         }
 
@@ -115,7 +114,6 @@ namespace AbilitySystem {
         //     // Apply durational effects
         //     foreach (var effect in durationalEffects) {
         //         if (await ApplyEffectToTarget(effect.Effect, effect.Target)) {
-
         //         }
         //     }
         // }
@@ -131,7 +129,6 @@ namespace AbilitySystem {
             if (!effect.ApplicationTagRequirementMet(target)) {
                 return null;
             }
-
             // If this is a non-instant gameplay effect (i.e. it will modify the current value, not the base value)
 
             // If this is an instant gameplay effect (i.e. it will modify the base value)
@@ -167,7 +164,6 @@ namespace AbilitySystem {
 
                 StacksRemoved[GE.EffectData.Effect]++;
             }
-
 
             var gameplayCues = effect.GameplayCues;
             // Execute gameplay cue

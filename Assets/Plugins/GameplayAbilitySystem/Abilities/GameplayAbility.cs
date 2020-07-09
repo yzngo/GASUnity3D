@@ -5,27 +5,25 @@ using UnityEngine;
 using AbilitySystem.Abilities.AbilityActivations;
 using System.Linq;
 
-namespace AbilitySystem.Abilities {
-    /// <inheritdoc />
-    [AddComponentMenu("Ability System/Ability")]
+namespace AbilitySystem.Abilities 
+{
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability")]
-    public class GameplayAbility : ScriptableObject, IGameplayAbility {
+    public class GameplayAbility : ScriptableObject, IGameplayAbility 
+    {
+        public GameplayAbilityTags Tags => _tags;
+        public GameplayEffect Cost => cost;
+        public List<GameplayEffect> Cooldowns => _cooldownsToApply;
+        public AbstractAbilityActivation AbilityLogic => _abilityLogic;
 
         [SerializeField] private GameplayAbilityTags _tags = new GameplayAbilityTags();
         [SerializeField] private GameplayEffect cost = default;
         [SerializeField] private List<GameplayEffect> _cooldownsToApply = new List<GameplayEffect>();
+        [SerializeField] private AbstractAbilityActivation _abilityLogic = default;
+
         // [SerializeField] private List<GameplayEffect> _effectsToApplyOnExecution = new List<GameplayEffect>();
         // [SerializeField] private GenericAbilityEvent _onGameplayAbilityCommitted = new GenericAbilityEvent();
         // [SerializeField] private GenericAbilityEvent _onGameplayAbilityCancelled = new GenericAbilityEvent();
         // [SerializeField] private GenericAbilityEvent _onGameplayAbilityEnded = new GenericAbilityEvent();
-        [SerializeField] private AbstractAbilityActivation _abilityLogic = default;
-
-        public GameplayAbilityTags Tags => _tags;
-        public GameplayEffect Cost => cost;
-        public List<GameplayEffect> Cooldowns => _cooldownsToApply;
-        /// Defines what the ability actually does
-        public AbstractAbilityActivation AbilityLogic => _abilityLogic;
-
         // public List<GameplayEffect> EffectsToApplyOnExecution => _effectsToApplyOnExecution;
         // public GenericAbilityEvent OnGameplayAbilityCommitted => _onGameplayAbilityCommitted;
         // public GenericAbilityEvent OnGameplayAbilityCancelled => _onGameplayAbilityCancelled;
@@ -38,7 +36,7 @@ namespace AbilitySystem.Abilities {
         }
 
         public void ActivateAbility(AbilitySystemComponent ASC) {
-            _abilityLogic.ActivateAbility(ASC, this);
+            AbilityLogic.ActivateAbility(ASC, this);
             ApplyCooldown(ASC);
         }
 
