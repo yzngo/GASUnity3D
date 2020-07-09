@@ -154,9 +154,7 @@ namespace GameplayAbilitySystem {
 
             Dictionary<GameplayEffect, int> stacks = new Dictionary<GameplayEffect, int>();
 
-            Debug.Log("---------------------------------------------------------------");
             foreach (var beRemovedEffect in beRemovedEffects) {
-                Debug.Log(beRemovedEffect.Tag.name);
                 var effect = beRemovedEffect.EffectData.Effect;
                 if (!stacks.ContainsKey(effect)) {
                     stacks.Add(effect, 0);
@@ -167,7 +165,6 @@ namespace GameplayAbilitySystem {
                 }
                 stacks[effect]++;
             }
-            Debug.Log("---------------------------------------------------------------");
 
             var gameplayCues = appliedEffect.GameplayCues;
             // Execute gameplay cue
