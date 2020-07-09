@@ -30,18 +30,6 @@ public class AbilityCharacter : MonoBehaviour
 
         GameplayAbility ability = Abilities[n].ability;
         AbilitySystem target = Abilities[n].target;
-        GameplayTag abilityTag = ability.Tags.AbilityTags.Added.Count > 0 ? ability.Tags.AbilityTags.Added[0] : new GameplayTag();
-
-        AbilityEventData abilityEventData = new AbilityEventData();
-        // eventData.EventTag = eventTag;
-        abilityEventData.Target = target;
-
-        // If ability can be activated
-        if (AbilitySystem.TryActivateAbility(ability))
-        {
-            // Send gameplay event to this player with information on target etc
-            AbilitySystem.OnGameplayEvent.Invoke(abilityTag, abilityEventData);
-        }
+        AbilitySystem.TryActivateAbility(ability, target);
     }
-
 }

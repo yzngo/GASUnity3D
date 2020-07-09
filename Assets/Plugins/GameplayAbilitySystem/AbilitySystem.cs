@@ -62,11 +62,15 @@ namespace GameplayAbilitySystem {
         }
 
         // Try to activate the ability
-        public bool TryActivateAbility(GameplayAbility Ability) {
-            if (!CanActivateAbility(Ability)) return false;
-            if (!Ability.IsAbilityActivatable(this)) return false;
-            runningAbilities.Add(Ability);
-            Ability.CommitAbility(this);
+        public bool TryActivateAbility(GameplayAbility ability, AbilitySystem target = null) {
+            if (!CanActivateAbility(ability)) return false;
+            if (!ability.IsAbilityActivatable(this)) return false;
+            runningAbilities.Add(ability);
+            ability.CommitAbility(this);
+            GameplayTag abilityTag = ability.Tags.AbilityTags.Added.Count > 0 ? ability.Tags.AbilityTags.Added[0] : new GameplayTag();
+            var data = new AbilityEventData();
+            data.Target = target;
+            onGameplayEvent?.Invoke(abilityTag, data);
             return true;
         }
 
