@@ -9,44 +9,44 @@ using System.Threading.Tasks;
 
 namespace AbilitySystem.Interfaces {
 
-    public interface IGameplayAbilitySystem {
+    // public interface IGameplayAbilitySystem {
 
         /// <summary>
         /// Called when a <see cref="IGameplayAbility"/> ends <see cref="AbilitySystemComponent"/> (e.g. <see cref="IGameplayAbility.EndAbility(AbilitySystemComponent)"/> is called)
         /// This indicates that the resource/cooldown for the ability have been commited and the ability will be executed
         /// </summary>
         /// <value></value>
-        GenericAbilityEvent OnGameplayAbilityEnded { get; }
+        // GenericAbilityEvent OnGameplayAbilityEnded { get; }
 
         /// <summary>
         /// List of running abilities that have not ended on this <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <value></value>
-        List<IGameplayAbility> RunningAbilities { get; }
+        // List<IGameplayAbility> RunningAbilities { get; }
 
         /// <summary>
         /// This event is called when a <see cref="GameplayEvent"/> is executed this <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <value></value>
-        GameplayEvent OnGameplayEvent { get; }
+        // GameplayEvent OnGameplayEvent { get; }
 
         /// <summary>
         /// Event called when an effect is removed on this <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <value></value>
-        GenericGameplayEffectEvent OnEffectRemoved { get; }
+        // GenericGameplayEffectEvent OnEffectRemoved { get; }
 
         /// <summary>
         /// Event called when an effect is added on this <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <value></value>
-        GenericGameplayEffectEvent OnEffectAdded { get; }
+        // GenericGameplayEffectEvent OnEffectAdded { get; }
 
         /// <summary>
         /// Lists all active <see cref="GameplayEffect"/> on this <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <value></value>
-        ActiveGameplayEffectsContainer ActiveGameplayEffectsContainer { get; }
+        // ActiveGameplayEffectsContainer ActiveGameplayEffectsContainer { get; }
 
 
         /// <summary>
@@ -54,14 +54,14 @@ namespace AbilitySystem.Interfaces {
         /// </summary>
         /// <param name="Ability">The <see cref="GameplayAbility"/> to execute</param>
         /// <returns>True if the ability can be activated, false otherwise</returns>
-        bool CanActivateAbility(IGameplayAbility Ability);
+        // bool CanActivateAbility(IGameplayAbility Ability);
 
         /// <summary>
         /// Attempts to activate the <see cref="GameplayAbility"/>.
         /// </summary>
         /// <param name="Ability">The <see cref="GameplayAbility"/> to execute</param>
         /// <returns>True if the ability was activated, false otherwise</returns>
-        bool TryActivateAbility(GameplayAbility Ability);
+        // bool TryActivateAbility(GameplayAbility Ability);
 
         /// <summary>
         /// Applies a <see cref="GameplayEffect"/> to the target <see cref="AbilitySystemComponent"/>.
@@ -71,40 +71,40 @@ namespace AbilitySystem.Interfaces {
         /// <param name="Target">Target on which effect is to be applied</param>
         /// <param name="Level">Level of the effect.  May be used to affect the "strength" of the effect</param>
         /// <returns><see cref="GameplayEffect"/> that was applied  to the target</returns>
-        Task<GameplayEffect> ApplyGameEffectToTarget(GameplayEffect Effect, AbilitySystemComponent Target, float Level = 0f);
+        // Task<GameplayEffect> ApplyGameEffectToTarget(GameplayEffect Effect, AbilitySystemComponent Target, float Level = 0f);
 
         /// <summary>
         /// Notifies this <see cref="AbilitySystemComponent"/> that the specified <see cref="GameplayAbility"/> has ended
         /// </summary>
         /// <param name="Ability"><see cref="GameplayAbility"/> which has ended</param>
-        void NotifyAbilityEnded(GameplayAbility Ability);
+        // void NotifyAbilityEnded(GameplayAbility Ability);
 
         /// <summary>
         /// Gets the parent <see cref="Transform"/> of this <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <returns></returns>
-        Transform GetActor();
+        // Transform GetActor();
 
         /// <summary>
         /// Responds to a Gameplay Event on this <see cref="AbilitySystemComponent"/>
         /// </summary>
         /// <param name="EventTag">Tag of the event</param>
         /// <param name="Payload">Payload containing information about the event, such as target, etc.</param>
-        void HandleGameplayEvent(GameplayTag EventTag, GameplayEventData Payload);
+        // void HandleGameplayEvent(GameplayTag EventTag, GameplayEventData Payload);
 
         /// <summary>
         /// Gets the base numerical value of an attribute attached to this <see cref="GameObject"/>
         /// </summary>
         /// <param name="AttributeType">Type of attribute to get value of</param>
         /// <returns>Current value of attribute</returns>
-        float GetNumericAttributeBase(AttributeType AttributeType);
+        // float GetNumericAttributeBase(AttributeType AttributeType);
 
         /// <summary>
         /// Gets the current numerical value of an attribute attached to this <see cref="GameObject"/>
         /// </summary>
         /// <param name="AttributeType">Type of attribute to get value of</param>
         /// <returns>Current value of attribute</returns>
-        float GetNumericAttributeCurrent(AttributeType AttributeType);
+        // float GetNumericAttributeCurrent(AttributeType AttributeType);
 
         /// <summary>
         /// Sets the current numerical value of an attribute attached to this <see cref="GameObject"/>
@@ -112,7 +112,7 @@ namespace AbilitySystem.Interfaces {
         /// <param name="AttributeType">Type of attribute to get value of</param>
         /// <param name="NewValue">New value of attribute</param>
         /// <returns>Current value of attribute</returns>
-        void SetNumericAttributeCurrent(AttributeType AttributeType, float NewValue);
+        // void SetNumericAttributeCurrent(AttributeType AttributeType, float NewValue);
 
         /// <summary>
         /// <para>
@@ -127,9 +127,6 @@ namespace AbilitySystem.Interfaces {
         /// could be different depending on the order in which the <see cref="GameplayEffect"/> are applied.
         /// </para>
         /// </summary>
-        void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystemComponent Target, float Level)> BatchedGameplayEffects);
-    }
-
-
-
+        // void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystemComponent Target, float Level)> BatchedGameplayEffects);
+    // }
 }
