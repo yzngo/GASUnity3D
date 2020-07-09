@@ -2,40 +2,27 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AbilitySystem {
-    /// <summary>
-    /// Gameplay tags are used to define how various aspects interact with each other
-    /// </summary>
-    [CreateAssetMenu(fileName = "Gameplay Tag", menuName = "Ability System/Gameplay Tag")]
-    [Serializable]
-    public class GameplayTag : ScriptableObject {
-        /// <summary>
-        /// A static container for keeping track of all <see cref="GameplayTag"/> that are used.
-        /// </summary>
-        /// <typeparam name="GameplayTag"></typeparam>
-        /// <returns></returns>
+namespace AbilitySystem 
+{
+    // Gameplay tags are used to define how various aspects interact with each other
+    [Serializable,CreateAssetMenu(fileName = "Gameplay Tag", menuName = "Ability System/Gameplay Tag")]
+    public class GameplayTag : ScriptableObject 
+    {
+        // A static container for keeping track of all Tag that are used.
         public static HashSet<GameplayTag> GameplayTags = new HashSet<GameplayTag>();
 
-        /// <summary>
-        /// A developer friendly comment
-        /// </summary>
+        // A developer friendly comment
         public string Comment;
 
         void OnEnable() {
-            /// <summary>
-            /// When this <see cref="ScriptableObject"/> is initialised, add the instance to the static container <see cref="GameplayTags"/>
-            /// </summary>
-            /// <returns></returns>
+            // When this Tag is initialized, add the instance to the static container
             if (!GameplayTags.Contains(this)) {
                 GameplayTags.Add(this);
             }
         }
 
         void OnDisable() {
-            /// <summary>
-            /// When this <see cref="ScriptableObject"/> is destroyed, remove the instance from the static container <see cref="GameplayTags"/>
-            /// </summary>
-            /// <returns></returns>
+            /// When this Tag is destroyed, remove the instance from the static container
             GameplayTags.Remove(this);
         }
 
