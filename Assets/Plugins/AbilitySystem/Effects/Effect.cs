@@ -16,11 +16,6 @@ namespace GameplayAbilitySystem.Effects
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class Effect : ScriptableObject 
     {
-        public class ModifyArrtibuteValues {
-            public float oldValue = 0f;
-            public float newValue = 0f;
-        }
-
         [SerializeField] private EffectPolicy gameplayEffectPolicy = new EffectPolicy();
         [SerializeField] private PeriodConfig periodicity = new PeriodConfig();
         [SerializeField] private StackConfig stackPolicy = new StackConfig();
@@ -157,6 +152,12 @@ namespace GameplayAbilitySystem.Effects
                 }
             }
         }
+
+        public class ModifyArrtibuteValues {
+            public float oldValue = 0f;
+            public float newValue = 0f;
+        }
+
     }
 }
 
