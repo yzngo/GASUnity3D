@@ -8,8 +8,6 @@ namespace GameplayAbilitySystem.Abilities
     [Serializable]
     public class AbilityTagContainer
     {
-        public List<GameplayTag> AbilityTags => abilityTags;     // 是否可以用id代替?
-        public List<GameplayTag> CooldownTags => cooldownTags;
         
         [Tooltip("Tags for this ability")]
         [SerializeField] private List<GameplayTag> abilityTags;
@@ -17,6 +15,10 @@ namespace GameplayAbilitySystem.Abilities
         [Tooltip("Tags to determine whether the ability is on cooldown")]
         [SerializeField] private List<GameplayTag> cooldownTags;
 
+
+
+        public List<GameplayTag> AbilityTags => abilityTags;     // 是否可以用id代替?
+        public List<GameplayTag> CooldownTags => cooldownTags;
 
 
 

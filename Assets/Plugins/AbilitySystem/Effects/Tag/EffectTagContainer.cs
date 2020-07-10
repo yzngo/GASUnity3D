@@ -7,8 +7,13 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class EffectTagContainer
     {
+        [Tooltip("Tags for this effect")]
         [SerializeField] private List<GameplayTag> effectTags = new List<GameplayTag>();
+
+        [Tooltip("??????????????????????")]
         [SerializeField] private List<GameplayTag> grantedToInstigatorTags = new List<GameplayTag>();
+
+        [Tooltip("Effects with these Tags will removed when this effect execute.")]
         [SerializeField] private RemovedEffectTagContainer removedEffectsTags = new RemovedEffectTagContainer();
 
 
