@@ -139,8 +139,8 @@ namespace GameplayAbilitySystem {
                 // Durational effect require attention to many more things than instant effects
                 // Such as stacking and effect durations
                 // Durational effect modify the current value
-                var effectData = new EffectContext(appliedEffect, this, target);
-                target.EffectsContainer.ApplyDurationalEffect(effectData);
+                var effectContext = new EffectContext(appliedEffect, this, target);
+                target.EffectsContainer.ApplyDurationalEffect(effectContext);
             }
 
             // Remove all effects which have tags defined as "Be Removed Effects Tags". 
@@ -149,19 +149,19 @@ namespace GameplayAbilitySystem {
             var tagsToRemove = appliedEffect.EffectTags.BeRemovedEffectsTags.Added;
             var beRemovedEffects = target.GetActiveEffectsTags()
                                     .Where(x => tagsToRemove.Any(y => x.Tag == y.Tag))
-                                    .Join(tagsToRemove, x => x.Tag, x => x.Tag, (x, y) => new { Tag = x.Tag, EffectData = x.GrantingEffect, StacksToRemove = y.StacksToRemove })
-                                    .OrderBy(x => x.EffectData.CooldownTimeRemaining);
+                                    .Join(tagsToRemove, x => x.Tag, x => x.Tag, (x, y) => new { Tag = x.Tag, effectContext = x.GrantingEffect, StacksToRemove = y.StacksToRemove })
+                                    .OrderBy(x => x.effectContext.CooldownTimeRemaining);
 
             Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
 
             foreach (var beRemovedEffect in beRemovedEffects) {
-                var effect = beRemovedEffect.EffectData.Effect;
+                var effect = beRemovedEffect.effectContext.Effect;
                 if (!stacks.ContainsKey(effect)) {
                     stacks.Add(effect, 0);
                 }
 
                 if (beRemovedEffect.StacksToRemove == 0 || stacks[effect] < beRemovedEffect.StacksToRemove) {
-                    beRemovedEffect.EffectData.ForceEndEffect();
+                    beRemovedEffect.effectContext.ForceEndEffect();
                 }
                 stacks[effect]++;
             }

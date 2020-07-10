@@ -12,18 +12,18 @@ namespace GameplayAbilitySystem.Effects
         private Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>> effectAggregator = 
             new Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>>();
 
-        public Dictionary<AttributeType, AttributeModifyAggregator> AddorGet(EffectContext effectData) 
+        public Dictionary<AttributeType, AttributeModifyAggregator> AddorGet(EffectContext effectContext) 
         {
-            if (!effectAggregator.TryGetValue(effectData, out var attributeAggregators)) {
+            if (!effectAggregator.TryGetValue(effectContext, out var attributeAggregators)) {
                 attributeAggregators = new Dictionary<AttributeType, AttributeModifyAggregator>();
-                effectAggregator.Add(effectData, attributeAggregators);
+                effectAggregator.Add(effectContext, attributeAggregators);
             }
             return attributeAggregators;
         }
 
-        public void RemoveEffect(EffectContext effectData) 
+        public void RemoveEffect(EffectContext effectContext) 
         {
-            effectAggregator.Remove(effectData);
+            effectAggregator.Remove(effectContext);
         }
 
         public List<EffectContext> GetAllEffects() 
