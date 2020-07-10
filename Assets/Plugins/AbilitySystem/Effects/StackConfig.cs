@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 namespace GameplayAbilitySystem.Effects 
 {
     [Serializable]
-    public class StackPolicy {
+    public class StackConfig {
         public StackType Type;
         public int Limit;
         public StackRefreshPolicy DurationRefreshPolicy;   // 时间刷新策略

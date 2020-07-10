@@ -23,16 +23,16 @@ namespace GameplayAbilitySystem.Effects
         }
 
         [SerializeField] private EffectPolicy gameplayEffectPolicy = new EffectPolicy();
-        [SerializeField] private PeriodPolicy periodicity = new PeriodPolicy();
-        [SerializeField] private StackPolicy stackPolicy = new StackPolicy();
+        [SerializeField] private PeriodConfig periodicity = new PeriodConfig();
+        [SerializeField] private StackConfig stackPolicy = new StackConfig();
         [SerializeField] private EffectTagContainer gameplayEffectTags = new EffectTagContainer();
         [SerializeField] private List<GameplayCue> gameplayCues = new List<GameplayCue>();
 
         public EffectPolicy Policy => gameplayEffectPolicy;
         public EffectTagContainer EffectTags => gameplayEffectTags;
-        public PeriodPolicy PeriodPolicy => periodicity;
+        public PeriodConfig PeriodPolicy => periodicity;
         public List<GameplayCue> GameplayCues => gameplayCues;
-        public StackPolicy StackPolicy => stackPolicy;
+        public StackConfig StackPolicy => stackPolicy;
         public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedToInstigatorTags;
 
         public bool IsTagsRequiredMatch(AbilitySystem target) {

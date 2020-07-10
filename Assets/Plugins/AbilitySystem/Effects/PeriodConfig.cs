@@ -4,7 +4,7 @@ namespace GameplayAbilitySystem.Effects
 {
     // 每[Period]时间执行一次[EffectOnExecute]  DOT, HOT类型
     [Serializable]
-    public class PeriodPolicy 
+    public class PeriodConfig 
     {
         public float Period;        // 周期时间
         public bool IsExecuteOnApply;   // 应用时即执行
