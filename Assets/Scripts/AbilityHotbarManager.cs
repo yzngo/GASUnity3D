@@ -39,7 +39,7 @@ public class AbilityHotbarManager : MonoBehaviour {
         if (n >= AbilityCharacter.Abilities.Count) {
             return new CoolDownInfo();
         }
-        GameplayAbility ability = AbilityCharacter.Abilities[n].ability;
+        Ability ability = AbilityCharacter.Abilities[n].ability;
         CoolDownInfo cooldownInfo = ability.CalculateCooldown(AbilityCharacter.AbilitySystem);
         return cooldownInfo;
     }

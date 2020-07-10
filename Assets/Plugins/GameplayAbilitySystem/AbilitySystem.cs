@@ -25,7 +25,7 @@ namespace GameplayAbilitySystem {
         private AbilityEvent onAbilityEvent = new AbilityEvent();
         public AbilityEvent OnAbilityEvent => onAbilityEvent;
 
-        private List<GameplayAbility> runningAbilities = new List<GameplayAbility>();
+        private List<Ability> runningAbilities = new List<Ability>();
 
         // Lists all active Effect
         private EffectsContainer effectsContainer;
@@ -54,7 +54,7 @@ namespace GameplayAbilitySystem {
         // Checks to see if the ability can be activated
         // DO NOT execute the ability
         // 激活之后后续流程交给ability
-        public bool CanActivateAbility(GameplayAbility ability) {
+        public bool CanActivateAbility(Ability ability) {
             // Check if this ability is already active on this Ability System
             if (runningAbilities.Contains(ability)) {
                 return false;
@@ -67,7 +67,7 @@ namespace GameplayAbilitySystem {
         }
 
         // Try to activate the ability
-        public bool TryActivateAbility(GameplayAbility ability, AbilitySystem target = null) {
+        public bool TryActivateAbility(Ability ability, AbilitySystem target = null) {
             if (!CanActivateAbility(ability)) {
                 return false;
             }
@@ -84,7 +84,7 @@ namespace GameplayAbilitySystem {
         }
 
         // Notifies this AbilitySystem that the specified ability has ended
-        public void NotifyAbilityEnded(GameplayAbility ability) {
+        public void NotifyAbilityEnded(Ability ability) {
             runningAbilities.Remove(ability);
         }
         

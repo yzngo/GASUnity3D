@@ -13,7 +13,7 @@ namespace GameplayAbilitySystem.Abilities
     /// Abilities represent "things" that players can cast, etc.
     /// E.g. a Ability might represent a fireball ability which the player casts and which damages a target
     /// </summary>
-    public class GameplayAbility : ScriptableObject
+    public class Ability : ScriptableObject
     {
         /// <summary>
         /// Tags that this ability has/provides

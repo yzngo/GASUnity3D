@@ -21,7 +21,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
         public string ProjectileFireTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void ActivateAbility(AbilitySystem abilitySystem, GameplayAbility Ability) {
+        public override async void ActivateAbility(AbilitySystem abilitySystem, Ability Ability) {
             var abilitySystemActor = abilitySystem.transform;
             var animationEventSystemComponent = abilitySystemActor.GetComponent<AnimationEventSystem>();
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();

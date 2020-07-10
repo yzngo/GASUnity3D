@@ -9,7 +9,7 @@ public class AbilityCharacter : MonoBehaviour
     [Serializable]
     public class CastingAbilityContainer
     {
-        public GameplayAbility ability;
+        public Ability ability;
         public AbilitySystem target;
     }
 
@@ -28,7 +28,7 @@ public class AbilityCharacter : MonoBehaviour
         if (Abilities[n].ability == null) return;
         if (Abilities[n].target == null) return;
 
-        GameplayAbility ability = Abilities[n].ability;
+        Ability ability = Abilities[n].ability;
         AbilitySystem target = Abilities[n].target;
         AbilitySystem.TryActivateAbility(ability, target);
     }

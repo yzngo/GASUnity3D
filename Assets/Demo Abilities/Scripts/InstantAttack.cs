@@ -18,7 +18,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
         public string AnimationCompleteTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void ActivateAbility(AbilitySystem instigator, GameplayAbility Ability) {
+        public override async void ActivateAbility(AbilitySystem instigator, Ability Ability) {
             var animationEventSystem = instigator.GetComponent<AnimationEventSystem>();
             var animator = instigator.Animator;
 
