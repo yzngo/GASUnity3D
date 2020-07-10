@@ -1,20 +1,21 @@
 using System;
 using GameplayAbilitySystem.Effects;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace GameplayAbilitySystem.Abilities 
 {
     [Serializable]
     public class AbilityTagContainer
     {
-        public GameplayEffectAddRemoveTagContainer AbilityTags => abilityTags;     // 是否可以用id代替?
-        public GameplayEffectAddRemoveTagContainer CooldownTags => cooldownTags;
+        public List<GameplayTag> AbilityTags => abilityTags;     // 是否可以用id代替?
+        public List<GameplayTag> CooldownTags => cooldownTags;
         
         [Tooltip("Tags for this ability")]
-        [SerializeField] protected GameplayEffectAddRemoveTagContainer abilityTags;
+        [SerializeField] protected List<GameplayTag> abilityTags;
 
         [Tooltip("Tags to determine whether the ability is on cooldown")]
-        [SerializeField] protected GameplayEffectAddRemoveTagContainer cooldownTags;
+        [SerializeField] protected List<GameplayTag> cooldownTags;
 
 
 

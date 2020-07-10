@@ -12,34 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37026ab3aac9f374293f60158cbe94d1, type: 3}
   m_Name: Healing Ability
   m_EditorClassIdentifier: 
-  _tags:
-    _abilityTags:
-      _added:
-      - {fileID: 11400000, guid: 0f7aacaa3f81d2b419604039ea36b254, type: 2}
-    _cooldownTags:
-      _added:
-      - {fileID: 11400000, guid: 708984ed89b56d64699579056a24b4bf, type: 2}
-      - {fileID: 11400000, guid: 9a5e97d4d3432d14c81810a21c7a29d3, type: 2}
-    _cancelAbilitiesWithTags:
-      _added: []
-    _blockAbilitiesWithTags:
-      _added: []
-    _activationOwnedTags:
-      _added: []
-    _activationRequiredTags:
-      _added: []
-    _activationBlockedTags:
-      _added: []
-    _sourceRequiredTags:
-      _added: []
-    _sourceBlockedTags:
-      _added: []
-    _targetRequiredTags:
-      _added: []
-    _targetBlockedTags:
-      _added: []
+  tags:
+    abilityTags:
+    - {fileID: 11400000, guid: 0f7aacaa3f81d2b419604039ea36b254, type: 2}
+    cooldownTags:
+    - {fileID: 11400000, guid: 708984ed89b56d64699579056a24b4bf, type: 2}
+    - {fileID: 11400000, guid: 9a5e97d4d3432d14c81810a21c7a29d3, type: 2}
   cost: {fileID: 11400000, guid: 520415e26382f224c867fce4071958df, type: 2}
-  _cooldownsToApply:
+  cooldowns:
   - {fileID: 11400000, guid: d54b66206c84ce04795001e8909186b8, type: 2}
   - {fileID: 11400000, guid: d4498b55c0a7526469977fa87a6259b9, type: 2}
-  _abilityLogic: {fileID: 11400000, guid: 3bca910e2eb21f1488595e49c96ce66c, type: 2}
+  abilityLogic: {fileID: 11400000, guid: 3bca910e2eb21f1488595e49c96ce66c, type: 2}

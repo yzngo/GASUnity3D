@@ -113,7 +113,7 @@ namespace GameplayAbilitySystem.Abilities
         public CoolDownInfo CalculateCooldown(AbilitySystem abilitySystem) 
         {
             CoolDownInfo info = new CoolDownInfo();
-            List<GameplayTag> cooldownTags = Tags.CooldownTags.Added;
+            List<GameplayTag> cooldownTags = Tags.CooldownTags;
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
             EffectContext maxCooldownEffect = abilitySystem.EffectsContainer
                                     .effectsModifyAggregator

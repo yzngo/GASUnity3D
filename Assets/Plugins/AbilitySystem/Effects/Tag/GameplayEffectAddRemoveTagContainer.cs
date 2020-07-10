@@ -10,7 +10,6 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class GameplayEffectAddRemoveTagContainer
     {
-
         [SerializeField] List<GameplayTag> _added = new List<GameplayTag>();
         public List<GameplayTag> Added => _added;
 

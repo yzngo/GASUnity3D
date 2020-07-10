@@ -76,7 +76,7 @@ namespace GameplayAbilitySystem {
             runningAbilities.Add(ability);
             ability.CommitAbility(this);
 
-            GameplayTag abilityTag = ability.Tags.AbilityTags.Added.Count > 0 ? ability.Tags.AbilityTags.Added[0] : new GameplayTag();
+            GameplayTag abilityTag = ability.Tags.AbilityTags.Count > 0 ? ability.Tags.AbilityTags[0] : new GameplayTag();
             var data = new AbilityEventData();
             data.Target = target;
             onAbilityEvent?.Invoke(abilityTag, data);
