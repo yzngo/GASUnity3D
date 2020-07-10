@@ -18,12 +18,12 @@ namespace GameplayAbilitySystem.Abilities
         /// <summary>
         /// Tags that this ability has/provides
         /// </summary
-        public AbilityTagsContainer Tags => tags;
+        public AbilityTagContainer Tags => tags;
         public Effect Cost => cost; // Cost of using this ability
         public List<Effect> Cooldowns => cooldowns;     // Cooldowns associated with this ability
         public AbstractAbilityActivation AbilityLogic => abilityLogic; // Defines what the ability actually does
 
-        [SerializeField] private AbilityTagsContainer tags = new AbilityTagsContainer();
+        [SerializeField] private AbilityTagContainer tags = new AbilityTagContainer();
         [SerializeField] private Effect cost = default;
 
         [SerializeField] private List<Effect> cooldowns = new List<Effect>();

@@ -6,27 +6,23 @@ using UnityEngine;
 namespace GameplayAbilitySystem.Effects 
 {
     [Serializable]
-    public class GameplayEffectAddRemoveStacksTagContainer : EffectTagContainer 
+    public class RemovedEffectTagContainer : EffectTagContainer 
     {
-        [SerializeField]
-        List<GameplayTagStackComposite> _added = new List<GameplayTagStackComposite>();
-
-        public List<GameplayTagStackComposite> Added => _added;
-
+        [SerializeField] private List<RemovedInfo> removed = new List<RemovedInfo>();
+        public List<RemovedInfo> Removed => removed;
 
         public override bool HasAny(IEnumerable<GameplayTag> Tags) {
-            return _added.Where(x => !Tags.Any(y => x.Tag == y)).Any();
+            return removed.Where(x => !Tags.Any(y => x.Tag == y)).Any();
         }
 
         public override bool HasAll(IEnumerable<GameplayTag> Tags) {
-            var addedTags = _added.Select(x => x.Tag);
+            var addedTags = removed.Select(x => x.Tag);
             return !Tags.Except(addedTags).Any();
         }
-
     }
 
     [Serializable]
-    public class GameplayTagStackComposite {
+    public class RemovedInfo {
         [Tooltip("GameplayEffects with this tag will be candidates for removal")]
         public GameplayTag Tag;
         

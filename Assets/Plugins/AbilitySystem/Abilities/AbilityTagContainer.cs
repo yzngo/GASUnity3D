@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GameplayAbilitySystem.Abilities 
 {
     [Serializable]
-    public class AbilityTagsContainer
+    public class AbilityTagContainer
     {
         public GameplayEffectAddRemoveTagContainer AbilityTags => abilityTags;     // 是否可以用id代替?
         public GameplayEffectAddRemoveTagContainer CooldownTags => cooldownTags;

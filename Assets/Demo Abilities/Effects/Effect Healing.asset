@@ -16,31 +16,25 @@ MonoBehaviour:
     durationPolicy: 1
     durationMagnitude: 21
     modifiers: []
+  periodicity:
+    Period: 3
+    IsExecuteOnApply: 0
+    EffectOnExecute: {fileID: 11400000, guid: 2f67849ecd9684d42a69798734a9ff04, type: 2}
+  stackPolicy:
+    Type: 0
+    Limit: 0
+    DurationRefreshPolicy: 0
+    PeriodResetPolicy: 0
+    ExpirationPolicy: 0
   gameplayEffectTags:
     effectTags:
       _added: []
     grantedToASCTags:
       _added:
       - {fileID: 11400000, guid: 0f7aacaa3f81d2b419604039ea36b254, type: 2}
-    ongoingRequiredTags:
-      requirePresence: []
-      requireAbsence: []
-    applyRequiredTags:
-      requirePresence: []
-      requireAbsence: []
     beRemovedEffectsTags:
-      _added:
+      removed:
       - Tag: {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
         StacksToRemove: 1
-  periodicity:
-    Period: 3
-    ExecuteOnApplication: 1
-    EffectOnExecute: {fileID: 11400000, guid: 2f67849ecd9684d42a69798734a9ff04, type: 2}
   gameplayCues:
   - {fileID: 11400000, guid: c2fdf7b8b6a3efe4bb8950654af72d18, type: 2}
-  stackingPolicy:
-    StackingType: 0
-    StackLimit: 0
-    StackDurationRefreshPolicy: 0
-    StackPeriodResetPolicy: 0
-    StackExpirationPolicy: 1
