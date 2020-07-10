@@ -10,15 +10,8 @@ namespace GameplayAbilitySystem.Effects {
     [Serializable]
     public class EffectPolicy
     {
-        [Tooltip(
-@"游戏效果策略 
-        Instant  执行一次  
-        Duration 执行一段时间
-        Infinite 一直执行不停止")]
         [SerializeField] private DurationPolicy durationPolicy = default;
-
         [SerializeField] private float durationMagnitude = 0f;
-
         [SerializeField] private List<EffectModifier> modifiers = new List<EffectModifier>();
 
         public DurationPolicy DurationPolicy => durationPolicy;
