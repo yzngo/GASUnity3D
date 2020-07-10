@@ -12,24 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cc1ff66db5d0749b0bab3afccec0ce, type: 3}
   m_Name: Fire Cooldown
   m_EditorClassIdentifier: 
-  gameplayEffectPolicy:
+  configs:
+    DurationConfig:
+      policy: 1
+      durationLength: 2
+    PeriodConfig:
+      Period: 0
+      IsExecuteOnApply: 0
+      EffectOnExecute: {fileID: 0}
+    StackConfig:
+      Type: 0
+      Limit: 0
+      DurationRefreshPolicy: 0
+      PeriodResetPolicy: 0
+      ExpirationPolicy: 0
+    Modifiers: []
+    EffectTags:
+      effectTags: []
+      grantedToInstigatorTags: []
+      removedEffectsTags: []
+    Cues: []
+  effectPolicy:
     durationPolicy: 1
     durationMagnitude: 2
     modifiers: []
-  periodicity:
+  periodConfig:
     Period: 0
     IsExecuteOnApply: 0
     EffectOnExecute: {fileID: 0}
-  stackPolicy:
+  stackConfig:
     Type: 0
     Limit: 0
     DurationRefreshPolicy: 0
     PeriodResetPolicy: 0
     ExpirationPolicy: 0
-  gameplayEffectTags:
+  effectTags:
     effectTags: []
     grantedToInstigatorTags:
     - {fileID: 11400000, guid: 910dc94fbfa7a024e88265c21eafc190, type: 2}
     removedEffectsTags:
-      removed: []
-  gameplayCues: []
+    - EffectTag: {fileID: 0}
+      BeRemovedStacks: 0

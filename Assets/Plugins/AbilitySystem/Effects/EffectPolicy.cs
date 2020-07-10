@@ -20,8 +20,10 @@ namespace GameplayAbilitySystem.Effects
 
     [Serializable]
     public class DurationConfig {
-        public DurationPolicy policy;
-        public float durationLength;
+        [FormerlySerializedAs("policy")]
+        public DurationPolicy Policy;
+        [FormerlySerializedAs("durationLength")]
+        public float DurationLength;
     }
 
 

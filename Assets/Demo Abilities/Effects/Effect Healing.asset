@@ -12,26 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cc1ff66db5d0749b0bab3afccec0ce, type: 3}
   m_Name: Effect Healing
   m_EditorClassIdentifier: 
-  effectConfig:
-    durationConfig:
-      policy: 0
-      durationLength: 0
-    periodConfig:
+  configs:
+    DurationConfig:
+      policy: 1
+      durationLength: 21
+    PeriodConfig:
       Period: 0
       IsExecuteOnApply: 0
       EffectOnExecute: {fileID: 0}
-    stackConfig:
+    StackConfig:
       Type: 0
       Limit: 0
       DurationRefreshPolicy: 0
       PeriodResetPolicy: 0
       ExpirationPolicy: 0
-    modifiers: []
-    effectTags:
+    Modifiers: []
+    EffectTags:
       effectTags: []
       grantedToInstigatorTags: []
       removedEffectsTags: []
-    cues:
+    Cues:
     - {fileID: 11400000, guid: c2fdf7b8b6a3efe4bb8950654af72d18, type: 2}
   effectPolicy:
     durationPolicy: 1
@@ -55,5 +55,3 @@ MonoBehaviour:
     removedEffectsTags:
     - EffectTag: {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
       BeRemovedStacks: 1
-  cues:
-  - {fileID: 11400000, guid: c2fdf7b8b6a3efe4bb8950654af72d18, type: 2}

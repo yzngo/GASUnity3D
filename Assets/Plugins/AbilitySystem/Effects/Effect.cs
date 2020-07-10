@@ -20,12 +20,10 @@ namespace GameplayAbilitySystem.Effects
         [SerializeField] private EffectConfigs configs = default;
         public EffectConfigs Configs => configs;
 
-        [SerializeField] private EffectPolicy effectPolicy = new EffectPolicy();
         [SerializeField] private PeriodConfig periodConfig = new PeriodConfig();
         [SerializeField] private StackConfig stackConfig = new StackConfig();
         [SerializeField] private EffectTagContainer effectTags = new EffectTagContainer();
 
-        public EffectPolicy EffectPolicy => effectPolicy;
         public PeriodConfig PeriodConfig => periodConfig;
         public StackConfig StackConfig => stackConfig;
         public EffectTagContainer EffectTags => effectTags;
@@ -62,7 +60,7 @@ namespace GameplayAbilitySystem.Effects
         {
             var totalModifies = new TotalModifies();
 
-            foreach (var modifier in EffectPolicy.Modifiers) {
+            foreach (var modifier in Configs.Modifiers) {
                 // 当前attributeType的条目是否存在
                 if (!totalModifies.TryGetValue(modifier.AttributeType, out var typeModifiers)) {
                     typeModifiers = new Dictionary<ModifierOperationType, float>();
