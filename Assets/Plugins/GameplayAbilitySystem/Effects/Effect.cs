@@ -23,15 +23,14 @@ namespace GameplayAbilitySystem.Effects
         }
 
         [SerializeField] private GameplayEffectPolicy gameplayEffectPolicy = new GameplayEffectPolicy();
-        [SerializeField] private GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
-        [SerializeField] private EffectPeriodicity periodicity = new EffectPeriodicity();
-        [SerializeField] private List<GameplayCue> gameplayCues = new List<GameplayCue>();
-        [FormerlySerializedAs("stackingPolicy")]
+        [SerializeField] private PeriodPolicy periodicity = new PeriodPolicy();
         [SerializeField] private StackPolicy stackPolicy = new StackPolicy();
+        [SerializeField] private GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
+        [SerializeField] private List<GameplayCue> gameplayCues = new List<GameplayCue>();
 
         public GameplayEffectPolicy Policy => gameplayEffectPolicy;
         public GameplayEffectTags EffectTags => gameplayEffectTags;
-        public EffectPeriodicity Periodicity => periodicity;
+        public PeriodPolicy PeriodPolicy => periodicity;
         public List<GameplayCue> GameplayCues => gameplayCues;
         public StackPolicy StackPolicy => stackPolicy;
         public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedToASCTags.Added;

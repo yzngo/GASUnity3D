@@ -4,5 +4,4 @@ namespace GameplayAbilitySystem.Effects {
         Duration,    // 临时修改currentValue
         Infinite    // 临时修改currentValue
     }
-
 }

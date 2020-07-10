@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayEffectPolicy:
     durationPolicy: 0
-    durationMagnitude: 10
+    durationMagnitude: 0
     modifiers:
     - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
       modifierOperationType: 1
@@ -36,6 +36,16 @@ MonoBehaviour:
       targetTags:
         RequireTags: []
         IgnoreTags: []
+  periodicity:
+    Period: 0
+    IsExecuteOnApply: 0
+    EffectOnExecute: {fileID: 0}
+  stackPolicy:
+    Type: 0
+    Limit: 0
+    DurationRefreshPolicy: 0
+    PeriodResetPolicy: 0
+    ExpirationPolicy: 0
   gameplayEffectTags:
     effectTags:
       _added: []
@@ -49,15 +59,5 @@ MonoBehaviour:
       requireAbsence: []
     beRemovedEffectsTags:
       _added: []
-  periodicity:
-    Period: 0
-    ExecuteOnApplication: 0
-    EffectOnExecute: {fileID: 0}
   gameplayCues:
   - {fileID: 11400000, guid: 576d4a44a75bd1941b1ac46abc36be6d, type: 2}
-  stackingPolicy:
-    StackingType: 0
-    StackLimit: 0
-    StackDurationRefreshPolicy: 0
-    StackPeriodResetPolicy: 0
-    StackExpirationPolicy: 1

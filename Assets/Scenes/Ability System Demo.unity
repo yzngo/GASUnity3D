@@ -1603,6 +1603,26 @@ PrefabInstance:
       propertyPath: Abilities.Array.data[2].target
       value: 
       objectReference: {fileID: 843129480}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributes.Array.data[3]._baseValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributes.Array.data[3]._currentValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributes.Array.data[4]._baseValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributes.Array.data[4]._currentValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7899279095267886754, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: m_LocalPosition.x

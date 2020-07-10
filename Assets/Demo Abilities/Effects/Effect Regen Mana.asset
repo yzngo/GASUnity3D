@@ -19,7 +19,7 @@ MonoBehaviour:
     - attributeType: {fileID: 11400000, guid: 124a7a186e5666c4b8fdc11ca51efeb7, type: 2}
       modifierOperationType: 0
       magnitudeCalculationType: 0
-      scaledMagnitude: 1.5
+      scaledMagnitude: 10
       sourceTags:
         RequireTags: []
         IgnoreTags: []
@@ -45,9 +45,9 @@ MonoBehaviour:
     EffectOnExecute: {fileID: 0}
   gameplayCues:
   - {fileID: 11400000, guid: 260647a52278cdc4eb6654efe826b9cd, type: 2}
-  stackingPolicy:
-    StackingType: 0
-    StackLimit: 0
-    StackDurationRefreshPolicy: 0
-    StackPeriodResetPolicy: 0
-    StackExpirationPolicy: 1
+  stackPolicy:
+    Type: 0
+    Limit: 0
+    DurationRefreshPolicy: 0
+    PeriodResetPolicy: 0
+    ExpirationPolicy: 1

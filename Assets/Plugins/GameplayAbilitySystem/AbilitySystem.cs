@@ -25,7 +25,7 @@ namespace GameplayAbilitySystem {
         private AbilityEvent onAbilityEvent = new AbilityEvent();
         public AbilityEvent OnAbilityEvent => onAbilityEvent;
 
-        private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
+        private List<GameplayAbility> runningAbilities = new List<GameplayAbility>();
 
         // Lists all active Effect
         private EffectsContainer effectsContainer;

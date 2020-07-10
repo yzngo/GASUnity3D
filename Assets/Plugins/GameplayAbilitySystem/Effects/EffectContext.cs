@@ -26,7 +26,7 @@ namespace GameplayAbilitySystem.Effects
             Instigator = instigator;
             Target = target;
 
-            if (!Effect.Periodicity.ExecuteOnApplication) {
+            if (!Effect.PeriodPolicy.IsExecuteOnApply) {
                 timeOfLastPeriodicApplication = Time.time;
             }
         }
@@ -56,7 +56,7 @@ namespace GameplayAbilitySystem.Effects
         // 对于周期性的effect而言, 自从上次应用效果之后流逝的时间
         public float TimeSincePreviousPeriodicApplication => Time.time - timeOfLastPeriodicApplication;
         // 对于周期性的effect而言, 到下次应用还需要的时间
-        public float TimeUntilNextPeriodicApplication => timeOfLastPeriodicApplication + Effect.Periodicity.Period - Time.time;
+        public float TimeUntilNextPeriodicApplication => timeOfLastPeriodicApplication + Effect.PeriodPolicy.Period - Time.time;
         private Dictionary<AttributeType, AttributeModifyAggregator> PeriodicEffectModificationsToDate = new Dictionary<AttributeType, AttributeModifyAggregator>();
 
 // reset time

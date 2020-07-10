@@ -18,7 +18,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
         public string AnimationCompleteTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void ActivateAbility(AbilitySystem instigator, IGameplayAbility Ability) {
+        public override async void ActivateAbility(AbilitySystem instigator, GameplayAbility Ability) {
             var animationEventSystem = instigator.GetComponent<AnimationEventSystem>();
             var animator = instigator.Animator;
 
@@ -37,7 +37,6 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
             var beh = animator.GetBehaviour<AnimationBehaviourEventSystem>();
             await beh.StateEnter.WaitForEvent((anim, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));
 
-            // End Ability
             Ability.EndAbility(instigator);
         }
 

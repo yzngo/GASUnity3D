@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayEffectPolicy:
     durationPolicy: 1
-    durationMagnitude: 30
+    durationMagnitude: 60
     modifiers: []
   gameplayEffectTags:
     effectTags:
@@ -31,7 +31,7 @@ MonoBehaviour:
     beRemovedEffectsTags:
       _added: []
   periodicity:
-    Period: 1
+    Period: 10
     ExecuteOnApplication: 1
     EffectOnExecute: {fileID: 11400000, guid: 20fb0364cdae5e348854db1deb47d72e, type: 2}
   gameplayCues:

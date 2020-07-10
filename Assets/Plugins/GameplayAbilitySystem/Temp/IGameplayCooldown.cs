@@ -3,9 +3,9 @@ using GameplayAbilitySystem.Effects;
 
 namespace GameplayAbilitySystem.Interfaces {
     /// <summary>
-    /// This is used to represent cooldowns for a <see cref="IGameplayAbility"/>.  
+    /// This is used to represent cooldowns for a <see cref="GameplayAbility"/>.  
     /// Multiple <see cref="IGameplayCooldown"/> can be set for an ability to represent multiple
-    /// shared cooldowns (e.g. a global cooldown shared by all abilities, and a <see cref="IGameplayAbility"/> specific cooldown)
+    /// shared cooldowns (e.g. a global cooldown shared by all abilities, and a <see cref="GameplayAbility"/> specific cooldown)
     /// </summary>
     public interface IGameplayCooldown {
         /// <summary>
