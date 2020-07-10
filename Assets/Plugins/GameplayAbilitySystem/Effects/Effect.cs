@@ -148,9 +148,9 @@ namespace GameplayAbilitySystem.Effects
                 target.SetBaseValue(changeByType.Key, changeByType.Value.newValue);
 
                 // mark the corresponding aggregator as dirty so we can recalculate the current values
-                var aggregators = target.ActiveEffectsContainer.effectsModifyAggregator.GetAggregatorsForAttribute(changeByType.Key);
+                var aggregators = target.EffectsContainer.effectsModifyAggregator.GetAggregatorsForAttribute(changeByType.Key);
                 if (aggregators.Count() != 0) {
-                    target.ActiveEffectsContainer.UpdateAttribute(aggregators, changeByType.Key);
+                    target.EffectsContainer.UpdateAttribute(aggregators, changeByType.Key);
                 } else {
                     // No aggregators, so set current value = base value
                     target.SetCurrentValue(changeByType.Key, target.GetBaseValue(changeByType.Key));

@@ -28,8 +28,8 @@ namespace GameplayAbilitySystem {
         private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
 
         // Lists all active Effect
-        private EffectsContainer activeEffectsContainer;
-        public EffectsContainer ActiveEffectsContainer => activeEffectsContainer;
+        private EffectsContainer effectsContainer;
+        public EffectsContainer EffectsContainer => effectsContainer;
 
         private Animator animator;
         public Animator Animator => animator;
@@ -37,7 +37,7 @@ namespace GameplayAbilitySystem {
         private AttributeSet attributeSet;
 
         public IEnumerable<GameplayTag> ActiveTags =>
-                ActiveEffectsContainer
+                EffectsContainer
                             .effectsModifyAggregator
                             .GetAllEffects()
                             .SelectMany(x => x.Effect.EffectTags.GrantedToASCTags.Added)
@@ -46,7 +46,7 @@ namespace GameplayAbilitySystem {
         private IEnumerable<GameplayTag> AbilityGrantedTags => runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
 
         public void Awake() {
-            activeEffectsContainer = new EffectsContainer(this);
+            effectsContainer = new EffectsContainer(this);
             animator = GetComponent<Animator>();
             attributeSet = GetComponent<AttributeSet>();
         }
@@ -140,7 +140,7 @@ namespace GameplayAbilitySystem {
                 // Such as stacking and effect durations
                 // Durational effect modify the current value
                 var effectData = new EffectContext(appliedEffect, this, target);
-                target.ActiveEffectsContainer.ApplyDurationalEffect(effectData);
+                target.EffectsContainer.ApplyDurationalEffect(effectData);
             }
 
             // Remove all effects which have tags defined as "Be Removed Effects Tags". 
@@ -176,7 +176,7 @@ namespace GameplayAbilitySystem {
 
         public IEnumerable<(GameplayTag Tag, EffectContext GrantingEffect)> GetActiveEffectsTags()
         {
-            var activeEffects = ActiveEffectsContainer.effectsModifyAggregator.GetAllEffects();
+            var activeEffects = EffectsContainer.effectsModifyAggregator.GetAllEffects();
             if (activeEffects == null) 
                 return new List<(GameplayTag, EffectContext)>();
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));

@@ -106,7 +106,7 @@ namespace GameplayAbilitySystem.Abilities
             CoolDownInfo info = new CoolDownInfo();
             List<GameplayTag> cooldownTags = Tags.CooldownTags.Added;
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
-            EffectContext maxCooldownEffect = abilitySystem.ActiveEffectsContainer
+            EffectContext maxCooldownEffect = abilitySystem.EffectsContainer
                                     .effectsModifyAggregator
                                     .GetAllEffects()
                                     .Where(x => x.Effect.GrantedTags.Intersect(cooldownTags).Any())
