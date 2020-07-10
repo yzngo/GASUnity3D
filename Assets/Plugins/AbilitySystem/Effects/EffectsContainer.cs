@@ -25,10 +25,10 @@ namespace GameplayAbilitySystem.Effects
         {
             // Durational effect.  Add granted modifiers to active list
             int existingStacks = -1;
-            int maxStacks = effectContext.Effect.StackPolicy.Limit;
+            int maxStacks = effectContext.Effect.StackConfig.Limit;
             IEnumerable<EffectContext> matchingStackedActiveEffects = GetMatchingStackedEffectsByEffect(effectContext);
 
-            switch (effectContext.Effect.StackPolicy.DurationRefreshPolicy) {
+            switch (effectContext.Effect.StackConfig.DurationRefreshPolicy) {
                 case StackRefreshPolicy.RefreshOnSuccessfulApply: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
@@ -39,7 +39,7 @@ namespace GameplayAbilitySystem.Effects
                     break;
 
             }
-            switch (effectContext.Effect.StackPolicy.PeriodResetPolicy) {
+            switch (effectContext.Effect.StackConfig.PeriodResetPolicy) {
                 case StackRefreshPolicy.RefreshOnSuccessfulApply: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
@@ -97,7 +97,7 @@ namespace GameplayAbilitySystem.Effects
 
                     // If this is a periodic effect, we don't add any attributes here. 
                     // They will be added as required on period expiry and stored in a separate structure
-                    if (effectContext.Effect.PeriodPolicy.Period <= 0) {
+                    if (effectContext.Effect.PeriodConfig.Period <= 0) {
                         aggregator.AddAggregatorModifier(modifier.ModifierOperation, evaluatedValue);
                     }
                     // Recalculate new value by recomputing all aggregators
@@ -137,7 +137,7 @@ namespace GameplayAbilitySystem.Effects
                     durationExpired = effectContext.StartWorldTime <= 0 ? true : false;
                 }
                 // Periodic effects only occur if the period is > 0
-                if (effectContext.Effect.PeriodPolicy.Period > 0) {
+                if (effectContext.Effect.PeriodConfig.Period > 0) {
                     CheckAndApplyPeriodicEffect(effectContext);
                 }
                 if (durationExpired) { // This effect is due for expiry
@@ -150,8 +150,8 @@ namespace GameplayAbilitySystem.Effects
         {
             if (effectContext.TimeUntilNextPeriodicApplication <= 0) {
                 // Apply gameplay effect defined for period.  
-                if (effectContext.Effect.PeriodPolicy.EffectOnExecute != null) {
-                    effectContext.Instigator.ApplyEffectToTarget(effectContext.Effect.PeriodPolicy.EffectOnExecute, effectContext.Target);
+                if (effectContext.Effect.PeriodConfig.EffectOnExecute != null) {
+                    effectContext.Instigator.ApplyEffectToTarget(effectContext.Effect.PeriodConfig.EffectOnExecute, effectContext.Target);
                 }
                 var gameplayCues = effectContext.Effect.Cues;
                 foreach (var cue in gameplayCues) {
@@ -166,7 +166,7 @@ namespace GameplayAbilitySystem.Effects
         {
             IEnumerable<EffectContext> matchingEffects;
 
-            switch (effectContext.Effect.StackPolicy.ExpirationPolicy) {
+            switch (effectContext.Effect.StackConfig.ExpirationPolicy) {
                 case StackExpirationPolicy.ClearEntireStack: // Remove all effects which match
                     matchingEffects = GetMatchingStackedEffectsByEffect(effectContext);
                     if (matchingEffects == null) break;
@@ -239,7 +239,7 @@ namespace GameplayAbilitySystem.Effects
         private IEnumerable<EffectContext> GetMatchingStackedEffectsByEffect(EffectContext effectContext) 
         {
             IEnumerable<EffectContext> matchingStackedActiveEffects = null;
-            switch (effectContext.Effect.StackPolicy.Type) {
+            switch (effectContext.Effect.StackConfig.Type) {
                 // Stacking Type None:
                 // Add effect as a separate instance. 
                 case StackType.None:

@@ -16,21 +16,20 @@ namespace GameplayAbilitySystem.Effects
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class Effect : ScriptableObject 
     {
-        [FormerlySerializedAs("gameplayEffectPolicy")]
         [SerializeField] private EffectPolicy effectPolicy = new EffectPolicy();
-        [FormerlySerializedAs("periodicity")]
-        [SerializeField] private PeriodConfig periodPolicy = new PeriodConfig();
-        [SerializeField] private StackConfig stackPolicy = new StackConfig();
-        [FormerlySerializedAs("gameplayEffectTags")]
+        [FormerlySerializedAs("periodPolicy")]
+        [SerializeField] private PeriodConfig periodConfig = new PeriodConfig();
+        [FormerlySerializedAs("stackPolicy")]
+        [SerializeField] private StackConfig stackConfig = new StackConfig();
         [SerializeField] private EffectTagContainer effectTags = new EffectTagContainer();
-        [FormerlySerializedAs("gameplayCues")]
         [SerializeField] private List<EffectCues> cues = new List<EffectCues>();
 
         public EffectPolicy EffectPolicy => effectPolicy;
+        public PeriodConfig PeriodConfig => periodConfig;
+        public StackConfig StackConfig => stackConfig;
         public EffectTagContainer EffectTags => effectTags;
-        public PeriodConfig PeriodPolicy => periodPolicy;
         public List<EffectCues> Cues => cues;
-        public StackConfig StackPolicy => stackPolicy;
+
         public List<GameplayTag> GrantedTags => effectTags.GrantedToInstigatorTags;
 
         public bool IsTagsRequiredMatch(AbilitySystem target) {
