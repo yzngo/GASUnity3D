@@ -22,6 +22,27 @@ namespace GameplayAbilitySystem.Abilities
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // public GameplayEffectAddRemoveTagContainer CancelAbilitiesWithTags => _cancelAbilitiesWithTags;
         // public GameplayEffectAddRemoveTagContainer BlockAbilitiesWithTags => _blockAbilitiesWithTags;
         // public GameplayEffectAddRemoveTagContainer ActivationOwnedTags => _activationOwnedTags;

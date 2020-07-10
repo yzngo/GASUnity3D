@@ -22,13 +22,13 @@ namespace GameplayAbilitySystem.Effects
             public float newValue = 0f;
         }
 
-        [SerializeField] private GameplayEffectPolicy gameplayEffectPolicy = new GameplayEffectPolicy();
+        [SerializeField] private EffectPolicy gameplayEffectPolicy = new EffectPolicy();
         [SerializeField] private PeriodPolicy periodicity = new PeriodPolicy();
         [SerializeField] private StackPolicy stackPolicy = new StackPolicy();
         [SerializeField] private EffectTagContainer gameplayEffectTags = new EffectTagContainer();
         [SerializeField] private List<GameplayCue> gameplayCues = new List<GameplayCue>();
 
-        public GameplayEffectPolicy Policy => gameplayEffectPolicy;
+        public EffectPolicy Policy => gameplayEffectPolicy;
         public EffectTagContainer EffectTags => gameplayEffectTags;
         public PeriodPolicy PeriodPolicy => periodicity;
         public List<GameplayCue> GameplayCues => gameplayCues;

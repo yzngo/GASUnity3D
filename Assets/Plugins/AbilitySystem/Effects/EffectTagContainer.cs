@@ -21,6 +21,29 @@ namespace GameplayAbilitySystem.Effects
         public List<GameplayTag> GrantedToInstigatorTags => grantedToInstigatorTags;
         public List<BeRemovedEffectInfo> RemovedEffectsTags => removedEffectsTags;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // [SerializeField]
         // private GameplayEffectRequireIgnoreTagContainer ongoingRequiredTags = new GameplayEffectRequireIgnoreTagContainer();
         // [SerializeField]
