@@ -44,7 +44,7 @@ namespace GameplayAbilitySystem.Interfaces
         /// <see cref="GameplayTag"/> that are given to the <see cref="AbilitySystem"/>
         /// </summary>
         /// <value></value>
-        GameplayEffectAddRemoveTagContainer GrantedToASCTags { get; }
+        GameplayEffectAddRemoveTagContainer GrantedToInstigatorTags { get; }
 
         /// <summary>
         /// <see cref="GameplayTag"/> that are required on the <see cref="AbilitySystem"/> for the <see cref="Effect"> to have an effect.  

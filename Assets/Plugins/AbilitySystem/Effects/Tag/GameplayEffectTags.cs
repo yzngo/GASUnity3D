@@ -16,7 +16,7 @@ namespace GameplayAbilitySystem.Effects {
 
         // 赋予AbilitySystemComponent的标签
         // 移除时也会从ASC中移除, 只能用于Duration和Infinite的GameEffect
-        public GameplayEffectAddRemoveTagContainer GrantedToASCTags => grantedToASCTags;
+        public GameplayEffectAddRemoveTagContainer GrantedToInstigatorTags => grantedToASCTags;
 
         // 移除任何带有这些tag的effect
         public RemovedEffectTagContainer RemovedEffectsTags => removedEffectsTags;

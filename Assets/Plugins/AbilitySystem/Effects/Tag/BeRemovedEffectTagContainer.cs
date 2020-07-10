@@ -6,19 +6,19 @@ using UnityEngine;
 namespace GameplayAbilitySystem.Effects 
 {
     [Serializable]
-    public class RemovedEffectTagContainer : EffectTagContainer 
+    public class RemovedEffectTagContainer
     {
         [SerializeField] private List<RemovedInfo> removed = new List<RemovedInfo>();
         public List<RemovedInfo> Removed => removed;
 
-        public override bool HasAny(IEnumerable<GameplayTag> Tags) {
-            return removed.Where(x => !Tags.Any(y => x.Tag == y)).Any();
-        }
+        // public bool HasAny(IEnumerable<GameplayTag> Tags) {
+        //     return removed.Where(x => !Tags.Any(y => x.Tag == y)).Any();
+        // }
 
-        public override bool HasAll(IEnumerable<GameplayTag> Tags) {
-            var addedTags = removed.Select(x => x.Tag);
-            return !Tags.Except(addedTags).Any();
-        }
+        // public bool HasAll(IEnumerable<GameplayTag> Tags) {
+        //     var addedTags = removed.Select(x => x.Tag);
+        //     return !Tags.Except(addedTags).Any();
+        // }
     }
 
     [Serializable]

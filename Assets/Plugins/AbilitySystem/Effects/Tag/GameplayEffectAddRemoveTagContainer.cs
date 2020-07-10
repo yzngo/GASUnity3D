@@ -8,7 +8,7 @@ using UnityEngine;
 namespace GameplayAbilitySystem.Effects 
 {
     [Serializable]
-    public class GameplayEffectAddRemoveTagContainer : EffectTagContainer
+    public class GameplayEffectAddRemoveTagContainer
     {
 
         [SerializeField]
@@ -16,13 +16,13 @@ namespace GameplayAbilitySystem.Effects
 
         public List<GameplayTag> Added => _added;
 
-        public override bool HasAny(IEnumerable<GameplayTag> Tags) {
-            return _added.Where(x => !Tags.Any(y => x == y)).Any();
-        }
+        // public bool HasAny(IEnumerable<GameplayTag> Tags) {
+        //     return _added.Where(x => !Tags.Any(y => x == y)).Any();
+        // }
 
-        public override bool HasAll(IEnumerable<GameplayTag> Tags) {
-            return !Tags.Except(_added).Any();
-        }
+        // public bool HasAll(IEnumerable<GameplayTag> Tags) {
+        //     return !Tags.Except(_added).Any();
+        // }
 
     }
 }
