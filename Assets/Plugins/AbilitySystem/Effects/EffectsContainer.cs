@@ -55,8 +55,8 @@ namespace GameplayAbilitySystem.Effects
                 AddActiveGameplayEffect(effectContext);
                 // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, effectContext);
                 // We only need to do timed checks for durational abilities
-                if (effectContext.Effect.Policy.DurationPolicy == DurationPolicy.Duration
-                    || effectContext.Effect.Policy.DurationPolicy == DurationPolicy.Infinite) {
+                if (effectContext.Effect.EffectPolicy.DurationPolicy == DurationPolicy.Duration
+                    || effectContext.Effect.EffectPolicy.DurationPolicy == DurationPolicy.Infinite) {
                     // var removalTime = effectContext.Effect.GameplayEffectPolicy.DurationMagnitude * 1000.0f;
                     CheckGameplayEffectForTimedEffects(effectContext);
                 }
@@ -70,11 +70,11 @@ namespace GameplayAbilitySystem.Effects
 
         private void ModifyActiveGameplayEffect(EffectContext effectContext, Action<EffectModifier> action) 
         {
-            foreach (var modifier in effectContext.Effect.Policy.Modifiers) {
+            foreach (var modifier in effectContext.Effect.EffectPolicy.Modifiers) {
                 action(modifier);
             }
             // If there are no gameplay effect modifiers, we need to add or get an empty entry
-            if (effectContext.Effect.Policy.Modifiers.Count == 0) {
+            if (effectContext.Effect.EffectPolicy.Modifiers.Count == 0) {
                 action((new EffectModifier()).InitializeEmpty());
             }
         }
@@ -129,11 +129,11 @@ namespace GameplayAbilitySystem.Effects
 
                 if (effectContext.ForceRemoveEffect) {
                     durationExpired = true;
-                } else if (effectContext.Effect.Policy.DurationPolicy == DurationPolicy.Duration) {
+                } else if (effectContext.Effect.EffectPolicy.DurationPolicy == DurationPolicy.Duration) {
                     // Check whether required time has expired
                     // We only need to do this for effects with a finite duration
                     durationExpired = effectContext.CooldownTimeRemaining <= 0 ? true : false;
-                } else if (effectContext.Effect.Policy.DurationPolicy == DurationPolicy.Infinite) {
+                } else if (effectContext.Effect.EffectPolicy.DurationPolicy == DurationPolicy.Infinite) {
                     durationExpired = effectContext.StartWorldTime <= 0 ? true : false;
                 }
                 // Periodic effects only occur if the period is > 0
@@ -153,7 +153,7 @@ namespace GameplayAbilitySystem.Effects
                 if (effectContext.Effect.PeriodPolicy.EffectOnExecute != null) {
                     effectContext.Instigator.ApplyEffectToTarget(effectContext.Effect.PeriodPolicy.EffectOnExecute, effectContext.Target);
                 }
-                var gameplayCues = effectContext.Effect.GameplayCues;
+                var gameplayCues = effectContext.Effect.Cues;
                 foreach (var cue in gameplayCues) {
                     cue.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
                 }
@@ -205,7 +205,7 @@ namespace GameplayAbilitySystem.Effects
         private async void CheckGameplayEffectForTimedEffects(EffectContext effectContext) 
         {
             await WaitForEffectExpiryTime(effectContext);
-            var gameplayCues = effectContext.Effect.GameplayCues;
+            var gameplayCues = effectContext.Effect.Cues;
             foreach (var cue in gameplayCues) {
                 cue.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
             }

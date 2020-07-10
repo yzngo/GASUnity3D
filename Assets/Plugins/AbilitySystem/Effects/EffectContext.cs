@@ -43,13 +43,13 @@ namespace GameplayAbilitySystem.Effects
         /// </summary>
         /// <value>Cooldown time total</value>
         public float CooldownTimeTotal => 
-                Effect.Policy.DurationPolicy == DurationPolicy.Duration ? Effect.Policy.DurationValue : 0;
+                Effect.EffectPolicy.DurationPolicy == DurationPolicy.Duration ? Effect.EffectPolicy.DurationValue : 0;
         /// <summary>
         /// The cooldown time that is remaining for this gameplay effect
         /// </summary>
         /// <value>Cooldown time remaining</value>
         public float CooldownTimeRemaining => 
-                Effect.Policy.DurationPolicy == DurationPolicy.Duration ? CooldownTimeTotal - CooldownTimeElapsed : 0;
+                Effect.EffectPolicy.DurationPolicy == DurationPolicy.Duration ? CooldownTimeTotal - CooldownTimeElapsed : 0;
 
 // period
         // 对于周期性的effect而言, 自从上次应用效果之后流逝的时间
@@ -88,7 +88,7 @@ namespace GameplayAbilitySystem.Effects
         public void AddPeriodicEffectAttributeModifiers() 
         {
             // Check out ActiveGameplayEffectContainer.AddActiveGameplayEffect to see how to populate the ActiveEffectAttributeAggregator object
-            foreach (var modifier in Effect.Policy.Modifiers) {
+            foreach (var modifier in Effect.EffectPolicy.Modifiers) {
                 modifier.AttemptCalculateMagnitude(out var EvaluatedValue);
 
                 // If aggregator for this attribute doesn't exist, add it.

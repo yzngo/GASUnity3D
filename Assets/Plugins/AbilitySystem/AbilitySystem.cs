@@ -122,7 +122,7 @@ namespace GameplayAbilitySystem {
         // level -> maybe used to affect the "strength" of the effect
         public void ApplyEffectToTarget(Effect appliedEffect, AbilitySystem target, float level = 0) {
             // Check to make sure all the attributes being modified by this effect exist on the target
-            foreach(var modifiers in appliedEffect.Policy.Modifiers) {
+            foreach(var modifiers in appliedEffect.EffectPolicy.Modifiers) {
                 if (!target.IsAttributeExist(modifiers.AttributeType)) {
                     return ;
                 }
@@ -135,7 +135,7 @@ namespace GameplayAbilitySystem {
             }
 
             // Handling Instant effects is different to handling HasDuration and Infinite effects, instant effect modify the base value
-            if (appliedEffect.Policy.DurationPolicy == DurationPolicy.Instant) {
+            if (appliedEffect.EffectPolicy.DurationPolicy == DurationPolicy.Instant) {
                 appliedEffect.ApplyInstantEffect(target);
             } else {
                 // Durational effect require attention to many more things than instant effects
@@ -169,7 +169,7 @@ namespace GameplayAbilitySystem {
             }
 
             // Execute gameplay cue
-            var gameplayCues = appliedEffect.GameplayCues;
+            var gameplayCues = appliedEffect.Cues;
             for (var i = 0; i < gameplayCues.Count; i++) {
                 var cue = gameplayCues[i];
                 cue.HandleCue(target, CueEventMomentType.OnActive);

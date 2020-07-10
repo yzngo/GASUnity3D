@@ -16,18 +16,22 @@ namespace GameplayAbilitySystem.Effects
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class Effect : ScriptableObject 
     {
-        [SerializeField] private EffectPolicy gameplayEffectPolicy = new EffectPolicy();
-        [SerializeField] private PeriodConfig periodicity = new PeriodConfig();
+        [FormerlySerializedAs("gameplayEffectPolicy")]
+        [SerializeField] private EffectPolicy effectPolicy = new EffectPolicy();
+        [FormerlySerializedAs("periodicity")]
+        [SerializeField] private PeriodConfig periodPolicy = new PeriodConfig();
         [SerializeField] private StackConfig stackPolicy = new StackConfig();
-        [SerializeField] private EffectTagContainer gameplayEffectTags = new EffectTagContainer();
-        [SerializeField] private List<GameplayCue> gameplayCues = new List<GameplayCue>();
+        [FormerlySerializedAs("gameplayEffectTags")]
+        [SerializeField] private EffectTagContainer effectTags = new EffectTagContainer();
+        [FormerlySerializedAs("gameplayCues")]
+        [SerializeField] private List<EffectCues> cues = new List<EffectCues>();
 
-        public EffectPolicy Policy => gameplayEffectPolicy;
-        public EffectTagContainer EffectTags => gameplayEffectTags;
-        public PeriodConfig PeriodPolicy => periodicity;
-        public List<GameplayCue> GameplayCues => gameplayCues;
+        public EffectPolicy EffectPolicy => effectPolicy;
+        public EffectTagContainer EffectTags => effectTags;
+        public PeriodConfig PeriodPolicy => periodPolicy;
+        public List<EffectCues> Cues => cues;
         public StackConfig StackPolicy => stackPolicy;
-        public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedToInstigatorTags;
+        public List<GameplayTag> GrantedTags => effectTags.GrantedToInstigatorTags;
 
         public bool IsTagsRequiredMatch(AbilitySystem target) {
             var requiredTagsPresent = true;
@@ -59,7 +63,7 @@ namespace GameplayAbilitySystem.Effects
         {
             var totalModifies = new TotalModifies();
 
-            foreach (var modifier in Policy.Modifiers) {
+            foreach (var modifier in EffectPolicy.Modifiers) {
                 // 当前attributeType的条目是否存在
                 if (!totalModifies.TryGetValue(modifier.AttributeType, out var typeModifiers)) {
                     typeModifiers = new Dictionary<ModifierOperationType, float>();

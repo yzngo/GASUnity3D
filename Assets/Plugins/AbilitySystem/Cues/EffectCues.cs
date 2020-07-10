@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GameplayAbilitySystem.Cues 
 {
     [CreateAssetMenu(fileName = "GameplayCue", menuName = "Ability System/Gameplay Cue/Gameplay Cue")]
-    public sealed class GameplayCue : ScriptableObject 
+    public sealed class EffectCues : ScriptableObject 
     {
         [SerializeField] private BaseCueAction ExecuteAction = default;
         [SerializeField] private BaseCueAction OnActiveAction = default;
