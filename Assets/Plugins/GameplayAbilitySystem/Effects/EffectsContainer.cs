@@ -17,18 +17,15 @@ namespace GameplayAbilitySystem.Effects
         /// This is used to keep track of all the "temporary" attribute modifiers,
         /// so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
         /// </summary>
-        /// <value></value>
         public EffectsModifyAggregator effectsModifyAggregator { get; } = new EffectsModifyAggregator();
 
         public EffectsContainer(AbilitySystem target) 
         {
             this.target = target;
         }
-        // private ActiveGameplayEffectsEvent ActiveGameplayEffectAddedEvent = new ActiveGameplayEffectsEvent();
 
-        //todo async 异步?
-        // public async Task<ActiveGameplayEffectData> ApplyGameEffect(ActiveGameplayEffectData EffectData) {
-        public void ApplyDurationalEffect(EffectContext effectData) {
+        public void ApplyDurationalEffect(EffectContext effectData) 
+        {
             // Durational effect.  Add granted modifiers to active list
             var existingStacks = -1;
             var maxStacks = effectData.Effect.StackingPolicy.StackLimit;
@@ -45,7 +42,6 @@ namespace GameplayAbilitySystem.Effects
                     break;
 
             }
-
             switch (effectData.Effect.StackingPolicy.StackPeriodResetPolicy) {
                 case StackRefreshPolicy.RefreshOnSuccessfulApplication: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
@@ -57,38 +53,37 @@ namespace GameplayAbilitySystem.Effects
                     break;
             }
 
-
             existingStacks = matchingStackedActiveEffects?.Count() ?? -1;
             if (existingStacks < maxStacks) { // We can still add more stacks.
                 AddActiveGameplayEffect(effectData);
                 // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, EffectData);
-
                 // We only need to do timed checks for durational abilities
                 if (effectData.Effect.Policy.DurationPolicy == DurationPolicy.Duration
                     || effectData.Effect.Policy.DurationPolicy == DurationPolicy.Infinite) {
                     // var removalTime = EffectData.Effect.GameplayEffectPolicy.DurationMagnitude * 1000.0f;
                     CheckGameplayEffectForTimedEffects(effectData);
                 }
-
             }
         }
 
-        private void OnActiveGameplayEffectAdded(EffectContext effectData) {
+        private void OnActiveGameplayEffectAdded(EffectContext effectData) 
+        {
             // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, effectData);
         }
 
-        private void ModifyActiveGameplayEffect(EffectContext effectData, Action<GameplayEffectModifier> action) {
+        private void ModifyActiveGameplayEffect(EffectContext effectData, Action<GameplayEffectModifier> action) 
+        {
             foreach (var modifier in effectData.Effect.Policy.Modifiers) {
                 action(modifier);
             }
-
             // If there are no gameplay effect modifiers, we need to add or get an empty entry
             if (effectData.Effect.Policy.Modifiers.Count == 0) {
                 action((new GameplayEffectModifier()).InitializeEmpty());
             }
         }
 
-        private void AddActiveGameplayEffect(EffectContext effectData) {
+        private void AddActiveGameplayEffect(EffectContext effectData) 
+        {
             ModifyActiveGameplayEffect(effectData, modifier => {
                 // We only apply if the effect has execute on application
                 modifier.AttemptCalculateMagnitude(out var evaluatedValue);
@@ -108,13 +103,11 @@ namespace GameplayAbilitySystem.Effects
                     if (effectData.Effect.Periodicity.Period <= 0) {
                         aggregator.AddAggregatorModifier(modifier.ModifierOperation, evaluatedValue);
                     }
-
                     // Recalculate new value by recomputing all aggregators
                     var aggregators = effectsModifyAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
                     UpdateAttribute(aggregators, modifier.AttributeType);
                 }
             });
-
             // Add cooldown effect as well.  Application of cooldown effect
             // is different to other game effects, because we don't take
             // attribute modifiers into account
@@ -131,7 +124,8 @@ namespace GameplayAbilitySystem.Effects
         /// </summary>
         /// <param name="effectData"></param>
         /// <returns> </returns>
-        private async Task WaitForEffectExpiryTime(EffectContext effectData) {
+        private async Task WaitForEffectExpiryTime(EffectContext effectData) 
+        {
             bool durationExpired = false;
             while (!durationExpired) {
                 await UniTask.DelayFrame(0);
@@ -145,20 +139,18 @@ namespace GameplayAbilitySystem.Effects
                 } else if (effectData.Effect.Policy.DurationPolicy == DurationPolicy.Infinite) {
                     durationExpired = effectData.StartWorldTime <= 0 ? true : false;
                 }
-
                 // Periodic effects only occur if the period is > 0
                 if (effectData.Effect.Periodicity.Period > 0) {
                     CheckAndApplyPeriodicEffect(effectData);
                 }
-
                 if (durationExpired) { // This effect is due for expiry
                     ApplyStackExpirationPolicy(effectData, ref durationExpired);
                 }
-
             }
         }
 
-        private void CheckAndApplyPeriodicEffect(EffectContext effectData) {
+        private void CheckAndApplyPeriodicEffect(EffectContext effectData) 
+        {
             if (effectData.TimeUntilNextPeriodicApplication <= 0) {
                 // Apply gameplay effect defined for period.  
                 if (effectData.Effect.Periodicity.EffectOnExecute != null) {
@@ -168,13 +160,13 @@ namespace GameplayAbilitySystem.Effects
                 foreach (var cue in gameplayCues) {
                     cue.HandleCue(effectData.Target, CueEventMomentType.OnExecute);
                 }
-
                 effectData.AddPeriodicEffectAttributeModifiers();
                 effectData.ResetPeriodicTime();
             }
         }
 
-        private void ApplyStackExpirationPolicy(EffectContext effectData, ref bool durationExpired) {
+        private void ApplyStackExpirationPolicy(EffectContext effectData, ref bool durationExpired) 
+        {
             IEnumerable<EffectContext> matchingEffects;
 
             switch (effectData.Effect.StackingPolicy.StackExpirationPolicy) {
@@ -213,7 +205,8 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-        private async void CheckGameplayEffectForTimedEffects(EffectContext effectData) {
+        private async void CheckGameplayEffectForTimedEffects(EffectContext effectData) 
+        {
             await WaitForEffectExpiryTime(effectData);
             var gameplayCues = effectData.Effect.GameplayCues;
             foreach (var cue in gameplayCues) {
@@ -228,7 +221,6 @@ namespace GameplayAbilitySystem.Effects
 
                 // Find all remaining aggregators of the same type and recompute values
                 var aggregators = effectsModifyAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
-
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
                     var current = target.GetBaseValue(modifier.AttributeType);
@@ -238,30 +230,28 @@ namespace GameplayAbilitySystem.Effects
                     UpdateAttribute(aggregators, modifier.AttributeType);
                 }
             });
-
         }
 
-        public void UpdateAttribute(IEnumerable<AttributeModifyAggregator> aggregator, AttributeType attributeType) {
+        public void UpdateAttribute(IEnumerable<AttributeModifyAggregator> aggregator, AttributeType attributeType) 
+        {
             var baseAttributeValue = target.GetBaseValue(attributeType);
             var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
             target.SetCurrentValue(attributeType, newCurrentAttributeValue);
         }
 
-        private IEnumerable<EffectContext> GetMatchingStackedEffectsByEffect(EffectContext effectData) {
+        private IEnumerable<EffectContext> GetMatchingStackedEffectsByEffect(EffectContext effectData) 
+        {
             IEnumerable<EffectContext> matchingStackedActiveEffects = null;
-
             switch (effectData.Effect.StackingPolicy.StackingType) {
                 // Stacking Type None:
                 // Add effect as a separate instance. 
                 case StackingType.None:
                     break;
-
                 case StackingType.AggregatedBySource:
                     matchingStackedActiveEffects = effectsModifyAggregator
                                         .GetAllEffects()
                                         .Where(x => x.Instigator == effectData.Instigator && x.Effect == effectData.Effect);
                     break;
-
                 case StackingType.AggregatedByTarget:
                     matchingStackedActiveEffects = effectsModifyAggregator
                                         .GetAllEffects()
