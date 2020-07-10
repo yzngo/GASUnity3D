@@ -36,14 +36,14 @@ namespace GameplayAbilitySystem {
 
         private AttributeSet attributeSet;
 
-        public IEnumerable<GameplayTag> ActiveTags =>
-                EffectsContainer
-                            .effectsModifyAggregator
-                            .GetAllEffects()
-                            .SelectMany(x => x.Effect.EffectTags.GrantedToASCTags.Added)
-                            .Union(AbilityGrantedTags);
+        // public IEnumerable<GameplayTag> ActiveTags =>
+        //         EffectsContainer
+        //                     .effectsModifyAggregator
+        //                     .GetAllEffects()
+        //                     .SelectMany(x => x.Effect.EffectTags.GrantedToASCTags.Added)
+        //                     .Union(runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added));
 
-        private IEnumerable<GameplayTag> AbilityGrantedTags => runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
+        // private IEnumerable<GameplayTag> AbilityGrantedTags => 
 
         public void Awake() {
             effectsContainer = new EffectsContainer(this);

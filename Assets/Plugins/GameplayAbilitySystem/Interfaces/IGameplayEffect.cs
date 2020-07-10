@@ -51,14 +51,14 @@ namespace GameplayAbilitySystem.Interfaces
         /// If these <see cref="GameplayTag"/> are not on the <see cref="AbilitySystem"/>, the effect is "disabled" until these <see cref="GameplayTag"/> are present.
         /// </summary>
         /// <value></value>
-        GameplayEffectRequireIgnoreTagContainer OngoingRequiredTags { get; }
+        // GameplayEffectRequireIgnoreTagContainer OngoingRequiredTags { get; }
 
         /// <summary>
         /// These <see cref="GameplayTag"/> are required on the target to apply the <see cref="Effect"/>.  Once the <see cref="Effect"/> is applied,
         /// this has no effect.
         /// </summary>
         /// <value></value>
-        GameplayEffectRequireIgnoreTagContainer ApplyRequiredTags { get; }
+        // GameplayEffectRequireIgnoreTagContainer ApplyRequiredTags { get; }
 
         /// <summary>
         /// Removes any existing <see cref="Effect"/> that have these <see cref="GameplayTag"/>.

@@ -39,13 +39,13 @@ namespace GameplayAbilitySystem.Effects
             var requiredTagsPresent = true;
             var ignoredTagsAbsent = true;
 
-            if (EffectTags.ApplyRequiredTags.RequirePresence.Count > 0) {
-                requiredTagsPresent = target.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequirePresence.Contains(x));
-            }
+            // if (EffectTags.ApplyRequiredTags.RequirePresence.Count > 0) {
+            //     requiredTagsPresent = target.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequirePresence.Contains(x));
+            // }
 
-            if (EffectTags.ApplyRequiredTags.RequireAbsence.Count > 0) {
-                ignoredTagsAbsent = !target.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequireAbsence.Contains(x));
-            }
+            // if (EffectTags.ApplyRequiredTags.RequireAbsence.Count > 0) {
+            //     ignoredTagsAbsent = !target.ActiveTags.Any(x => EffectTags.ApplyRequiredTags.RequireAbsence.Contains(x));
+            // }
             return requiredTagsPresent && ignoredTagsAbsent;
         }
 

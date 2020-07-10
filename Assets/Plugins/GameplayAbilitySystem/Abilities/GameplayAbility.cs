@@ -60,24 +60,24 @@ namespace GameplayAbilitySystem.Abilities
         private bool IsTagsSatisfied(AbilitySystem abilitySystem) 
         {
             // Checks to make sure Source ability system doesn't have prohibited tags
-            var activeTags = abilitySystem.ActiveTags;
+            // var activeTags = abilitySystem.ActiveTags;
             bool hasActivationRequiredTags = true;
             bool hasActivationBlockedTags = false;
-            bool hasSourceRequiredTags = false;
-            bool hasSourceBlockedTags = false;
+            // bool hasSourceRequiredTags = false;
+            // bool hasSourceBlockedTags = false;
 
-            if (Tags.ActivationRequiredTags.Added.Count > 0) {
-                hasActivationRequiredTags = !Tags.ActivationRequiredTags.Added.Except(activeTags).Any();
-            }
-            if (Tags.ActivationBlockedTags.Added.Count > 0) {
-                hasActivationBlockedTags = activeTags.Any(x => Tags.ActivationBlockedTags.Added.Contains(x));
-            }
-            if (Tags.SourceRequiredTags.Added.Count > 0) {
-                hasSourceRequiredTags = !Tags.SourceRequiredTags.Added.Except(activeTags).Any();
-            }
-            if (Tags.SourceBlockedTags.Added.Count > 0) {
-                hasSourceBlockedTags = activeTags.Any(x => Tags.SourceBlockedTags.Added.Contains(x));
-            }
+            // if (Tags.ActivationRequiredTags.Added.Count > 0) {
+            //     hasActivationRequiredTags = !Tags.ActivationRequiredTags.Added.Except(activeTags).Any();
+            // }
+            // if (Tags.ActivationBlockedTags.Added.Count > 0) {
+            //     hasActivationBlockedTags = activeTags.Any(x => Tags.ActivationBlockedTags.Added.Contains(x));
+            // }
+            // if (Tags.SourceRequiredTags.Added.Count > 0) {
+            //     hasSourceRequiredTags = !Tags.SourceRequiredTags.Added.Except(activeTags).Any();
+            // }
+            // if (Tags.SourceBlockedTags.Added.Count > 0) {
+            //     hasSourceBlockedTags = activeTags.Any(x => Tags.SourceBlockedTags.Added.Contains(x));
+            // }
             return !hasActivationBlockedTags && hasActivationRequiredTags;
         }
 

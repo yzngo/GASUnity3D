@@ -12,11 +12,11 @@ namespace GameplayAbilitySystem.Effects {
         [SerializeField]
         private GameplayEffectAddRemoveTagContainer grantedToASCTags = new GameplayEffectAddRemoveTagContainer();
 
-        [SerializeField]
-        private GameplayEffectRequireIgnoreTagContainer ongoingRequiredTags = new GameplayEffectRequireIgnoreTagContainer();
+        // [SerializeField]
+        // private GameplayEffectRequireIgnoreTagContainer ongoingRequiredTags = new GameplayEffectRequireIgnoreTagContainer();
 
-        [SerializeField]
-        private GameplayEffectRequireIgnoreTagContainer applyRequiredTags = new GameplayEffectRequireIgnoreTagContainer();
+        // [SerializeField]
+        // private GameplayEffectRequireIgnoreTagContainer applyRequiredTags = new GameplayEffectRequireIgnoreTagContainer();
 
         [SerializeField]
         private GameplayEffectAddRemoveStacksTagContainer beRemovedEffectsTags = new GameplayEffectAddRemoveStacksTagContainer();
@@ -29,10 +29,10 @@ namespace GameplayAbilitySystem.Effects {
         public GameplayEffectAddRemoveTagContainer GrantedToASCTags => grantedToASCTags;
         // ongoing (持续存在的)
         // 决定Modifier是开还是关  Ongoing(持续存在的), 仅作用于Duration, Infinate
-        public GameplayEffectRequireIgnoreTagContainer OngoingRequiredTags => ongoingRequiredTags;
+        // public GameplayEffectRequireIgnoreTagContainer OngoingRequiredTags => ongoingRequiredTags;
 
         // 目标对象上有这些tag才可以应用
-        public GameplayEffectRequireIgnoreTagContainer ApplyRequiredTags => applyRequiredTags;
+        // public GameplayEffectRequireIgnoreTagContainer ApplyRequiredTags => applyRequiredTags;
 
         // 移除任何带有这些tag的effect
         public GameplayEffectAddRemoveStacksTagContainer BeRemovedEffectsTags => beRemovedEffectsTags;
