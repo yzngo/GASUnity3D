@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using GameplayAbilitySystem.Interfaces;
 using System.Collections.Generic;
 using GameplayAbilitySystem.Attributes;
 

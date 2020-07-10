@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GameplayAbilitySystem.Interfaces;
 using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using GameplayAbilitySystem.Abilities.AbilityActivations;

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Interfaces;
 using GameplayAbilitySystem;
 using GameplayAbilitySystem.Attributes;
 using UnityEngine;

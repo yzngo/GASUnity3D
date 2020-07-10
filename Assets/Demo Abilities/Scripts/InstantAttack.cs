@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameplayAbilitySystem.ExtensionMethods;
 using GameplayAbilitySystem.Effects;
-using GameplayAbilitySystem.Interfaces;
 using UniRx.Async;
 using UnityEngine;
 
@@ -24,7 +23,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
 
             // Make sure we have enough resources.  End ability if we don't
 
-            (_, var abilityEventData) = await instigator.OnAbilityEvent.WaitForEvent((gameplayTag, eventData) => gameplayTag == WaitForEventTag);
+            var abilityEventData = await instigator.OnAbilityEvent.WaitForEvent((eventData) => eventData.AbilityTag == WaitForEventTag);
             animator.SetTrigger(AnimationTriggerName);
             animator.SetTrigger(AnimationCompleteTriggerName);
 

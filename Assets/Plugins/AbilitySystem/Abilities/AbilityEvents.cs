@@ -1,18 +1,18 @@
 using System;
-using GameplayAbilitySystem.Interfaces;
 using UnityEngine.Events;
-using UnityEngine;
 using System.Collections.Generic;
 
-namespace GameplayAbilitySystem.Abilities {
-
+namespace GameplayAbilitySystem.Abilities 
+{
     [Serializable]
-    public class AbilityEvent : UnityEvent<GameplayTag, AbilityEventData> {
+    public class AbilityEvent : UnityEvent<AbilityEventData> 
+    {
     }
 
     [Serializable]
-    public struct AbilityEventData {
-        // public GameplayTag EventTag;
+    public struct AbilityEventData 
+    {
+        public GameplayTag AbilityTag;
         // public AbilitySystem Instigator;
         public AbilitySystem Target;
         // public object OptionalObject;

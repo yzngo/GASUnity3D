@@ -1,6 +1,5 @@
 using System.Linq;
 using GameplayAbilitySystem.Attributes;
-using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
 

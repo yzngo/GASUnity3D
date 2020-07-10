@@ -7,7 +7,6 @@ using UnityEngine;
 using GameplayAbilitySystem.Attributes;
 using GameplayAbilitySystem.Cues;
 using UnityEngine.Events;
-using GameplayAbilitySystem.Interfaces;
 
 namespace GameplayAbilitySystem {
 
@@ -78,8 +77,9 @@ namespace GameplayAbilitySystem {
 
             GameplayTag abilityTag = ability.Tags.AbilityTags.Count > 0 ? ability.Tags.AbilityTags[0] : new GameplayTag();
             var data = new AbilityEventData();
+            data.AbilityTag = abilityTag;
             data.Target = target;
-            onAbilityEvent?.Invoke(abilityTag, data);
+            onAbilityEvent?.Invoke(data);
             return true;
         }
 
