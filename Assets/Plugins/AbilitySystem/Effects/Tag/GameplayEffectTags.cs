@@ -1,18 +1,19 @@
 using System;
 using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
-
-namespace GameplayAbilitySystem.Effects {
-
+using System.Collections.Generic;
+namespace GameplayAbilitySystem.Effects 
+{
     [Serializable]
-    public class GameplayEffectTags : IGameplayEffectTags {
-        [SerializeField] private GameplayEffectAddRemoveTagContainer effectTags = new GameplayEffectAddRemoveTagContainer();
+    public class GameplayEffectTags
+    {
+        [SerializeField] private List<GameplayTag> effectTags = new List<GameplayTag>();
         [SerializeField] private GameplayEffectAddRemoveTagContainer grantedToASCTags = new GameplayEffectAddRemoveTagContainer();
         [SerializeField] private RemovedEffectTagContainer removedEffectsTags = new RemovedEffectTagContainer();
 
 
         // 此Effect具有的标签
-        public GameplayEffectAddRemoveTagContainer EffectTags => effectTags;
+        public List<GameplayTag> EffectTags => effectTags;
 
         // 赋予AbilitySystemComponent的标签
         // 移除时也会从ASC中移除, 只能用于Duration和Infinite的GameEffect
