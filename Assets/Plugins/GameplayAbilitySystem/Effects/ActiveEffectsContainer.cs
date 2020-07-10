@@ -8,13 +8,11 @@ using GameplayAbilitySystem.Cues;
 
 namespace GameplayAbilitySystem.Effects {
 
-    // 所有激活的effect的容器
     [Serializable]
     public class ActiveEffectsContainer {
-
-        private AbilitySystem abilitySystem;
-        public ActiveEffectsContainer(AbilitySystem abilitySystem) {
-            this.abilitySystem = abilitySystem;
+        private AbilitySystem target;
+        public ActiveEffectsContainer(AbilitySystem target) {
+            this.target = target;
         }
 
         /// <summary>
@@ -22,7 +20,7 @@ namespace GameplayAbilitySystem.Effects {
         /// so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
         /// </summary>
         /// <value></value>
-        public ActiveEffectAttributeAggregator ActiveEffectAttributeAggregator { get; } = new ActiveEffectAttributeAggregator();
+        public ActiveEffectAttributeAggregator AttributeAggregator { get; } = new ActiveEffectAttributeAggregator();
 
         // private ActiveGameplayEffectsEvent ActiveGameplayEffectAddedEvent = new ActiveGameplayEffectsEvent();
 
@@ -94,7 +92,7 @@ namespace GameplayAbilitySystem.Effects {
                 modifier.AttemptCalculateMagnitude(out var evaluatedMagnitude);
 
                 // Check if we already have an entry for this gameplay effect attribute modifier
-                var attributeAggregatorMap = ActiveEffectAttributeAggregator.AddorGet(effectData);
+                var attributeAggregatorMap = AttributeAggregator.AddorGet(effectData);
 
                 if (modifier.AttributeType != null) {
                     // If aggregator for this attribute doesn't exist, add it.
@@ -110,7 +108,7 @@ namespace GameplayAbilitySystem.Effects {
                     }
 
                     // Recalculate new value by recomputing all aggregators
-                    var aggregators = ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
+                    var aggregators = AttributeAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
                     UpdateAttribute(aggregators, modifier.AttributeType);
                 }
             });
@@ -223,17 +221,17 @@ namespace GameplayAbilitySystem.Effects {
             // Remove one instance of this effect from the active list
             ModifyActiveGameplayEffect(effectData, modifier => {
 
-                ActiveEffectAttributeAggregator.RemoveEffect(effectData);
+                AttributeAggregator.RemoveEffect(effectData);
                 if (modifier.AttributeType == null) return;
 
                 // Find all remaining aggregators of the same type and recompute values
-                var aggregators = ActiveEffectAttributeAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
+                var aggregators = AttributeAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
 
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
-                    var current = abilitySystem.GetBaseValue(modifier.AttributeType);
-                    if (current < 0) abilitySystem.SetBaseValue(modifier.AttributeType, 0f);
-                    abilitySystem.SetCurrentValue(modifier.AttributeType, current);
+                    var current = target.GetBaseValue(modifier.AttributeType);
+                    if (current < 0) target.SetBaseValue(modifier.AttributeType, 0f);
+                    target.SetCurrentValue(modifier.AttributeType, current);
                 } else {
                     UpdateAttribute(aggregators, modifier.AttributeType);
                 }
@@ -242,9 +240,9 @@ namespace GameplayAbilitySystem.Effects {
         }
 
         public void UpdateAttribute(IEnumerable<Aggregator> aggregator, AttributeType attributeType) {
-            var baseAttributeValue = abilitySystem.GetBaseValue(attributeType);
+            var baseAttributeValue = target.GetBaseValue(attributeType);
             var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
-            abilitySystem.SetCurrentValue(attributeType, newCurrentAttributeValue);
+            target.SetCurrentValue(attributeType, newCurrentAttributeValue);
         }
 
         private IEnumerable<ActivedEffectData> GetMatchingStackedEffectsByEffect(ActivedEffectData effectData) {
@@ -257,13 +255,13 @@ namespace GameplayAbilitySystem.Effects {
                     break;
 
                 case StackingType.AggregatedBySource:
-                    matchingStackedActiveEffects = ActiveEffectAttributeAggregator
+                    matchingStackedActiveEffects = AttributeAggregator
                                         .GetAllActiveEffects()
                                         .Where(x => x.Instigator == effectData.Instigator && x.Effect == effectData.Effect);
                     break;
 
                 case StackingType.AggregatedByTarget:
-                    matchingStackedActiveEffects = ActiveEffectAttributeAggregator
+                    matchingStackedActiveEffects = AttributeAggregator
                                         .GetAllActiveEffects()
                                         .Where(x => x.Target == effectData.Target && x.Effect == effectData.Effect);
                     break;

@@ -12,7 +12,6 @@ namespace GameplayAbilitySystem.Effects {
         private Dictionary<ActivedEffectData, Dictionary<AttributeType, Aggregator>> Map = 
             new Dictionary<ActivedEffectData, Dictionary<AttributeType, Aggregator>>();
 
-
         public Dictionary<AttributeType, Aggregator> AddorGet(ActivedEffectData EffectData) {
             if (!Map.TryGetValue(EffectData, out var attributeAggregatorMap)) {
                 attributeAggregatorMap = new Dictionary<AttributeType, Aggregator>();

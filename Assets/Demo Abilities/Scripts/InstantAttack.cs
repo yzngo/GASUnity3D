@@ -18,28 +18,27 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
         public string AnimationCompleteTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void ActivateAbility(AbilitySystem abilitySystem, IGameplayAbility Ability) {
-            var abilitySystemActor = abilitySystem.transform;
-            var animationEventSystemComponent = abilitySystemActor.GetComponent<AnimationEventSystem>();
-            var animatorComponent = abilitySystemActor.GetComponent<Animator>();
+        public override async void ActivateAbility(AbilitySystem instigator, IGameplayAbility Ability) {
+            var animationEventSystem = instigator.GetComponent<AnimationEventSystem>();
+            var animator = instigator.Animator;
 
             // Make sure we have enough resources.  End ability if we don't
 
-            (_, var abilityEventData) = await abilitySystem.OnAbilityEvent.WaitForEvent((gameplayTag, eventData) => gameplayTag == WaitForEventTag);
-            animatorComponent.SetTrigger(AnimationTriggerName);
-            animatorComponent.SetTrigger(AnimationCompleteTriggerName);
+            (_, var abilityEventData) = await instigator.OnAbilityEvent.WaitForEvent((gameplayTag, eventData) => gameplayTag == WaitForEventTag);
+            animator.SetTrigger(AnimationTriggerName);
+            animator.SetTrigger(AnimationCompleteTriggerName);
 
             if (ExecuteEffectEvent != null) {
-                await animationEventSystemComponent.CustomAnimationEvent.WaitForEvent((x) => x == ExecuteEffectEvent);
+                await animationEventSystem.CustomAnimationEvent.WaitForEvent((x) => x == ExecuteEffectEvent);
             }
-            abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, abilityEventData.Target);
+            instigator.ApplyEffectToTarget(TargetGameplayEffect, abilityEventData.Target);
 
 
-            var beh = animatorComponent.GetBehaviour<AnimationBehaviourEventSystem>();
-            await beh.StateEnter.WaitForEvent((animator, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));
+            var beh = animator.GetBehaviour<AnimationBehaviourEventSystem>();
+            await beh.StateEnter.WaitForEvent((anim, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));
 
             // End Ability
-            Ability.EndAbility(abilitySystem);
+            Ability.EndAbility(instigator);
         }
 
     }
