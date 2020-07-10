@@ -8,7 +8,7 @@ namespace GameplayAbilitySystem.Effects
     public class GameplayEffectTags
     {
         [SerializeField] private List<GameplayTag> effectTags = new List<GameplayTag>();
-        [SerializeField] private GameplayEffectAddRemoveTagContainer grantedToASCTags = new GameplayEffectAddRemoveTagContainer();
+        [SerializeField] private List<GameplayTag> grantedToInstigatorTags = new List<GameplayTag>();
         [SerializeField] private RemovedEffectTagContainer removedEffectsTags = new RemovedEffectTagContainer();
 
 
@@ -17,7 +17,7 @@ namespace GameplayAbilitySystem.Effects
 
         // 赋予AbilitySystemComponent的标签
         // 移除时也会从ASC中移除, 只能用于Duration和Infinite的GameEffect
-        public GameplayEffectAddRemoveTagContainer GrantedToInstigatorTags => grantedToASCTags;
+        public List<GameplayTag> GrantedToInstigatorTags => grantedToInstigatorTags;
 
         // 移除任何带有这些tag的effect
         public RemovedEffectTagContainer RemovedEffectsTags => removedEffectsTags;

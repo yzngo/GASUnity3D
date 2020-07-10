@@ -33,7 +33,7 @@ namespace GameplayAbilitySystem.Effects
         public PeriodPolicy PeriodPolicy => periodicity;
         public List<GameplayCue> GameplayCues => gameplayCues;
         public StackPolicy StackPolicy => stackPolicy;
-        public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedToInstigatorTags.Added;
+        public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedToInstigatorTags;
 
         public bool IsTagsRequiredMatch(AbilitySystem target) {
             var requiredTagsPresent = true;

@@ -28,10 +28,9 @@ MonoBehaviour:
     ExpirationPolicy: 0
   gameplayEffectTags:
     effectTags:
-      _added: []
-    grantedToASCTags:
-      _added:
-      - {fileID: 11400000, guid: 0f7aacaa3f81d2b419604039ea36b254, type: 2}
+    - {fileID: 0}
+    grantedToInstigatorTags:
+    - {fileID: 11400000, guid: 0f7aacaa3f81d2b419604039ea36b254, type: 2}
     removedEffectsTags:
       removed:
       - Tag: {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
