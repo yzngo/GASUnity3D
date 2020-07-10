@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using GameplayAbilitySystem.ExtensionMethods;
 using UnityEngine;
 
 namespace GameplayAbilitySystem.Abilities.Logic 

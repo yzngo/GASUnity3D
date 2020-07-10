@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using GameplayAbilitySystem.ExtensionMethods;
 using GameplayAbilitySystem.Effects;
 using UniRx.Async;
 using UnityEngine;
+using GameplayAbilitySystem.Utility;
 
 namespace GameplayAbilitySystem.Abilities.Logic 
 {

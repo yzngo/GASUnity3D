@@ -6,7 +6,8 @@ using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using GameplayAbilitySystem.Attributes;
 using GameplayAbilitySystem.Cues;
-using UnityEngine.Events;
+using GameplayAbilitySystem.Utility;
+
 
 namespace GameplayAbilitySystem {
 

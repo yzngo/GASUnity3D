@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameplayAbilitySystem.Effects;
 using UnityEngine;
+using GameplayAbilitySystem.Utility;
 
 namespace GameplayAbilitySystem.Attributes 
 {
