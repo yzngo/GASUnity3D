@@ -1,7 +1,6 @@
 using System;
 using GameplayAbilitySystem.Effects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Abilities 
 {
@@ -16,7 +15,6 @@ namespace GameplayAbilitySystem.Abilities
 
         [Tooltip("Tags to determine whether the ability is on cooldown")]
         [SerializeField] protected GameplayEffectAddRemoveTagContainer cooldownTags;
-
 
 
 
