@@ -4,6 +4,7 @@ using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using GameplayAbilitySystem.Abilities.AbilityActivations;
 using System.Linq;
+using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Abilities 
 {
@@ -17,15 +18,16 @@ namespace GameplayAbilitySystem.Abilities
         /// <summary>
         /// Tags that this ability has/provides
         /// </summary
-        public GameplayAbilityTags Tags => _tags;
+        public AbilityTagsContainer Tags => tags;
         public Effect Cost => cost; // Cost of using this ability
-        public List<Effect> Cooldowns => _cooldownsToApply;     // Cooldowns associated with this ability
-        public AbstractAbilityActivation AbilityLogic => _abilityLogic; // Defines what the ability actually does
+        public List<Effect> Cooldowns => cooldowns;     // Cooldowns associated with this ability
+        public AbstractAbilityActivation AbilityLogic => abilityLogic; // Defines what the ability actually does
 
-        [SerializeField] private GameplayAbilityTags _tags = new GameplayAbilityTags();
+        [SerializeField] private AbilityTagsContainer tags = new AbilityTagsContainer();
         [SerializeField] private Effect cost = default;
-        [SerializeField] private List<Effect> _cooldownsToApply = new List<Effect>();
-        [SerializeField] private AbstractAbilityActivation _abilityLogic = default;
+
+        [SerializeField] private List<Effect> cooldowns = new List<Effect>();
+        [SerializeField] private AbstractAbilityActivation abilityLogic = default;
 
         // [SerializeField] private List<GameplayEffect> _effectsToApplyOnExecution = new List<GameplayEffect>();
         // [SerializeField] private GenericAbilityEvent _onGameplayAbilityCommitted = new GenericAbilityEvent();
