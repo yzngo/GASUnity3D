@@ -13,10 +13,7 @@ namespace GameplayAbilitySystem.Effects
     {
         private AbilitySystem target;
 
-        /// <summary>
-        /// This is used to keep track of all the "temporary" attribute modifiers,
-        /// so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
-        /// </summary>
+        // all durational modifier
         public EffectsModifyAggregator effectsModifyAggregator { get; } = new EffectsModifyAggregator();
 
         public EffectsContainer(AbilitySystem target) 
@@ -27,8 +24,8 @@ namespace GameplayAbilitySystem.Effects
         public void ApplyDurationalEffect(EffectContext effectContext) 
         {
             // Durational effect.  Add granted modifiers to active list
-            var existingStacks = -1;
-            var maxStacks = effectContext.Effect.StackingPolicy.StackLimit;
+            int existingStacks = -1;
+            int maxStacks = effectContext.Effect.StackingPolicy.StackLimit;
             IEnumerable<EffectContext> matchingStackedActiveEffects = GetMatchingStackedEffectsByEffect(effectContext);
 
             switch (effectContext.Effect.StackingPolicy.StackDurationRefreshPolicy) {
