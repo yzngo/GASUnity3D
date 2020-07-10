@@ -39,7 +39,7 @@ namespace GameplayAbilitySystem.Effects
                                 .Where(x => x.Value.ContainsKey(Attribute))
                                 .Select(x => x.Value[Attribute]);
             var periodic = effectAggregator
-                            .Where(x => x.Key.Effect.PeriodConfig.Period > 0)
+                            .Where(x => x.Key.Effect.Configs.PeriodConfig.Period > 0)
                             .Select(x => x.Key.GetPeriodicAggregatorForAttribute(Attribute))
                             .Where(x => x != null);
             return aggregators.Concat(periodic);

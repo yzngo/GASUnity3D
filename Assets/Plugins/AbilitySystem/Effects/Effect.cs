@@ -20,11 +20,9 @@ namespace GameplayAbilitySystem.Effects
         [SerializeField] private EffectConfigs configs = default;
         public EffectConfigs Configs => configs;
 
-        [SerializeField] private PeriodConfig periodConfig = new PeriodConfig();
         [SerializeField] private StackConfig stackConfig = new StackConfig();
         [SerializeField] private EffectTagContainer effectTags = new EffectTagContainer();
 
-        public PeriodConfig PeriodConfig => periodConfig;
         public StackConfig StackConfig => stackConfig;
         public EffectTagContainer EffectTags => effectTags;
 

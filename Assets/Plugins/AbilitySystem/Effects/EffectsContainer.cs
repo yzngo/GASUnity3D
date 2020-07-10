@@ -97,7 +97,7 @@ namespace GameplayAbilitySystem.Effects
 
                     // If this is a periodic effect, we don't add any attributes here. 
                     // They will be added as required on period expiry and stored in a separate structure
-                    if (effectContext.Effect.PeriodConfig.Period <= 0) {
+                    if (effectContext.Effect.Configs.PeriodConfig.Period <= 0) {
                         aggregator.AddAggregatorModifier(modifier.ModifierOperation, evaluatedValue);
                     }
                     // Recalculate new value by recomputing all aggregators
@@ -137,7 +137,7 @@ namespace GameplayAbilitySystem.Effects
                     durationExpired = effectContext.StartWorldTime <= 0 ? true : false;
                 }
                 // Periodic effects only occur if the period is > 0
-                if (effectContext.Effect.PeriodConfig.Period > 0) {
+                if (effectContext.Effect.Configs.PeriodConfig.Period > 0) {
                     CheckAndApplyPeriodicEffect(effectContext);
                 }
                 if (durationExpired) { // This effect is due for expiry
@@ -150,8 +150,8 @@ namespace GameplayAbilitySystem.Effects
         {
             if (effectContext.TimeUntilNextPeriodicApplication <= 0) {
                 // Apply gameplay effect defined for period.  
-                if (effectContext.Effect.PeriodConfig.EffectOnExecute != null) {
-                    effectContext.Instigator.ApplyEffectToTarget(effectContext.Effect.PeriodConfig.EffectOnExecute, effectContext.Target);
+                if (effectContext.Effect.Configs.PeriodConfig.EffectOnExecute != null) {
+                    effectContext.Instigator.ApplyEffectToTarget(effectContext.Effect.Configs.PeriodConfig.EffectOnExecute, effectContext.Target);
                 }
                 var gameplayCues = effectContext.Effect.Configs.Cues;
                 foreach (var cue in gameplayCues) {

@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configs:
     DurationConfig:
-      policy: 1
-      durationLength: 21
+      Policy: 1
+      DurationLength: 21
     PeriodConfig:
-      Period: 0
+      Period: 3
       IsExecuteOnApply: 0
-      EffectOnExecute: {fileID: 0}
+      EffectOnExecute: {fileID: 11400000, guid: 2f67849ecd9684d42a69798734a9ff04,
+        type: 2}
     StackConfig:
       Type: 0
       Limit: 0
@@ -33,10 +34,6 @@ MonoBehaviour:
       removedEffectsTags: []
     Cues:
     - {fileID: 11400000, guid: c2fdf7b8b6a3efe4bb8950654af72d18, type: 2}
-  effectPolicy:
-    durationPolicy: 1
-    durationMagnitude: 21
-    modifiers: []
   periodConfig:
     Period: 3
     IsExecuteOnApply: 0
