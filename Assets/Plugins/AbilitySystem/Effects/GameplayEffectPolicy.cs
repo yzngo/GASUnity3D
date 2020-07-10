@@ -8,7 +8,8 @@ namespace GameplayAbilitySystem.Effects {
     // - 时长 (立即生效, 区间+magnitude, 无穷)
     // - 修改器
     [Serializable]
-    public class GameplayEffectPolicy : IGameplayEffectPolicy {
+    public class GameplayEffectPolicy
+    {
         [Tooltip(
 @"游戏效果策略 
         Instant  执行一次  
