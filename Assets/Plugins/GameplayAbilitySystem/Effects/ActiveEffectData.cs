@@ -88,7 +88,7 @@ namespace GameplayAbilitySystem.Effects {
         public void AddPeriodicEffectAttributeModifiers() {
             // Check out ActiveGameplayEffectContainer.AddActiveGameplayEffect to see how to populate the ActiveEffectAttributeAggregator object
             foreach (var modifier in Effect.Policy.Modifiers) {
-                modifier.AttemptCalculateMagnitude(out var EvaluatedMagnitude);
+                modifier.AttemptCalculateMagnitude(out var EvaluatedValue);
 
                 // If aggregator for this attribute doesn't exist, add it.
                 if (!PeriodicEffectModificationsToDate.TryGetValue(modifier.AttributeType, out var aggregator)) {
@@ -97,7 +97,7 @@ namespace GameplayAbilitySystem.Effects {
                     PeriodicEffectModificationsToDate.Add(modifier.AttributeType, aggregator);
                 }
 
-                aggregator.AddAggregatorModifier(EvaluatedMagnitude, modifier.ModifierOperation);
+                aggregator.AddAggregatorModifier(modifier.ModifierOperation, EvaluatedValue);
 
                 // Recalculate new value by recomputing all aggregators
                 var aggregators = Target.ActiveEffectsContainer.AttributeAggregator

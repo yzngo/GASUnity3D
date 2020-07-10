@@ -89,7 +89,7 @@ namespace GameplayAbilitySystem.Effects {
         private void AddActiveGameplayEffect(ActivedEffectData effectData) {
             ModifyActiveGameplayEffect(effectData, modifier => {
                 // We only apply if the effect has execute on application
-                modifier.AttemptCalculateMagnitude(out var evaluatedMagnitude);
+                modifier.AttemptCalculateMagnitude(out var evaluatedValue);
 
                 // Check if we already have an entry for this gameplay effect attribute modifier
                 var attributeAggregatorMap = AttributeAggregator.AddorGet(effectData);
@@ -104,7 +104,7 @@ namespace GameplayAbilitySystem.Effects {
                     // If this is a periodic effect, we don't add any attributes here. 
                     // They will be added as required on period expiry and stored in a separate structure
                     if (effectData.Effect.Periodicity.Period <= 0) {
-                        aggregator.AddAggregatorModifier(evaluatedMagnitude, modifier.ModifierOperation);
+                        aggregator.AddAggregatorModifier(modifier.ModifierOperation, evaluatedValue);
                     }
 
                     // Recalculate new value by recomputing all aggregators
