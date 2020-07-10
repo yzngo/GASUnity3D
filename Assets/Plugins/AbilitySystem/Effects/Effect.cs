@@ -17,9 +17,7 @@ namespace GameplayAbilitySystem.Effects
     public class Effect : ScriptableObject 
     {
         [SerializeField] private EffectPolicy effectPolicy = new EffectPolicy();
-        [FormerlySerializedAs("periodPolicy")]
         [SerializeField] private PeriodConfig periodConfig = new PeriodConfig();
-        [FormerlySerializedAs("stackPolicy")]
         [SerializeField] private StackConfig stackConfig = new StackConfig();
         [SerializeField] private EffectTagContainer effectTags = new EffectTagContainer();
         [SerializeField] private List<EffectCues> cues = new List<EffectCues>();
