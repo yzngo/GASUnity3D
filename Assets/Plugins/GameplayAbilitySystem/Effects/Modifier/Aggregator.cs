@@ -91,6 +91,4 @@ namespace GameplayAbilitySystem.Effects
             return (baseValue + additives) * multipliers;
         }
     }
-
 }
-
