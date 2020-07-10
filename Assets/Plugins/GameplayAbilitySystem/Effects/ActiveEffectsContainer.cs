@@ -20,7 +20,7 @@ namespace GameplayAbilitySystem.Effects {
         /// so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
         /// </summary>
         /// <value></value>
-        public ActiveEffectAttributeAggregator AttributeAggregator { get; } = new ActiveEffectAttributeAggregator();
+        public EffectsModifyAggregator AttributeAggregator { get; } = new EffectsModifyAggregator();
 
         // private ActiveGameplayEffectsEvent ActiveGameplayEffectAddedEvent = new ActiveGameplayEffectsEvent();
 
@@ -96,8 +96,8 @@ namespace GameplayAbilitySystem.Effects {
 
                 if (modifier.AttributeType != null) {
                     // If aggregator for this attribute doesn't exist, add it.
-                    if (!attributeAggregatorMap.TryGetValue(modifier.AttributeType, out Aggregator aggregator)) {
-                        aggregator = new Aggregator(modifier.AttributeType);
+                    if (!attributeAggregatorMap.TryGetValue(modifier.AttributeType, out AttributeModifyAggregator aggregator)) {
+                        aggregator = new AttributeModifyAggregator(modifier.AttributeType);
                         attributeAggregatorMap.Add(modifier.AttributeType, aggregator);
                     }
 
@@ -239,7 +239,7 @@ namespace GameplayAbilitySystem.Effects {
 
         }
 
-        public void UpdateAttribute(IEnumerable<Aggregator> aggregator, AttributeType attributeType) {
+        public void UpdateAttribute(IEnumerable<AttributeModifyAggregator> aggregator, AttributeType attributeType) {
             var baseAttributeValue = target.GetBaseValue(attributeType);
             var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
             target.SetCurrentValue(attributeType, newCurrentAttributeValue);
@@ -256,13 +256,13 @@ namespace GameplayAbilitySystem.Effects {
 
                 case StackingType.AggregatedBySource:
                     matchingStackedActiveEffects = AttributeAggregator
-                                        .GetAllActiveEffects()
+                                        .GetAllEffects()
                                         .Where(x => x.Instigator == effectData.Instigator && x.Effect == effectData.Effect);
                     break;
 
                 case StackingType.AggregatedByTarget:
                     matchingStackedActiveEffects = AttributeAggregator
-                                        .GetAllActiveEffects()
+                                        .GetAllEffects()
                                         .Where(x => x.Target == effectData.Target && x.Effect == effectData.Effect);
                     break;
             }

@@ -108,7 +108,7 @@ namespace GameplayAbilitySystem.Abilities
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
             ActivedEffectData maxCooldownEffect = abilitySystem.ActiveEffectsContainer
                                     .AttributeAggregator
-                                    .GetAllActiveEffects()
+                                    .GetAllEffects()
                                     .Where(x => x.Effect.GrantedTags.Intersect(cooldownTags).Any())
                                     .DefaultIfEmpty()
                                     .OrderByDescending(x => x?.CooldownTimeRemaining)

@@ -39,7 +39,7 @@ namespace GameplayAbilitySystem {
         public IEnumerable<GameplayTag> ActiveTags =>
                 ActiveEffectsContainer
                             .AttributeAggregator
-                            .GetAllActiveEffects()
+                            .GetAllEffects()
                             .SelectMany(x => x.Effect.EffectTags.GrantedToASCTags.Added)
                             .Union(AbilityGrantedTags);
 
@@ -176,7 +176,7 @@ namespace GameplayAbilitySystem {
 
         public IEnumerable<(GameplayTag Tag, ActivedEffectData GrantingEffect)> GetActiveEffectsTags()
         {
-            var activeEffects = ActiveEffectsContainer.AttributeAggregator.GetAllActiveEffects();
+            var activeEffects = ActiveEffectsContainer.AttributeAggregator.GetAllEffects();
             if (activeEffects == null) 
                 return new List<(GameplayTag, ActivedEffectData)>();
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));

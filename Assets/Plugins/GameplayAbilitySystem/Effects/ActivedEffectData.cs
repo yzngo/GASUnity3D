@@ -59,7 +59,7 @@ namespace GameplayAbilitySystem.Effects {
         public float TimeSincePreviousPeriodicApplication => Time.time - timeOfLastPeriodicApplication;
         // 对于周期性的effect而言, 到下次应用还需要的时间
         public float TimeUntilNextPeriodicApplication => timeOfLastPeriodicApplication + Effect.Periodicity.Period - Time.time;
-        private Dictionary<AttributeType, Aggregator> PeriodicEffectModificationsToDate = new Dictionary<AttributeType, Aggregator>();
+        private Dictionary<AttributeType, AttributeModifyAggregator> PeriodicEffectModificationsToDate = new Dictionary<AttributeType, AttributeModifyAggregator>();
 
 // reset time
         /// Reset duration of this effect.
@@ -92,7 +92,7 @@ namespace GameplayAbilitySystem.Effects {
 
                 // If aggregator for this attribute doesn't exist, add it.
                 if (!PeriodicEffectModificationsToDate.TryGetValue(modifier.AttributeType, out var aggregator)) {
-                    aggregator = new Aggregator(modifier.AttributeType);
+                    aggregator = new AttributeModifyAggregator(modifier.AttributeType);
                     // aggregator.Dirtied.AddListener(UpdateAttribute);
                     PeriodicEffectModificationsToDate.Add(modifier.AttributeType, aggregator);
                 }
@@ -106,7 +106,7 @@ namespace GameplayAbilitySystem.Effects {
             }
         }
 
-        public Aggregator GetPeriodicAggregatorForAttribute(AttributeType Attribute) {
+        public AttributeModifyAggregator GetPeriodicAggregatorForAttribute(AttributeType Attribute) {
             PeriodicEffectModificationsToDate.TryGetValue(Attribute, out var aggregator);
             return aggregator;
         }

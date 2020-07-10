@@ -1,12 +1,10 @@
 using System.Linq;
-using System;
 using System.Collections.Generic;
-using UnityEngine.Events;
 using GameplayAbilitySystem.Attributes;
 
 namespace GameplayAbilitySystem.Effects 
 {
-    public class Aggregator 
+    public class AttributeModifyAggregator 
     {
         // e.g. HP
         //      add     10 40 50
@@ -14,7 +12,7 @@ namespace GameplayAbilitySystem.Effects
         private AttributeType attributeType;
         private Dictionary<ModifierOperationType, List<float>> modifiers = new Dictionary<ModifierOperationType, List<float>>();
 
-        public Aggregator(AttributeType attributeType) 
+        public AttributeModifyAggregator(AttributeType attributeType) 
         {
             this.attributeType = attributeType;
         }
@@ -82,7 +80,7 @@ namespace GameplayAbilitySystem.Effects
 
     public static partial class ExtensionMethods 
     {
-        public static float Evaluate(this IEnumerable<Aggregator> aggregators, float baseValue) 
+        public static float Evaluate(this IEnumerable<AttributeModifyAggregator> aggregators, float baseValue) 
         {
             var additives = aggregators.Select(x => x.GetAdditives()).Sum();
             var multipliers = aggregators
