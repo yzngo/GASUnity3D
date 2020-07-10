@@ -16,6 +16,9 @@ namespace GameplayAbilitySystem.Effects
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class Effect : ScriptableObject 
     {
+        [SerializeField] private EffectConfig effectConfig = default;
+        public EffectConfig EffectConfig => effectConfig;
+
         [SerializeField] private EffectPolicy effectPolicy = new EffectPolicy();
         [SerializeField] private PeriodConfig periodConfig = new PeriodConfig();
         [SerializeField] private StackConfig stackConfig = new StackConfig();

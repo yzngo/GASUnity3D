@@ -1,11 +1,31 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using GameplayAbilitySystem.Cues;
 
-namespace GameplayAbilitySystem.Effects {
-    // Effect的策略集合
-    // - 时长 (立即生效, 区间+magnitude, 无穷)
-    // - 修改器
+namespace GameplayAbilitySystem.Effects 
+{
+    [Serializable]
+    public class EffectConfig 
+    {
+        public DurationConfig durationConfig;
+        public PeriodConfig periodConfig;
+        public StackConfig stackConfig;
+        public List<EffectModifier> modifiers;
+        public EffectTagContainer effectTags;
+        public List<EffectCues> cues;
+    }
+
+    [Serializable]
+    public class DurationConfig {
+        public DurationPolicy policy;
+        public float durationLength;
+    }
+
+
+
+
+
     [Serializable]
     public class EffectPolicy
     {
@@ -17,5 +37,4 @@ namespace GameplayAbilitySystem.Effects {
         public float DurationValue => durationMagnitude;
         public List<EffectModifier> Modifiers => modifiers;
     }
-
 }
