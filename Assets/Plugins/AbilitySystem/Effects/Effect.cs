@@ -25,11 +25,11 @@ namespace GameplayAbilitySystem.Effects
         [SerializeField] private GameplayEffectPolicy gameplayEffectPolicy = new GameplayEffectPolicy();
         [SerializeField] private PeriodPolicy periodicity = new PeriodPolicy();
         [SerializeField] private StackPolicy stackPolicy = new StackPolicy();
-        [SerializeField] private GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
+        [SerializeField] private EffectTagContainer gameplayEffectTags = new EffectTagContainer();
         [SerializeField] private List<GameplayCue> gameplayCues = new List<GameplayCue>();
 
         public GameplayEffectPolicy Policy => gameplayEffectPolicy;
-        public GameplayEffectTags EffectTags => gameplayEffectTags;
+        public EffectTagContainer EffectTags => gameplayEffectTags;
         public PeriodPolicy PeriodPolicy => periodicity;
         public List<GameplayCue> GameplayCues => gameplayCues;
         public StackPolicy StackPolicy => stackPolicy;

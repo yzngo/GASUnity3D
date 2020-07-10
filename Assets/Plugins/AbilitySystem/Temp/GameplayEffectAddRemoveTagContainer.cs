@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace GameplayAbilitySystem.Effects 
 {
-    [Serializable]
-    public class GameplayEffectAddRemoveTagContainer
-    {
-        [SerializeField] List<GameplayTag> _added = new List<GameplayTag>();
-        public List<GameplayTag> Added => _added;
+    // [Serializable]
+    // public class GameplayEffectAddRemoveTagContainer
+    // {
+    //     [SerializeField] List<GameplayTag> _added = new List<GameplayTag>();
+    //     public List<GameplayTag> Added => _added;
 
         // public bool HasAny(IEnumerable<GameplayTag> Tags) {
         //     return _added.Where(x => !Tags.Any(y => x == y)).Any();
@@ -21,5 +21,5 @@ namespace GameplayAbilitySystem.Effects
         //     return !Tags.Except(_added).Any();
         // }
 
-    }
+    // }
 }

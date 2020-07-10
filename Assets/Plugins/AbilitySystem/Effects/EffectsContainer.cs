@@ -68,14 +68,14 @@ namespace GameplayAbilitySystem.Effects
             // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, effectContext);
         }
 
-        private void ModifyActiveGameplayEffect(EffectContext effectContext, Action<GameplayEffectModifier> action) 
+        private void ModifyActiveGameplayEffect(EffectContext effectContext, Action<EffectModifier> action) 
         {
             foreach (var modifier in effectContext.Effect.Policy.Modifiers) {
                 action(modifier);
             }
             // If there are no gameplay effect modifiers, we need to add or get an empty entry
             if (effectContext.Effect.Policy.Modifiers.Count == 0) {
-                action((new GameplayEffectModifier()).InitializeEmpty());
+                action((new EffectModifier()).InitializeEmpty());
             }
         }
 

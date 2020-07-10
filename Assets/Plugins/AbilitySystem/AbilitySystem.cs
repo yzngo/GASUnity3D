@@ -148,8 +148,8 @@ namespace GameplayAbilitySystem {
             // This is accomplished by finding all effects which grant these tags, and then adjusting start time
             var tagsToRemove = appliedEffect.EffectTags.RemovedEffectsTags.Removed;
             var beRemovedEffects = target.GetActiveEffectsTags()
-                                    .Where(x => tagsToRemove.Any(y => x.Tag == y.Tag))
-                                    .Join(tagsToRemove, x => x.Tag, x => x.Tag, (x, y) => new { Tag = x.Tag, effectContext = x.GrantingEffect, StacksToRemove = y.StacksToRemove })
+                                    .Where(x => tagsToRemove.Any(y => x.Tag == y.EffectTag))
+                                    .Join(tagsToRemove, x => x.Tag, x => x.EffectTag, (x, y) => new { Tag = x.Tag, effectContext = x.GrantingEffect, StacksToRemove = y.BeRemovedStacks })
                                     .OrderBy(x => x.effectContext.CooldownTimeRemaining);
 
             Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();

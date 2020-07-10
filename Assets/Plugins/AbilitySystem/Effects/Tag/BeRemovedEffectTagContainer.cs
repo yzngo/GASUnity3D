@@ -8,8 +8,8 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class RemovedEffectTagContainer
     {
-        [SerializeField] private List<RemovedInfo> removed = new List<RemovedInfo>();
-        public List<RemovedInfo> Removed => removed;
+        [SerializeField] private List<BeRemovedEffectInfo> removed = new List<BeRemovedEffectInfo>();
+        public List<BeRemovedEffectInfo> Removed => removed;
 
         // public bool HasAny(IEnumerable<GameplayTag> Tags) {
         //     return removed.Where(x => !Tags.Any(y => x.Tag == y)).Any();
@@ -21,12 +21,4 @@ namespace GameplayAbilitySystem.Effects
         // }
     }
 
-    [Serializable]
-    public class RemovedInfo {
-        [Tooltip("GameplayEffects with this tag will be candidates for removal")]
-        public GameplayTag Tag;
-        
-        [Tooltip("Number of stacks of each GameEffect to remove.  0 means remove all stacks.")]
-        public int StacksToRemove = 0;
-    }
 }

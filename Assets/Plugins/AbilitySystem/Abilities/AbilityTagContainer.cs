@@ -12,10 +12,10 @@ namespace GameplayAbilitySystem.Abilities
         public List<GameplayTag> CooldownTags => cooldownTags;
         
         [Tooltip("Tags for this ability")]
-        [SerializeField] protected List<GameplayTag> abilityTags;
+        [SerializeField] private List<GameplayTag> abilityTags;
 
         [Tooltip("Tags to determine whether the ability is on cooldown")]
-        [SerializeField] protected List<GameplayTag> cooldownTags;
+        [SerializeField] private List<GameplayTag> cooldownTags;
 
 
 

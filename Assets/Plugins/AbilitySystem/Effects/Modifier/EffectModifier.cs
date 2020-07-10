@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GameplayAbilitySystem.Effects 
 {
     [Serializable]
-    public class GameplayEffectModifier
+    public class EffectModifier
     {
         [SerializeField] private AttributeType attributeType = null;
 
@@ -44,7 +44,7 @@ namespace GameplayAbilitySystem.Effects
             return true;
         }
 
-        public GameplayEffectModifier InitializeEmpty() {
+        public EffectModifier InitializeEmpty() {
             this.attributeType = null;
             return this;
         }
