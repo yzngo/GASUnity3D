@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using GameplayAbilitySystem.Effects;
 using UnityEngine;
-using GameplayAbilitySystem.Abilities.AbilityActivations;
+using GameplayAbilitySystem.Abilities.Logic;
 using System.Linq;
 using UnityEngine.Serialization;
 

@@ -6,7 +6,8 @@ using GameplayAbilitySystem.Effects;
 using UniRx.Async;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.Abilities.AbilityActivations {
+namespace GameplayAbilitySystem.Abilities.Logic 
+{
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Instant Attack")]
     public class InstantAttack : AbilityLogic {
 
@@ -17,7 +18,8 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
         public string AnimationCompleteTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void Execute(AbilitySystem instigator, Ability Ability) {
+        public override async void Execute(AbilitySystem instigator, Ability Ability) 
+        {
             var animationEventSystem = instigator.GetComponent<AnimationEventSystem>();
             var animator = instigator.Animator;
 

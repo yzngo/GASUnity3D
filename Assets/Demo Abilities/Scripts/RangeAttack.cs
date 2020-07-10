@@ -6,10 +6,11 @@ using GameplayAbilitySystem.Effects;
 using UniRx.Async;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.Abilities.AbilityActivations {
+namespace GameplayAbilitySystem.Abilities.Logic 
+{
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Range Attack")]
-    public class RangeAttack : AbilityLogic {
-
+    public class RangeAttack : AbilityLogic 
+    {
         public GameObject Projectile;
         public Vector3 ProjectilePositionOffset;
         public Effect TargetGameplayEffect;

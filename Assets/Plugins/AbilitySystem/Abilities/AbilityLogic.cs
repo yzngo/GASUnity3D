@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using GameplayAbilitySystem.ExtensionMethods;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.Abilities.AbilityActivations 
+namespace GameplayAbilitySystem.Abilities.Logic 
 {
     public abstract class AbilityLogic : ScriptableObject 
     {
