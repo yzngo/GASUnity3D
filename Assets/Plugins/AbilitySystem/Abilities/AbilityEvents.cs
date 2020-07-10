@@ -5,9 +5,6 @@ using UnityEngine;
 using System.Collections.Generic;
 
 namespace GameplayAbilitySystem.Abilities {
-    // [Serializable]
-    // public class GenericAbilityEvent : UnityEvent<IGameplayAbility> {
-    // }
 
     [Serializable]
     public class AbilityEvent : UnityEvent<GameplayTag, AbilityEventData> {

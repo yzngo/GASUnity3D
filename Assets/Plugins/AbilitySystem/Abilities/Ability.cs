@@ -21,13 +21,13 @@ namespace GameplayAbilitySystem.Abilities
         public AbilityTagContainer Tags => tags;
         public Effect Cost => cost; // Cost of using this ability
         public List<Effect> Cooldowns => cooldowns;     // Cooldowns associated with this ability
-        public AbstractAbilityActivation AbilityLogic => abilityLogic; // Defines what the ability actually does
+        public AbilityLogic AbilityLogic => abilityLogic; // Defines what the ability actually does
 
         [SerializeField] private AbilityTagContainer tags = new AbilityTagContainer();
         [SerializeField] private Effect cost = default;
 
         [SerializeField] private List<Effect> cooldowns = new List<Effect>();
-        [SerializeField] private AbstractAbilityActivation abilityLogic = default;
+        [SerializeField] private AbilityLogic abilityLogic = default;
 
         // [SerializeField] private List<GameplayEffect> _effectsToApplyOnExecution = new List<GameplayEffect>();
         // [SerializeField] private GenericAbilityEvent _onGameplayAbilityCommitted = new GenericAbilityEvent();
@@ -45,18 +45,18 @@ namespace GameplayAbilitySystem.Abilities
             return CheckCost(abilitySystem) && AbilityOffCooldown(abilitySystem) && IsTagsSatisfied(abilitySystem);
         }
 
-        public void ActivateAbility(AbilitySystem abilitySystem) 
-        {
-            AbilityLogic.ActivateAbility(abilitySystem, this);
-            ApplyCooldown(abilitySystem);
-        }
-
         public bool CommitAbility(AbilitySystem abilitySystem) 
         {
             ActivateAbility(abilitySystem);
             // AbilitySystem.OnGameplayAbilityActivated.Invoke(this);
             ApplyCost(abilitySystem);
             return true;
+        }
+
+        public void ActivateAbility(AbilitySystem abilitySystem) 
+        {
+            AbilityLogic.Execute(abilitySystem, this);
+            ApplyCooldown(abilitySystem);
         }
 
         private bool IsTagsSatisfied(AbilitySystem abilitySystem) 

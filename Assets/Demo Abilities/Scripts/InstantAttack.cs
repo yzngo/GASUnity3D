@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace GameplayAbilitySystem.Abilities.AbilityActivations {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Instant Attack")]
-    public class InstantAttack : AbstractAbilityActivation {
+    public class InstantAttack : AbilityLogic {
 
         public Effect TargetGameplayEffect;
         public AnimationEvent ExecuteEffectEvent;
@@ -18,7 +18,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
         public string AnimationCompleteTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void ActivateAbility(AbilitySystem instigator, Ability Ability) {
+        public override async void Execute(AbilitySystem instigator, Ability Ability) {
             var animationEventSystem = instigator.GetComponent<AnimationEventSystem>();
             var animator = instigator.Animator;
 

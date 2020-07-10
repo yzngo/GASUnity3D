@@ -221,10 +221,4 @@ namespace GameplayAbilitySystem {
             // OnGameplayEvent.Invoke(EventTag, Payload);
         // }
     }
-
-//----------------------------------------------------------------------------------------
-    [System.Serializable]
-    public class GenericGameplayEffectEvent : UnityEvent<Effect> {
-
-    }
 }

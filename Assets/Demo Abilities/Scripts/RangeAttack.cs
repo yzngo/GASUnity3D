@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace GameplayAbilitySystem.Abilities.AbilityActivations {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Range Attack")]
-    public class RangeAttack : AbstractAbilityActivation {
+    public class RangeAttack : AbilityLogic {
 
         public GameObject Projectile;
         public Vector3 ProjectilePositionOffset;
@@ -21,7 +21,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
         public string ProjectileFireTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void ActivateAbility(AbilitySystem abilitySystem, Ability Ability) {
+        public override async void Execute(AbilitySystem abilitySystem, Ability Ability) {
             var abilitySystemActor = abilitySystem.transform;
             var animationEventSystemComponent = abilitySystemActor.GetComponent<AnimationEventSystem>();
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();
