@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.Effects {
+namespace GameplayAbilitySystem.Effects 
+{
     [Serializable]
-    public class GameplayEffectAddRemoveStacksTagContainer : GameplayEffectTagContainer {
+    public class GameplayEffectAddRemoveStacksTagContainer : GameplayEffectTagContainer 
+    {
         [SerializeField]
         List<GameplayTagStackComposite> _added = new List<GameplayTagStackComposite>();
 

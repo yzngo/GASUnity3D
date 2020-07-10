@@ -5,10 +5,11 @@ using GameplayAbilitySystem;
 using GameplayAbilitySystem.Interfaces;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.Effects {
-
+namespace GameplayAbilitySystem.Effects 
+{
     [Serializable]
-    public class GameplayEffectAddRemoveTagContainer : GameplayEffectTagContainer, IAddedRemovedTags {
+    public class GameplayEffectAddRemoveTagContainer : GameplayEffectTagContainer
+    {
 
         [SerializeField]
         List<GameplayTag> _added = new List<GameplayTag>();
