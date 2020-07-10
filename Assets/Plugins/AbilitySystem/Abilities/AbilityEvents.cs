@@ -12,11 +12,10 @@ namespace GameplayAbilitySystem.Abilities
     [Serializable]
     public struct AbilityEventData 
     {
+        public Ability ability;
         public GameplayTag AbilityTag;
         // public AbilitySystem Instigator;
         public AbilitySystem Target;
-        // public object OptionalObject;
-        // Gameplay Effect handle?
         // public List<GameplayTag> InstigatorTags;
         // public List<GameplayTag> TargetTags;
         // public float EventMagnitude;
