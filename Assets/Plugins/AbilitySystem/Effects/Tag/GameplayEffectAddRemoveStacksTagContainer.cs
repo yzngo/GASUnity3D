@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GameplayAbilitySystem.Effects 
 {
     [Serializable]
-    public class GameplayEffectAddRemoveStacksTagContainer : GameplayEffectTagContainer 
+    public class GameplayEffectAddRemoveStacksTagContainer : EffectTagContainer 
     {
         [SerializeField]
         List<GameplayTagStackComposite> _added = new List<GameplayTagStackComposite>();

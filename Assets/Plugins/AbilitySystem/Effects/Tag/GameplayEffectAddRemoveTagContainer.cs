@@ -8,7 +8,7 @@ using UnityEngine;
 namespace GameplayAbilitySystem.Effects 
 {
     [Serializable]
-    public class GameplayEffectAddRemoveTagContainer : GameplayEffectTagContainer
+    public class GameplayEffectAddRemoveTagContainer : EffectTagContainer
     {
 
         [SerializeField]
