@@ -153,7 +153,7 @@ namespace GameplayAbilitySystem.Effects
                 if (effectContext.Effect.PeriodConfig.EffectOnExecute != null) {
                     effectContext.Instigator.ApplyEffectToTarget(effectContext.Effect.PeriodConfig.EffectOnExecute, effectContext.Target);
                 }
-                var gameplayCues = effectContext.Effect.Cues;
+                var gameplayCues = effectContext.Effect.Configs.Cues;
                 foreach (var cue in gameplayCues) {
                     cue.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
                 }
@@ -205,7 +205,7 @@ namespace GameplayAbilitySystem.Effects
         private async void CheckGameplayEffectForTimedEffects(EffectContext effectContext) 
         {
             await WaitForEffectExpiryTime(effectContext);
-            var gameplayCues = effectContext.Effect.Cues;
+            var gameplayCues = effectContext.Effect.Configs.Cues;
             foreach (var cue in gameplayCues) {
                 cue.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
             }

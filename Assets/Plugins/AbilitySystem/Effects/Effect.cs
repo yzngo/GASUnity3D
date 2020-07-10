@@ -16,20 +16,19 @@ namespace GameplayAbilitySystem.Effects
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class Effect : ScriptableObject 
     {
-        [SerializeField] private EffectConfig effectConfig = default;
-        public EffectConfig EffectConfig => effectConfig;
+        [FormerlySerializedAs("config")]
+        [SerializeField] private EffectConfigs configs = default;
+        public EffectConfigs Configs => configs;
 
         [SerializeField] private EffectPolicy effectPolicy = new EffectPolicy();
         [SerializeField] private PeriodConfig periodConfig = new PeriodConfig();
         [SerializeField] private StackConfig stackConfig = new StackConfig();
         [SerializeField] private EffectTagContainer effectTags = new EffectTagContainer();
-        [SerializeField] private List<EffectCues> cues = new List<EffectCues>();
 
         public EffectPolicy EffectPolicy => effectPolicy;
         public PeriodConfig PeriodConfig => periodConfig;
         public StackConfig StackConfig => stackConfig;
         public EffectTagContainer EffectTags => effectTags;
-        public List<EffectCues> Cues => cues;
 
         public List<GameplayTag> GrantedTags => effectTags.GrantedToInstigatorTags;
 

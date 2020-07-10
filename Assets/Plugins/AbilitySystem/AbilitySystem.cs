@@ -169,9 +169,9 @@ namespace GameplayAbilitySystem {
             }
 
             // Execute gameplay cue
-            var gameplayCues = appliedEffect.Cues;
-            for (var i = 0; i < gameplayCues.Count; i++) {
-                var cue = gameplayCues[i];
+            var cues = appliedEffect.Configs.Cues;
+            for (var i = 0; i < cues.Count; i++) {
+                var cue = cues[i];
                 cue.HandleCue(target, CueEventMomentType.OnActive);
             }
         }

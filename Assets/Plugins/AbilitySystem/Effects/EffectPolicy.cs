@@ -2,18 +2,20 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using GameplayAbilitySystem.Cues;
+using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Effects 
 {
     [Serializable]
-    public class EffectConfig 
+    public class EffectConfigs 
     {
-        public DurationConfig durationConfig;
-        public PeriodConfig periodConfig;
-        public StackConfig stackConfig;
-        public List<EffectModifier> modifiers;
-        public EffectTagContainer effectTags;
-        public List<EffectCues> cues;
+        public DurationConfig DurationConfig;
+        public PeriodConfig PeriodConfig;
+        public StackConfig StackConfig;
+        public List<EffectModifier> Modifiers;
+        public EffectTagContainer EffectTags;
+        [FormerlySerializedAs("cues")]
+        public List<EffectCues> Cues;
     }
 
     [Serializable]

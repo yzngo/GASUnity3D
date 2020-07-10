@@ -12,7 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cc1ff66db5d0749b0bab3afccec0ce, type: 3}
   m_Name: Effect Regen Health
   m_EditorClassIdentifier: 
-  gameplayEffectPolicy:
+  effectConfig:
+    durationConfig:
+      policy: 0
+      durationLength: 0
+    periodConfig:
+      Period: 0
+      IsExecuteOnApply: 0
+      EffectOnExecute: {fileID: 0}
+    stackConfig:
+      Type: 0
+      Limit: 0
+      DurationRefreshPolicy: 0
+      PeriodResetPolicy: 0
+      ExpirationPolicy: 0
+    modifiers: []
+    effectTags:
+      effectTags: []
+      grantedToInstigatorTags: []
+      removedEffectsTags: []
+    cues:
+    - {fileID: 11400000, guid: a0a0a94b358c56f45aaceb55727bf3d9, type: 2}
+  effectPolicy:
     durationPolicy: 0
     durationMagnitude: 0
     modifiers:
@@ -20,34 +41,20 @@ MonoBehaviour:
       modifierOperationType: 0
       magnitudeCalculationType: 0
       scaledMagnitude: 5
-      sourceTags:
-        RequireTags: []
-        IgnoreTags: []
-      targetTags:
-        RequireTags: []
-        IgnoreTags: []
-  gameplayEffectTags:
-    effectTags:
-      _added: []
-    grantedToASCTags:
-      _added: []
-    ongoingRequiredTags:
-      requirePresence: []
-      requireAbsence: []
-    applyRequiredTags:
-      requirePresence: []
-      requireAbsence: []
-    beRemovedEffectsTags:
-      _added: []
-  periodicity:
+  periodConfig:
     Period: 0
-    ExecuteOnApplication: 0
+    IsExecuteOnApply: 0
     EffectOnExecute: {fileID: 0}
-  gameplayCues:
+  stackConfig:
+    Type: 0
+    Limit: 0
+    DurationRefreshPolicy: 0
+    PeriodResetPolicy: 0
+    ExpirationPolicy: 0
+  effectTags:
+    effectTags:
+    - {fileID: 0}
+    grantedToInstigatorTags: []
+    removedEffectsTags: []
+  cues:
   - {fileID: 11400000, guid: a0a0a94b358c56f45aaceb55727bf3d9, type: 2}
-  stackingPolicy:
-    StackingType: 0
-    StackLimit: 0
-    StackDurationRefreshPolicy: 0
-    StackPeriodResetPolicy: 0
-    StackExpirationPolicy: 1

@@ -12,15 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cc1ff66db5d0749b0bab3afccec0ce, type: 3}
   m_Name: Effect Blood Pact
   m_EditorClassIdentifier: 
+  effectConfig:
+    durationConfig:
+      policy: 0
+      durationLength: 0
+    periodConfig:
+      Period: 0
+      IsExecuteOnApply: 0
+      EffectOnExecute: {fileID: 0}
+    stackConfig:
+      Type: 0
+      Limit: 0
+      DurationRefreshPolicy: 0
+      PeriodResetPolicy: 0
+      ExpirationPolicy: 0
+    modifiers: []
+    effectTags:
+      effectTags: []
+      grantedToInstigatorTags: []
+      removedEffectsTags: []
+    cues:
+    - {fileID: 11400000, guid: 74a66fb2dcac9bd499073ecdc7d3cdd1, type: 2}
   effectPolicy:
     durationPolicy: 1
     durationMagnitude: 20
     modifiers: []
-  periodPolicy:
+  periodConfig:
     Period: 2
     IsExecuteOnApply: 1
     EffectOnExecute: {fileID: 11400000, guid: 20fb0364cdae5e348854db1deb47d72e, type: 2}
-  stackPolicy:
+  stackConfig:
     Type: 1
     Limit: 5
     DurationRefreshPolicy: 0
