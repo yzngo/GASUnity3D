@@ -9,10 +9,10 @@ namespace GameplayAbilitySystem.Effects
     // so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
     public class EffectsModifyAggregator 
     {
-        private Dictionary<ActivedEffectData, Dictionary<AttributeType, AttributeModifyAggregator>> effectAggregator = 
-            new Dictionary<ActivedEffectData, Dictionary<AttributeType, AttributeModifyAggregator>>();
+        private Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>> effectAggregator = 
+            new Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>>();
 
-        public Dictionary<AttributeType, AttributeModifyAggregator> AddorGet(ActivedEffectData effectData) 
+        public Dictionary<AttributeType, AttributeModifyAggregator> AddorGet(EffectContext effectData) 
         {
             if (!effectAggregator.TryGetValue(effectData, out var attributeAggregators)) {
                 attributeAggregators = new Dictionary<AttributeType, AttributeModifyAggregator>();
@@ -21,12 +21,12 @@ namespace GameplayAbilitySystem.Effects
             return attributeAggregators;
         }
 
-        public void RemoveEffect(ActivedEffectData effectData) 
+        public void RemoveEffect(EffectContext effectData) 
         {
             effectAggregator.Remove(effectData);
         }
 
-        public List<ActivedEffectData> GetAllEffects() 
+        public List<EffectContext> GetAllEffects() 
         {
             return effectAggregator.Keys.ToList();
         }

@@ -4,24 +4,24 @@ using GameplayAbilitySystem.Interfaces;
 using System.Collections.Generic;
 using GameplayAbilitySystem.Attributes;
 
-namespace GameplayAbilitySystem.Effects {
-
-    /// 激活的某个游戏效果的数据集, 用于跟踪活动中的effect
+namespace GameplayAbilitySystem.Effects 
+{
     [Serializable]
-    public class ActivedEffectData {
+    public class EffectContext {
 // base data
-        private GameplayEffect gameplayEffect = default;
+        private GameplayEffect effect;
         private float startWorldTime;                  //激活时间, Time.time
         private float timeOfLastPeriodicApplication = 0;
 
         /// The actual GameplayEffect
-        public GameplayEffect Effect => gameplayEffect;
+        public GameplayEffect Effect => effect;
         public float StartWorldTime => startWorldTime;
         public AbilitySystem Instigator { get; private set; }      // 发起者
         public AbilitySystem Target { get; private set; }          // 目标对象
 // ctor
-        public ActivedEffectData(GameplayEffect effect, AbilitySystem instigator, AbilitySystem target) {
-            gameplayEffect = effect;
+        public EffectContext(GameplayEffect effect, AbilitySystem instigator, AbilitySystem target) 
+        {
+            this.effect = effect;
             startWorldTime = Time.time;
             Instigator = instigator;
             Target = target;
@@ -44,15 +44,13 @@ namespace GameplayAbilitySystem.Effects {
         /// </summary>
         /// <value>Cooldown time total</value>
         public float CooldownTimeTotal => 
-                Effect.Policy.DurationPolicy == DurationPolicy.Duration ? 
-                                            Effect.Policy.DurationValue : 0;
+                Effect.Policy.DurationPolicy == DurationPolicy.Duration ? Effect.Policy.DurationValue : 0;
         /// <summary>
         /// The cooldown time that is remaining for this gameplay effect
         /// </summary>
         /// <value>Cooldown time remaining</value>
         public float CooldownTimeRemaining => 
-                Effect.Policy.DurationPolicy == DurationPolicy.Duration ? 
-                                            CooldownTimeTotal - CooldownTimeElapsed : 0;
+                Effect.Policy.DurationPolicy == DurationPolicy.Duration ? CooldownTimeTotal - CooldownTimeElapsed : 0;
 
 // period
         // 对于周期性的effect而言, 自从上次应用效果之后流逝的时间
@@ -66,26 +64,30 @@ namespace GameplayAbilitySystem.Effects {
         /// Optionally, we can provide an offset to compensate for
         /// the fact that the reset did not happen at exactly 0
         /// and over time this could cause time drift
-        public void ResetDuration(float offset = 0) {
+        public void ResetDuration(float offset = 0) 
+        {
             this.startWorldTime = Time.time - offset;
         }
 
         /// Reset time at which last periodic application occured.
-        public void ResetPeriodicTime(float offset = 0) {
+        public void ResetPeriodicTime(float offset = 0) 
+        {
             this.timeOfLastPeriodicApplication = Time.time - offset;
         }
 
-        public void EndEffect() {
+        public void EndEffect() 
+        {
             this.startWorldTime = Time.time - CooldownTimeTotal;
         }
 
-        public void ForceEndEffect() {
+        public void ForceEndEffect() 
+        {
             EndEffect();
             forceRemoveEffect = true;
         }
 
-
-        public void AddPeriodicEffectAttributeModifiers() {
+        public void AddPeriodicEffectAttributeModifiers() 
+        {
             // Check out ActiveGameplayEffectContainer.AddActiveGameplayEffect to see how to populate the ActiveEffectAttributeAggregator object
             foreach (var modifier in Effect.Policy.Modifiers) {
                 modifier.AttemptCalculateMagnitude(out var EvaluatedValue);
@@ -106,14 +108,11 @@ namespace GameplayAbilitySystem.Effects {
             }
         }
 
-        public AttributeModifyAggregator GetPeriodicAggregatorForAttribute(AttributeType Attribute) {
+        public AttributeModifyAggregator GetPeriodicAggregatorForAttribute(AttributeType Attribute) 
+        {
             PeriodicEffectModificationsToDate.TryGetValue(Attribute, out var aggregator);
             return aggregator;
         }
-
-        // [SerializeField] private int _stacks;
-        // public void CheckOngoingTagRequirements() {
-        // }
     }
 }
 

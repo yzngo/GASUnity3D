@@ -139,7 +139,7 @@ namespace GameplayAbilitySystem {
                 // Durational effect require attention to many more things than instant effects
                 // Such as stacking and effect durations
                 // Durational effect modify the current value
-                var effectData = new ActivedEffectData(appliedEffect, this, target);
+                var effectData = new EffectContext(appliedEffect, this, target);
                 target.ActiveEffectsContainer.ApplyDurationalEffect(effectData);
             }
 
@@ -174,11 +174,11 @@ namespace GameplayAbilitySystem {
             }
         }
 
-        public IEnumerable<(GameplayTag Tag, ActivedEffectData GrantingEffect)> GetActiveEffectsTags()
+        public IEnumerable<(GameplayTag Tag, EffectContext GrantingEffect)> GetActiveEffectsTags()
         {
             var activeEffects = ActiveEffectsContainer.effectsModifyAggregator.GetAllEffects();
             if (activeEffects == null) 
-                return new List<(GameplayTag, ActivedEffectData)>();
+                return new List<(GameplayTag, EffectContext)>();
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));
         }
 
