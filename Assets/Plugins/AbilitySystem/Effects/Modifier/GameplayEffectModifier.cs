@@ -19,11 +19,11 @@ namespace GameplayAbilitySystem.Effects
         // todo -> to scaledValue
         [SerializeField] private float scaledMagnitude = 0f;
 
-        [Space(10)]
+        // [Space(10)]
 
-        [SerializeField] private GameplayEffectModifierTagCollection sourceTags = null;
+        // [SerializeField] private GameplayEffectModifierTagCollection sourceTags = null;
 
-        [SerializeField] private GameplayEffectModifierTagCollection targetTags = null;
+        // [SerializeField] private GameplayEffectModifierTagCollection targetTags = null;
 
         
         public AttributeType AttributeType => attributeType;
@@ -34,9 +34,9 @@ namespace GameplayAbilitySystem.Effects
         
         public ModifierCalculationType ModifierCalculationType => magnitudeCalculationType;
         
-        public GameplayEffectModifierTagCollection SourceTags => sourceTags;
+        // public GameplayEffectModifierTagCollection SourceTags => sourceTags;
         
-        public GameplayEffectModifierTagCollection TargetTags => targetTags;
+        // public GameplayEffectModifierTagCollection TargetTags => targetTags;
 
         public bool AttemptCalculateMagnitude(out float evaluatedValue) {
             //TODO: PROPER IMPLEMENTATION
