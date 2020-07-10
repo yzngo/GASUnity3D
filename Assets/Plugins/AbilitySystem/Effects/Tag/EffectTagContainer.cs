@@ -8,20 +8,18 @@ namespace GameplayAbilitySystem.Effects
     public class EffectTagContainer
     {
         [Tooltip("Tags for this effect.")]
-        [SerializeField] private List<GameplayTag> effectTags = new List<GameplayTag>();
+        [SerializeField] private List<GameplayTag> effectTags = default;
 
-        [Tooltip("Only for durational effect.")]
-        [SerializeField] private List<GameplayTag> grantedToInstigatorTags = new List<GameplayTag>();
+        [Tooltip("Only for durational effect.????")]
+        [SerializeField] private List<GameplayTag> grantedToInstigatorTags = default;
 
         [Tooltip("Effects with these Tags will removed when this effect execute.")]
-        [SerializeField] private RemovedEffectTagContainer removedEffectsTags = new RemovedEffectTagContainer();
+        [SerializeField] private List<BeRemovedEffectInfo> removedEffectsTags = default;
 
 
         public List<GameplayTag> EffectTags => effectTags;
-        // 赋予AbilitySystemComponent的标签
-        // 移除时也会从ASC中移除, 只能用于Duration和Infinite的GameEffect
         public List<GameplayTag> GrantedToInstigatorTags => grantedToInstigatorTags;
-        public RemovedEffectTagContainer RemovedEffectsTags => removedEffectsTags;
+        public List<BeRemovedEffectInfo> RemovedEffectsTags => removedEffectsTags;
 
         // [SerializeField]
         // private GameplayEffectRequireIgnoreTagContainer ongoingRequiredTags = new GameplayEffectRequireIgnoreTagContainer();

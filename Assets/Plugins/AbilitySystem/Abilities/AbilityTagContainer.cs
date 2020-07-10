@@ -10,10 +10,10 @@ namespace GameplayAbilitySystem.Abilities
     {
         
         [Tooltip("Tags for this ability")]
-        [SerializeField] private List<GameplayTag> abilityTags;
+        [SerializeField] private List<GameplayTag> abilityTags = default;
 
         [Tooltip("Tags to determine whether the ability is on cooldown")]
-        [SerializeField] private List<GameplayTag> cooldownTags;
+        [SerializeField] private List<GameplayTag> cooldownTags = default;
 
 
 

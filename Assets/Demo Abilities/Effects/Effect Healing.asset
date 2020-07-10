@@ -32,8 +32,7 @@ MonoBehaviour:
     grantedToInstigatorTags:
     - {fileID: 11400000, guid: 0f7aacaa3f81d2b419604039ea36b254, type: 2}
     removedEffectsTags:
-      removed:
-      - Tag: {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
-        StacksToRemove: 1
+    - EffectTag: {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
+      BeRemovedStacks: 1
   gameplayCues:
   - {fileID: 11400000, guid: c2fdf7b8b6a3efe4bb8950654af72d18, type: 2}
