@@ -4,7 +4,7 @@ using GameplayAbilitySystem.Effects;
 namespace GameplayAbilitySystem.Interfaces {
 
     /// <summary>
-    /// This class defines how a  <see cref="GameplayEffect"/> modifies attributes (e.g. doing damage, healing)
+    /// This class defines how a  <see cref="Effect"/> modifies attributes (e.g. doing damage, healing)
     /// </summary>
     public interface IGameplayEffectModifier {
         /// <summary>

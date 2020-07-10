@@ -9,17 +9,17 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class EffectContext {
 // base data
-        private GameplayEffect effect;
+        private Effect effect;
         private float startWorldTime;                  //激活时间, Time.time
         private float timeOfLastPeriodicApplication = 0;
 
         /// The actual GameplayEffect
-        public GameplayEffect Effect => effect;
+        public Effect Effect => effect;
         public float StartWorldTime => startWorldTime;
         public AbilitySystem Instigator { get; private set; }      // 发起者
         public AbilitySystem Target { get; private set; }          // 目标对象
 // ctor
-        public EffectContext(GameplayEffect effect, AbilitySystem instigator, AbilitySystem target) 
+        public EffectContext(Effect effect, AbilitySystem instigator, AbilitySystem target) 
         {
             this.effect = effect;
             startWorldTime = Time.time;

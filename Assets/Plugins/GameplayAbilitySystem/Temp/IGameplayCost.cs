@@ -3,7 +3,7 @@ using GameplayAbilitySystem.Effects;
 namespace GameplayAbilitySystem.Interfaces {
     /// <summary>
     /// Represents the cost of a <see cref="IGameplayAbility"/>.
-    /// The <see cref="GameplayEffect"/> defines the actual cost of the ability by describing which <see cref="IAttribute"/> are reduced on the 
+    /// The <see cref="Effect"/> defines the actual cost of the ability by describing which <see cref="IAttribute"/> are reduced on the 
     /// casting <see cref="AbilitySystemComponent"/> (e.g. mana)
     /// </summary>
     // public interface IGameplayCost {

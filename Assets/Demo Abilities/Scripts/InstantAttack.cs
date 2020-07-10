@@ -11,7 +11,7 @@ namespace GameplayAbilitySystem.Abilities.AbilityActivations {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Instant Attack")]
     public class InstantAttack : AbstractAbilityActivation {
 
-        public GameplayEffect TargetGameplayEffect;
+        public Effect TargetGameplayEffect;
         public AnimationEvent ExecuteEffectEvent;
         public GameplayTag WaitForEventTag;
         public string AnimationTriggerName;

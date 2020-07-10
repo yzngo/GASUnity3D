@@ -13,7 +13,7 @@ namespace GameplayAbilitySystem.Effects {
 
     // 改变自己或别人的Attributes 和GameplayTags的途径
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
-    public class GameplayEffect : ScriptableObject {
+    public class Effect : ScriptableObject {
         [SerializeField] private GameplayEffectPolicy gameplayEffectPolicy = new GameplayEffectPolicy();
         [SerializeField] private GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
         [SerializeField] private EffectPeriodicity periodicity = new EffectPeriodicity();

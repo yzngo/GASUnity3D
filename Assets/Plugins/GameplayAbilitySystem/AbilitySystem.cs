@@ -93,7 +93,7 @@ namespace GameplayAbilitySystem {
         // some with instant modifiers, and some with infinite or duration modifiers.
         // By batching these effects, we can ensure that all these effect happen 
         // with reference to the same base attribute value.
-        public void ApplyBatchGameplayEffects(IEnumerable<(GameplayEffect Effect, AbilitySystem Target, float Level)> batchedGameplayEffects) {
+        public void ApplyBatchGameplayEffects(IEnumerable<(Effect Effect, AbilitySystem Target, float Level)> batchedGameplayEffects) {
 
             foreach(var effect in batchedGameplayEffects) {
                 ApplyEffectToTarget(effect.Effect, effect.Target, effect.Level);
@@ -118,7 +118,7 @@ namespace GameplayAbilitySystem {
         // Apply a effect to the target
         // The overall effect may be modulated by the Level.
         // level -> maybe used to affect the "strength" of the effect
-        public void ApplyEffectToTarget(GameplayEffect appliedEffect, AbilitySystem target, float level = 0) {
+        public void ApplyEffectToTarget(Effect appliedEffect, AbilitySystem target, float level = 0) {
             // Check to make sure all the attributes being modified by this effect exist on the target
             foreach(var modifiers in appliedEffect.Policy.Modifiers) {
                 if (!target.IsAttributeExist(modifiers.AttributeType)) {
@@ -152,7 +152,7 @@ namespace GameplayAbilitySystem {
                                     .Join(tagsToRemove, x => x.Tag, x => x.Tag, (x, y) => new { Tag = x.Tag, EffectData = x.GrantingEffect, StacksToRemove = y.StacksToRemove })
                                     .OrderBy(x => x.EffectData.CooldownTimeRemaining);
 
-            Dictionary<GameplayEffect, int> stacks = new Dictionary<GameplayEffect, int>();
+            Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
 
             foreach (var beRemovedEffect in beRemovedEffects) {
                 var effect = beRemovedEffect.EffectData.Effect;
@@ -224,7 +224,7 @@ namespace GameplayAbilitySystem {
 
 //----------------------------------------------------------------------------------------
     [System.Serializable]
-    public class GenericGameplayEffectEvent : UnityEvent<GameplayEffect> {
+    public class GenericGameplayEffectEvent : UnityEvent<Effect> {
 
     }
 }

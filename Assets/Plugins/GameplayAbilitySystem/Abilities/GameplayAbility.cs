@@ -11,13 +11,13 @@ namespace GameplayAbilitySystem.Abilities
     public class GameplayAbility : ScriptableObject, IGameplayAbility 
     {
         public GameplayAbilityTags Tags => _tags;
-        public GameplayEffect Cost => cost;
-        public List<GameplayEffect> Cooldowns => _cooldownsToApply;
+        public Effect Cost => cost;
+        public List<Effect> Cooldowns => _cooldownsToApply;
         public AbstractAbilityActivation AbilityLogic => _abilityLogic;
 
         [SerializeField] private GameplayAbilityTags _tags = new GameplayAbilityTags();
-        [SerializeField] private GameplayEffect cost = default;
-        [SerializeField] private List<GameplayEffect> _cooldownsToApply = new List<GameplayEffect>();
+        [SerializeField] private Effect cost = default;
+        [SerializeField] private List<Effect> _cooldownsToApply = new List<Effect>();
         [SerializeField] private AbstractAbilityActivation _abilityLogic = default;
 
         // [SerializeField] private List<GameplayEffect> _effectsToApplyOnExecution = new List<GameplayEffect>();

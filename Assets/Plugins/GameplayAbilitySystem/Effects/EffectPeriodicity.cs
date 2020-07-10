@@ -8,7 +8,7 @@ namespace GameplayAbilitySystem.Effects {
     public class EffectPeriodicity {
         public float Period;        // 周期时间
         public bool ExecuteOnApplication;   // 应用时即执行
-        public GameplayEffect EffectOnExecute;     //执行时应用的effect
+        public Effect EffectOnExecute;     //执行时应用的effect
     }
 }
 

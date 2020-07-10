@@ -12,7 +12,7 @@ namespace GameplayAbilitySystem.Interfaces {
         /// The descriptor for the cooldown.  The tags granted by this are used to determine cooldowns
         /// </summary>
         /// <value></value>
-        GameplayEffect CooldownGameplayEffect { get; }
+        Effect CooldownGameplayEffect { get; }
 
         /// <summary>
         /// Gets the list of cooldown tags that this applies

@@ -23,13 +23,13 @@ namespace GameplayAbilitySystem.Interfaces {
         /// Cost of using this ability
         /// </summary>
         /// <value></value>
-        GameplayEffect Cost { get; }
+        Effect Cost { get; }
 
         /// <summary>
         /// Cooldowns associated with this ability
         /// </summary>
         /// <value></value>
-        List<GameplayEffect> Cooldowns { get; }
+        List<Effect> Cooldowns { get; }
 
         /// <summary>
         /// This is called whenever this ability ends.
