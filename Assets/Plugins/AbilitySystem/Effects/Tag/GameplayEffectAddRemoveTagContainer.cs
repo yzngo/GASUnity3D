@@ -11,9 +11,7 @@ namespace GameplayAbilitySystem.Effects
     public class GameplayEffectAddRemoveTagContainer
     {
 
-        [SerializeField]
-        List<GameplayTag> _added = new List<GameplayTag>();
-
+        [SerializeField] List<GameplayTag> _added = new List<GameplayTag>();
         public List<GameplayTag> Added => _added;
 
         // public bool HasAny(IEnumerable<GameplayTag> Tags) {
