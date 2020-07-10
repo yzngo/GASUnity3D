@@ -1,23 +1,25 @@
 using System;
+using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Effects {
     [Serializable]
-    public class StackingPolicy {
-        public StackingType StackingType;
-        public int StackLimit;
-        public StackRefreshPolicy StackDurationRefreshPolicy;   // 时间刷新策略
-        public StackRefreshPolicy StackPeriodResetPolicy;       // 周期刷新策略
-        public StackExpirationPolicy StackExpirationPolicy;     // 过期策略
+    public class StackPolicy {
+        [FormerlySerializedAs("StackType")]
+        public StackType Type;
+        public int Limit;
+        public StackRefreshPolicy DurationRefreshPolicy;   // 时间刷新策略
+        public StackRefreshPolicy PeriodResetPolicy;       // 周期刷新策略
+        public StackExpirationPolicy ExpirationPolicy;     // 过期策略
     }
 
-    public enum StackingType {
+    public enum StackType {
         None, 
-        AggregatedBySource, 
-        AggregatedByTarget
+        StackBySource, 
+        StackByTarget
     }
 
     public enum StackRefreshPolicy {
-        RefreshOnSuccessfulApplication,     // 成功施放之后刷新
+        RefreshOnSuccessfulApply,     // 成功施放之后刷新
         NeverRefresh                        // 永不刷新
     }
 

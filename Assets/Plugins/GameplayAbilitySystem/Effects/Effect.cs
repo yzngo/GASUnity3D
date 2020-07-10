@@ -6,6 +6,7 @@ using GameplayAbilitySystem;
 using GameplayAbilitySystem.Attributes;
 using UnityEngine;
 using GameplayAbilitySystem.Cues;
+using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Effects 
 {
@@ -25,13 +26,14 @@ namespace GameplayAbilitySystem.Effects
         [SerializeField] private GameplayEffectTags gameplayEffectTags = new GameplayEffectTags();
         [SerializeField] private EffectPeriodicity periodicity = new EffectPeriodicity();
         [SerializeField] private List<GameplayCue> gameplayCues = new List<GameplayCue>();
-        [SerializeField] private StackingPolicy stackingPolicy = new StackingPolicy();
+        [FormerlySerializedAs("stackingPolicy")]
+        [SerializeField] private StackPolicy stackPolicy = new StackPolicy();
 
         public GameplayEffectPolicy Policy => gameplayEffectPolicy;
         public GameplayEffectTags EffectTags => gameplayEffectTags;
         public EffectPeriodicity Periodicity => periodicity;
         public List<GameplayCue> GameplayCues => gameplayCues;
-        public StackingPolicy StackingPolicy => stackingPolicy;
+        public StackPolicy StackPolicy => stackPolicy;
         public List<GameplayTag> GrantedTags => gameplayEffectTags.GrantedToASCTags.Added;
 
         public bool IsTagsRequiredMatch(AbilitySystem target) {

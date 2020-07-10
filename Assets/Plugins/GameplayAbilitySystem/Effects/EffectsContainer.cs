@@ -25,11 +25,11 @@ namespace GameplayAbilitySystem.Effects
         {
             // Durational effect.  Add granted modifiers to active list
             int existingStacks = -1;
-            int maxStacks = effectContext.Effect.StackingPolicy.StackLimit;
+            int maxStacks = effectContext.Effect.StackPolicy.Limit;
             IEnumerable<EffectContext> matchingStackedActiveEffects = GetMatchingStackedEffectsByEffect(effectContext);
 
-            switch (effectContext.Effect.StackingPolicy.StackDurationRefreshPolicy) {
-                case StackRefreshPolicy.RefreshOnSuccessfulApplication: // We refresh all instances of this game effect
+            switch (effectContext.Effect.StackPolicy.DurationRefreshPolicy) {
+                case StackRefreshPolicy.RefreshOnSuccessfulApply: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
                         effect.ResetDuration();
@@ -39,8 +39,8 @@ namespace GameplayAbilitySystem.Effects
                     break;
 
             }
-            switch (effectContext.Effect.StackingPolicy.StackPeriodResetPolicy) {
-                case StackRefreshPolicy.RefreshOnSuccessfulApplication: // We refresh all instances of this game effect
+            switch (effectContext.Effect.StackPolicy.PeriodResetPolicy) {
+                case StackRefreshPolicy.RefreshOnSuccessfulApply: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
                         effect.ResetPeriodicTime();
@@ -166,7 +166,7 @@ namespace GameplayAbilitySystem.Effects
         {
             IEnumerable<EffectContext> matchingEffects;
 
-            switch (effectContext.Effect.StackingPolicy.StackExpirationPolicy) {
+            switch (effectContext.Effect.StackPolicy.ExpirationPolicy) {
                 case StackExpirationPolicy.ClearEntireStack: // Remove all effects which match
                     matchingEffects = GetMatchingStackedEffectsByEffect(effectContext);
                     if (matchingEffects == null) break;
@@ -239,17 +239,17 @@ namespace GameplayAbilitySystem.Effects
         private IEnumerable<EffectContext> GetMatchingStackedEffectsByEffect(EffectContext effectContext) 
         {
             IEnumerable<EffectContext> matchingStackedActiveEffects = null;
-            switch (effectContext.Effect.StackingPolicy.StackingType) {
+            switch (effectContext.Effect.StackPolicy.Type) {
                 // Stacking Type None:
                 // Add effect as a separate instance. 
-                case StackingType.None:
+                case StackType.None:
                     break;
-                case StackingType.AggregatedBySource:
+                case StackType.StackBySource:
                     matchingStackedActiveEffects = effectsModifyAggregator
                                         .GetAllEffects()
                                         .Where(x => x.Instigator == effectContext.Instigator && x.Effect == effectContext.Effect);
                     break;
-                case StackingType.AggregatedByTarget:
+                case StackType.StackByTarget:
                     matchingStackedActiveEffects = effectsModifyAggregator
                                         .GetAllEffects()
                                         .Where(x => x.Target == effectContext.Target && x.Effect == effectContext.Effect);

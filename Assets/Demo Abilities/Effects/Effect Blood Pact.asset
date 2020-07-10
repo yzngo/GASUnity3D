@@ -36,9 +36,9 @@ MonoBehaviour:
     EffectOnExecute: {fileID: 11400000, guid: 20fb0364cdae5e348854db1deb47d72e, type: 2}
   gameplayCues:
   - {fileID: 11400000, guid: 74a66fb2dcac9bd499073ecdc7d3cdd1, type: 2}
-  stackingPolicy:
-    StackingType: 1
-    StackLimit: 8
-    StackDurationRefreshPolicy: 0
-    StackPeriodResetPolicy: 0
-    StackExpirationPolicy: 1
+  stackPolicy:
+    Type: 1
+    Limit: 5
+    DurationRefreshPolicy: 0
+    PeriodResetPolicy: 0
+    ExpirationPolicy: 1
