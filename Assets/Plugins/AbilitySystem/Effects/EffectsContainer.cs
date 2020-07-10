@@ -25,10 +25,10 @@ namespace GameplayAbilitySystem.Effects
         {
             // Durational effect.  Add granted modifiers to active list
             int existingStacks = -1;
-            int maxStacks = effectContext.Effect.StackConfig.Limit;
+            int maxStacks = effectContext.Effect.Configs.StackConfig.Limit;
             IEnumerable<EffectContext> matchingStackedActiveEffects = GetMatchingStackedEffectsByEffect(effectContext);
 
-            switch (effectContext.Effect.StackConfig.DurationRefreshPolicy) {
+            switch (effectContext.Effect.Configs.StackConfig.DurationRefreshPolicy) {
                 case StackRefreshPolicy.RefreshOnSuccessfulApply: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
@@ -39,7 +39,7 @@ namespace GameplayAbilitySystem.Effects
                     break;
 
             }
-            switch (effectContext.Effect.StackConfig.PeriodResetPolicy) {
+            switch (effectContext.Effect.Configs.StackConfig.PeriodResetPolicy) {
                 case StackRefreshPolicy.RefreshOnSuccessfulApply: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
@@ -166,7 +166,7 @@ namespace GameplayAbilitySystem.Effects
         {
             IEnumerable<EffectContext> matchingEffects;
 
-            switch (effectContext.Effect.StackConfig.ExpirationPolicy) {
+            switch (effectContext.Effect.Configs.StackConfig.ExpirationPolicy) {
                 case StackExpirationPolicy.ClearEntireStack: // Remove all effects which match
                     matchingEffects = GetMatchingStackedEffectsByEffect(effectContext);
                     if (matchingEffects == null) break;
@@ -239,7 +239,7 @@ namespace GameplayAbilitySystem.Effects
         private IEnumerable<EffectContext> GetMatchingStackedEffectsByEffect(EffectContext effectContext) 
         {
             IEnumerable<EffectContext> matchingStackedActiveEffects = null;
-            switch (effectContext.Effect.StackConfig.Type) {
+            switch (effectContext.Effect.Configs.StackConfig.Type) {
                 // Stacking Type None:
                 // Add effect as a separate instance. 
                 case StackType.None:

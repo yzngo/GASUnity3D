@@ -30,20 +30,13 @@ MonoBehaviour:
     Modifiers: []
     EffectTags:
       effectTags: []
-      grantedToInstigatorTags: []
-      removedEffectsTags: []
+      grantedToInstigatorTags:
+      - {fileID: 11400000, guid: 0f7aacaa3f81d2b419604039ea36b254, type: 2}
+      removedEffectsTags:
+      - EffectTag: {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
+        BeRemovedStacks: 1
     Cues:
     - {fileID: 11400000, guid: c2fdf7b8b6a3efe4bb8950654af72d18, type: 2}
-  periodConfig:
-    Period: 3
-    IsExecuteOnApply: 0
-    EffectOnExecute: {fileID: 11400000, guid: 2f67849ecd9684d42a69798734a9ff04, type: 2}
-  stackConfig:
-    Type: 0
-    Limit: 0
-    DurationRefreshPolicy: 0
-    PeriodResetPolicy: 0
-    ExpirationPolicy: 0
   effectTags:
     effectTags:
     - {fileID: 0}

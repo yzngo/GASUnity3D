@@ -20,13 +20,7 @@ namespace GameplayAbilitySystem.Effects
         [SerializeField] private EffectConfigs configs = default;
         public EffectConfigs Configs => configs;
 
-        [SerializeField] private StackConfig stackConfig = new StackConfig();
-        [SerializeField] private EffectTagContainer effectTags = new EffectTagContainer();
-
-        public StackConfig StackConfig => stackConfig;
-        public EffectTagContainer EffectTags => effectTags;
-
-        public List<GameplayTag> GrantedTags => effectTags.GrantedToInstigatorTags;
+        public List<GameplayTag> GrantedTags => Configs.EffectTags.GrantedToInstigatorTags;
 
         public bool IsTagsRequiredMatch(AbilitySystem target) {
             var requiredTagsPresent = true;

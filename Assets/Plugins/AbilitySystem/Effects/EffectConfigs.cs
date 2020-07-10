@@ -25,20 +25,4 @@ namespace GameplayAbilitySystem.Effects
         [FormerlySerializedAs("durationLength")]
         public float DurationLength;
     }
-
-
-
-
-
-    [Serializable]
-    public class EffectPolicy
-    {
-        [SerializeField] private DurationPolicy durationPolicy = default;
-        [SerializeField] private float durationMagnitude = 0f;
-        [SerializeField] private List<EffectModifier> modifiers = new List<EffectModifier>();
-
-        public DurationPolicy DurationPolicy => durationPolicy;
-        public float DurationValue => durationMagnitude;
-        public List<EffectModifier> Modifiers => modifiers;
-    }
 }

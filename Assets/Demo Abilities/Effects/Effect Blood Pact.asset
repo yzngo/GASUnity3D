@@ -22,28 +22,19 @@ MonoBehaviour:
       EffectOnExecute: {fileID: 11400000, guid: 20fb0364cdae5e348854db1deb47d72e,
         type: 2}
     StackConfig:
-      Type: 0
-      Limit: 0
+      Type: 1
+      Limit: 5
       DurationRefreshPolicy: 0
       PeriodResetPolicy: 0
-      ExpirationPolicy: 0
+      ExpirationPolicy: 1
     Modifiers: []
     EffectTags:
       effectTags: []
-      grantedToInstigatorTags: []
+      grantedToInstigatorTags:
+      - {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
       removedEffectsTags: []
     Cues:
     - {fileID: 11400000, guid: 74a66fb2dcac9bd499073ecdc7d3cdd1, type: 2}
-  periodConfig:
-    Period: 2
-    IsExecuteOnApply: 1
-    EffectOnExecute: {fileID: 11400000, guid: 20fb0364cdae5e348854db1deb47d72e, type: 2}
-  stackConfig:
-    Type: 1
-    Limit: 5
-    DurationRefreshPolicy: 0
-    PeriodResetPolicy: 0
-    ExpirationPolicy: 1
   effectTags:
     effectTags:
     - {fileID: 0}
