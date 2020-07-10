@@ -6,22 +6,24 @@ using UniRx.Async;
 using System.Threading.Tasks;
 using GameplayAbilitySystem.Cues;
 
-namespace GameplayAbilitySystem.Effects {
-
+namespace GameplayAbilitySystem.Effects 
+{
     [Serializable]
-    public class ActiveEffectsContainer {
+    public class EffectsContainer 
+    {
         private AbilitySystem target;
-        public ActiveEffectsContainer(AbilitySystem target) {
-            this.target = target;
-        }
 
         /// <summary>
         /// This is used to keep track of all the "temporary" attribute modifiers,
         /// so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
         /// </summary>
         /// <value></value>
-        public EffectsModifyAggregator AttributeAggregator { get; } = new EffectsModifyAggregator();
+        public EffectsModifyAggregator effectsModifyAggregator { get; } = new EffectsModifyAggregator();
 
+        public EffectsContainer(AbilitySystem target) 
+        {
+            this.target = target;
+        }
         // private ActiveGameplayEffectsEvent ActiveGameplayEffectAddedEvent = new ActiveGameplayEffectsEvent();
 
         //todo async 异步?
@@ -92,7 +94,7 @@ namespace GameplayAbilitySystem.Effects {
                 modifier.AttemptCalculateMagnitude(out var evaluatedValue);
 
                 // Check if we already have an entry for this gameplay effect attribute modifier
-                var attributeAggregatorMap = AttributeAggregator.AddorGet(effectData);
+                var attributeAggregatorMap = effectsModifyAggregator.AddorGet(effectData);
 
                 if (modifier.AttributeType != null) {
                     // If aggregator for this attribute doesn't exist, add it.
@@ -108,7 +110,7 @@ namespace GameplayAbilitySystem.Effects {
                     }
 
                     // Recalculate new value by recomputing all aggregators
-                    var aggregators = AttributeAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
+                    var aggregators = effectsModifyAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
                     UpdateAttribute(aggregators, modifier.AttributeType);
                 }
             });
@@ -221,11 +223,11 @@ namespace GameplayAbilitySystem.Effects {
             // Remove one instance of this effect from the active list
             ModifyActiveGameplayEffect(effectData, modifier => {
 
-                AttributeAggregator.RemoveEffect(effectData);
+                effectsModifyAggregator.RemoveEffect(effectData);
                 if (modifier.AttributeType == null) return;
 
                 // Find all remaining aggregators of the same type and recompute values
-                var aggregators = AttributeAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
+                var aggregators = effectsModifyAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
 
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
@@ -255,13 +257,13 @@ namespace GameplayAbilitySystem.Effects {
                     break;
 
                 case StackingType.AggregatedBySource:
-                    matchingStackedActiveEffects = AttributeAggregator
+                    matchingStackedActiveEffects = effectsModifyAggregator
                                         .GetAllEffects()
                                         .Where(x => x.Instigator == effectData.Instigator && x.Effect == effectData.Effect);
                     break;
 
                 case StackingType.AggregatedByTarget:
-                    matchingStackedActiveEffects = AttributeAggregator
+                    matchingStackedActiveEffects = effectsModifyAggregator
                                         .GetAllEffects()
                                         .Where(x => x.Target == effectData.Target && x.Effect == effectData.Effect);
                     break;

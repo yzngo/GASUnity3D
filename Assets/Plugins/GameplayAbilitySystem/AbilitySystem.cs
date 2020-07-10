@@ -28,8 +28,8 @@ namespace GameplayAbilitySystem {
         private List<IGameplayAbility> runningAbilities = new List<IGameplayAbility>();
 
         // Lists all active Effect
-        private ActiveEffectsContainer activeEffectsContainer;
-        public ActiveEffectsContainer ActiveEffectsContainer => activeEffectsContainer;
+        private EffectsContainer activeEffectsContainer;
+        public EffectsContainer ActiveEffectsContainer => activeEffectsContainer;
 
         private Animator animator;
         public Animator Animator => animator;
@@ -38,7 +38,7 @@ namespace GameplayAbilitySystem {
 
         public IEnumerable<GameplayTag> ActiveTags =>
                 ActiveEffectsContainer
-                            .AttributeAggregator
+                            .effectsModifyAggregator
                             .GetAllEffects()
                             .SelectMany(x => x.Effect.EffectTags.GrantedToASCTags.Added)
                             .Union(AbilityGrantedTags);
@@ -46,7 +46,7 @@ namespace GameplayAbilitySystem {
         private IEnumerable<GameplayTag> AbilityGrantedTags => runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added);
 
         public void Awake() {
-            activeEffectsContainer = new ActiveEffectsContainer(this);
+            activeEffectsContainer = new EffectsContainer(this);
             animator = GetComponent<Animator>();
             attributeSet = GetComponent<AttributeSet>();
         }
@@ -176,7 +176,7 @@ namespace GameplayAbilitySystem {
 
         public IEnumerable<(GameplayTag Tag, ActivedEffectData GrantingEffect)> GetActiveEffectsTags()
         {
-            var activeEffects = ActiveEffectsContainer.AttributeAggregator.GetAllEffects();
+            var activeEffects = ActiveEffectsContainer.effectsModifyAggregator.GetAllEffects();
             if (activeEffects == null) 
                 return new List<(GameplayTag, ActivedEffectData)>();
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));

@@ -100,7 +100,7 @@ namespace GameplayAbilitySystem.Effects {
                 aggregator.AddAggregatorModifier(modifier.ModifierOperation, EvaluatedValue);
 
                 // Recalculate new value by recomputing all aggregators
-                var aggregators = Target.ActiveEffectsContainer.AttributeAggregator
+                var aggregators = Target.ActiveEffectsContainer.effectsModifyAggregator
                                     .GetAggregatorsForAttribute(modifier.AttributeType);
                 Target.ActiveEffectsContainer.UpdateAttribute(aggregators, modifier.AttributeType);
             }
