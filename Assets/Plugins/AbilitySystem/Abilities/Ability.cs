@@ -14,17 +14,14 @@ namespace GameplayAbilitySystem.Abilities
     /// </summary>
     public class Ability : ScriptableObject
     {
-        /// <summary>
-        /// Tags that this ability has/provides
-        /// </summary
-        public AbilityTagContainer Tags => tags;
+        public AbilityTagContainer Tags => tags; // Tags that this ability has/provides
         public Effect CostEffect => costEffect; // Cost of using this ability
         public List<Effect> CooldownEffects => cooldownEffects;     // Cooldowns associated with this ability
         public AbilityLogic AbilityLogic => abilityLogic; // Defines what the ability actually does
 
-        [SerializeField] private AbilityTagContainer tags = new AbilityTagContainer();
+        [SerializeField] private AbilityTagContainer tags = default;
         [SerializeField] private Effect costEffect = default;
-        [SerializeField] private List<Effect> cooldownEffects = new List<Effect>();
+        [SerializeField] private List<Effect> cooldownEffects = default;
         [SerializeField] private AbilityLogic abilityLogic = default;
 
         // [SerializeField] private List<GameplayEffect> _effectsToApplyOnExecution = new List<GameplayEffect>();

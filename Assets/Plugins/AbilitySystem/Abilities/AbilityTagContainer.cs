@@ -15,8 +15,6 @@ namespace GameplayAbilitySystem.Abilities
         [Tooltip("Tags to determine whether the ability is on cooldown")]
         [SerializeField] private List<GameplayTag> cooldownTags = default;
 
-
-
         public List<GameplayTag> AbilityTags => abilityTags;     // 是否可以用id代替?
         public List<GameplayTag> CooldownTags => cooldownTags;
 
