@@ -134,7 +134,7 @@ namespace GameplayAbilitySystem.Effects
                     // We only need to do this for effects with a finite duration
                     durationExpired = effectContext.CooldownTimeRemaining <= 0 ? true : false;
                 } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Infinite) {
-                    durationExpired = effectContext.StartWorldTime <= 0 ? true : false;
+                    durationExpired = effectContext.StartTime <= 0 ? true : false;
                 }
                 // Periodic effects only occur if the period is > 0
                 if (effectContext.Effect.Configs.PeriodConfig.Period > 0) {

@@ -25,7 +25,7 @@ public class GameplayTagsStatusBarManager : MonoBehaviour {
         var effectsToShow = activeTags
                             .Where(x => availableTagsToShow
                                                     .ContainsKey(x.Tag))
-                                                    .OrderBy(x => x.GrantingEffect.StartWorldTime)
+                                                    .OrderBy(x => x.GrantingEffect.StartTime)
                                                     .Select(x => (x.Tag, x.GrantingEffect, 1))
                             .ToList();
         return effectsToShow;

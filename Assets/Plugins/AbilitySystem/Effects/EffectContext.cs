@@ -8,25 +8,22 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class EffectContext {
 // base data
-        private Effect effect;
-        private float startWorldTime;                  //激活时间, Time.time
-        private float timeOfLastPeriodicApplication = 0;
+        public Effect Effect { get; private set; }
+        public float StartTime { get; private set; }
+        public AbilitySystem Instigator { get; private set; }
+        public AbilitySystem Target { get; private set; }
 
-        /// The actual GameplayEffect
-        public Effect Effect => effect;
-        public float StartWorldTime => startWorldTime;
-        public AbilitySystem Instigator { get; private set; }      // 发起者
-        public AbilitySystem Target { get; private set; }          // 目标对象
+        private float timeOfLastPeriodicApply;
 // ctor
         public EffectContext(Effect effect, AbilitySystem instigator, AbilitySystem target) 
         {
-            this.effect = effect;
-            startWorldTime = Time.time;
+            Effect = effect;
+            StartTime = Time.time;
             Instigator = instigator;
             Target = target;
 
             if (!Effect.Configs.PeriodConfig.IsExecuteOnApply) {
-                timeOfLastPeriodicApplication = Time.time;
+                timeOfLastPeriodicApply = Time.time;
             }
         }
 
@@ -37,7 +34,7 @@ namespace GameplayAbilitySystem.Effects
 
 // cooldown time
         /// The cooldown time that has already elapsed for this gameplay effect
-        public float CooldownTimeElapsed => Time.time - startWorldTime;
+        public float CooldownTimeElapsed => Time.time - StartTime;
         /// <summary>
         /// The total cooldown time for this gameplay effect
         /// </summary>
@@ -53,9 +50,9 @@ namespace GameplayAbilitySystem.Effects
 
 // period
         // 对于周期性的effect而言, 自从上次应用效果之后流逝的时间
-        public float TimeSincePreviousPeriodicApplication => Time.time - timeOfLastPeriodicApplication;
+        public float TimeSincePreviousPeriodicApplication => Time.time - timeOfLastPeriodicApply;
         // 对于周期性的effect而言, 到下次应用还需要的时间
-        public float TimeUntilNextPeriodicApplication => timeOfLastPeriodicApplication + Effect.Configs.PeriodConfig.Period - Time.time;
+        public float TimeUntilNextPeriodicApplication => timeOfLastPeriodicApply + Effect.Configs.PeriodConfig.Period - Time.time;
         private Dictionary<AttributeType, AttributeModifyAggregator> PeriodicEffectModificationsToDate = new Dictionary<AttributeType, AttributeModifyAggregator>();
 
 // reset time
@@ -65,18 +62,18 @@ namespace GameplayAbilitySystem.Effects
         /// and over time this could cause time drift
         public void ResetDuration(float offset = 0) 
         {
-            this.startWorldTime = Time.time - offset;
+            StartTime = Time.time - offset;
         }
 
         /// Reset time at which last periodic application occured.
         public void ResetPeriodicTime(float offset = 0) 
         {
-            this.timeOfLastPeriodicApplication = Time.time - offset;
+            this.timeOfLastPeriodicApply = Time.time - offset;
         }
 
         public void EndEffect() 
         {
-            this.startWorldTime = Time.time - CooldownTimeTotal;
+            StartTime = Time.time - CooldownTimeTotal;
         }
 
         public void ForceEndEffect() 
