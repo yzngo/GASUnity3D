@@ -87,7 +87,7 @@ namespace GameplayAbilitySystem.Effects
                     PeriodicEffectModificationsToDate.Add(modifier.AttributeType, aggregator);
                 }
 
-                aggregator.AddAggregatorModifier(modifier.ModifierOperation, evaluatedValue);
+                aggregator.AddAggregatorModifier(modifier.OperationType, evaluatedValue);
 
                 // Recalculate new value by recomputing all aggregators
                 var aggregators = Target.EffectsContainer.effectsModifyAggregator

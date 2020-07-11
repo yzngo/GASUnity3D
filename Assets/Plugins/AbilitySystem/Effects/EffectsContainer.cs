@@ -98,7 +98,7 @@ namespace GameplayAbilitySystem.Effects
                     // If this is a periodic effect, we don't add any attributes here. 
                     // They will be added as required on period expiry and stored in a separate structure
                     if (effectContext.Effect.Configs.PeriodConfig.Period <= 0) {
-                        aggregator.AddAggregatorModifier(modifier.ModifierOperation, evaluatedValue);
+                        aggregator.AddAggregatorModifier(modifier.OperationType, evaluatedValue);
                     }
                     // Recalculate new value by recomputing all aggregators
                     var aggregators = effectsModifyAggregator.GetAggregatorsForAttribute(modifier.AttributeType);

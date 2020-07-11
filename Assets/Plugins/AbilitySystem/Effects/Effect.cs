@@ -58,9 +58,9 @@ namespace GameplayAbilitySystem.Effects
                     totalModifies.Add(modifier.AttributeType, typeModifiers);
                 }
                 // 当前attribute的operation条目是否存在
-                if (!typeModifiers.TryGetValue(modifier.ModifierOperation, out var value)) {
+                if (!typeModifiers.TryGetValue(modifier.OperationType, out var value)) {
                     value = 0;
-                    switch (modifier.ModifierOperation) {
+                    switch (modifier.OperationType) {
                         case ModifierOperationType.Multiply:
                             value = 1;
                             break;
@@ -71,18 +71,18 @@ namespace GameplayAbilitySystem.Effects
                             value = 0;
                             break;
                     }
-                    typeModifiers.Add(modifier.ModifierOperation, value);
+                    typeModifiers.Add(modifier.OperationType, value);
                 }
 
-                switch (modifier.ModifierOperation) {
+                switch (modifier.OperationType) {
                     case ModifierOperationType.Add:
-                        totalModifies[modifier.AttributeType][modifier.ModifierOperation] += modifier.ScaledMagnitude;
+                        totalModifies[modifier.AttributeType][modifier.OperationType] += modifier.ScaledMagnitude;
                         break;
                     case ModifierOperationType.Multiply:
-                        totalModifies[modifier.AttributeType][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
+                        totalModifies[modifier.AttributeType][modifier.OperationType] *= modifier.ScaledMagnitude;
                         break;
                     case ModifierOperationType.Divide:
-                        totalModifies[modifier.AttributeType][modifier.ModifierOperation] *= modifier.ScaledMagnitude;
+                        totalModifies[modifier.AttributeType][modifier.OperationType] *= modifier.ScaledMagnitude;
                         break;
                 }
             }
