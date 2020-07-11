@@ -8,11 +8,10 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class EffectModifier
     {
-        [SerializeField] private AttributeType attributeType = null;
-        [FormerlySerializedAs("modifierOperationType")]
+        [SerializeField] private AttributeType attributeType = default;
         [SerializeField] private ModifierOperationType operationType = default;
         [SerializeField] private ModifierCalculationType valueSourceType = default;
-        [SerializeField] private float scaledValue = 0f;
+        [SerializeField] private float scaledValue = default;
 
         // [Space(10)]
         // [SerializeField] private GameplayEffectModifierTagCollection sourceTags = null;
