@@ -7,8 +7,7 @@ using UnityEngine.Serialization;
 namespace GameplayAbilitySystem.Effects 
 {
     [Serializable]
-    public class EffectConfigs 
-    {
+    public class EffectConfigs {
         public DurationConfig DurationConfig;
         public PeriodConfig PeriodConfig;
         public StackConfig StackConfig;
@@ -20,14 +19,12 @@ namespace GameplayAbilitySystem.Effects
 // Duration ------------------------------------------------------------------------------
 
     [Serializable]
-    public class DurationConfig 
-    {
+    public class DurationConfig {
         public DurationPolicy Policy;
         public float DurationLength;
     }
 
-    public enum DurationPolicy 
-    {
+    public enum DurationPolicy {
         Instant,
         Duration,
         Infinite
@@ -36,8 +33,7 @@ namespace GameplayAbilitySystem.Effects
 // Period --------------------------------------------------------------------------------
 
     [Serializable]
-    public class PeriodConfig 
-    {
+    public class PeriodConfig {
         public float Period;
         public bool IsExecuteOnApply;
         public Effect EffectOnExecute;
@@ -46,8 +42,7 @@ namespace GameplayAbilitySystem.Effects
 // Stack ---------------------------------------------------------------------------------
 
     [Serializable]
-    public class StackConfig 
-    {
+    public class StackConfig {
         public StackType Type;
         public int Limit;
         public StackRefreshPolicy DurationRefreshPolicy;   // 时间刷新策略
@@ -55,21 +50,18 @@ namespace GameplayAbilitySystem.Effects
         public StackExpirationPolicy ExpirationPolicy;     // 过期策略
     }
 
-    public enum StackType 
-    {
+    public enum StackType {
         None, 
         StackBySource, 
         StackByTarget
     }
 
-    public enum StackRefreshPolicy 
-    {
+    public enum StackRefreshPolicy {
         RefreshOnSuccessfulApply,     // 成功施放之后刷新
         NeverRefresh                        // 永不刷新
     }
 
-    public enum StackExpirationPolicy 
-    {
+    public enum StackExpirationPolicy {
         ClearEntireStack,                       // 清空整个栈
         RemoveSingleStackAndRefreshDuration,    // 移除一个元素且刷新时间
         RefreshDuration                         // 刷新时间
