@@ -26,11 +26,8 @@ namespace GameplayAbilitySystem.Effects
 
         
         public AttributeType AttributeType => attributeType;
-        
         public ModifierOperationType ModifierOperation => modifierOperationType;
-        
         public float ScaledMagnitude => scaledMagnitude;
-        
         public ModifierCalculationType ModifierCalculationType => magnitudeCalculationType;
         
         // public GameplayEffectModifierTagCollection SourceTags => sourceTags;

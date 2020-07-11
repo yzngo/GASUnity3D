@@ -9,7 +9,6 @@ using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Effects 
 {
-
     using TotalModifies = Dictionary<AttributeType, Dictionary<ModifierOperationType, float>>;
 
     // 改变自己或别人的Attributes 和GameplayTags的途径

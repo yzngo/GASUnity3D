@@ -18,14 +18,15 @@ namespace GameplayAbilitySystem.Abilities
         /// Tags that this ability has/provides
         /// </summary
         public AbilityTagContainer Tags => tags;
-        public Effect Cost => cost; // Cost of using this ability
-        public List<Effect> Cooldowns => cooldowns;     // Cooldowns associated with this ability
+        public Effect CostEffect => costEffect; // Cost of using this ability
+        public List<Effect> CooldownEffects => cooldownEffects;     // Cooldowns associated with this ability
         public AbilityLogic AbilityLogic => abilityLogic; // Defines what the ability actually does
 
         [SerializeField] private AbilityTagContainer tags = new AbilityTagContainer();
-        [SerializeField] private Effect cost = default;
-
-        [SerializeField] private List<Effect> cooldowns = new List<Effect>();
+        [FormerlySerializedAs("cost")]
+        [SerializeField] private Effect costEffect = default;
+        [FormerlySerializedAs("cooldowns")]
+        [SerializeField] private List<Effect> cooldownEffects = new List<Effect>();
         [SerializeField] private AbilityLogic abilityLogic = default;
 
         // [SerializeField] private List<GameplayEffect> _effectsToApplyOnExecution = new List<GameplayEffect>();
@@ -104,7 +105,7 @@ namespace GameplayAbilitySystem.Abilities
         /// </summary>
         protected void ApplyCooldown(AbilitySystem instigator) 
         {
-            foreach (var cooldown in Cooldowns) {
+            foreach (var cooldown in CooldownEffects) {
                 instigator.ApplyEffectToTarget(cooldown, instigator);
             }
         }
@@ -135,8 +136,8 @@ namespace GameplayAbilitySystem.Abilities
         private bool IsCostSatisfied(AbilitySystem instigator) 
         {
             // Check the modifiers on the ability cost GameEffect
-            var modifiers = Cost.CalculateModifiers();
-            var attributeModification = Cost.CalculateAttributes(
+            var modifiers = CostEffect.CalculateModifiers();
+            var attributeModification = CostEffect.CalculateAttributes(
                     instigator, modifiers, operateOnCurrentValue: true);
 
             foreach (var attribute in attributeModification) {
@@ -151,9 +152,9 @@ namespace GameplayAbilitySystem.Abilities
         /// </summary>
         private void ApplyCost(AbilitySystem instigator) 
         {
-            var modifiers = Cost.CalculateModifiers();
-            var attributeModification = Cost.CalculateAttributes(instigator, modifiers);
-            Cost.ApplyInstantEffect(instigator);
+            var modifiers = CostEffect.CalculateModifiers();
+            var attributeModification = CostEffect.CalculateAttributes(instigator, modifiers);
+            CostEffect.ApplyInstantEffect(instigator);
         }
 
         // Checks to see if the ability is off cooldown

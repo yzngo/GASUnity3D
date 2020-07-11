@@ -1,20 +1,18 @@
 using UnityEngine;
-using System;
 using System.Collections.Generic;
 using GameplayAbilitySystem.Attributes;
 
 namespace GameplayAbilitySystem.Effects 
 {
-    [Serializable]
-    public class EffectContext {
-// base data
+    public class EffectContext 
+    {
         public Effect Effect { get; private set; }
         public float StartTime { get; private set; }
         public AbilitySystem Instigator { get; private set; }
         public AbilitySystem Target { get; private set; }
 
         private float timeOfLastPeriodicApply;
-// ctor
+
         public EffectContext(Effect effect, AbilitySystem instigator, AbilitySystem target) 
         {
             Effect = effect;
@@ -60,16 +58,10 @@ namespace GameplayAbilitySystem.Effects
         /// Optionally, we can provide an offset to compensate for
         /// the fact that the reset did not happen at exactly 0
         /// and over time this could cause time drift
-        public void ResetDuration(float offset = 0) 
-        {
-            StartTime = Time.time - offset;
-        }
+        public void ResetDuration(float offset = 0) => StartTime = Time.time - offset;
 
         /// Reset time at which last periodic application occured.
-        public void ResetPeriodicTime(float offset = 0) 
-        {
-            this.timeOfLastPeriodicApply = Time.time - offset;
-        }
+        public void ResetPeriodicTime(float offset = 0) => timeOfLastPeriodicApply = Time.time - offset;
 
         public void EndEffect() 
         {
@@ -86,7 +78,7 @@ namespace GameplayAbilitySystem.Effects
         {
             // Check out ActiveGameplayEffectContainer.AddActiveGameplayEffect to see how to populate the ActiveEffectAttributeAggregator object
             foreach (var modifier in Effect.Configs.Modifiers) {
-                modifier.AttemptCalculateMagnitude(out var EvaluatedValue);
+                modifier.AttemptCalculateMagnitude(out var evaluatedValue);
 
                 // If aggregator for this attribute doesn't exist, add it.
                 if (!PeriodicEffectModificationsToDate.TryGetValue(modifier.AttributeType, out var aggregator)) {
@@ -95,7 +87,7 @@ namespace GameplayAbilitySystem.Effects
                     PeriodicEffectModificationsToDate.Add(modifier.AttributeType, aggregator);
                 }
 
-                aggregator.AddAggregatorModifier(modifier.ModifierOperation, EvaluatedValue);
+                aggregator.AddAggregatorModifier(modifier.ModifierOperation, evaluatedValue);
 
                 // Recalculate new value by recomputing all aggregators
                 var aggregators = Target.EffectsContainer.effectsModifyAggregator
