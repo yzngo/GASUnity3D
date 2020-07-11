@@ -23,9 +23,7 @@ namespace GameplayAbilitySystem.Abilities
         public AbilityLogic AbilityLogic => abilityLogic; // Defines what the ability actually does
 
         [SerializeField] private AbilityTagContainer tags = new AbilityTagContainer();
-        [FormerlySerializedAs("cost")]
         [SerializeField] private Effect costEffect = default;
-        [FormerlySerializedAs("cooldowns")]
         [SerializeField] private List<Effect> cooldownEffects = new List<Effect>();
         [SerializeField] private AbilityLogic abilityLogic = default;
 
