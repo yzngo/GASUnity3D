@@ -34,7 +34,7 @@ namespace GameplayAbilitySystem.Abilities.Logic
             var beh = animator.GetBehaviour<AnimationBehaviourEventSystem>();
             await beh.StateEnter.WaitForEvent((anim, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));
 
-            Ability.EndAbility(instigator);
+            Ability.End(instigator);
         }
 
     }

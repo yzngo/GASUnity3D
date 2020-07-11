@@ -19,13 +19,13 @@ namespace GameplayAbilitySystem.Abilities.Logic
         public string ProjectileFireTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void Execute(AbilitySystem abilitySystem, Ability Ability) {
-            var abilitySystemActor = abilitySystem.transform;
+        public override async void Execute(AbilitySystem instigator, Ability ability) {
+            var abilitySystemActor = instigator.transform;
             var animationEventSystemComponent = abilitySystemActor.GetComponent<AnimationEventSystem>();
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();
 
             // Make sure we have enough resources.  End ability if we don't
-            var abilityEventData = await abilitySystem.OnAbilityEvent.WaitForEvent((eventData) => eventData.AbilityTag == WaitForEventTag);
+            var abilityEventData = await instigator.OnAbilityEvent.WaitForEvent((eventData) => eventData.AbilityTag == WaitForEventTag);
             animatorComponent.SetTrigger(AnimationTriggerName);
 
             List<GameObject> objectsSpawned = new List<GameObject>();
@@ -47,14 +47,14 @@ namespace GameplayAbilitySystem.Abilities.Logic
 
             // Animation complete.  Spawn and send projectile at target
             if (instantiatedProjectile != null) {
-                SeekTargetAndDestroy(abilitySystem, abilityEventData.Target, instantiatedProjectile);
+                SeekTargetAndDestroy(instigator, abilityEventData.Target, instantiatedProjectile);
             }
 
 
             var beh = animatorComponent.GetBehaviour<AnimationBehaviourEventSystem>();
             await beh.StateEnter.WaitForEvent((animator, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));
 
-            Ability.EndAbility(abilitySystem);
+            ability.End(instigator);
         }
 
         private async void SeekTargetAndDestroy(AbilitySystem abilitySystem, AbilitySystem target, GameObject projectile) {

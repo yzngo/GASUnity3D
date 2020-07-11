@@ -22,7 +22,7 @@ namespace GameplayAbilitySystem.Attributes
         public void PreBaseChange(Attribute attribute, ref float newValue) => preBaseChangeHandler?.OnAttributeChange(this, attribute, ref newValue);
         public void PreCurrentChange(Attribute attribute, ref float newValue) => preCurrentChangeHandler?.OnAttributeChange(this, attribute, ref newValue);
 
-        public void AddAttribute(AttributeType type, float baseValue, float currentValue)
+        public void Add(AttributeType type, float baseValue, float currentValue)
         {
             if (attributes == null) {
                 attributes = new List<Attribute>();

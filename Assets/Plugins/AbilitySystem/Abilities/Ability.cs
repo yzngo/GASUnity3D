@@ -33,22 +33,22 @@ namespace GameplayAbilitySystem.Abilities
         // public GenericAbilityEvent OnGameplayAbilityCancelled => _onGameplayAbilityCancelled;
         // public GenericAbilityEvent OnGameplayAbilityEnded => _onGameplayAbilityEnded;
 
-        public bool IsAbilityActivatable(AbilitySystem instigator) 
+        public bool IsActivatable(AbilitySystem instigator) 
         {
             // Player must be "Idle" to begin ability activation
             if (instigator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base.Idle")) return false;
             return IsCostSatisfied(instigator) && !IsCooling(instigator) && IsTagsSatisfied(instigator);
         }
 
-        public bool CommitAbility(AbilitySystem instigator) 
+        public bool Commit(AbilitySystem instigator) 
         {
-            ActivateAbility(instigator);
+            Activate(instigator);
             // AbilitySystem.OnGameplayAbilityActivated.Invoke(this);
             ApplyCost(instigator);
             return true;
         }
 
-        public void ActivateAbility(AbilitySystem instigator) 
+        public void Activate(AbilitySystem instigator) 
         {
             AbilityLogic.Execute(instigator, this);
             ApplyCooldown(instigator);
@@ -78,7 +78,7 @@ namespace GameplayAbilitySystem.Abilities
             return !hasActivationBlockedTags && hasActivationRequiredTags;
         }
 
-        public void EndAbility(AbilitySystem instigator) 
+        public void End(AbilitySystem instigator) 
         {
             // _onGameplayAbilityEnded.Invoke(this);
 

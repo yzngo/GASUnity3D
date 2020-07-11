@@ -21,7 +21,7 @@ namespace GameplayAbilitySystem.Effects
 
         public List<GameplayTag> GrantedTags => Configs.EffectTags.GrantedToInstigatorTags;
 
-        public bool IsTagsRequiredMatch(AbilitySystem target) {
+        public bool IsRequiredTagsSatisfied(AbilitySystem target) {
             var requiredTagsPresent = true;
             var ignoredTagsAbsent = true;
 

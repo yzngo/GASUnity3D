@@ -60,7 +60,7 @@ namespace GameplayAbilitySystem {
                 return false;
             }
 
-            if (!ability.IsAbilityActivatable(this)) {
+            if (!ability.IsActivatable(this)) {
                 return false;
             }
             return true;
@@ -74,7 +74,7 @@ namespace GameplayAbilitySystem {
             // 一个技能的生命周期是从[释放开始]到[释放结束], 之后的工作交给effect
             // 技能仅仅是一个时序流程
             runningAbilities.Add(ability);
-            ability.CommitAbility(this);
+            ability.Commit(this);
 
             GameplayTag abilityTag = ability.Tags.AbilityTags.Count > 0 ? ability.Tags.AbilityTags[0] : new GameplayTag();
             var data = new AbilityEventData();
@@ -130,7 +130,7 @@ namespace GameplayAbilitySystem {
             // TODO: Get list of tags owned by target
             // TODO: Check for immunity tags, and don't apply effect if target is immune (and also add Immunity Tags container to IGameplayEffect)
             // TODO: Check to make sure Application Tag Requirements are met (i.e. target has all the required tags, and does not contain any prohibited tags )
-            if (!appliedEffect.IsTagsRequiredMatch(target)) {
+            if (!appliedEffect.IsRequiredTagsSatisfied(target)) {
                 return ;
             }
 
