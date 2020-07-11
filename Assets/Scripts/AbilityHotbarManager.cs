@@ -28,7 +28,7 @@ public class AbilityHotbarManager : MonoBehaviour {
             var button = AbilityButtons[i];
             CoolDownInfo info = GetCooldownOfAbility(i);
             var remainingPercent = 0f;
-            if (info.total != 0) {
+            if (info.isCooling == true) {
                 remainingPercent = 1 - info.elapsed / info.total;
             }
             button.SetCooldownRemainingPercent(1 - remainingPercent);

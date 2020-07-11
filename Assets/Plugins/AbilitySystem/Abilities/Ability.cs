@@ -41,7 +41,7 @@ namespace GameplayAbilitySystem.Abilities
         {
             // Player must be "Idle" to begin ability activation
             if (instigator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base.Idle")) return false;
-            return CheckCost(instigator) && AbilityOffCooldown(instigator) && IsTagsSatisfied(instigator);
+            return IsCostSatisfied(instigator) && !IsCooling(instigator) && IsTagsSatisfied(instigator);
         }
 
         public bool CommitAbility(AbilitySystem instigator) 
@@ -111,10 +111,10 @@ namespace GameplayAbilitySystem.Abilities
 
         public CoolDownInfo CalculateCooldown(AbilitySystem instigator) 
         {
-            CoolDownInfo info = new CoolDownInfo();
+            CoolDownInfo info = new CoolDownInfo(isCooling: false);
             List<GameplayTag> cooldownTags = Tags.CooldownTags;
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
-            EffectContext maxCooldownEffect = instigator.EffectsContainer
+            EffectContext maxCDEffectContext = instigator.EffectsContainer
                                     .effectsModifyAggregator
                                     .GetAllEffects()
                                     .Where(x => x.Effect.GrantedTags.Intersect(cooldownTags).Any())
@@ -122,16 +122,17 @@ namespace GameplayAbilitySystem.Abilities
                                     .OrderByDescending(x => x?.CooldownTimeRemaining)
                                     .FirstOrDefault();
 
-            if (maxCooldownEffect == null) {
+            if (maxCDEffectContext == null) {
                 return info;
             }
-            info.elapsed = maxCooldownEffect.CooldownTimeElapsed;
-            info.total = maxCooldownEffect.CooldownTimeTotal;
+            info.isCooling = true;
+            info.elapsed = maxCDEffectContext.CooldownTimeElapsed;
+            info.total = maxCDEffectContext.CooldownTimeTotal;
             return info;
         }
 
         // Checks to see if the target GAS has the required cost resource to cast the ability
-        private bool CheckCost(AbilitySystem instigator) 
+        private bool IsCostSatisfied(AbilitySystem instigator) 
         {
             // Check the modifiers on the ability cost GameEffect
             var modifiers = Cost.CalculateModifiers();
@@ -155,18 +156,25 @@ namespace GameplayAbilitySystem.Abilities
             Cost.ApplyInstantEffect(instigator);
         }
 
-        // Checks to see if the GAS is off cooldown
-        private bool AbilityOffCooldown(AbilitySystem instigator) 
+        // Checks to see if the ability is off cooldown
+        private bool IsCooling(AbilitySystem instigator) 
         {
             CoolDownInfo info = CalculateCooldown(instigator);
-            // (var elapsed, var total) = CalculateCooldown(abilitySystem);
-            return info.total == 0f;
+            return info.isCooling;
         }
 
         public struct CoolDownInfo
         {
+            public bool isCooling;
             public float elapsed;
             public float total;
+
+            public CoolDownInfo(bool isCooling, float elapsed = 0f, float total = 0f)
+            {
+                this.isCooling = isCooling;
+                this.elapsed = elapsed;
+                this.total = total;
+            }
         }
     }
 }
