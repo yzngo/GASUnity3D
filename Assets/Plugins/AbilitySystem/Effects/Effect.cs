@@ -15,10 +15,8 @@ namespace GameplayAbilitySystem.Effects
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class Effect : ScriptableObject 
     {
-        [FormerlySerializedAs("config")]
         [SerializeField] private EffectConfigs configs = default;
         public EffectConfigs Configs => configs;
-
         public List<GameplayTag> GrantedTags => Configs.EffectTags.GrantedToInstigatorTags;
 
         public bool IsRequiredTagsSatisfied(AbilitySystem target) {
