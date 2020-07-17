@@ -51,7 +51,7 @@ namespace GameplayAbilitySystem.Abilities.Logic
             }
 
 
-            var beh = animatorComponent.GetBehaviour<AnimationBehaviourEventSystem>();
+            var beh = animatorComponent.GetBehaviour<ActorFSMBehaviour>();
             await beh.StateEnter.WaitForEvent((animator, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));
 
             ability.End(instigator);

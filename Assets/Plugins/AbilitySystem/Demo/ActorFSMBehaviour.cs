@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AnimationBehaviourEventSystem : StateMachineBehaviour {
-    public AnimationBehaviourStateEvent StateEnter = new AnimationBehaviourStateEvent();
-    public AnimationBehaviourStateEvent StateUpdate = new AnimationBehaviourStateEvent();
-    public AnimationBehaviourStateEvent StateExit = new AnimationBehaviourStateEvent();
-    public AnimationBehaviourStateEvent StateMove = new AnimationBehaviourStateEvent();
-    public AnimationBehaviourStateEvent StateIK = new AnimationBehaviourStateEvent();
-    public AnimationBehaviourStateMachineEvent StateMachineEnter = new AnimationBehaviourStateMachineEvent();
-    public AnimationBehaviourStateMachineEvent StateMachineExit = new AnimationBehaviourStateMachineEvent();
+public class ActorFSMBehaviour : StateMachineBehaviour 
+{
+    public class StateEvent : UnityEvent<Animator, AnimatorStateInfo, int> {}
+    public class StateMechineEvent : UnityEvent<Animator, int> {}
+
+    public StateEvent StateEnter = new StateEvent();
+    public StateEvent StateUpdate = new StateEvent();
+    public StateEvent StateExit = new StateEvent();
+    public StateEvent StateMove = new StateEvent();
+    public StateEvent StateIK = new StateEvent();
+    public StateMechineEvent StateMachineEnter = new StateMechineEvent();
+    public StateMechineEvent StateMachineExit = new StateMechineEvent();
 
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
@@ -48,11 +52,3 @@ public class AnimationBehaviourEventSystem : StateMachineBehaviour {
     }
 }
 
-
-public class AnimationBehaviourStateEvent : UnityEvent<Animator, AnimatorStateInfo, int> {
-
-}
-
-public class AnimationBehaviourStateMachineEvent : UnityEvent<Animator, int> {
-
-}
