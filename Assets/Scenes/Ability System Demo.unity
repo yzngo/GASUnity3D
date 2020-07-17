@@ -1623,6 +1623,12 @@ PrefabInstance:
       propertyPath: attributes.Array.data[4]._currentValue
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: preBaseChangeHandler
+      value: 
+      objectReference: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
+        type: 2}
     - target: {fileID: 7899279095267886754, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: m_LocalPosition.x
