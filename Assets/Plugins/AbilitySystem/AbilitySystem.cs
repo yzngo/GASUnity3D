@@ -8,15 +8,14 @@ using GameplayAbilitySystem.Attributes;
 using GameplayAbilitySystem.Cues;
 using GameplayAbilitySystem.Utility;
 
-
-namespace GameplayAbilitySystem {
-
+namespace GameplayAbilitySystem 
+{
     /// The AbilitySytem is the primary component. Every game object 
     /// that needs to participate with the GAS needs to have this component attached.
     [AddComponentMenu("Ability System/Ability System")]
     [RequireComponent(typeof(AttributeSet))]
-    public class AbilitySystem : MonoBehaviour {
-
+    public class AbilitySystem : MonoBehaviour 
+    {
         // 自己身上作为目标的点
         [SerializeField] private Transform targetPoint = default;
         public Transform TargetPoint => targetPoint;
