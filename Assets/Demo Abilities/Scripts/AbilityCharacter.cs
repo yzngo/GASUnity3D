@@ -3,7 +3,7 @@ using GameplayAbilitySystem;
 using GameplayAbilitySystem.Abilities;
 using UnityEngine;
 using System;
-
+using UnityEngine.Serialization;
 public class AbilityCharacter : MonoBehaviour
 {
     [Serializable]
@@ -13,7 +13,8 @@ public class AbilityCharacter : MonoBehaviour
         public AbilitySystem target;
     }
 
-    public List<CastingAbilityContainer> Abilities = new List<CastingAbilityContainer>();
+    [FormerlySerializedAs("Abilities")]
+    public List<CastingAbilityContainer> abilities = new List<CastingAbilityContainer>();
     public AbilitySystem AbilitySystem { get; private set; }
 
     void Start()
@@ -23,13 +24,13 @@ public class AbilityCharacter : MonoBehaviour
 
     public void CastAbility(int n)
     {
-        if (n >= Abilities.Count) return;
-        if (Abilities[n] == null) return;
-        if (Abilities[n].ability == null) return;
-        if (Abilities[n].target == null) return;
+        if (n >= abilities.Count) return;
+        if (abilities[n] == null) return;
+        if (abilities[n].ability == null) return;
+        if (abilities[n].target == null) return;
 
-        Ability ability = Abilities[n].ability;
-        AbilitySystem target = Abilities[n].target;
+        Ability ability = abilities[n].ability;
+        AbilitySystem target = abilities[n].target;
         AbilitySystem.TryActivateAbility(ability, target);
     }
 }

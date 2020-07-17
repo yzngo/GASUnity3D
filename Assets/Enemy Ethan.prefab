@@ -1892,7 +1892,6 @@ GameObject:
   - component: {fileID: 5555714685437361609}
   - component: {fileID: 5555714685437361603}
   - component: {fileID: 5555714685437361608}
-  - component: {fileID: 7899279095716547604}
   m_Layer: 0
   m_Name: Enemy Ethan
   m_TagString: Untagged
@@ -2014,44 +2013,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributes:
-  - _attributeType: {fileID: 11400000, guid: 8769ea8817563784a87cb6142aef671b, type: 2}
-    _baseValue: 100
-    _currentValue: 100
-  - _attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
-    _baseValue: 100
-    _currentValue: 100
-  - _attributeType: {fileID: 11400000, guid: e5f56864ce3c4b742868ac560a891f48, type: 2}
-    _baseValue: 5
-    _currentValue: 5
-  - _attributeType: {fileID: 11400000, guid: 124a7a186e5666c4b8fdc11ca51efeb7, type: 2}
-    _baseValue: 20
-    _currentValue: 20
-  - _attributeType: {fileID: 11400000, guid: 9513cbcc3a089f742b9c48ae4201b1db, type: 2}
-    _baseValue: 20
-    _currentValue: 20
-  preBaseChangeHandler: {fileID: 11400000, guid: 50647ac471124bf4bb71e322db6b76a8,
+  - attributeType: {fileID: 11400000, guid: 8769ea8817563784a87cb6142aef671b, type: 2}
+    baseValue: 100
+    currentValue: 100
+  - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
+    baseValue: 100
+    currentValue: 100
+  - attributeType: {fileID: 11400000, guid: e5f56864ce3c4b742868ac560a891f48, type: 2}
+    baseValue: 5
+    currentValue: 5
+  - attributeType: {fileID: 11400000, guid: 124a7a186e5666c4b8fdc11ca51efeb7, type: 2}
+    baseValue: 20
+    currentValue: 20
+  - attributeType: {fileID: 11400000, guid: 9513cbcc3a089f742b9c48ae4201b1db, type: 2}
+    baseValue: 20
+    currentValue: 20
+  preBaseChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
     type: 2}
   preCurrentChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
     type: 2}
-  afterBaseChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  afterCurrentChanged:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &7899279095716547604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555714685437361602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60717443bded3ea4a81d794965fc0910, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatChangeHandler: {fileID: 11400000, guid: 80a161f938c6c674ca02402d6ecd7c52, type: 2}
 --- !u!1 &5555714685437361604
 GameObject:
   m_ObjectHideFlags: 0

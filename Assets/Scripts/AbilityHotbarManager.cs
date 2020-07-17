@@ -10,9 +10,9 @@ public class AbilityHotbarManager : MonoBehaviour {
     public List<AbilityIconMap> AbilityIconMaps;
 
     void Awake() {
-        for (int i = 0; i < AbilityCharacter.Abilities.Count; i++) {
+        for (int i = 0; i < AbilityCharacter.abilities.Count; i++) {
             if (AbilityButtons.Count > i) {
-                var abilityGraphic = AbilityIconMaps.FirstOrDefault(x => x.Ability == AbilityCharacter.Abilities[i].ability);
+                var abilityGraphic = AbilityIconMaps.FirstOrDefault(x => x.Ability == AbilityCharacter.abilities[i].ability);
 
                 if (abilityGraphic != null) {
                     AbilityButtons[i].ImageIcon.sprite = abilityGraphic.Sprite;
@@ -38,10 +38,10 @@ public class AbilityHotbarManager : MonoBehaviour {
 
     public CoolDownInfo GetCooldownOfAbility(int n)
     {
-        if (n >= AbilityCharacter.Abilities.Count) {
+        if (n >= AbilityCharacter.abilities.Count) {
             return new CoolDownInfo();
         }
-        Ability ability = AbilityCharacter.Abilities[n].ability;
+        Ability ability = AbilityCharacter.abilities[n].ability;
         CoolDownInfo cooldownInfo = ability.CalculateCooldown(AbilityCharacter.AbilitySystem);
         return cooldownInfo;
     }
