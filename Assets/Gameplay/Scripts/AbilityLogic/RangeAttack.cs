@@ -4,7 +4,7 @@ using UniRx.Async;
 using UnityEngine;
 using GameplayAbilitySystem.Utility;
 
-namespace GameplayAbilitySystem.Abilities.Logic 
+namespace GameplayAbilitySystem.Abilities
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Range Attack")]
     public class RangeAttack : AbilityLogic 
