@@ -16,8 +16,6 @@ namespace GameplayAbilitySystem.Utility
     [Serializable] public class AttributeChangeEvent : UnityEvent<AbilityAttribute> {}
     [Serializable] public class AbilityEvent : UnityEvent<AbilityEventData> {}
 
-
-
     [Serializable]
     public struct AbilityEventData 
     {
