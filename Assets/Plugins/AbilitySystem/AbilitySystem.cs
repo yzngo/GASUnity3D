@@ -168,7 +168,7 @@ namespace GameplayAbilitySystem
             }
 
             // Execute gameplay cue
-            var cues = appliedEffect.Configs.Cues;
+            List<EffectCues> cues = appliedEffect.Configs.Cues;
             for (var i = 0; i < cues.Count; i++) {
                 var cue = cues[i];
                 cue.HandleCue(target, CueEventMomentType.OnActive);

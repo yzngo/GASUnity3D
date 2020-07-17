@@ -4,7 +4,7 @@ using GameplayAbilitySystem;
 using GameplayAbilitySystem.Cues;
 using UniRx.Async;
 using UnityEngine;
-
+using UnityEngine.Serialization;
 namespace AbilitySystemDemo 
 {
     [CreateAssetMenu(fileName = "Spawn Object Gameplay Cue", menuName = "Ability System Demo/Gameplay Cue/Spawn Object Gameplay Cue")]
@@ -22,14 +22,14 @@ namespace AbilitySystemDemo
             await UniTask.DelayFrame(5);
             Time.timeScale = 1;
 
-            var gameObject = Instantiate(ObjectToSpawn);
-            gameObject.transform.SetParent(target.transform);
-            gameObject.transform.localPosition = Position;
-            gameObject.transform.localRotation = Rotation;
-            gameObject.transform.localScale = Scale;
+            Transform go = Instantiate(ObjectToSpawn).transform;
+            go.SetParent(target.transform);
+            go.localPosition = Position;
+            go.localRotation = Rotation;
+            go.localScale = Scale;
             if (DestroyInSeconds > 0) {
                 await UniTask.Delay(TimeSpan.FromSeconds(DestroyInSeconds));
-                GameObject.DestroyImmediate(gameObject);
+                GameObject.DestroyImmediate(go.gameObject);
             }
         }
 
