@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02cc1ff66db5d0749b0bab3afccec0ce, type: 3}
-  m_Name: Effect Healing
+  m_Name: Effect.Heal
   m_EditorClassIdentifier: 
   configs:
     DurationConfig:
@@ -37,11 +37,3 @@ MonoBehaviour:
         BeRemovedStacks: 1
     Cues:
     - {fileID: 11400000, guid: c2fdf7b8b6a3efe4bb8950654af72d18, type: 2}
-  effectTags:
-    effectTags:
-    - {fileID: 0}
-    grantedToInstigatorTags:
-    - {fileID: 11400000, guid: 0f7aacaa3f81d2b419604039ea36b254, type: 2}
-    removedEffectsTags:
-    - EffectTag: {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}
-      BeRemovedStacks: 1
