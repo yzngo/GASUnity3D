@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configs:
     DurationConfig:
-      policy: 0
-      durationLength: 0
+      Policy: 0
+      DurationLength: 0
     PeriodConfig:
       Period: 0
       IsExecuteOnApply: 0
@@ -28,35 +28,12 @@ MonoBehaviour:
       ExpirationPolicy: 0
     Modifiers:
     - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
-      modifierOperationType: 0
-      magnitudeCalculationType: 0
-      scaledMagnitude: 5
+      operationType: 0
+      valueSourceType: 0
+      scaledValue: 5
     EffectTags:
       effectTags: []
       grantedToInstigatorTags: []
       removedEffectsTags: []
     Cues:
     - {fileID: 11400000, guid: a0a0a94b358c56f45aaceb55727bf3d9, type: 2}
-  effectPolicy:
-    durationPolicy: 0
-    durationMagnitude: 0
-    modifiers:
-    - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
-      modifierOperationType: 0
-      magnitudeCalculationType: 0
-      scaledMagnitude: 5
-  periodConfig:
-    Period: 0
-    IsExecuteOnApply: 0
-    EffectOnExecute: {fileID: 0}
-  stackConfig:
-    Type: 0
-    Limit: 0
-    DurationRefreshPolicy: 0
-    PeriodResetPolicy: 0
-    ExpirationPolicy: 0
-  effectTags:
-    effectTags:
-    - {fileID: 0}
-    grantedToInstigatorTags: []
-    removedEffectsTags: []

@@ -18,6 +18,8 @@ MonoBehaviour:
     cooldownTags:
     - {fileID: 11400000, guid: bcc193d422b231841b87591da788bb05, type: 2}
     - {fileID: 11400000, guid: 9a5e97d4d3432d14c81810a21c7a29d3, type: 2}
-  costEffect: {fileID: 11400000, guid: ffd023926afb8604da27388cef668ff7, type: 2}
-  cooldownEffects: []
+  costEffect: {fileID: 11400000, guid: 37b17980154ac5e46924458c6fb0c447, type: 2}
+  cooldownEffects:
+  - {fileID: 11400000, guid: c0b5b25c4db1c8345acb375a405fdda4, type: 2}
+  - {fileID: 11400000, guid: d4498b55c0a7526469977fa87a6259b9, type: 2}
   abilityLogic: {fileID: 11400000, guid: f6deb5d957f373b4488dff3c2f2234f6, type: 2}
