@@ -5,8 +5,8 @@ using GameplayAbilitySystem.Utility;
 namespace GameplayAbilitySystem.Abilities.Logic 
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Instant Attack")]
-    public class InstantAttack : AbilityLogic {
-
+    public class InstantAttack : AbilityLogic 
+    {
         public Effect TargetGameplayEffect;
         public AnimationEvent ExecuteEffectEvent;
         public GameplayTag WaitForEventTag;
