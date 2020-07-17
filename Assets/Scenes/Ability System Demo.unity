@@ -531,8 +531,8 @@ MonoBehaviour:
   - {fileID: 581392358}
   - {fileID: 2001019375}
   GameplayTagIcons:
-  - {fileID: 11400000, guid: 7b209934d74a7d24bb7383048b1278ec, type: 2}
   - {fileID: 11400000, guid: ed85940f3735f294882ed592ed72d2ff, type: 2}
+  - {fileID: 11400000, guid: 7b209934d74a7d24bb7383048b1278ec, type: 2}
   - {fileID: 11400000, guid: 264cfb9aa77a9a7479735a1d5596061e, type: 2}
 --- !u!1001 &381492119
 PrefabInstance:
