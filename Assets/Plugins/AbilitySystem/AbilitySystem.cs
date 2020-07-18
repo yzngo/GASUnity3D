@@ -78,8 +78,8 @@ namespace GameplayAbilitySystem
             GameplayTag abilityTag = ability.Tags.AbilityTags.Count > 0 ? ability.Tags.AbilityTags[0] : new GameplayTag();
             var data = new AbilityEventData();
             data.ability = ability;
-            data.AbilityTag = abilityTag;
-            data.Target = target;
+            data.abilityTag = abilityTag;
+            data.target = target;
             onAbilityEvent?.Invoke(data);
             return true;
         }

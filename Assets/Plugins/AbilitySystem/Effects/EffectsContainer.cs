@@ -2,9 +2,10 @@ using System.Linq;
 using System.Collections.Generic;
 using GameplayAbilitySystem.Attributes;
 using System;
-using UniRx.Async;
 using System.Threading.Tasks;
 using GameplayAbilitySystem.Cues;
+
+using Cysharp.Threading.Tasks;
 
 namespace GameplayAbilitySystem.Effects 
 {

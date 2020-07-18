@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using GameplayAbilitySystem.Effects;
-using UniRx.Async;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using GameplayAbilitySystem.Utility;
 
@@ -25,7 +25,7 @@ namespace GameplayAbilitySystem.Abilities
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();
 
             // Make sure we have enough resources.  End ability if we don't
-            var abilityEventData = await instigator.OnAbilityEvent.WaitForEvent((eventData) => eventData.AbilityTag == WaitForEventTag);
+            var abilityEventData = await instigator.OnAbilityEvent.WaitForEvent((eventData) => eventData.abilityTag == WaitForEventTag);
             animatorComponent.SetTrigger(AnimationTriggerName);
 
             List<GameObject> objectsSpawned = new List<GameObject>();
@@ -47,7 +47,7 @@ namespace GameplayAbilitySystem.Abilities
 
             // Animation complete.  Spawn and send projectile at target
             if (instantiatedProjectile != null) {
-                SeekTargetAndDestroy(instigator, abilityEventData.Target, instantiatedProjectile);
+                SeekTargetAndDestroy(instigator, abilityEventData.target, instantiatedProjectile);
             }
 
 

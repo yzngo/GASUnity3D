@@ -2,9 +2,11 @@
 using System;
 using GameplayAbilitySystem;
 using GameplayAbilitySystem.Cues;
-using UniRx.Async;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Cysharp.Threading.Tasks;
+
+
 namespace AbilitySystemDemo 
 {
     [CreateAssetMenu(fileName = "Spawn Object Gameplay Cue", menuName = "Ability System Demo/Gameplay Cue/Spawn Object Gameplay Cue")]

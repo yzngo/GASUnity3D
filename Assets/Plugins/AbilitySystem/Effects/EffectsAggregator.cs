@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using GameplayAbilitySystem.Attributes;
-using UniRx.Async;
+using Cysharp.Threading.Tasks;
 
 namespace GameplayAbilitySystem.Effects 
 {

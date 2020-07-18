@@ -2,39 +2,40 @@
 using System;
 using UnityEngine.Events;
 using GameplayAbilitySystem.Abilities;
-using GameplayAbilitySystem.Attributes;
 using System.Threading;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEngine;
-using UniRx.Async;
+using Cysharp.Threading.Tasks;
+
 using AbilityAttribute = GameplayAbilitySystem.Attributes.Attribute;
 
 namespace GameplayAbilitySystem.Utility 
 {
+    [Serializable] 
+    public class AttributeChangeEvent : UnityEvent<AbilityAttribute> {
+    }
 
-    [Serializable] public class AttributeChangeEvent : UnityEvent<AbilityAttribute> {}
-    [Serializable] public class AbilityEvent : UnityEvent<AbilityEventData> {}
+    [Serializable] 
+    public class AbilityEvent : UnityEvent<AbilityEventData> {
+    }
 
     [Serializable]
     public struct AbilityEventData 
     {
         public Ability ability;
-        public GameplayTag AbilityTag;
-        public AbilitySystem Target;
+        public GameplayTag abilityTag;
+        public AbilitySystem target;
     }
 
-    public static class UnityEventExtensionMethods {
+    public static class UnityEventExtensionMethods 
+    {
         /// <summary>
         /// Waits for event to execute, then returns.
         /// </summary>
         /// <param name="evt"></param>
         /// <returns>Task</returns>
-        public static async Task WaitForEvent(this UnityEvent evt, CancellationToken cts = default(CancellationToken)) {
-            var eventTriggered = false;
-            UnityAction method = new UnityAction(() => {
-                eventTriggered = true;
-            });
+        public static async Task WaitForEvent(this UnityEvent evt, CancellationToken cts = default) {
+            bool eventTriggered = false;
+            UnityAction method = new UnityAction( () => { eventTriggered = true; } );
             evt.AddListener(method);
             while (!eventTriggered) {
                 await UniTask.DelayFrame(0);
@@ -45,30 +46,29 @@ namespace GameplayAbilitySystem.Utility
             evt.RemoveListener(method);
         }
 
-
         /// <summary>
         /// Waits for event to execute, then returns when T returned by event matches the comparer.
         /// </summary>
-        /// <param name="event">UnityEvent to wait for</param>
+        /// <param name="evt">UnityEvent to wait for</param>
         /// <param name="compareFunc">Function to define how to compare the returned value from the Event to some other value</param>
-        public static async Task<T> WaitForEvent<T>(this UnityEvent<T> @event, Func<T, bool> compareFunc, CancellationToken cts = default(CancellationToken)) {
-            T val = default(T);
-            UnityAction<T> method = new UnityAction<T>((x) => {
-                val = x;
-            });
-            @event.AddListener(method);
+        public static async Task<T> WaitForEvent<T>(this UnityEvent<T> evt, Func<T, bool> compareFunc, CancellationToken cts = default) 
+        {
+            T val = default;
+            UnityAction<T> method = new UnityAction<T>((x) => { val = x; });
+            evt.AddListener(method);
 
             while (!compareFunc(val)) {
                 await UniTask.DelayFrame(0);
                 if (cts.IsCancellationRequested) {
-                    return (default(T));
+                    return (default);
                 }
             }
-            @event.RemoveListener(method);
+            evt.RemoveListener(method);
             return val;
         }
 
-        public static async Task<(T1 T1, T2 T2)> WaitForEvent<T1, T2>(this UnityEvent<T1, T2> evt, Func<T1, T2, bool> compareFunc, CancellationToken cts = default(CancellationToken)) {
+        public static async Task<(T1 T1, T2 T2)> WaitForEvent<T1, T2>(this UnityEvent<T1, T2> evt, Func<T1, T2, bool> compareFunc, CancellationToken cts = default) 
+        {
             T1 val1 = default(T1);
             T2 val2 = default(T2);
             UnityAction<T1, T2> method = new UnityAction<T1, T2>((x, y) => {
@@ -87,7 +87,8 @@ namespace GameplayAbilitySystem.Utility
             return (val1, val2);
         }
 
-        public static async Task<(T1 T1, T2 T2, T3 T3)> WaitForEvent<T1, T2, T3>(this UnityEvent<T1, T2, T3> evt, Func<T1, T2, T3, bool> compareFunc, CancellationToken cts = default(CancellationToken)) {
+        public static async Task<(T1 T1, T2 T2, T3 T3)> WaitForEvent<T1, T2, T3>(this UnityEvent<T1, T2, T3> evt, Func<T1, T2, T3, bool> compareFunc, CancellationToken cts = default) 
+        {
             T1 val1 = default(T1);
             T2 val2 = default(T2);
             T3 val3 = default(T3);
@@ -107,7 +108,8 @@ namespace GameplayAbilitySystem.Utility
             return (val1, val2, val3);
         }
 
-        public static async Task<(T1 T1, T2 T2, T3 T3, T4 T4)> WaitForEvent<T1, T2, T3, T4>(this UnityEvent<T1, T2, T3, T4> evt, Func<T1, T2, T3, T4, bool> compareFunc, CancellationToken cts = default(CancellationToken)) {
+        public static async Task<(T1 T1, T2 T2, T3 T3, T4 T4)> WaitForEvent<T1, T2, T3, T4>(this UnityEvent<T1, T2, T3, T4> evt, Func<T1, T2, T3, T4, bool> compareFunc, CancellationToken cts = default) 
+        {
             T1 val1 = default(T1);
             T2 val2 = default(T2);
             T3 val3 = default(T3);
