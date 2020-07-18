@@ -78,12 +78,13 @@ namespace GameplayAbilitySystem
             runningAbilities.Add(ability);
             ability.Commit(this);
 
-            GameplayTag abilityTag = ability.Tags.AbilityTags.Count > 0 ? ability.Tags.AbilityTags[0] : new GameplayTag();
+            // GameplayTag abilityTag = ability.Tags.AbilityTags.Count > 0 ? ability.Tags.AbilityTags[0] : new GameplayTag();
             var data = new AbilityEventData();
+            data.abilityId = ability.Id;
             data.ability = ability;
-            data.abilityTag = abilityTag;
+            // data.abilityTag = abilityTag;
             data.target = target;
-            onAbilityEvent?.Invoke(data);
+            OnAbilityEvent?.Invoke(data);
             return true;
         }
 

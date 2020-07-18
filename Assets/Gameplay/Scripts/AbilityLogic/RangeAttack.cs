@@ -14,17 +14,20 @@ namespace GameplayAbilitySystem.Abilities
         public Effect TargetGameplayEffect;
         public string CastingInitiatedToken;
         public string FireProjectileToken;
-        public GameplayTag WaitForEventTag;
+        // public GameplayTag WaitForEventTag;
         public string AnimationTriggerName;
         public string ProjectileFireTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void Execute(AbilitySystem instigator, Ability ability) {
-            var abilitySystemActor = instigator.transform;
-            var animatorComponent = abilitySystemActor.GetComponent<Animator>();
+        public override async void Execute(AbilitySystem instigator, Ability ability) 
+        {
+            // var abilitySystemActor = instigator.transform;
+            var animatorComponent = instigator.GetComponent<Animator>();
 
             // Make sure we have enough resources.  End ability if we don't
-            AbilityEventData abilityEventData = await instigator.OnAbilityEvent.WaitForEvent((eventData) => eventData.abilityTag == WaitForEventTag);
+            AbilityEventData abilityEventData = await instigator.OnAbilityEvent.WaitForEvent(
+                (eventData) => eventData.abilityId == ability.Id
+            );
             animatorComponent.SetTrigger(AnimationTriggerName);
 
             List<GameObject> objectsSpawned = new List<GameObject>();
@@ -34,7 +37,7 @@ namespace GameplayAbilitySystem.Abilities
 
             if (Projectile != null) {
                 instantiatedProjectile = Instantiate(Projectile);
-                instantiatedProjectile.transform.position = abilitySystemActor.transform.position + this.ProjectilePositionOffset + abilitySystemActor.transform.forward * 1.2f;
+                instantiatedProjectile.transform.position = instigator.transform.position + this.ProjectilePositionOffset + instigator.transform.forward * 1.2f;
             }
 
             animatorComponent.SetTrigger(ProjectileFireTriggerName);

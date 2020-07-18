@@ -13,13 +13,12 @@ namespace GameplayAbilitySystem.Abilities
     public class Ability : ScriptableObject
     {
         public int Id => id;
-        public AbilityTagContainer Tags => tags; // Tags that this ability has/provides
         public Effect CostEffect => costEffect; // Cost of using this ability
         public List<Effect> CooldownEffects => cooldownEffects;     // Cooldowns associated with this ability
         public AbilityLogic AbilityLogic => abilityLogic; // Defines what the ability actually does
 
         [SerializeField] private int id = default;
-        [SerializeField] private AbilityTagContainer tags = default;
+        // [SerializeField] private AbilityTagContainer tags = default;
         [SerializeField] private Effect costEffect = default;
         [SerializeField] private List<Effect> cooldownEffects = default;
         [SerializeField] private AbilityLogic abilityLogic = default;
@@ -108,7 +107,6 @@ namespace GameplayAbilitySystem.Abilities
         public CoolDownInfo CalculateCooldown(AbilitySystem instigator) 
         {
             CoolDownInfo info = new CoolDownInfo(isCooling: false);
-            // List<GameplayTag> cooldownTags = Tags.CooldownTags;
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
             EffectContext maxCDEffectContext = instigator.EffectsContainer
                                     .effectsModifyAggregator

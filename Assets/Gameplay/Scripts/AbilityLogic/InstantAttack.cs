@@ -9,7 +9,7 @@ namespace GameplayAbilitySystem.Abilities
     {
         public Effect TargetGameplayEffect;
         public string ExecuteEffectToken;
-        public GameplayTag WaitForEventTag;
+        // public GameplayTag WaitForEventTag;
         public string AnimationTriggerName;
         public string AnimationCompleteTriggerName;
         public string CompletionAnimatorStateFullHash;
@@ -17,10 +17,11 @@ namespace GameplayAbilitySystem.Abilities
         public override async void Execute(AbilitySystem instigator, Ability ability) 
         {
             var animator = instigator.Animator;
-
             // Make sure we have enough resources.  End ability if we don't
+            AbilityEventData abilityEventData = await instigator.OnAbilityEvent.WaitForEvent(
+                (eventData) => eventData.abilityId == ability.Id
+            );
 
-            var abilityEventData = await instigator.OnAbilityEvent.WaitForEvent((eventData) => eventData.abilityTag == WaitForEventTag);
             animator.SetTrigger(AnimationTriggerName);
             animator.SetTrigger(AnimationCompleteTriggerName);
 

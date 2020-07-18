@@ -19,8 +19,9 @@ namespace GameplayAbilitySystem.Utility
     [Serializable]
     public struct AbilityEventData 
     {
+        public int abilityId;
         public Ability ability;
-        public GameplayTag abilityTag;
+        // public GameplayTag abilityTag;
         public AbilitySystem target;
     }
 
