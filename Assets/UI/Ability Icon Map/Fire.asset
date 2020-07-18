@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ability: {fileID: 11400000, guid: ae33e3a3cccb84e4fb4bfb4c2d5c089e, type: 2}
   Sprite: {fileID: 21300000, guid: 012e223bae53ce3439432cd17309ca89, type: 3}
-  SpriteColor: {r: 1, g: 0.9638132, b: 0, a: 1}
+  SpriteColor: {r: 1, g: 1, b: 1, a: 1}

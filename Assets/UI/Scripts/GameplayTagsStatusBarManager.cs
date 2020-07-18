@@ -64,10 +64,9 @@ public class GameplayTagsStatusBarManager : MonoBehaviour {
 
             GameplayTagIndicator[tagIndex].SetCooldownRemainingPercent(1 - remainingPercent);
             GameplayTagIndicator[tagIndex].ImageIcon.sprite = iconMap.Sprite;
-            GameplayTagIndicator[tagIndex].ImageIcon.color = iconMap.SpriteColor;
+            GameplayTagIndicator[tagIndex].ImageIcon.color = new Color( 1.0f, 1.0f, 1.0f);
             GameplayTagIndicator[tagIndex].GetComponentInChildren<RectTransform>(true).gameObject.SetActive(true);
             GameplayTagIndicator[tagIndex].SetStacks(stacks);
-
             ++tagIndex;
         }
 

@@ -13,12 +13,7 @@ MonoBehaviour:
   m_Name: Ability Fire
   m_EditorClassIdentifier: 
   id: 1
-  tags:
-    abilityTags:
-    - {fileID: 11400000, guid: 84cc62e193ffc4940bb3c442938121f9, type: 2}
-    cooldownTags:
-    - {fileID: 11400000, guid: 910dc94fbfa7a024e88265c21eafc190, type: 2}
-    - {fileID: 11400000, guid: 9a5e97d4d3432d14c81810a21c7a29d3, type: 2}
+  icon: {fileID: 21300000, guid: 012e223bae53ce3439432cd17309ca89, type: 3}
   costEffect: {fileID: 11400000, guid: 520415e26382f224c867fce4071958df, type: 2}
   cooldownEffects:
   - {fileID: 11400000, guid: 422c677cf42e423488b2acaffaa9e642, type: 2}

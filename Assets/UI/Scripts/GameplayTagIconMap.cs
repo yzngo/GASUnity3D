@@ -9,5 +9,4 @@ using UnityEngine;
 public class GameplayTagIconMap : ScriptableObject {
     public GameplayTag Tag;
     public Sprite Sprite;
-    public Color SpriteColor;
 }
