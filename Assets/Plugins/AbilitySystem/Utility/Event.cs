@@ -34,10 +34,10 @@ namespace GameplayAbilitySystem.Utility
         /// <param name="evt"></param>
         /// <returns>Task</returns>
         public static async Task WaitForEvent(this UnityEvent evt, CancellationToken cts = default) {
-            bool eventTriggered = false;
-            UnityAction method = new UnityAction( () => { eventTriggered = true; } );
+            bool invoked = false;
+            UnityAction method = () => invoked = true;
             evt.AddListener(method);
-            while (!eventTriggered) {
+            while (!invoked) {
                 await UniTask.DelayFrame(0);
                 if (cts.IsCancellationRequested) {
                     return;
@@ -54,7 +54,7 @@ namespace GameplayAbilitySystem.Utility
         public static async Task<T> WaitForEvent<T>(this UnityEvent<T> evt, Func<T, bool> compareFunc, CancellationToken cts = default) 
         {
             T val = default;
-            UnityAction<T> method = new UnityAction<T>((x) => { val = x; });
+            UnityAction<T> method = x => val = x;
             evt.AddListener(method);
 
             while (!compareFunc(val)) {
@@ -71,10 +71,7 @@ namespace GameplayAbilitySystem.Utility
         {
             T1 val1 = default(T1);
             T2 val2 = default(T2);
-            UnityAction<T1, T2> method = new UnityAction<T1, T2>((x, y) => {
-                val1 = x;
-                val2 = y;
-            });
+            UnityAction<T1, T2> method = (x, y) => { val1 = x; val2 = y; };
             evt.AddListener(method);
 
             while (!compareFunc(val1, val2)) {
@@ -92,11 +89,11 @@ namespace GameplayAbilitySystem.Utility
             T1 val1 = default(T1);
             T2 val2 = default(T2);
             T3 val3 = default(T3);
-            UnityAction<T1, T2, T3> method = new UnityAction<T1, T2, T3>((x, y, z) => {
+            UnityAction<T1, T2, T3> method = (x, y, z) => {
                 val1 = x;
                 val2 = y;
                 val3 = z;
-            });
+            };
             evt.AddListener(method);
             while (!compareFunc(val1, val2, val3)) {
                 await UniTask.DelayFrame(0);
@@ -114,12 +111,12 @@ namespace GameplayAbilitySystem.Utility
             T2 val2 = default(T2);
             T3 val3 = default(T3);
             T4 val4 = default(T4);
-            UnityAction<T1, T2, T3, T4> method = new UnityAction<T1, T2, T3, T4>((x, y, z, u) => {
+            UnityAction<T1, T2, T3, T4> method = (x, y, z, u) => {
                 val1 = x;
                 val2 = y;
                 val3 = z;
                 val4 = u;
-            });
+            };
             evt.AddListener(method);
             while (!compareFunc(val1, val2, val3, val4)) {
                 await UniTask.DelayFrame(0);
