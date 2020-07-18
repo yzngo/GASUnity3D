@@ -6,7 +6,7 @@ using static GameplayAbilitySystem.Abilities.Ability;
 
 public class AbilityHotbar : MonoBehaviour {
     public AbilityCharacter AbilityCharacter;
-    public List<AbilityHotbarButton> AbilityButtons;
+    public List<GenericUIIcon> AbilityButtons;
 
     void Awake() {
         for (int i = 0; i < AbilityCharacter.abilities.Count; i++) {
