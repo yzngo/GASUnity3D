@@ -7,17 +7,12 @@ using static GameplayAbilitySystem.Abilities.Ability;
 public class AbilityHotbarManager : MonoBehaviour {
     public AbilityCharacter AbilityCharacter;
     public List<AbilityHotbarButton> AbilityButtons;
-    public List<AbilityIconMap> AbilityIconMaps;
 
     void Awake() {
         for (int i = 0; i < AbilityCharacter.abilities.Count; i++) {
             if (AbilityButtons.Count > i) {
-                var abilityGraphic = AbilityIconMaps.FirstOrDefault(x => x.Ability == AbilityCharacter.abilities[i].ability);
-
-                if (abilityGraphic != null) {
-                    AbilityButtons[i].ImageIcon.sprite = abilityGraphic.Sprite;
-                    AbilityButtons[i].ImageIcon.color = abilityGraphic.SpriteColor;
-                }
+                AbilityButtons[i].ImageIcon.sprite = AbilityCharacter.abilities[i].ability.Icon;
+                AbilityButtons[i].ImageIcon.color = new Color(1.0f, 1.0f, 1.0f); 
             }
         }
 
