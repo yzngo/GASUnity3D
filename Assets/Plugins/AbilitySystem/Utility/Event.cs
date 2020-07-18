@@ -11,12 +11,10 @@ using AbilityAttribute = GameplayAbilitySystem.Attributes.Attribute;
 namespace GameplayAbilitySystem.Utility 
 {
     [Serializable] 
-    public class AttributeChangeEvent : UnityEvent<AbilityAttribute> {
-    }
+    public class AttributeChangeEvent : UnityEvent<AbilityAttribute> {}
 
     [Serializable] 
-    public class AbilityEvent : UnityEvent<AbilityEventData> {
-    }
+    public class AbilityEvent : UnityEvent<AbilityEventData> {}
 
     [Serializable]
     public struct AbilityEventData 
@@ -25,6 +23,9 @@ namespace GameplayAbilitySystem.Utility
         public GameplayTag abilityTag;
         public AbilitySystem target;
     }
+
+    [Serializable]
+    public class AnimationEvent1 : UnityEvent<string> {}
 
     public static class UnityEventExtensionMethods 
     {

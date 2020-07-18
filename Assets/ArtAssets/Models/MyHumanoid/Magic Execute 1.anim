@@ -13193,7 +13193,7 @@ AnimationClip:
   m_Events:
   - time: 0.5416667
     functionName: OnAnimationEvent
-    data: 
+    data: FireProjectile
     objectReferenceParameter: {fileID: 11400000, guid: a390e7f3b0587f24daef94744108743c,
       type: 2}
     floatParameter: 0
@@ -13201,7 +13201,7 @@ AnimationClip:
     messageOptions: 0
   - time: 0.5833333
     functionName: OnAnimationEvent
-    data: 
+    data: CastingComplete
     objectReferenceParameter: {fileID: 11400000, guid: 7fd97a92d981e3c428c3b627a5f3d559,
       type: 2}
     floatParameter: 0

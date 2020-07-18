@@ -8,7 +8,7 @@ namespace GameplayAbilitySystem.Abilities
     public class InstantAttack : AbilityLogic 
     {
         public Effect TargetGameplayEffect;
-        public AnimationEvent ExecuteEffectEvent;
+        public string ExecuteEffectToken;
         public GameplayTag WaitForEventTag;
         public string AnimationTriggerName;
         public string AnimationCompleteTriggerName;
@@ -16,7 +16,6 @@ namespace GameplayAbilitySystem.Abilities
 
         public override async void Execute(AbilitySystem instigator, Ability Ability) 
         {
-            var animationEventSystem = instigator.GetComponent<AnimationEventSystem>();
             var animator = instigator.Animator;
 
             // Make sure we have enough resources.  End ability if we don't
@@ -25,8 +24,8 @@ namespace GameplayAbilitySystem.Abilities
             animator.SetTrigger(AnimationTriggerName);
             animator.SetTrigger(AnimationCompleteTriggerName);
 
-            if (ExecuteEffectEvent != null) {
-                await animationEventSystem.CustomAnimationEvent.WaitForEvent((x) => x == ExecuteEffectEvent);
+            if ( !string.IsNullOrEmpty(ExecuteEffectToken) ) {
+                await instigator.OnAnimEvent.WaitForEvent( (x) => x == ExecuteEffectToken);
             }
             instigator.ApplyEffectToTarget(TargetGameplayEffect, abilityEventData.target);
 

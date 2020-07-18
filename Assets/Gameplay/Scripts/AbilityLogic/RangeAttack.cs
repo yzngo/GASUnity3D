@@ -12,7 +12,9 @@ namespace GameplayAbilitySystem.Abilities
         public GameObject Projectile;
         public Vector3 ProjectilePositionOffset;
         public Effect TargetGameplayEffect;
+        public string CastingInitiatedToken;
         public AnimationEvent CastingInitiated;
+        public string FireProjectileToken;
         public AnimationEvent FireProjectile;
         public GameplayTag WaitForEventTag;
         public string AnimationTriggerName;
@@ -21,7 +23,6 @@ namespace GameplayAbilitySystem.Abilities
 
         public override async void Execute(AbilitySystem instigator, Ability ability) {
             var abilitySystemActor = instigator.transform;
-            var animationEventSystemComponent = abilitySystemActor.GetComponent<AnimationEventSystem>();
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();
 
             // Make sure we have enough resources.  End ability if we don't
@@ -31,8 +32,7 @@ namespace GameplayAbilitySystem.Abilities
             List<GameObject> objectsSpawned = new List<GameObject>();
 
             GameObject instantiatedProjectile = null;
-            
-            await animationEventSystemComponent.CustomAnimationEvent.WaitForEvent((x) => x == CastingInitiated);
+            await instigator.OnAnimEvent.WaitForEvent( (x) => x == CastingInitiatedToken );
 
             if (Projectile != null) {
                 instantiatedProjectile = Instantiate(Projectile);
@@ -41,9 +41,7 @@ namespace GameplayAbilitySystem.Abilities
 
             animatorComponent.SetTrigger(ProjectileFireTriggerName);
 
-
-            await animationEventSystemComponent.CustomAnimationEvent.WaitForEvent((x) => x == FireProjectile);
-
+            await instigator.OnAnimEvent.WaitForEvent( (x) => x == FireProjectileToken );
 
             // Animation complete.  Spawn and send projectile at target
             if (instantiatedProjectile != null) {

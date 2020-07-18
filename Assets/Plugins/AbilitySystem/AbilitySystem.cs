@@ -24,6 +24,9 @@ namespace GameplayAbilitySystem
         private AbilityEvent onAbilityEvent = new AbilityEvent();
         public AbilityEvent OnAbilityEvent => onAbilityEvent;
 
+        private AnimationEvent1 onAnimEvent = new AnimationEvent1();
+        public AnimationEvent1 OnAnimEvent => onAnimEvent;
+
         private List<Ability> runningAbilities = new List<Ability>();
 
         // Lists all active Effect
@@ -183,6 +186,10 @@ namespace GameplayAbilitySystem
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));
         }
 
+        public void OnAnimationEvent(string param)
+        {
+            OnAnimEvent.Invoke(param);
+        }
 
 // attribute -----------------------------------------------------------------------------
         public bool IsAttributeExist(AttributeType type) => attributeSet.Attributes.Exists( x => x.AttributeType == type);

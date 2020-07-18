@@ -11159,7 +11159,7 @@ AnimationClip:
   m_Events:
   - time: 0.25
     functionName: OnAnimationEvent
-    data: 
+    data: CastingStart
     objectReferenceParameter: {fileID: 11400000, guid: b78d40ccd06acd54aab6aa0e215c87e0,
       type: 2}
     floatParameter: 0

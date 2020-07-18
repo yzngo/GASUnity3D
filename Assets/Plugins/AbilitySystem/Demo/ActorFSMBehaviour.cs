@@ -5,16 +5,18 @@ using UnityEngine.Events;
 
 public class ActorFSMBehaviour : StateMachineBehaviour 
 {
-    public class StateEvent : UnityEvent<Animator, AnimatorStateInfo, int> {}
     public class StateMechineEvent : UnityEvent<Animator, int> {}
+    public class StateEvent : UnityEvent<Animator, AnimatorStateInfo, int> {}
+
+    public StateMechineEvent StateMachineEnter = new StateMechineEvent();
+    public StateMechineEvent StateMachineExit = new StateMechineEvent();
 
     public StateEvent StateEnter = new StateEvent();
     public StateEvent StateUpdate = new StateEvent();
     public StateEvent StateExit = new StateEvent();
     public StateEvent StateMove = new StateEvent();
     public StateEvent StateIK = new StateEvent();
-    public StateMechineEvent StateMachineEnter = new StateMechineEvent();
-    public StateMechineEvent StateMachineExit = new StateMechineEvent();
+
 
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
