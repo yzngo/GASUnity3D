@@ -6,8 +6,6 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class EffectTagContainer
     {
-        [Tooltip("Tags for this effect.")]
-        [SerializeField] private List<GameplayTag> effectTags = default;
 
         [Tooltip("Only for durational effect.????")]
         [SerializeField] private List<GameplayTag> grantedToInstigatorTags = default;
@@ -16,7 +14,6 @@ namespace GameplayAbilitySystem.Effects
         [SerializeField] private List<BeRemovedEffectInfo> removedEffectsTags = default;
 
 
-        public List<GameplayTag> EffectTags => effectTags;
         public List<GameplayTag> GrantedToInstigatorTags => grantedToInstigatorTags;
         public List<BeRemovedEffectInfo> RemovedEffectsTags => removedEffectsTags;
 
