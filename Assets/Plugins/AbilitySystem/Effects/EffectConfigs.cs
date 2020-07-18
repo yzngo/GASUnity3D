@@ -8,6 +8,7 @@ namespace GameplayAbilitySystem.Effects
 {
     [Serializable]
     public class EffectConfigs {
+        public EffectType EffectType;
         public DurationConfig DurationConfig;
         public PeriodConfig PeriodConfig;
         public StackConfig StackConfig;
@@ -15,7 +16,13 @@ namespace GameplayAbilitySystem.Effects
         public EffectTagContainer EffectTags;
         public List<EffectCues> Cues;
     }
-
+// Type ----------------------------------------------------------------------------------
+    [Serializable]
+    public enum EffectType {
+        Normal,
+        Cost,
+        CoolDown
+    }
 // Duration ------------------------------------------------------------------------------
 
     [Serializable]

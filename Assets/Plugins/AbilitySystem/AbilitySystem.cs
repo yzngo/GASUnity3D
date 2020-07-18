@@ -24,8 +24,8 @@ namespace GameplayAbilitySystem
         private AbilityEvent onAbilityEvent = new AbilityEvent();
         public AbilityEvent OnAbilityEvent => onAbilityEvent;
 
-        private AnimationEvent1 onAnimEvent = new AnimationEvent1();
-        public AnimationEvent1 OnAnimEvent => onAnimEvent;
+        private AnimEvent onAnimEvent = new AnimEvent();
+        public AnimEvent OnAnimEvent => onAnimEvent;
 
         private List<Ability> runningAbilities = new List<Ability>();
 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cooldown Heal
   m_EditorClassIdentifier: 
   configs:
+    EffectType: 2
     DurationConfig:
       Policy: 1
       DurationLength: 2

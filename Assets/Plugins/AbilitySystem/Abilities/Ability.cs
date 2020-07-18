@@ -112,7 +112,8 @@ namespace GameplayAbilitySystem.Abilities
             EffectContext maxCDEffectContext = instigator.EffectsContainer
                                     .effectsModifyAggregator
                                     .GetAllEffects()
-                                    .Where(x => x.Effect.GrantedTags.Intersect(cooldownTags).Any())
+                                    .Where(x => x.Effect.Configs.EffectType == EffectType.CoolDown)
+                                    // .Where(x => x.Effect.GrantedTags.Intersect(cooldownTags).Any())
                                     .DefaultIfEmpty()
                                     .OrderByDescending(x => x?.CooldownTimeRemaining)
                                     .FirstOrDefault();

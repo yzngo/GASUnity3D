@@ -25,7 +25,7 @@ namespace GameplayAbilitySystem.Utility
     }
 
     [Serializable]
-    public class AnimationEvent1 : UnityEvent<string> {}
+    public class AnimEvent : UnityEvent<string> {}
 
     public static class UnityEventExtensionMethods 
     {

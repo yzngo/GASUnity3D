@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cost Health
   m_EditorClassIdentifier: 
   configs:
+    EffectType: 1
     DurationConfig:
       Policy: 0
       DurationLength: 0

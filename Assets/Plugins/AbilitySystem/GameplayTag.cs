@@ -8,23 +8,5 @@ namespace GameplayAbilitySystem
     [Serializable,CreateAssetMenu(fileName = "Gameplay Tag", menuName = "Ability System/Gameplay Tag")]
     public class GameplayTag : ScriptableObject 
     {
-        // A static container for keeping track of all Tag that are used.
-        public static HashSet<GameplayTag> Tags { get; private set; } = new HashSet<GameplayTag>();
-
-        // A developer friendly comment
-        public string Comment;
-
-        void OnEnable() {
-            // When this Tag is initialized, add the instance to the static container
-            if (!Tags.Contains(this)) {
-                Tags.Add(this);
-            }
-        }
-
-        void OnDisable() {
-            /// When this Tag is destroyed, remove the instance from the static container
-            Tags.Remove(this);
-        }
-
     }
 }
