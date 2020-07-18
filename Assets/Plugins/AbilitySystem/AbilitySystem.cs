@@ -97,10 +97,10 @@ namespace GameplayAbilitySystem
         // some with instant modifiers, and some with infinite or duration modifiers.
         // By batching these effects, we can ensure that all these effect happen 
         // with reference to the same base attribute value.
-        public void ApplyBatchGameplayEffects(IEnumerable<(Effect Effect, AbilitySystem Target, float Level)> batchedGameplayEffects) {
+        public void ApplyBatchGameplayEffects(int sourceId, IEnumerable<(Effect Effect, AbilitySystem Target, float Level)> batchedGameplayEffects) {
 
             foreach(var effect in batchedGameplayEffects) {
-                ApplyEffectToTarget(effect.Effect, effect.Target, effect.Level);
+                ApplyEffectToTarget(sourceId, effect.Effect, effect.Target, effect.Level);
             }
             // var instantEffects = batchedGameplayEffects.Where(x => x.Effect.Policy.DurationPolicy == DurationPolicy.Instant);
             // var durationalEffects = batchedGameplayEffects.Where(
@@ -122,7 +122,7 @@ namespace GameplayAbilitySystem
         // Apply a effect to the target
         // The overall effect may be modulated by the Level.
         // level -> maybe used to affect the "strength" of the effect
-        public void ApplyEffectToTarget(Effect appliedEffect, AbilitySystem target, float level = 0) {
+        public void ApplyEffectToTarget(int sourceId, Effect appliedEffect, AbilitySystem target, float level = 0) {
             // Check to make sure all the attributes being modified by this effect exist on the target
             foreach(var modifiers in appliedEffect.Configs.Modifiers) {
                 if (!target.IsAttributeExist(modifiers.AttributeType)) {
@@ -143,7 +143,7 @@ namespace GameplayAbilitySystem
                 // Durational effect require attention to many more things than instant effects
                 // Such as stacking and effect durations
                 // Durational effect modify the current value
-                var effectContext = new EffectContext(appliedEffect, this, target);
+                var effectContext = new EffectContext(sourceId, appliedEffect, this, target);
                 target.EffectsContainer.ApplyDurationalEffect(effectContext);
             }
 

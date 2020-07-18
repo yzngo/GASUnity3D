@@ -21,7 +21,8 @@ namespace GameplayAbilitySystem.Effects
     public enum EffectType {
         Normal,
         Cost,
-        CoolDown
+        CoolDown,
+        GlobalCoolDown
     }
 // Duration ------------------------------------------------------------------------------
 

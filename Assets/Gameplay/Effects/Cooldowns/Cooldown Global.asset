@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cooldown Global
   m_EditorClassIdentifier: 
   configs:
-    EffectType: 2
+    EffectType: 3
     DurationConfig:
       Policy: 1
       DurationLength: 2

@@ -16,7 +16,7 @@ MonoBehaviour:
     EffectType: 2
     DurationConfig:
       Policy: 1
-      DurationLength: 2
+      DurationLength: 6
     PeriodConfig:
       Period: 0
       IsExecuteOnApply: 0

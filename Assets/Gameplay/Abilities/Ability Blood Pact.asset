@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37026ab3aac9f374293f60158cbe94d1, type: 3}
   m_Name: Ability Blood Pact
   m_EditorClassIdentifier: 
+  id: 2
   tags:
     abilityTags:
     - {fileID: 11400000, guid: 03b751e8ee9c2b54083e24e8634c0e1b, type: 2}

@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 using GameplayAbilitySystem.Attributes;
+using GameplayAbilitySystem.Abilities;
 
 namespace GameplayAbilitySystem.Effects 
 {
     public class EffectContext 
     {
+        public int SourceId { get; private set; }
         public Effect Effect { get; private set; }
         public float StartTime { get; private set; }
         public AbilitySystem Instigator { get; private set; }
@@ -13,8 +15,9 @@ namespace GameplayAbilitySystem.Effects
 
         private float timeOfLastPeriodicApply;
 
-        public EffectContext(Effect effect, AbilitySystem instigator, AbilitySystem target) 
+        public EffectContext(int sourceId, Effect effect, AbilitySystem instigator, AbilitySystem target) 
         {
+            SourceId = sourceId;
             Effect = effect;
             StartTime = Time.time;
             Instigator = instigator;
@@ -23,6 +26,17 @@ namespace GameplayAbilitySystem.Effects
             if (!Effect.Configs.PeriodConfig.IsExecuteOnApply) {
                 timeOfLastPeriodicApply = Time.time;
             }
+        }
+
+        public bool IsCoolDownOf(Ability ability) 
+        {
+            if (Effect.Configs.EffectType == EffectType.GlobalCoolDown) {
+                return true;
+            }
+            if (ability.Id == SourceId && Effect.Configs.EffectType == EffectType.CoolDown) {
+                return true;
+            }
+            return false;
         }
 
 // force remove?

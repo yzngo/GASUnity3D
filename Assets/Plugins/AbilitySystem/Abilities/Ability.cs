@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Abilities 
 {
@@ -13,11 +12,13 @@ namespace GameplayAbilitySystem.Abilities
     /// </summary>
     public class Ability : ScriptableObject
     {
+        public int Id => id;
         public AbilityTagContainer Tags => tags; // Tags that this ability has/provides
         public Effect CostEffect => costEffect; // Cost of using this ability
         public List<Effect> CooldownEffects => cooldownEffects;     // Cooldowns associated with this ability
         public AbilityLogic AbilityLogic => abilityLogic; // Defines what the ability actually does
 
+        [SerializeField] private int id = default;
         [SerializeField] private AbilityTagContainer tags = default;
         [SerializeField] private Effect costEffect = default;
         [SerializeField] private List<Effect> cooldownEffects = default;
@@ -100,20 +101,19 @@ namespace GameplayAbilitySystem.Abilities
         protected void ApplyCooldown(AbilitySystem instigator) 
         {
             foreach (var cooldown in CooldownEffects) {
-                instigator.ApplyEffectToTarget(cooldown, instigator);
+                instigator.ApplyEffectToTarget(id, cooldown, instigator);
             }
         }
 
         public CoolDownInfo CalculateCooldown(AbilitySystem instigator) 
         {
             CoolDownInfo info = new CoolDownInfo(isCooling: false);
-            List<GameplayTag> cooldownTags = Tags.CooldownTags;
+            // List<GameplayTag> cooldownTags = Tags.CooldownTags;
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
             EffectContext maxCDEffectContext = instigator.EffectsContainer
                                     .effectsModifyAggregator
                                     .GetAllEffects()
-                                    .Where(x => x.Effect.Configs.EffectType == EffectType.CoolDown)
-                                    // .Where(x => x.Effect.GrantedTags.Intersect(cooldownTags).Any())
+                                    .Where(x => x.IsCoolDownOf(this))
                                     .DefaultIfEmpty()
                                     .OrderByDescending(x => x?.CooldownTimeRemaining)
                                     .FirstOrDefault();

@@ -24,7 +24,7 @@ namespace GameplayAbilitySystem.Abilities
             var animatorComponent = abilitySystemActor.GetComponent<Animator>();
 
             // Make sure we have enough resources.  End ability if we don't
-            var abilityEventData = await instigator.OnAbilityEvent.WaitForEvent((eventData) => eventData.abilityTag == WaitForEventTag);
+            AbilityEventData abilityEventData = await instigator.OnAbilityEvent.WaitForEvent((eventData) => eventData.abilityTag == WaitForEventTag);
             animatorComponent.SetTrigger(AnimationTriggerName);
 
             List<GameObject> objectsSpawned = new List<GameObject>();
@@ -43,7 +43,7 @@ namespace GameplayAbilitySystem.Abilities
 
             // Animation complete.  Spawn and send projectile at target
             if (instantiatedProjectile != null) {
-                SeekTargetAndDestroy(instigator, abilityEventData.target, instantiatedProjectile);
+                SeekTargetAndDestroy(instigator, abilityEventData, instantiatedProjectile);
             }
 
 
@@ -53,9 +53,9 @@ namespace GameplayAbilitySystem.Abilities
             ability.End(instigator);
         }
 
-        private async void SeekTargetAndDestroy(AbilitySystem abilitySystem, AbilitySystem target, GameObject projectile) {
-            await projectile.GetComponent<Projectile>().SeekTarget(target.TargetPoint, target.gameObject);
-            abilitySystem.ApplyEffectToTarget(TargetGameplayEffect, target);
+        private async void SeekTargetAndDestroy(AbilitySystem instigator, AbilityEventData data, GameObject projectile) {
+            await projectile.GetComponent<Projectile>().SeekTarget(data.target.TargetPoint, data.target.gameObject);
+            instigator.ApplyEffectToTarget(data.ability.Id, TargetGameplayEffect, data.target);
             DestroyImmediate(projectile);
         }
 

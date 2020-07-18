@@ -152,7 +152,11 @@ namespace GameplayAbilitySystem.Effects
             if (effectContext.TimeUntilNextPeriodicApplication <= 0) {
                 // Apply gameplay effect defined for period.  
                 if (effectContext.Effect.Configs.PeriodConfig.EffectOnExecute != null) {
-                    effectContext.Instigator.ApplyEffectToTarget(effectContext.Effect.Configs.PeriodConfig.EffectOnExecute, effectContext.Target);
+                    effectContext.Instigator.ApplyEffectToTarget(
+                        effectContext.SourceId, 
+                        effectContext.Effect.Configs.PeriodConfig.EffectOnExecute, 
+                        effectContext.Target
+                    );
                 }
                 var gameplayCues = effectContext.Effect.Configs.Cues;
                 foreach (var cue in gameplayCues) {

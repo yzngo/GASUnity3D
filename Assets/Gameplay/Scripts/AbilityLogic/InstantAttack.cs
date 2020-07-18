@@ -14,7 +14,7 @@ namespace GameplayAbilitySystem.Abilities
         public string AnimationCompleteTriggerName;
         public string CompletionAnimatorStateFullHash;
 
-        public override async void Execute(AbilitySystem instigator, Ability Ability) 
+        public override async void Execute(AbilitySystem instigator, Ability ability) 
         {
             var animator = instigator.Animator;
 
@@ -27,13 +27,13 @@ namespace GameplayAbilitySystem.Abilities
             if ( !string.IsNullOrEmpty(ExecuteEffectToken) ) {
                 await instigator.OnAnimEvent.WaitForEvent( (x) => x == ExecuteEffectToken);
             }
-            instigator.ApplyEffectToTarget(TargetGameplayEffect, abilityEventData.target);
+            instigator.ApplyEffectToTarget(ability.Id, TargetGameplayEffect, abilityEventData.target);
 
 
             var beh = animator.GetBehaviour<ActorFSMBehaviour>();
             await beh.StateEnter.WaitForEvent((anim, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));
 
-            Ability.End(instigator);
+            ability.End(instigator);
         }
 
     }
