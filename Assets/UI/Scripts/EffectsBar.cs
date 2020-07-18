@@ -4,24 +4,21 @@ using UnityEngine;
 using GameplayAbilitySystem.Effects;
 using GameplayAbilitySystem;
 
-public class GameplayTagsStatusBarManager : MonoBehaviour {
-    public AbilityCharacter AbilityCharacter;
+public class EffectsBar : MonoBehaviour {
+    public AbilitySystem instigator;
     public List<GameplayTagStatusBarButton> GameplayTagIndicator;
     public List<GameplayTagIconMap> GameplayTagIcons;
 
     private Dictionary<GameplayTag, GameplayTagIconMap> availableTagsToShow;
-    private AbilitySystem abilitySystem;
 
-    public GameplayTagsStatusBarManager() {
+    void Awake() 
+    {
+        availableTagsToShow = GameplayTagIcons.ToDictionary(x => x.Tag);
     }
 
-    void Awake() {
-        this.availableTagsToShow = GameplayTagIcons.ToDictionary(x => x.Tag);
-        abilitySystem = AbilityCharacter.GetComponent<AbilitySystem>();
-    }
-
-    List<(GameplayTag Tag, EffectContext effectContext, int stacks)> GetTagsToShow() {
-        var activeTags = abilitySystem.GetActiveEffectsTags();
+    List<(GameplayTag Tag, EffectContext effectContext, int stacks)> GetTagsToShow() 
+    {
+        var activeTags = instigator.GetActiveEffectsTags();
         var effectsToShow = activeTags
                             .Where(x => availableTagsToShow
                                                     .ContainsKey(x.Tag))
@@ -31,7 +28,8 @@ public class GameplayTagsStatusBarManager : MonoBehaviour {
         return effectsToShow;
     }
 
-    List<(GameplayTag Tag, EffectContext effectContext, int stacks)> GetStackedGameplayTagsToShow() {
+    List<(GameplayTag Tag, EffectContext effectContext, int stacks)> GetStackedGameplayTagsToShow() 
+    {
         var effectsToShow = GetTagsToShow()
                             .GroupBy(x => x.Tag)
                             .Select(x => (x.Last().Tag, x.Last().effectContext, x.Count()))
@@ -40,7 +38,8 @@ public class GameplayTagsStatusBarManager : MonoBehaviour {
         return effectsToShow;
     }
 
-    void Update() {
+    void Update() 
+    {
         // var stackedEffectsToShow = GetEffectsToShow();
         var stackedTagsToShow = GetStackedGameplayTagsToShow();
         var tagIndex = 0;
@@ -78,6 +77,5 @@ public class GameplayTagsStatusBarManager : MonoBehaviour {
             GameplayTagIndicator[i].GetComponentInChildren<RectTransform>(true).gameObject.SetActive(false);
             GameplayTagIndicator[i].SetStacks(0);
         }
-
     }
 }

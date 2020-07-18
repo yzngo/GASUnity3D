@@ -4,7 +4,7 @@ using UnityEngine;
 using GameplayAbilitySystem.Abilities;
 using static GameplayAbilitySystem.Abilities.Ability;
 
-public class AbilityHotbarManager : MonoBehaviour {
+public class AbilityHotbar : MonoBehaviour {
     public AbilityCharacter AbilityCharacter;
     public List<AbilityHotbarButton> AbilityButtons;
 

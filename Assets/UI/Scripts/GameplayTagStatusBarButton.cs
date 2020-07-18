@@ -3,9 +3,6 @@ using TMPro;
 public class GameplayTagStatusBarButton : GenericUIIcon {
     public TextMeshProUGUI TextMeshPro;
 
-    public void SetStacks(int stacks) {
-        var stacksString = "";
-        if (stacks > 1) stacksString = stacks.ToString();
-        TextMeshPro.text = stacksString;
-    }
+    public void SetStacks(int stacks) => 
+        TextMeshPro.text = stacks > 1 ? stacks.ToString() : "";
 }
