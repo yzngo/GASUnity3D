@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: {fileID: 11400000, guid: 84cc62e193ffc4940bb3c442938121f9, type: 2}
   Sprite: {fileID: 21300000, guid: 012e223bae53ce3439432cd17309ca89, type: 3}
-  SpriteColor: {r: 1, g: 0.44866973, b: 0, a: 1}
