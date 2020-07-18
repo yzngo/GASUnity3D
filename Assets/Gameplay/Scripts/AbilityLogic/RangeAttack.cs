@@ -13,9 +13,7 @@ namespace GameplayAbilitySystem.Abilities
         public Vector3 ProjectilePositionOffset;
         public Effect TargetGameplayEffect;
         public string CastingInitiatedToken;
-        public AnimationEvent CastingInitiated;
         public string FireProjectileToken;
-        public AnimationEvent FireProjectile;
         public GameplayTag WaitForEventTag;
         public string AnimationTriggerName;
         public string ProjectileFireTriggerName;
