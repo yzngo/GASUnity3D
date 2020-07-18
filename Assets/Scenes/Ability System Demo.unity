@@ -2432,9 +2432,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityCharacter: {fileID: 1140104829}
   AbilityButtons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2368979380446301522}
+  - {fileID: 1166559831}
+  - {fileID: 619005649}
 --- !u!223 &1167899088
 Canvas:
   m_ObjectHideFlags: 0
