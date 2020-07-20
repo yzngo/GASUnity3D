@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cost Health
   m_EditorClassIdentifier: 
   id: 10
+  icon: {fileID: 0}
   configs:
     Icon: {fileID: 0}
     EffectType: 1
@@ -31,14 +32,14 @@ MonoBehaviour:
       ExpirationPolicy: 0
     Modifiers:
     - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
+      type: Health
       operationType: 0
       valueSourceType: 0
       scaledValue: -15
     - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
+      type: Health
       operationType: 1
       valueSourceType: 0
       scaledValue: 0.85
-    EffectTags:
-      grantedToInstigatorTags: []
-      removedEffectsTags: []
+    RemoveEffectsInfo: []
     Cues: []

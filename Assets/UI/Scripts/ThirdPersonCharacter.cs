@@ -16,7 +16,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		[SerializeField] float m_MoveSpeedMultiplier = 1f;
 		[SerializeField] float m_AnimSpeedMultiplier = 1f;
 		[SerializeField] float m_GroundCheckDistance = 0.1f;
-        public AttributeType SpeedAttribute;
+        public string SpeedAttribute;
         public AttributeSet AttributeSet;
 
         Rigidbody m_Rigidbody;

@@ -930,6 +930,56 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2068465677}
     m_Modifications:
+    - target: {fileID: 2017678857625141388, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: AttributeType
+      value: Mana
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017678857625141388, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: MaxAttributeType
+      value: MaxMana
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017678857625141388, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributeType
+      value: Mana
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017678857625141388, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: maxAttributeType
+      value: MaxMana
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017678857625141388, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributeBar
+      value: 
+      objectReference: {fileID: 2083350363}
+    - target: {fileID: 3652452763574720524, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: AttributeType
+      value: Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652452763574720524, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: MaxAttributeType
+      value: MaxHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652452763574720524, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributeType
+      value: Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652452763574720524, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: maxAttributeType
+      value: MaxHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652452763574720524, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributeBar
+      value: 
+      objectReference: {fileID: 1618080984}
     - target: {fileID: 7899279095267793602, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: m_Name
@@ -996,6 +1046,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
         type: 2}
+    - target: {fileID: 7899279095267793608, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: attributes.Array.data[0].attributeType
+      value: Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899279095267793611, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: SpeedAttribute
+      value: Speed
+      objectReference: {fileID: 0}
     - target: {fileID: 7899279095267886754, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1547,6 +1607,12 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!224 &1618080984 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4354318907793874763, guid: fddc582aed5bbbd4ab4ac8025536d369,
+    type: 3}
+  m_PrefabInstance: {fileID: 863385731}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1666329937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1671,6 +1737,12 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2368979380633877767, guid: a5095e4e55136f74b9b9debb65e1356c,
     type: 3}
   m_PrefabInstance: {fileID: 1666329937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1708125190 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2017753674824409404, guid: 87613a41b93a7d44a9290c82c0dd98c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2343628200546972114}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1783193244
 PrefabInstance:
@@ -1944,6 +2016,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &2083350363 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1359391840599656395, guid: fddc582aed5bbbd4ab4ac8025536d369,
+    type: 3}
+  m_PrefabInstance: {fileID: 863385731}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2343628200546972114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1951,17 +2029,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2068465677}
     m_Modifications:
+    - target: {fileID: 1359308431272715899, guid: 87613a41b93a7d44a9290c82c0dd98c2,
+        type: 3}
+      propertyPath: attributeType
+      value: Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359308431272715899, guid: 87613a41b93a7d44a9290c82c0dd98c2,
+        type: 3}
+      propertyPath: maxAttributeType
+      value: MaxHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359308431272715899, guid: 87613a41b93a7d44a9290c82c0dd98c2,
+        type: 3}
+      propertyPath: attributeBar
+      value: 
+      objectReference: {fileID: 1708125190}
     - target: {fileID: 5555714685437361602, guid: 87613a41b93a7d44a9290c82c0dd98c2,
         type: 3}
       propertyPath: m_Name
       value: Enemy Ethan
       objectReference: {fileID: 0}
-    - target: {fileID: 5555714685437361608, guid: 87613a41b93a7d44a9290c82c0dd98c2,
-        type: 3}
-      propertyPath: preBaseChangeHandler
-      value: 
-      objectReference: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
-        type: 2}
     - target: {fileID: 5555714685437583778, guid: 87613a41b93a7d44a9290c82c0dd98c2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2017,9 +2104,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7899279095716547604, guid: 87613a41b93a7d44a9290c82c0dd98c2, type: 3}
-    - {fileID: 5555714685437361609, guid: 87613a41b93a7d44a9290c82c0dd98c2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87613a41b93a7d44a9290c82c0dd98c2, type: 3}
 --- !u!1001 &2368979380446301518
 PrefabInstance:

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Effect RegenHealth
   m_EditorClassIdentifier: 
   id: 103
+  icon: {fileID: 0}
   configs:
     Icon: {fileID: 0}
     EffectType: 0
@@ -31,11 +32,10 @@ MonoBehaviour:
       ExpirationPolicy: 0
     Modifiers:
     - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
+      type: Health
       operationType: 0
       valueSourceType: 0
       scaledValue: 5
-    EffectTags:
-      grantedToInstigatorTags: []
-      removedEffectsTags: []
+    RemoveEffectsInfo: []
     Cues:
     - {fileID: 11400000, guid: a0a0a94b358c56f45aaceb55727bf3d9, type: 2}

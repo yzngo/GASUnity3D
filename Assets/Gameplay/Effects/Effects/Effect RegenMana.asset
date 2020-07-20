@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Effect RegenMana
   m_EditorClassIdentifier: 
   id: 104
+  icon: {fileID: 0}
   configs:
     Icon: {fileID: 0}
     EffectType: 0
@@ -31,11 +32,10 @@ MonoBehaviour:
       ExpirationPolicy: 1
     Modifiers:
     - attributeType: {fileID: 11400000, guid: 124a7a186e5666c4b8fdc11ca51efeb7, type: 2}
+      type: Mana
       operationType: 0
       valueSourceType: 0
       scaledValue: 5
-    EffectTags:
-      grantedToInstigatorTags: []
-      removedEffectsTags: []
+    RemoveEffectsInfo: []
     Cues:
     - {fileID: 11400000, guid: 260647a52278cdc4eb6654efe826b9cd, type: 2}

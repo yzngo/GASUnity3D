@@ -2088,7 +2088,7 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 0.2
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.5
-  SpeedAttribute: {fileID: 11400000, guid: e5f56864ce3c4b742868ac560a891f48, type: 2}
+  SpeedAttribute: 
   AttributeSet: {fileID: 7899279095267793608}
 --- !u!114 &7899279095267793610
 MonoBehaviour:
@@ -2128,19 +2128,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributes:
-  - attributeType: {fileID: 11400000, guid: 8769ea8817563784a87cb6142aef671b, type: 2}
+  - attributeType: Health
     baseValue: 100
     currentValue: 100
-  - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
+  - attributeType: MaxHealth
     baseValue: 100
     currentValue: 100
-  - attributeType: {fileID: 11400000, guid: e5f56864ce3c4b742868ac560a891f48, type: 2}
+  - attributeType: Speed
     baseValue: 5
     currentValue: 5
-  - attributeType: {fileID: 11400000, guid: 124a7a186e5666c4b8fdc11ca51efeb7, type: 2}
+  - attributeType: Mana
     baseValue: 20
     currentValue: 20
-  - attributeType: {fileID: 11400000, guid: 9513cbcc3a089f742b9c48ae4201b1db, type: 2}
+  - attributeType: MaxMana
     baseValue: 20
     currentValue: 20
   preBaseChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
@@ -3028,14 +3028,12 @@ PrefabInstance:
         type: 3}
       propertyPath: AttributeType
       value: 
-      objectReference: {fileID: 11400000, guid: 124a7a186e5666c4b8fdc11ca51efeb7,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: MaxAttributeType
       value: 
-      objectReference: {fileID: 11400000, guid: 9513cbcc3a089f742b9c48ae4201b1db,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2202905021266549665, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3095,14 +3093,12 @@ PrefabInstance:
         type: 3}
       propertyPath: AttributeType
       value: 
-      objectReference: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: MaxAttributeType
       value: 
-      objectReference: {fileID: 11400000, guid: 8769ea8817563784a87cb6142aef671b,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 2202905021266549665, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -9,10 +9,10 @@ namespace GameplayAbilitySystem.Effects
         // e.g. HP
         //      add     10 40 50
         //      multi   0.1 0.3 
-        private AttributeType attributeType;
+        private string attributeType;
         private Dictionary<ModifierOperationType, List<float>> modifiers = new Dictionary<ModifierOperationType, List<float>>();
 
-        public AttributeModifyAggregator(AttributeType attributeType) 
+        public AttributeModifyAggregator(string attributeType) 
         {
             this.attributeType = attributeType;
         }

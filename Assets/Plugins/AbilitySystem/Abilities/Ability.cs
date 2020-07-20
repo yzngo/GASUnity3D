@@ -79,7 +79,7 @@ namespace GameplayAbilitySystem.Abilities
         {
             CoolDownInfo info = new CoolDownInfo(isCooling: false);
             // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
-            EffectContext maxCDEffectContext = instigator.EffectsContainer
+            EffectContext maxCDEffectContext = instigator.ActivedEffects
                                     .AllEffects
                                     .Where(x => x.IsCoolDownOf(this))
                                     .DefaultIfEmpty()

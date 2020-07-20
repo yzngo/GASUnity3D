@@ -8,12 +8,12 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class EffectModifier
     {
-        [SerializeField] private AttributeType attributeType = default;
+        [SerializeField] private string type = default;
         [SerializeField] private ModifierOperationType operationType = default;
         [SerializeField] private ModifierCalculationType valueSourceType = default;
         [SerializeField] private float scaledValue = default;
 
-        public AttributeType AttributeType => attributeType;
+        public string Type => type;
         public ModifierOperationType OperationType => operationType;
         public float ScaledMagnitude => scaledValue;
         public ModifierCalculationType ModifierCalculationType => valueSourceType;
@@ -24,7 +24,7 @@ namespace GameplayAbilitySystem.Effects
         }
 
         public EffectModifier InitializeEmpty() {
-            this.attributeType = null;
+            this.type = string.Empty;
             return this;
         }
 

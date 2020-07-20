@@ -17,7 +17,7 @@ public class AbilityCharacter : MonoBehaviour
     public List<CastingAbilityContainer> abilities = new List<CastingAbilityContainer>();
     public AbilitySystem AbilitySystem { get; private set; }
 
-    void Start()
+    void Awake()
     {
         AbilitySystem = GetComponent<AbilitySystem>();
     }

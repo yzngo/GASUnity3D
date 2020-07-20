@@ -16,8 +16,8 @@ namespace GameplayAbilitySystem.Effects
         // so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
 
         // effect -> attribute -> modifies
-        private Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>> modifiesAggregator = 
-            new Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>>();
+        private Dictionary<EffectContext, Dictionary<string, AttributeModifyAggregator>> modifiesAggregator = 
+            new Dictionary<EffectContext, Dictionary<string, AttributeModifyAggregator>>();
 
 
         public ActivedEffects(AbilitySystem target) 
@@ -67,7 +67,7 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-        public void UpdateAttribute(IEnumerable<AttributeModifyAggregator> aggregator, AttributeType attributeType) 
+        public void UpdateAttribute(IEnumerable<AttributeModifyAggregator> aggregator, string attributeType) 
         {
             var baseAttributeValue = target.GetBaseValue(attributeType);
             var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
@@ -76,7 +76,7 @@ namespace GameplayAbilitySystem.Effects
 
 
         // 获取所有effect中,修改某个attribute的所有attributeAggregator
-        public IEnumerable<AttributeModifyAggregator> GetAggregatorsForAttribute(AttributeType Attribute) 
+        public IEnumerable<AttributeModifyAggregator> GetAggregatorsForAttribute(string Attribute) 
         {
             // Find all remaining aggregators of the same type and recompute values
             var aggregators = modifiesAggregator
@@ -111,28 +111,27 @@ namespace GameplayAbilitySystem.Effects
                 
                 //todo-----
                 if (!modifiesAggregator.TryGetValue(effectContext, out var attributeAggregators)) {
-                    attributeAggregators = new Dictionary<AttributeType, AttributeModifyAggregator>();
+                    attributeAggregators = new Dictionary<string, AttributeModifyAggregator>();
                     modifiesAggregator.Add(effectContext, attributeAggregators);
                 }
                 var attributeAggregatorMap = attributeAggregators;
                 // ---------------
                 // Dictionary<AttributeType, AttributeModifyAggregator> dic = 
 
-                if (modifier.AttributeType != null) {
+                if (!string.IsNullOrEmpty(modifier.Type)) {
                     // If aggregator for this attribute doesn't exist, add it.
-                    if (!attributeAggregatorMap.TryGetValue(modifier.AttributeType, out AttributeModifyAggregator aggregator)) {
-                        aggregator = new AttributeModifyAggregator(modifier.AttributeType);
-                        attributeAggregatorMap.Add(modifier.AttributeType, aggregator);
+                    if (!attributeAggregatorMap.TryGetValue(modifier.Type, out AttributeModifyAggregator aggregator)) {
+                        aggregator = new AttributeModifyAggregator(modifier.Type);
+                        attributeAggregatorMap.Add(modifier.Type, aggregator);
                     }
-
                     // If this is a periodic effect, we don't add any attributes here. 
                     // They will be added as required on period expiry and stored in a separate structure
                     if (effectContext.Effect.Configs.PeriodConfig.Period <= 0) {
                         aggregator.AddAggregatorModifier(modifier.OperationType, evaluatedValue);
                     }
                     // Recalculate new value by recomputing all aggregators
-                    var aggregators = GetAggregatorsForAttribute(modifier.AttributeType);
-                    UpdateAttribute(aggregators, modifier.AttributeType);
+                    var aggregators = GetAggregatorsForAttribute(modifier.Type);
+                    UpdateAttribute(aggregators, modifier.Type);
                 }
             });
         }
@@ -150,17 +149,17 @@ namespace GameplayAbilitySystem.Effects
                 
                 modifiesAggregator.Remove(effectContext);
                 // effectsModifyAggregator.RemoveEffect(effectContext);
-                if (modifier.AttributeType == null) return;
+                if (string.IsNullOrEmpty(modifier.Type)) return;
 
                 // Find all remaining aggregators of the same type and recompute values
-                var aggregators = GetAggregatorsForAttribute(modifier.AttributeType);
+                var aggregators = GetAggregatorsForAttribute(modifier.Type);
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
-                    var current = target.GetBaseValue(modifier.AttributeType);
-                    if (current < 0) target.SetBaseValue(modifier.AttributeType, 0f);
-                    target.SetCurrentValue(modifier.AttributeType, current);
+                    var current = target.GetBaseValue(modifier.Type);
+                    if (current < 0) target.SetBaseValue(modifier.Type, 0f);
+                    target.SetCurrentValue(modifier.Type, current);
                 } else {
-                    UpdateAttribute(aggregators, modifier.AttributeType);
+                    UpdateAttribute(aggregators, modifier.Type);
                 }
             });
         }

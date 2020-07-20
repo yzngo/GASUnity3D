@@ -1891,6 +1891,7 @@ GameObject:
   - component: {fileID: 5555714685437361612}
   - component: {fileID: 5555714685437361603}
   - component: {fileID: 5555714685437361608}
+  - component: {fileID: 1295322296}
   m_Layer: 0
   m_Name: Enemy Ethan
   m_TagString: Untagged
@@ -1989,26 +1990,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b4ca8122047dc4a9f205f9a7323c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attributes:
-  - attributeType: {fileID: 11400000, guid: 8769ea8817563784a87cb6142aef671b, type: 2}
-    baseValue: 100
-    currentValue: 100
-  - attributeType: {fileID: 11400000, guid: 08c3bc3be14b22e4aadc300234c0587a, type: 2}
-    baseValue: 100
-    currentValue: 100
-  - attributeType: {fileID: 11400000, guid: e5f56864ce3c4b742868ac560a891f48, type: 2}
-    baseValue: 5
-    currentValue: 5
-  - attributeType: {fileID: 11400000, guid: 124a7a186e5666c4b8fdc11ca51efeb7, type: 2}
-    baseValue: 20
-    currentValue: 20
-  - attributeType: {fileID: 11400000, guid: 9513cbcc3a089f742b9c48ae4201b1db, type: 2}
-    baseValue: 20
-    currentValue: 20
-  preBaseChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
-    type: 2}
-  preCurrentChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
-    type: 2}
+--- !u!114 &1295322296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555714685437361602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f94e23f44264684797ec593a3701767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5555714685437361604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2917,6 +2910,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8769ea8817563784a87cb6142aef671b,
         type: 2}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: attributeSet
+      value: 
+      objectReference: {fileID: 5555714685437361608}
     - target: {fileID: 2202905021266549665, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: m_LocalPosition.x

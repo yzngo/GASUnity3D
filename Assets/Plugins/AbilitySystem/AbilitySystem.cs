@@ -7,6 +7,7 @@ using UnityEngine;
 using GameplayAbilitySystem.Attributes;
 using GameplayAbilitySystem.Cues;
 using GameplayAbilitySystem.Utility;
+using UnityEngine.Events;
 
 namespace GameplayAbilitySystem 
 {
@@ -30,27 +31,23 @@ namespace GameplayAbilitySystem
         private List<Ability> runningAbilities = new List<Ability>();
 
         // Lists all active Effect
-        private ActivedEffects effectsContainer;
-        public ActivedEffects EffectsContainer => effectsContainer;
+        private ActivedEffects activedEffects;
+        public ActivedEffects ActivedEffects => activedEffects;
 
         private Animator animator;
         public Animator Animator => animator;
-
         private AttributeSet attributeSet;
 
-        // public IEnumerable<GameplayTag> ActiveTags =>
-        //         EffectsContainer
-        //                     .effectsModifyAggregator
-        //                     .GetAllEffects()
-        //                     .SelectMany(x => x.Effect.EffectTags.GrantedToASCTags.Added)
-        //                     .Union(runningAbilities.SelectMany(x => x.Tags.ActivationOwnedTags.Added));
-
-        // private IEnumerable<GameplayTag> AbilityGrantedTags => 
-
+        
         public void Awake() {
-            effectsContainer = new ActivedEffects(this);
+            activedEffects = new ActivedEffects(this);
             animator = GetComponent<Animator>();
             attributeSet = GetComponent<AttributeSet>();
+            AddAttribute(AttributeType.MaxHealth, 100, 100);
+            AddAttribute(AttributeType.Health, 100, 100);
+            AddAttribute(AttributeType.MaxMana, 50, 50);
+            AddAttribute(AttributeType.Mana, 50, 50);
+            AddAttribute(AttributeType.Speed, 5, 5);
         }
 
         // Checks to see if the ability can be activated
@@ -77,7 +74,6 @@ namespace GameplayAbilitySystem
             // 技能仅仅是一个时序流程
             runningAbilities.Add(ability);
             ability.Commit(this);
-
             // GameplayTag abilityTag = ability.Tags.AbilityTags.Count > 0 ? ability.Tags.AbilityTags[0] : new GameplayTag();
             var data = new AbilityEventData();
             data.abilityId = ability.Id;
@@ -126,15 +122,9 @@ namespace GameplayAbilitySystem
         public void ApplyEffectToTarget(int sourceId, Effect appliedEffect, AbilitySystem target, float level = 0) {
             // Check to make sure all the attributes being modified by this effect exist on the target
             foreach(var modifiers in appliedEffect.Configs.Modifiers) {
-                if (!target.IsAttributeExist(modifiers.AttributeType)) {
+                if (!target.IsAttributeExist(modifiers.Type)) {
                     return ;
                 }
-            }
-            // TODO: Get list of tags owned by target
-            // TODO: Check for immunity tags, and don't apply effect if target is immune (and also add Immunity Tags container to IGameplayEffect)
-            // TODO: Check to make sure Application Tag Requirements are met (i.e. target has all the required tags, and does not contain any prohibited tags )
-            if (!appliedEffect.IsRequiredTagsSatisfied(target)) {
-                return ;
             }
 
             // Handling Instant effects is different to handling HasDuration and Infinite effects, instant effect modify the base value
@@ -145,7 +135,7 @@ namespace GameplayAbilitySystem
                 // Such as stacking and effect durations
                 // Durational effect modify the current value
                 var effectContext = new EffectContext(sourceId, appliedEffect, this, target);
-                target.EffectsContainer.TryApplyDurationalEffect(effectContext);
+                target.ActivedEffects.TryApplyDurationalEffect(effectContext);
             }
 
             // Remove all effects which have tags defined as "Be Removed Effects Tags". 
@@ -180,7 +170,7 @@ namespace GameplayAbilitySystem
 
         public IEnumerable<EffectContext> GetDurationEffects()
         {
-            List<EffectContext> durationEffects = EffectsContainer.AllEffects;
+            List<EffectContext> durationEffects = ActivedEffects.AllEffects;
             if (durationEffects == null) {
                 return new List<EffectContext>();
             }
@@ -193,11 +183,18 @@ namespace GameplayAbilitySystem
         }
 
 // attribute -----------------------------------------------------------------------------
-        public bool IsAttributeExist(AttributeType type) => attributeSet.Attributes.Exists( x => x.AttributeType == type);
-        public float GetBaseValue(AttributeType type) => GetAttributeByType(type).BaseValue;
-        public float GetCurrentValue(AttributeType type) => GetAttributeByType(type).CurrentValue;
-        public void SetBaseValue(AttributeType type, float value) => GetAttributeByType(type).SetBaseValue(attributeSet, ref value);
-        public void SetCurrentValue(AttributeType type, float value) => GetAttributeByType(type).SetCurrentValue(attributeSet, ref value);
-        private Attribute GetAttributeByType(AttributeType type) => attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == type);
+        public bool IsAttributeExist(string type) => attributeSet.Attributes.Exists( x => x.AttributeType == type);
+        public void AddAttribute(string type, float baseValue, float currentValue) {
+            if (attributeSet == null) {
+                Debug.Log("attributeSet is null");
+            }
+            attributeSet.Add(type, baseValue, currentValue);
+        }
+
+        public float GetBaseValue(string type) => GetAttributeByType(type).BaseValue;
+        public float GetCurrentValue(string type) => GetAttributeByType(type).CurrentValue;
+        public void SetBaseValue(string type, float value) => GetAttributeByType(type).SetBaseValue(attributeSet, ref value);
+        public void SetCurrentValue(string type, float value) => GetAttributeByType(type).SetCurrentValue(attributeSet, ref value);
+        private Attribute GetAttributeByType(string type) => attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == type);
     }
 }
