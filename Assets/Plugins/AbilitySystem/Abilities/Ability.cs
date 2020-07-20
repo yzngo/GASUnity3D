@@ -25,15 +25,6 @@ namespace GameplayAbilitySystem.Abilities
         [SerializeField] private List<Effect> cooldownEffects = default;
         [SerializeField] private AbilityLogic abilityLogic = default;
 
-        // [SerializeField] private List<GameplayEffect> _effectsToApplyOnExecution = new List<GameplayEffect>();
-        // [SerializeField] private GenericAbilityEvent _onGameplayAbilityCommitted = new GenericAbilityEvent();
-        // [SerializeField] private GenericAbilityEvent _onGameplayAbilityCancelled = new GenericAbilityEvent();
-        // [SerializeField] private GenericAbilityEvent _onGameplayAbilityEnded = new GenericAbilityEvent();
-        // public List<GameplayEffect> EffectsToApplyOnExecution => _effectsToApplyOnExecution;
-        // public GenericAbilityEvent OnGameplayAbilityCommitted => _onGameplayAbilityCommitted;
-        // public GenericAbilityEvent OnGameplayAbilityCancelled => _onGameplayAbilityCancelled;
-        // public GenericAbilityEvent OnGameplayAbilityEnded => _onGameplayAbilityEnded;
-
         public bool IsActivatable(AbilitySystem instigator) 
         {
             // Player must be "Idle" to begin ability activation
@@ -44,7 +35,6 @@ namespace GameplayAbilitySystem.Abilities
         public bool Commit(AbilitySystem instigator) 
         {
             Activate(instigator);
-            // AbilitySystem.OnGameplayAbilityActivated.Invoke(this);
             ApplyCost(instigator);
             return true;
         }
@@ -58,40 +48,19 @@ namespace GameplayAbilitySystem.Abilities
         private bool IsTagsSatisfied(AbilitySystem instigator) 
         {
             // Checks to make sure Source ability system doesn't have prohibited tags
-            // var activeTags = abilitySystem.ActiveTags;
             bool hasActivationRequiredTags = true;
             bool hasActivationBlockedTags = false;
-            // bool hasSourceRequiredTags = false;
-            // bool hasSourceBlockedTags = false;
 
-            // if (Tags.ActivationRequiredTags.Added.Count > 0) {
-            //     hasActivationRequiredTags = !Tags.ActivationRequiredTags.Added.Except(activeTags).Any();
-            // }
-            // if (Tags.ActivationBlockedTags.Added.Count > 0) {
-            //     hasActivationBlockedTags = activeTags.Any(x => Tags.ActivationBlockedTags.Added.Contains(x));
-            // }
-            // if (Tags.SourceRequiredTags.Added.Count > 0) {
-            //     hasSourceRequiredTags = !Tags.SourceRequiredTags.Added.Except(activeTags).Any();
-            // }
-            // if (Tags.SourceBlockedTags.Added.Count > 0) {
-            //     hasSourceBlockedTags = activeTags.Any(x => Tags.SourceBlockedTags.Added.Contains(x));
-            // }
             return !hasActivationBlockedTags && hasActivationRequiredTags;
         }
 
         public void End(AbilitySystem instigator) 
         {
-            // _onGameplayAbilityEnded.Invoke(this);
-
-            // Ability finished.  Remove all listeners.
-            // _onGameplayAbilityEnded.RemoveAllListeners();
-            // TODO: Remove tags added by this ability
             // TODO: Cancel all tasks?
             // TODO: Remove gameplay cues
             // TODO: Cancel ability
             // TODO: Remove blocking/cancelling Gameplay Tags
 
-            // Tell ability system ability has ended
             instigator.NotifyAbilityEnded(this);
         }
 
