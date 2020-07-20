@@ -151,25 +151,21 @@ namespace GameplayAbilitySystem
             // Remove all effects which have tags defined as "Be Removed Effects Tags". 
             // We do this by setting the expiry time on the effect to make it end prematurely
             // This is accomplished by finding all effects which grant these tags, and then adjusting start time
-            var idOfBeingRemoved = appliedEffect.Configs.EffectTags.RemovedEffectsId;
-            var beRemovedEffects = target.GetActiveEffectsTags()
-                                    .Where(x => idOfBeingRemoved.Any(y => x.Tag == y.EffectTag))
-                                    .Join(idOfBeingRemoved, x => x.Tag, x => x.EffectTag, (x, y) => new { Tag = x.Tag, effectContext = x.GrantingEffect, StacksToRemove = y.BeRemovedStacks })
-                                    .OrderBy(x => x.effectContext.RemainingTime);
-
-            // var beremoved = target.GetDurationEffects()
-            //                     .Where(x =>idOfBeingRemoved.Any(y => x.Effect.Id == y.Id));
+            var beRemovedInfo = appliedEffect.Configs.EffectTags.RemovedEffectsId;
+            var beRemovedEffects = target.GetDurationEffects()
+                                .Where(x => beRemovedInfo.Any(y => x.Effect.Id == y.Id))
+                                .Join(beRemovedInfo, x => x.Effect.Id, y => y.Id, (x, y) => new { Id = x.Effect.Id, EffectContext = x, Stacks = y.BeRemovedStacks })
+                                .OrderBy(x => x.EffectContext.RemainingTime);
 
             Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
 
-            foreach (var beRemovedEffect in beRemovedEffects) {
-                var effect = beRemovedEffect.effectContext.Effect;
+            foreach(var beRemovedEffect in beRemovedEffects) {
+                var effect = beRemovedEffect.EffectContext.Effect;
                 if (!stacks.ContainsKey(effect)) {
                     stacks.Add(effect, 0);
                 }
-
-                if (beRemovedEffect.StacksToRemove == 0 || stacks[effect] < beRemovedEffect.StacksToRemove) {
-                    beRemovedEffect.effectContext.ForceEndEffect();
+                if (beRemovedEffect.Stacks == 0 || stacks[effect] < beRemovedEffect.Stacks ) {
+                    beRemovedEffect.EffectContext.ForceEndEffect();
                 }
                 stacks[effect]++;
             }
@@ -180,14 +176,6 @@ namespace GameplayAbilitySystem
                 var cue = cues[i];
                 cue.HandleCue(target, CueEventMomentType.OnActive);
             }
-        }
-
-        public IEnumerable<(GameplayTag Tag, EffectContext GrantingEffect)> GetActiveEffectsTags()
-        {
-            List<EffectContext> activeEffects = EffectsContainer.GetAllEffects();
-            if (activeEffects == null) 
-                return new List<(GameplayTag, EffectContext)>();
-            return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));
         }
 
         public IEnumerable<EffectContext> GetDurationEffects()
