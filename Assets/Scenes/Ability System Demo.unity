@@ -2059,6 +2059,11 @@ PrefabInstance:
       propertyPath: abilitySystem
       value: 
       objectReference: {fileID: 7899279095716547601}
+    - target: {fileID: 1359308431272715899, guid: 87613a41b93a7d44a9290c82c0dd98c2,
+        type: 3}
+      propertyPath: lerpSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5555714685437361602, guid: 87613a41b93a7d44a9290c82c0dd98c2,
         type: 3}
       propertyPath: m_Name

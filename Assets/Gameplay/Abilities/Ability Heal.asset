@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   icon: {fileID: 21300000, guid: 92a77166f9a72d840a4ad2cce89c7683, type: 3}
-  costEffect: {fileID: 11400000, guid: 37b17980154ac5e46924458c6fb0c447, type: 2}
+  costEffect: {fileID: 11400000, guid: 520415e26382f224c867fce4071958df, type: 2}
   cooldownEffects:
   - {fileID: 11400000, guid: d54b66206c84ce04795001e8909186b8, type: 2}
   - {fileID: 11400000, guid: d4498b55c0a7526469977fa87a6259b9, type: 2}
