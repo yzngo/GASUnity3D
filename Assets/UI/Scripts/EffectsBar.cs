@@ -18,35 +18,38 @@ public class EffectsBar : MonoBehaviour {
 
     List<(GameplayTag Tag, EffectContext effectContext, int stacks)> GetTagsToShow() 
     {
-        var activeTags = instigator.GetActiveEffectsTags();
-        var effectsToShow = activeTags
+        return instigator.GetActiveEffectsTags()
                             .Where(x => availableTagsToShow
                                                     .ContainsKey(x.Tag))
                                                     .OrderBy(x => x.GrantingEffect.StartTime)
                                                     .Select(x => (x.Tag, x.GrantingEffect, 1))
                             .ToList();
-        return effectsToShow;
     }
 
-    List<(GameplayTag Tag, EffectContext effectContext, int stacks)> GetStackedGameplayTagsToShow() 
-    {
-        var effectsToShow = GetTagsToShow()
-                            .GroupBy(x => x.Tag)
-                            .Select(x => (x.Last().Tag, x.Last().effectContext, x.Count()))
-                            .ToList();
-
-        return effectsToShow;
-    }
 
     void Update() 
     {
         // var stackedEffectsToShow = GetEffectsToShow();
-        var stackedTagsToShow = GetStackedGameplayTagsToShow();
+        // var stackedTagsToShow = GetStackedGameplayTagsToShow();
+        var temp = instigator.GetActiveEffectsTags()
+                            .Where(x => availableTagsToShow
+                                                    .ContainsKey(x.Tag))
+                                                    .OrderBy(x => x.GrantingEffect.StartTime)
+                                                    .Select(x => (x.Tag, x.GrantingEffect, 1))
+                            .ToList();
+
+        var stackedTagsToShow = GetTagsToShow().GroupBy(x => x.Tag)
+                            .Select(x => (x.Last().Tag, x.Last().effectContext, x.Count()))
+                            .ToList();
+
+
+
+
         var tagIndex = 0;
         for (int i = 0; i < stackedTagsToShow.Count; i++) {
             var tagToShow = stackedTagsToShow[i];
 
-            var stacks = stackedTagsToShow[i].stacks;
+            var stacks = stackedTagsToShow[i].Item3;
             // No more space to show buffs - just ignore the rest until space opens up
             if (GameplayTagIndicator.Count < tagIndex) return;
 

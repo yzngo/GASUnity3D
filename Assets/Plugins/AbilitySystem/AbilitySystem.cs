@@ -187,10 +187,14 @@ namespace GameplayAbilitySystem
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));
         }
 
-        // public List<EffectContext> GetDurationEffects()
-        // {
-        //     List<EffectContext> durationEffects = effectsContainer.effectsModifyAggregator
-        // }
+        public IEnumerable<EffectContext> GetDurationEffects()
+        {
+            List<EffectContext> durationEffects = EffectsContainer.GetAllEffects();
+            if (durationEffects == null) {
+                return new List<EffectContext>();
+            }
+            return durationEffects.Where(x => x.Effect.Configs.EffectType == EffectType.Normal && x.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration);
+        }
 
         public void OnAnimationEvent(string param)
         {
