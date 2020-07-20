@@ -22,7 +22,6 @@ namespace GameplayAbilitySystem.Effects
         public int Id => id;
         public Sprite Icon => icon;
         public EffectConfigs Configs => configs;
-        public List<GameplayTag> GrantedTags => Configs.EffectTags.GrantedToInstigatorTags;
 
         public bool IsRequiredTagsSatisfied(AbilitySystem target) {
             var requiredTagsPresent = true;

@@ -14,7 +14,7 @@ namespace GameplayAbilitySystem.Effects
         public PeriodConfig PeriodConfig;
         public StackConfig StackConfig;
         public List<EffectModifier> Modifiers;
-        public EffectTagContainer EffectTags;
+        public List<RemoveEffectInfo> RemoveEffectsInfo;
         public List<EffectCues> Cues;
     }
 // Type ----------------------------------------------------------------------------------
@@ -74,5 +74,16 @@ namespace GameplayAbilitySystem.Effects
         ClearEntireStack,                       // 清空整个栈
         RemoveSingleStackAndRefreshDuration,    // 移除一个元素且刷新时间
         RefreshDuration                         // 刷新时间
+    }
+
+// Remove Effect Info --------------------------------------------------------------------
+
+    [Serializable]
+    public class RemoveEffectInfo {
+        [Tooltip("GameplayEffects with this id will be candidates for removal")]
+        public int RemoveId;
+
+        [Tooltip("Number of stacks of each GameEffect to remove.  0 means remove all stacks.")]
+        public int RemoveStacks = 0;
     }
 }
