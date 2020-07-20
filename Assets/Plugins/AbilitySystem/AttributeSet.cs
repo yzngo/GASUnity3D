@@ -10,9 +10,6 @@ namespace GameplayAbilitySystem.Attributes
         private List<Attribute> attributes = new List<Attribute>();
         public List<Attribute> Attributes => attributes;
 
-        private AttributeChangeEvent afterBaseChanged = new AttributeChangeEvent();
-        private AttributeChangeEvent afterCurrentChanged = new AttributeChangeEvent();
-
         public void PreBaseChange(Attribute attribute, ref float newValue)
         {
             OnAttributeChange(attribute, ref newValue);
