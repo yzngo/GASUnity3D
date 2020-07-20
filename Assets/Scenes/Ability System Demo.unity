@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 6
+      value: EffectTile 6
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -256,18 +256,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 58054546}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &58054548 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 58054546}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &223490121 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2368979380633877767, guid: 6abd691f7e8403745ad594b75a550b12,
@@ -287,7 +275,7 @@ GameObject:
   - component: {fileID: 351111858}
   - component: {fileID: 351111860}
   m_Layer: 5
-  m_Name: EffectsBar
+  m_Name: Effects Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,20 +351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed60c647d3aea21479e7ebbd28040e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instigator: {fileID: 843129480}
-  GameplayTagIndicator:
-  - {fileID: 872576278}
-  - {fileID: 1666329939}
-  - {fileID: 1783193246}
-  - {fileID: 766764834}
-  - {fileID: 381492121}
-  - {fileID: 58054548}
-  - {fileID: 996056584}
-  - {fileID: 545239509}
-  - {fileID: 1591915590}
-  - {fileID: 876698596}
-  - {fileID: 581392358}
-  - {fileID: 2001019375}
 --- !u!1001 &381492119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -387,7 +361,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 5
+      value: EffectTile 5
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -512,18 +486,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 381492119}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &381492121 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 381492119}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &411785365
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +499,7 @@ GameObject:
   - component: {fileID: 411785367}
   - component: {fileID: 411785366}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UICanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -634,7 +596,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 8
+      value: EffectTile 8
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -759,18 +721,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 545239507}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &545239509 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 545239507}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &581392356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -781,7 +731,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 11
+      value: EffectTile 11
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -906,18 +856,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 581392356}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &581392358 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 581392356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &619005644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -932,7 +870,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: 6abd691f7e8403745ad594b75a550b12,
         type: 3}
       propertyPath: m_Name
-      value: Ability 3
+      value: AbilityTile 3
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877767, guid: 6abd691f7e8403745ad594b75a550b12,
         type: 3}
@@ -1194,7 +1132,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 4
+      value: EffectTile 4
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -1319,18 +1257,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 766764832}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &766764834 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 766764832}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &772122998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,7 +1524,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 1
+      value: EffectTile 1
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -1723,18 +1649,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 872576276}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &872576278 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 872576276}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &876698594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1745,7 +1659,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 10
+      value: EffectTile 10
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -1870,18 +1784,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 876698594}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &876698596 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 876698594}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &949310894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,7 +1870,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 7
+      value: EffectTile 7
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -2093,18 +1995,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 996056582}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &996056584 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 996056582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1124098576 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7899279095267886754, guid: fddc582aed5bbbd4ab4ac8025536d369,
@@ -2203,7 +2093,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: 6abd691f7e8403745ad594b75a550b12,
         type: 3}
       propertyPath: m_Name
-      value: Ability 2
+      value: AbilityTile 2
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877767, guid: 6abd691f7e8403745ad594b75a550b12,
         type: 3}
@@ -2467,7 +2357,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 9
+      value: EffectTile 9
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -2592,18 +2482,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1591915588}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1591915590 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1591915588}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1666329937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2614,7 +2492,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 2
+      value: EffectTile 2
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -2739,18 +2617,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1666329937}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1666329939 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1666329937}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1783193244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2761,7 +2627,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 3
+      value: EffectTile 3
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -2886,18 +2752,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1783193244}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1783193246 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1783193244}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1931120392
 GameObject:
   m_ObjectHideFlags: 0
@@ -3020,7 +2874,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
       propertyPath: m_Name
-      value: Status 12
+      value: EffectTile 12
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877766, guid: a5095e4e55136f74b9b9debb65e1356c,
         type: 3}
@@ -3145,18 +2999,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2001019373}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2001019375 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4558498789277372632, guid: a5095e4e55136f74b9b9debb65e1356c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2001019373}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321425062f13a8247aff859aa26c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2068465676
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,7 +3127,7 @@ PrefabInstance:
     - target: {fileID: 2368979380633877766, guid: 6abd691f7e8403745ad594b75a550b12,
         type: 3}
       propertyPath: m_Name
-      value: Ability 1
+      value: AbilityTile 1
       objectReference: {fileID: 0}
     - target: {fileID: 2368979380633877767, guid: 6abd691f7e8403745ad594b75a550b12,
         type: 3}

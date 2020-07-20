@@ -160,7 +160,6 @@ GameObject:
   - component: {fileID: 2368979380633877762}
   - component: {fileID: 2368979380633877765}
   - component: {fileID: 2368979380633877764}
-  - component: {fileID: 2368979380633877763}
   - component: {fileID: 223490127}
   - component: {fileID: 223490126}
   m_Layer: 5
@@ -252,20 +251,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2368979380633877763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2368979380633877766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d3623a9ed510ba4eb4b7c05b1b04619, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ImageIcon: {fileID: 2368979379177886076}
-  CooldownOverlay: {fileID: 2368979379789301124}
 --- !u!222 &223490127
 CanvasRenderer:
   m_ObjectHideFlags: 0
