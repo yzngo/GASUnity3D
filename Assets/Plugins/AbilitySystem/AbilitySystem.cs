@@ -181,11 +181,16 @@ namespace GameplayAbilitySystem
 
         public IEnumerable<(GameplayTag Tag, EffectContext GrantingEffect)> GetActiveEffectsTags()
         {
-            var activeEffects = EffectsContainer.effectsModifyAggregator.GetAllEffects();
+            List<EffectContext> activeEffects = EffectsContainer.effectsModifyAggregator.GetAllEffects();
             if (activeEffects == null) 
                 return new List<(GameplayTag, EffectContext)>();
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));
         }
+
+        // public List<EffectContext> GetDurationEffects()
+        // {
+        //     List<EffectContext> durationEffects = effectsContainer.effectsModifyAggregator
+        // }
 
         public void OnAnimationEvent(string param)
         {
