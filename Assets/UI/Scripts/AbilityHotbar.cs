@@ -4,31 +4,32 @@ using UnityEngine;
 using GameplayAbilitySystem.Abilities;
 using static GameplayAbilitySystem.Abilities.Ability;
 
+[DisallowMultipleComponent]
 public class AbilityHotbar : MonoBehaviour 
 {
     private AbilityCharacter abilityCharacter;
-    public List<BaseTile> AbilityButtons;
+    private BaseTile[] AbilityButtons;
 
     void Awake() 
     {
         abilityCharacter = GameObject.FindWithTag("Player").GetComponent<AbilityCharacter>();
+        AbilityButtons = GetComponentsInChildren<BaseTile>();
+
         for (int i = 0; i < abilityCharacter.abilities.Count; i++) {
-            if (AbilityButtons.Count > i) {
-                AbilityButtons[i].ImageIcon.sprite = abilityCharacter.abilities[i].ability.Icon;
-                AbilityButtons[i].ImageIcon.color = new Color(1.0f, 1.0f, 1.0f); 
+            if (AbilityButtons.Length > i) {
+                AbilityButtons[i].SetSprite(abilityCharacter.abilities[i].ability.Icon, Color.white);
             }
         }
     }
 
     void Update() 
     {
-        for (int i = 0; i < AbilityButtons.Count; i++) {
+        for (int i = 0; i < AbilityButtons.Length; i++) {
             var button = AbilityButtons[i];
             CoolDownInfo info = GetCooldownOfAbility(i);
             float remainingPercent = info.isCooling ? 1 - info.elapsed / info.total : 0;
             button.SetRemainingPercent(remainingPercent);
         }
-
     }
 
     public CoolDownInfo GetCooldownOfAbility(int n)
