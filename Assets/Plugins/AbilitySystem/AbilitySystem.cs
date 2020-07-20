@@ -151,11 +151,14 @@ namespace GameplayAbilitySystem
             // Remove all effects which have tags defined as "Be Removed Effects Tags". 
             // We do this by setting the expiry time on the effect to make it end prematurely
             // This is accomplished by finding all effects which grant these tags, and then adjusting start time
-            var tagsToRemove = appliedEffect.Configs.EffectTags.RemovedEffectsTags;
+            var idOfBeingRemoved = appliedEffect.Configs.EffectTags.RemovedEffectsId;
             var beRemovedEffects = target.GetActiveEffectsTags()
-                                    .Where(x => tagsToRemove.Any(y => x.Tag == y.EffectTag))
-                                    .Join(tagsToRemove, x => x.Tag, x => x.EffectTag, (x, y) => new { Tag = x.Tag, effectContext = x.GrantingEffect, StacksToRemove = y.BeRemovedStacks })
+                                    .Where(x => idOfBeingRemoved.Any(y => x.Tag == y.EffectTag))
+                                    .Join(idOfBeingRemoved, x => x.Tag, x => x.EffectTag, (x, y) => new { Tag = x.Tag, effectContext = x.GrantingEffect, StacksToRemove = y.BeRemovedStacks })
                                     .OrderBy(x => x.effectContext.RemainingTime);
+
+            // var beremoved = target.GetDurationEffects()
+            //                     .Where(x =>idOfBeingRemoved.Any(y => x.Effect.Id == y.Id));
 
             Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
 

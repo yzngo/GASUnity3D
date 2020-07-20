@@ -15,8 +15,7 @@ namespace GameplayAbilitySystem.Effects
 
 
         public List<GameplayTag> GrantedToInstigatorTags => grantedToInstigatorTags;
-        public List<BeRemovedEffectInfo> RemovedEffectsTags => removedEffectsTags;
-
+        public List<BeRemovedEffectInfo> RemovedEffectsId => removedEffectsTags;
 
 
         [Serializable]
@@ -24,9 +23,12 @@ namespace GameplayAbilitySystem.Effects
         {
             [Tooltip("GameplayEffects with this tag will be candidates for removal")]
             public GameplayTag EffectTag;
-            
+
+            [Tooltip("GameplayEffects with this id will be candidates for removal")]
+            public int Id;
             [Tooltip("Number of stacks of each GameEffect to remove.  0 means remove all stacks.")]
             public int BeRemovedStacks = 0;
+
         }
 
 

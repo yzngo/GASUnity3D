@@ -8,24 +8,24 @@ using static GameplayAbilitySystem.Abilities.Ability;
 public class AbilityHotbar : MonoBehaviour 
 {
     private AbilityCharacter abilityCharacter;
-    private BaseTile[] AbilityButtons;
+    private BaseTile[] abilityTiles;
 
     void Awake() 
     {
         abilityCharacter = GameObject.FindWithTag("Player").GetComponent<AbilityCharacter>();
-        AbilityButtons = GetComponentsInChildren<BaseTile>();
+        abilityTiles = GetComponentsInChildren<BaseTile>();
 
         for (int i = 0; i < abilityCharacter.abilities.Count; i++) {
-            if (AbilityButtons.Length > i) {
-                AbilityButtons[i].SetSprite(abilityCharacter.abilities[i].ability.Icon, Color.white);
+            if (abilityTiles.Length > i) {
+                abilityTiles[i].SetSprite(abilityCharacter.abilities[i].ability.Icon, Color.white);
             }
         }
     }
 
     void Update() 
     {
-        for (int i = 0; i < AbilityButtons.Length; i++) {
-            var button = AbilityButtons[i];
+        for (int i = 0; i < abilityTiles.Length; i++) {
+            var button = abilityTiles[i];
             CoolDownInfo info = GetCooldownOfAbility(i);
             float remainingPercent = info.isCooling ? 1 - info.elapsed / info.total : 0;
             button.SetRemainingPercent(remainingPercent);
