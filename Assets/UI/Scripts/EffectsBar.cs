@@ -1,16 +1,16 @@
 using System.Linq;
-using System.Collections.Generic;
 using UnityEngine;
-using GameplayAbilitySystem.Effects;
 using GameplayAbilitySystem;
 
-public class EffectsBar : MonoBehaviour {
+public class EffectsBar : MonoBehaviour 
+{
     private AbilitySystem instigator;
-    private GameplayTagStatusBarButton[] GameplayTagIndicator;
+    private EffectTile[] GameplayTagIndicator;
 
-    private void Awake() {
+    private void Awake() 
+    {
         instigator = GameObject.FindWithTag("Player").GetComponent<AbilitySystem>();
-        GameplayTagIndicator = GetComponentsInChildren<GameplayTagStatusBarButton>();
+        GameplayTagIndicator = GetComponentsInChildren<EffectTile>();
     }
 
     void Update() 
@@ -36,6 +36,7 @@ public class EffectsBar : MonoBehaviour {
             GameplayTagIndicator[tileIndex].SetStacks(effectInfo.Stacks);
             tileIndex++;
         }
+
         for (int i = tileIndex; i < GameplayTagIndicator.Length; i++) {
             GameplayTagIndicator[i].ImageIcon.sprite = null;
             GameplayTagIndicator[i].ImageIcon.color = new Color(0, 0, 0, 0);
