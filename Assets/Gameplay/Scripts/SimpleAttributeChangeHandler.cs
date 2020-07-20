@@ -12,6 +12,7 @@ namespace AbilitySystemDemo.Attributes {
         public AttributeType Mana;
 
         public override void OnAttributeChange(AttributeSet attributeSet, Attribute attribute, ref float value) {
+            
             if (attribute.AttributeType == Health) {
                 HandleHealthChange(ref value, attributeSet.Attributes.First(x => x.AttributeType == MaxHealth).CurrentValue);
             } else if (attribute.AttributeType == Mana) {

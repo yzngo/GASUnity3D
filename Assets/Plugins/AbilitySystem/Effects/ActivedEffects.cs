@@ -8,23 +8,27 @@ using Cysharp.Threading.Tasks;
 
 namespace GameplayAbilitySystem.Effects 
 {
-    public class EffectsContainer 
+    public class ActivedEffects 
     {
         private AbilitySystem target;
 
         // This is used to keep track of all the "temporary" attribute modifiers,
         // so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
-        private Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>> effectAggregator = 
+
+        // effect -> attribute -> modifies
+        private Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>> modifiesAggregator = 
             new Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>>();
 
-        public EffectsContainer(AbilitySystem target) 
+
+        public ActivedEffects(AbilitySystem target) 
         {
             this.target = target;
         }
 
-        public void ApplyDurationalEffect(EffectContext effectContext) 
+        public List<EffectContext> AllEffects => modifiesAggregator.Keys.ToList();
+
+        public void TryApplyDurationalEffect(EffectContext effectContext) 
         {
-            // Durational effect.  Add granted modifiers to active list
             int existingStacks = -1;
             int maxStacks = effectContext.Effect.Configs.StackConfig.Limit;
             IEnumerable<EffectContext> matchingStackedActiveEffects = GetMatchingStackedEffectsByEffect(effectContext);
@@ -70,19 +74,15 @@ namespace GameplayAbilitySystem.Effects
             target.SetCurrentValue(attributeType, newCurrentAttributeValue);
         }
 
-        public List<EffectContext> GetAllEffects()
-        {
-            return effectAggregator.Keys.ToList();
-        }
 
         // 获取所有effect中,修改某个attribute的所有attributeAggregator
         public IEnumerable<AttributeModifyAggregator> GetAggregatorsForAttribute(AttributeType Attribute) 
         {
             // Find all remaining aggregators of the same type and recompute values
-            var aggregators = effectAggregator
+            var aggregators = modifiesAggregator
                                 .Where(x => x.Value.ContainsKey(Attribute))
                                 .Select(x => x.Value[Attribute]);
-            var periodic = effectAggregator
+            var periodic = modifiesAggregator
                             .Where(x => x.Key.Effect.Configs.PeriodConfig.Period > 0)
                             .Select(x => x.Key.GetPeriodicAggregatorForAttribute(Attribute))
                             .Where(x => x != null);
@@ -110,9 +110,9 @@ namespace GameplayAbilitySystem.Effects
                 // var attributeAggregatorMap = effectsModifyAggregator.AddorGet(effectContext);
                 
                 //todo-----
-                if (!effectAggregator.TryGetValue(effectContext, out var attributeAggregators)) {
+                if (!modifiesAggregator.TryGetValue(effectContext, out var attributeAggregators)) {
                     attributeAggregators = new Dictionary<AttributeType, AttributeModifyAggregator>();
-                    effectAggregator.Add(effectContext, attributeAggregators);
+                    modifiesAggregator.Add(effectContext, attributeAggregators);
                 }
                 var attributeAggregatorMap = attributeAggregators;
                 // ---------------
@@ -137,6 +137,33 @@ namespace GameplayAbilitySystem.Effects
             });
         }
 
+        private async void CheckGameplayEffectForTimedEffects(EffectContext effectContext) 
+        {
+            await WaitForEffectExpiryTime(effectContext);
+            var gameplayCues = effectContext.Effect.Configs.Cues;
+            foreach (var cue in gameplayCues) {
+                cue.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
+            }
+            // There could be multiple stacked effects, due to multiple casts
+            // Remove one instance of this effect from the active list
+            ModifyActiveGameplayEffect(effectContext, modifier => {
+                
+                modifiesAggregator.Remove(effectContext);
+                // effectsModifyAggregator.RemoveEffect(effectContext);
+                if (modifier.AttributeType == null) return;
+
+                // Find all remaining aggregators of the same type and recompute values
+                var aggregators = GetAggregatorsForAttribute(modifier.AttributeType);
+                // If there are no aggregators, set base = current
+                if (aggregators.Count() == 0) {
+                    var current = target.GetBaseValue(modifier.AttributeType);
+                    if (current < 0) target.SetBaseValue(modifier.AttributeType, 0f);
+                    target.SetCurrentValue(modifier.AttributeType, current);
+                } else {
+                    UpdateAttribute(aggregators, modifier.AttributeType);
+                }
+            });
+        }
 
         /// <summary>
         /// This function is used to do checks for things that may happen on a timed basis, such as
@@ -232,33 +259,6 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-        private async void CheckGameplayEffectForTimedEffects(EffectContext effectContext) 
-        {
-            await WaitForEffectExpiryTime(effectContext);
-            var gameplayCues = effectContext.Effect.Configs.Cues;
-            foreach (var cue in gameplayCues) {
-                cue.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
-            }
-            // There could be multiple stacked effects, due to multiple casts
-            // Remove one instance of this effect from the active list
-            ModifyActiveGameplayEffect(effectContext, modifier => {
-                
-                effectAggregator.Remove(effectContext);
-                // effectsModifyAggregator.RemoveEffect(effectContext);
-                if (modifier.AttributeType == null) return;
-
-                // Find all remaining aggregators of the same type and recompute values
-                var aggregators = GetAggregatorsForAttribute(modifier.AttributeType);
-                // If there are no aggregators, set base = current
-                if (aggregators.Count() == 0) {
-                    var current = target.GetBaseValue(modifier.AttributeType);
-                    if (current < 0) target.SetBaseValue(modifier.AttributeType, 0f);
-                    target.SetCurrentValue(modifier.AttributeType, current);
-                } else {
-                    UpdateAttribute(aggregators, modifier.AttributeType);
-                }
-            });
-        }
 
         private IEnumerable<EffectContext> GetMatchingStackedEffectsByEffect(EffectContext effectContext) 
         {
@@ -269,12 +269,10 @@ namespace GameplayAbilitySystem.Effects
                 case StackType.None:
                     break;
                 case StackType.StackBySource:
-                    matchingStackedActiveEffects = GetAllEffects()
-                                        .Where(x => x.Instigator == effectContext.Instigator && x.Effect == effectContext.Effect);
+                    matchingStackedActiveEffects = AllEffects.Where(x => x.Instigator == effectContext.Instigator && x.Effect == effectContext.Effect);
                     break;
                 case StackType.StackByTarget:
-                    matchingStackedActiveEffects = GetAllEffects()
-                                        .Where(x => x.Target == effectContext.Target && x.Effect == effectContext.Effect);
+                    matchingStackedActiveEffects = AllEffects.Where(x => x.Target == effectContext.Target && x.Effect == effectContext.Effect);
                     break;
             }
             return matchingStackedActiveEffects;

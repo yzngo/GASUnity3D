@@ -30,8 +30,8 @@ namespace GameplayAbilitySystem
         private List<Ability> runningAbilities = new List<Ability>();
 
         // Lists all active Effect
-        private EffectsContainer effectsContainer;
-        public EffectsContainer EffectsContainer => effectsContainer;
+        private ActivedEffects effectsContainer;
+        public ActivedEffects EffectsContainer => effectsContainer;
 
         private Animator animator;
         public Animator Animator => animator;
@@ -48,7 +48,7 @@ namespace GameplayAbilitySystem
         // private IEnumerable<GameplayTag> AbilityGrantedTags => 
 
         public void Awake() {
-            effectsContainer = new EffectsContainer(this);
+            effectsContainer = new ActivedEffects(this);
             animator = GetComponent<Animator>();
             attributeSet = GetComponent<AttributeSet>();
         }
@@ -145,7 +145,7 @@ namespace GameplayAbilitySystem
                 // Such as stacking and effect durations
                 // Durational effect modify the current value
                 var effectContext = new EffectContext(sourceId, appliedEffect, this, target);
-                target.EffectsContainer.ApplyDurationalEffect(effectContext);
+                target.EffectsContainer.TryApplyDurationalEffect(effectContext);
             }
 
             // Remove all effects which have tags defined as "Be Removed Effects Tags". 
@@ -180,7 +180,7 @@ namespace GameplayAbilitySystem
 
         public IEnumerable<EffectContext> GetDurationEffects()
         {
-            List<EffectContext> durationEffects = EffectsContainer.GetAllEffects();
+            List<EffectContext> durationEffects = EffectsContainer.AllEffects;
             if (durationEffects == null) {
                 return new List<EffectContext>();
             }
@@ -199,35 +199,5 @@ namespace GameplayAbilitySystem
         public void SetBaseValue(AttributeType type, float value) => GetAttributeByType(type).SetBaseValue(attributeSet, ref value);
         public void SetCurrentValue(AttributeType type, float value) => GetAttributeByType(type).SetCurrentValue(attributeSet, ref value);
         private Attribute GetAttributeByType(AttributeType type) => attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == type);
-
-        // private GenericGameplayEffectEvent onEffectAdded = new GenericGameplayEffectEvent();
-        // private GenericGameplayEffectEvent onEffectRemoved = new GenericGameplayEffectEvent();
-
-        // private GenericAbilityEvent onGameplayAbilityActivated = new GenericAbilityEvent(); 
-        // private GenericAbilityEvent onGameplayAbilityCommitted = new GenericAbilityEvent();
-        // private GenericAbilityEvent onGameplayAbilityEnded = new GenericAbilityEvent();
-
-        // Called when an Ability is activated(激活) on this ASC
-        // public GenericAbilityEvent OnGameplayAbilityActivated => onGameplayAbilityActivated;
-        // Called when an Ability is committed(提交) on this ASC
-        // public GenericAbilityEvent OnGameplayAbilityCommitted => onGameplayAbilityCommitted;
-        // Called when an Ability ends
-        // public GenericAbilityEvent OnGameplayAbilityEnded => onGameplayAbilityEnded;
-        /// Called when an effect is added
-        // public GenericGameplayEffectEvent OnEffectAdded => onEffectAdded;
-        /// Called when an effect is removed
-        // public GenericGameplayEffectEvent OnEffectRemoved => onEffectRemoved;
-
-        /// List of running abilities that have not ended 
-        // public List<IGameplayAbility> RunningAbilities => runningAbilities;
-
-        // public void HandleGameplayEvent(GameplayTag EventTag, GameplayEventData Payload) {
-            /**
-             * TODO: Handle triggered abilities
-             * Search component for all abilities that are automatically triggered from a gameplay event
-             */
-
-            // OnGameplayEvent.Invoke(EventTag, Payload);
-        // }
     }
 }
