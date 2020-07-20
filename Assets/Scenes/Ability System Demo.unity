@@ -955,6 +955,11 @@ PrefabInstance:
       propertyPath: attributeBar
       value: 
       objectReference: {fileID: 2083350363}
+    - target: {fileID: 2017678857625141388, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: abilitySystem
+      value: 
+      objectReference: {fileID: 843129480}
     - target: {fileID: 3652452763574720524, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: AttributeType
@@ -980,6 +985,11 @@ PrefabInstance:
       propertyPath: attributeBar
       value: 
       objectReference: {fileID: 1618080984}
+    - target: {fileID: 3652452763574720524, guid: fddc582aed5bbbd4ab4ac8025536d369,
+        type: 3}
+      propertyPath: abilitySystem
+      value: 
+      objectReference: {fileID: 843129480}
     - target: {fileID: 7899279095267793602, guid: fddc582aed5bbbd4ab4ac8025536d369,
         type: 3}
       propertyPath: m_Name
@@ -2044,6 +2054,11 @@ PrefabInstance:
       propertyPath: attributeBar
       value: 
       objectReference: {fileID: 1708125190}
+    - target: {fileID: 1359308431272715899, guid: 87613a41b93a7d44a9290c82c0dd98c2,
+        type: 3}
+      propertyPath: abilitySystem
+      value: 
+      objectReference: {fileID: 7899279095716547601}
     - target: {fileID: 5555714685437361602, guid: 87613a41b93a7d44a9290c82c0dd98c2,
         type: 3}
       propertyPath: m_Name

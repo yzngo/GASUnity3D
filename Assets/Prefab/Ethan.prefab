@@ -1992,7 +1992,6 @@ GameObject:
   - component: {fileID: 7899279095267793611}
   - component: {fileID: 7899279095267793610}
   - component: {fileID: 7899279095267793603}
-  - component: {fileID: 7899279095267793608}
   - component: {fileID: 7899279095267793607}
   - component: {fileID: 7899279095267793605}
   m_Layer: 0
@@ -2089,7 +2088,6 @@ MonoBehaviour:
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.5
   SpeedAttribute: 
-  AttributeSet: {fileID: 7899279095267793608}
 --- !u!114 &7899279095267793610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2115,38 +2113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 7899279095267886658}
---- !u!114 &7899279095267793608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7899279095267793602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b4ca8122047dc4a9f205f9a7323c6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attributes:
-  - attributeType: Health
-    baseValue: 100
-    currentValue: 100
-  - attributeType: MaxHealth
-    baseValue: 100
-    currentValue: 100
-  - attributeType: Speed
-    baseValue: 5
-    currentValue: 5
-  - attributeType: Mana
-    baseValue: 20
-    currentValue: 20
-  - attributeType: MaxMana
-    baseValue: 20
-    currentValue: 20
-  preBaseChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
-    type: 2}
-  preCurrentChangeHandler: {fileID: 11400000, guid: d0fb19ee49913db48946ce55707e8938,
-    type: 2}
 --- !u!114 &7899279095267793607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3023,7 +2989,7 @@ PrefabInstance:
         type: 3}
       propertyPath: AttributeSet
       value: 
-      objectReference: {fileID: 7899279095267793608}
+      objectReference: {fileID: 0}
     - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: AttributeType
@@ -3088,7 +3054,7 @@ PrefabInstance:
         type: 3}
       propertyPath: AttributeSet
       value: 
-      objectReference: {fileID: 7899279095267793608}
+      objectReference: {fileID: 0}
     - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: AttributeType

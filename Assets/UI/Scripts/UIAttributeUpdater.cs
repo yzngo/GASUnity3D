@@ -7,21 +7,21 @@ using UnityEngine;
 using UnityEngine.Serialization;
 public class UIAttributeUpdater : MonoBehaviour 
 {
-    [SerializeField] private AttributeSet attributeSet = default;
+    [SerializeField] private AbilitySystem abilitySystem = default;
     [SerializeField] private string attributeType = default;
     [SerializeField] private string maxAttributeType = default;
-    [SerializeField] private float lerpSpeed = default;
-
     [SerializeField] private RectTransform attributeBar = default;
 
     private Attribute attribute;
     private Attribute maxAttribute;
+
+    private float lerpSpeed = 2;
     private float maxWidth;
 
     void Start() 
     {
-        attribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == attributeType);
-        maxAttribute = attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == maxAttributeType);
+        attribute = abilitySystem.GetAttributeByType(attributeType);
+        maxAttribute = abilitySystem.GetAttributeByType(maxAttributeType);
         maxWidth = attributeBar.rect.width;
     }
 

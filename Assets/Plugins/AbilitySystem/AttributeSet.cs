@@ -5,8 +5,7 @@ using GameplayAbilitySystem.Utility;
 
 namespace GameplayAbilitySystem.Attributes 
 {
-    [AddComponentMenu("Ability System/Attribute Set")]
-    public sealed class AttributeSet : MonoBehaviour
+    public sealed class AttributeSet
     {
         private List<Attribute> attributes = new List<Attribute>();
         public List<Attribute> Attributes => attributes;
@@ -26,9 +25,6 @@ namespace GameplayAbilitySystem.Attributes
 
         public void Add(string type, float baseValue, float currentValue)
         {
-            // if (attributes == null) {
-            //     attributes = new List<Attribute>();
-            // }
             attributes.Add( new Attribute(type, baseValue, currentValue) );            
         }
 

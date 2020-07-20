@@ -14,7 +14,6 @@ namespace GameplayAbilitySystem
     /// The AbilitySytem is the primary component. Every game object 
     /// that needs to participate with the GAS needs to have this component attached.
     [AddComponentMenu("Ability System/Ability System")]
-    [RequireComponent(typeof(AttributeSet))]
     public class AbilitySystem : MonoBehaviour 
     {
         // 自己身上作为目标的点
@@ -36,13 +35,12 @@ namespace GameplayAbilitySystem
 
         private Animator animator;
         public Animator Animator => animator;
-        private AttributeSet attributeSet;
+        private AttributeSet attributeSet = new AttributeSet();
 
         
         public void Awake() {
             activedEffects = new ActivedEffects(this);
             animator = GetComponent<Animator>();
-            attributeSet = GetComponent<AttributeSet>();
             AddAttribute(AttributeType.MaxHealth, 100, 100);
             AddAttribute(AttributeType.Health, 100, 100);
             AddAttribute(AttributeType.MaxMana, 50, 50);
@@ -195,6 +193,6 @@ namespace GameplayAbilitySystem
         public float GetCurrentValue(string type) => GetAttributeByType(type).CurrentValue;
         public void SetBaseValue(string type, float value) => GetAttributeByType(type).SetBaseValue(attributeSet, ref value);
         public void SetCurrentValue(string type, float value) => GetAttributeByType(type).SetCurrentValue(attributeSet, ref value);
-        private Attribute GetAttributeByType(string type) => attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == type);
+        public Attribute GetAttributeByType(string type) => attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == type);
     }
 }

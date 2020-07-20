@@ -1,6 +1,6 @@
 using GameplayAbilitySystem.Attributes;
 using UnityEngine;
-
+using GameplayAbilitySystem;
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
 	[RequireComponent(typeof(Rigidbody))]
@@ -17,7 +17,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		[SerializeField] float m_AnimSpeedMultiplier = 1f;
 		[SerializeField] float m_GroundCheckDistance = 0.1f;
         public string SpeedAttribute;
-        public AttributeSet AttributeSet;
+        private AbilitySystem abilitySystem;
 
         Rigidbody m_Rigidbody;
 		Animator m_Animator;
@@ -38,6 +38,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
+            abilitySystem = GetComponent<AbilitySystem>();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
@@ -193,7 +194,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// this allows us to modify the positional speed before it's applied.
 			if (m_IsGrounded && Time.deltaTime > 0)
 			{
-                var newMoveSpeedMultiplier = m_MoveSpeedMultiplier * AttributeSet.Attributes.Find(x => x.AttributeType == SpeedAttribute).CurrentValue;
+                var newMoveSpeedMultiplier = m_MoveSpeedMultiplier * abilitySystem.GetCurrentValue(SpeedAttribute);
                 Vector3 v = (m_Animator.deltaPosition * newMoveSpeedMultiplier) / Time.deltaTime;
 
 				// we preserve the existing y part of the current velocity.
