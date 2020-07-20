@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cc1ff66db5d0749b0bab3afccec0ce, type: 3}
   m_Name: Cooldown BloodPact
   m_EditorClassIdentifier: 
+  id: 1
   configs:
+    Icon: {fileID: 0}
     EffectType: 2
     DurationConfig:
       Policy: 1
@@ -29,7 +31,6 @@ MonoBehaviour:
       ExpirationPolicy: 0
     Modifiers: []
     EffectTags:
-      effectTags: []
       grantedToInstigatorTags:
       - {fileID: 11400000, guid: bcc193d422b231841b87591da788bb05, type: 2}
       removedEffectsTags: []

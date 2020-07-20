@@ -5,75 +5,37 @@ using GameplayAbilitySystem.Effects;
 using GameplayAbilitySystem;
 
 public class EffectsBar : MonoBehaviour {
-    public AbilitySystem instigator;
-    public List<GameplayTagStatusBarButton> GameplayTagIndicator;
-    public List<GameplayTagIconMap> GameplayTagIcons;
+    private AbilitySystem instigator;
+    private GameplayTagStatusBarButton[] GameplayTagIndicator;
 
-    private Dictionary<GameplayTag, GameplayTagIconMap> availableTagsToShow;
-
-    void Awake() 
-    {
-        availableTagsToShow = GameplayTagIcons.ToDictionary(x => x.Tag);
+    private void Awake() {
+        instigator = GameObject.FindWithTag("Player").GetComponent<AbilitySystem>();
+        GameplayTagIndicator = GetComponentsInChildren<GameplayTagStatusBarButton>();
     }
-
-    List<(GameplayTag Tag, EffectContext effectContext, int stacks)> GetTagsToShow() 
-    {
-        return instigator.GetActiveEffectsTags()
-                            .Where(x => availableTagsToShow
-                                                    .ContainsKey(x.Tag))
-                                                    .OrderBy(x => x.GrantingEffect.StartTime)
-                                                    .Select(x => (x.Tag, x.GrantingEffect, 1))
-                            .ToList();
-    }
-
-
     void Update() 
     {
-        // var stackedEffectsToShow = GetEffectsToShow();
-        // var stackedTagsToShow = GetStackedGameplayTagsToShow();
-        var temp = instigator.GetActiveEffectsTags()
-                            .Where(x => availableTagsToShow
-                                                    .ContainsKey(x.Tag))
-                                                    .OrderBy(x => x.GrantingEffect.StartTime)
-                                                    .Select(x => (x.Tag, x.GrantingEffect, 1))
-                            .ToList();
+        var effectsInfo = instigator.GetDurationEffects()
+                    .OrderBy(x => x.StartTime)
+                    .GroupBy(x => x.Effect.Id)
+                    .Select(x => (EffectContext: x.Last(), Stacks: x.Count()));
 
-        var stackedTagsToShow = GetTagsToShow().GroupBy(x => x.Tag)
-                            .Select(x => (x.Last().Tag, x.Last().effectContext, x.Count()))
-                            .ToList();
+        int tileIndex = 0;
+        foreach(var effectInfo in effectsInfo) {
+            if (GameplayTagIndicator.Length < tileIndex ) return;
+            if (effectInfo.EffectContext.Effect.Icon == null) continue;
 
+            float elapsedTime = effectInfo.EffectContext.ElapsedTime;
+            float totalTime = effectInfo.EffectContext.TotalTime;
+            float remainingPercent =  totalTime > 0 ? 1 - elapsedTime / totalTime : 0;
 
-
-
-        var tagIndex = 0;
-        for (int i = 0; i < stackedTagsToShow.Count; i++) {
-            var tagToShow = stackedTagsToShow[i];
-
-            var stacks = stackedTagsToShow[i].Item3;
-            // No more space to show buffs - just ignore the rest until space opens up
-            if (GameplayTagIndicator.Count < tagIndex) return;
-
-            availableTagsToShow.TryGetValue(tagToShow.Tag, out var iconMap);
-            if (iconMap == null) continue;
-
-            var cooldownElapsed = tagToShow.effectContext.CooldownTimeElapsed;
-            var cooldownTotal = tagToShow.effectContext.CooldownTimeTotal;
-
-            var remainingPercent = 0f;
-            if (cooldownTotal != 0) {
-                remainingPercent = 1 - cooldownElapsed / cooldownTotal;
-            }
-
-            GameplayTagIndicator[tagIndex].SetCooldownRemainingPercent(1 - remainingPercent);
-            GameplayTagIndicator[tagIndex].ImageIcon.sprite = iconMap.Sprite;
-            GameplayTagIndicator[tagIndex].ImageIcon.color = new Color( 1.0f, 1.0f, 1.0f);
-            GameplayTagIndicator[tagIndex].GetComponentInChildren<RectTransform>(true).gameObject.SetActive(true);
-            GameplayTagIndicator[tagIndex].SetStacks(stacks);
-            ++tagIndex;
+            GameplayTagIndicator[tileIndex].SetCooldownRemainingPercent(1- remainingPercent);
+            GameplayTagIndicator[tileIndex].ImageIcon.sprite = effectInfo.EffectContext.Effect.Icon;
+            GameplayTagIndicator[tileIndex].ImageIcon.color = new Color( 1.0f, 1.0f, 1.0f);
+            GameplayTagIndicator[tileIndex].GetComponentInChildren<RectTransform>(true).gameObject.SetActive(true);
+            GameplayTagIndicator[tileIndex].SetStacks(effectInfo.Stacks);
+            tileIndex++;
         }
-
-        // These are all empty - reset them
-        for (int i = tagIndex; i < GameplayTagIndicator.Count; i++) {
+        for (int i = tileIndex; i < GameplayTagIndicator.Length; i++) {
             GameplayTagIndicator[i].ImageIcon.sprite = null;
             GameplayTagIndicator[i].ImageIcon.color = new Color(0, 0, 0, 0);
             GameplayTagIndicator[i].SetCooldownRemainingPercent(0);

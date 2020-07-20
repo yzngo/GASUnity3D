@@ -1997,7 +1997,7 @@ GameObject:
   - component: {fileID: 7899279095267793605}
   m_Layer: 0
   m_Name: Ethan
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2224,9 +2224,9 @@ MonoBehaviour:
   - ability: {fileID: 11400000, guid: ae33e3a3cccb84e4fb4bfb4c2d5c089e, type: 2}
     target: {fileID: 0}
   - ability: {fileID: 11400000, guid: 2583a21c4bcf5a240a37b1568534e68f, type: 2}
-    target: {fileID: 0}
+    target: {fileID: 7899279095267793603}
   - ability: {fileID: 11400000, guid: 2ad2b404d2dbabc42ad72e779397634f, type: 2}
-    target: {fileID: 0}
+    target: {fileID: 7899279095267793603}
 --- !u!1 &7899279095267793604
 GameObject:
   m_ObjectHideFlags: 0

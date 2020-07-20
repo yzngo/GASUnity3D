@@ -46,25 +46,25 @@ namespace GameplayAbilitySystem.Effects
 
 // cooldown time
         /// The cooldown time that has already elapsed for this gameplay effect
-        public float CooldownTimeElapsed => Time.time - StartTime;
+        public float ElapsedTime => Time.time - StartTime;
         /// <summary>
         /// The total cooldown time for this gameplay effect
         /// </summary>
         /// <value>Cooldown time total</value>
-        public float CooldownTimeTotal => 
+        public float TotalTime => 
                 Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? Effect.Configs.DurationConfig.DurationLength : 0;
         /// <summary>
         /// The cooldown time that is remaining for this gameplay effect
         /// </summary>
         /// <value>Cooldown time remaining</value>
-        public float CooldownTimeRemaining => 
-                Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? CooldownTimeTotal - CooldownTimeElapsed : 0;
+        public float RemainingTime => 
+                Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? TotalTime - ElapsedTime : 0;
 
 // period
         // 对于周期性的effect而言, 自从上次应用效果之后流逝的时间
-        public float TimeSincePreviousPeriodicApplication => Time.time - timeOfLastPeriodicApply;
+        public float TimeSincePreviousPeriodApply => Time.time - timeOfLastPeriodicApply;
         // 对于周期性的effect而言, 到下次应用还需要的时间
-        public float TimeUntilNextPeriodicApplication => timeOfLastPeriodicApply + Effect.Configs.PeriodConfig.Period - Time.time;
+        public float TimeUntilNextPeriodApply => timeOfLastPeriodicApply + Effect.Configs.PeriodConfig.Period - Time.time;
         private Dictionary<AttributeType, AttributeModifyAggregator> PeriodicEffectModificationsToDate = new Dictionary<AttributeType, AttributeModifyAggregator>();
 
 // reset time
@@ -79,7 +79,7 @@ namespace GameplayAbilitySystem.Effects
 
         public void EndEffect() 
         {
-            StartTime = Time.time - CooldownTimeTotal;
+            StartTime = Time.time - TotalTime;
         }
 
         public void ForceEndEffect() 

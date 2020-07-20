@@ -15,7 +15,12 @@ namespace GameplayAbilitySystem.Effects
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class Effect : ScriptableObject 
     {
+        [SerializeField] private int id = default;
+        [SerializeField] private Sprite icon = default;
         [SerializeField] private EffectConfigs configs = default;
+
+        public int Id => id;
+        public Sprite Icon => icon;
         public EffectConfigs Configs => configs;
         public List<GameplayTag> GrantedTags => Configs.EffectTags.GrantedToInstigatorTags;
 

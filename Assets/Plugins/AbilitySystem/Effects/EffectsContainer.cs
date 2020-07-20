@@ -170,7 +170,7 @@ namespace GameplayAbilitySystem.Effects
                 } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration) {
                     // Check whether required time has expired
                     // We only need to do this for effects with a finite duration
-                    durationExpired = effectContext.CooldownTimeRemaining <= 0 ? true : false;
+                    durationExpired = effectContext.RemainingTime <= 0 ? true : false;
                 } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Infinite) {
                     durationExpired = effectContext.StartTime <= 0 ? true : false;
                 }
@@ -186,7 +186,7 @@ namespace GameplayAbilitySystem.Effects
 
         private void CheckAndApplyPeriodicEffect(EffectContext effectContext) 
         {
-            if (effectContext.TimeUntilNextPeriodicApplication <= 0) {
+            if (effectContext.TimeUntilNextPeriodApply <= 0) {
                 // Apply gameplay effect defined for period.  
                 if (effectContext.Effect.Configs.PeriodConfig.EffectOnExecute != null) {
                     effectContext.Instigator.ApplyEffectToTarget(
@@ -226,7 +226,7 @@ namespace GameplayAbilitySystem.Effects
                         // may have exceeded the actual limit by a little bit
                         // due to framerate.  So, when we reset the other cooldowns
                         // we need to account for this difference
-                        var timeOverflow = effect.CooldownTimeRemaining;
+                        var timeOverflow = effect.RemainingTime;
                         effect.ResetDuration(timeOverflow);
                     }
                     // This effect was going to expire anyway, but we put this here to be explicit to future code readers

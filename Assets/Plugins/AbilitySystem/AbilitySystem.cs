@@ -155,7 +155,7 @@ namespace GameplayAbilitySystem
             var beRemovedEffects = target.GetActiveEffectsTags()
                                     .Where(x => tagsToRemove.Any(y => x.Tag == y.EffectTag))
                                     .Join(tagsToRemove, x => x.Tag, x => x.EffectTag, (x, y) => new { Tag = x.Tag, effectContext = x.GrantingEffect, StacksToRemove = y.BeRemovedStacks })
-                                    .OrderBy(x => x.effectContext.CooldownTimeRemaining);
+                                    .OrderBy(x => x.effectContext.RemainingTime);
 
             Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
 
