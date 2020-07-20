@@ -4,12 +4,10 @@ using GameplayAbilitySystem.Attributes;
 using System;
 using System.Threading.Tasks;
 using GameplayAbilitySystem.Cues;
-
 using Cysharp.Threading.Tasks;
 
 namespace GameplayAbilitySystem.Effects 
 {
-    [Serializable]
     public class EffectsContainer 
     {
         private AbilitySystem target;
@@ -55,8 +53,7 @@ namespace GameplayAbilitySystem.Effects
 
             existingStacks = matchingStackedActiveEffects?.Count() ?? -1;
             if (existingStacks < maxStacks) { // We can still add more stacks.
-                AddActiveGameplayEffect(effectContext);
-                // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, effectContext);
+                ApplyEffect(effectContext);
                 // We only need to do timed checks for durational abilities
                 if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration
                     || effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Infinite) {
@@ -92,11 +89,6 @@ namespace GameplayAbilitySystem.Effects
             return aggregators.Concat(periodic);
         }
 
-        private void OnActiveGameplayEffectAdded(EffectContext effectContext) 
-        {
-            // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, effectContext);
-        }
-
         private void ModifyActiveGameplayEffect(EffectContext effectContext, Action<EffectModifier> action) 
         {
             foreach (var modifier in effectContext.Effect.Configs.Modifiers) {
@@ -108,7 +100,7 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-        private void AddActiveGameplayEffect(EffectContext effectContext) 
+        private void ApplyEffect(EffectContext effectContext) 
         {
             ModifyActiveGameplayEffect(effectContext, modifier => {
                 // We only apply if the effect has execute on application
@@ -143,10 +135,6 @@ namespace GameplayAbilitySystem.Effects
                     UpdateAttribute(aggregators, modifier.AttributeType);
                 }
             });
-            // Add cooldown effect as well.  Application of cooldown effect
-            // is different to other game effects, because we don't take
-            // attribute modifiers into account
-            OnActiveGameplayEffectAdded(effectContext);
         }
 
 
