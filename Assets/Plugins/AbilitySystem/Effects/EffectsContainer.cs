@@ -13,7 +13,7 @@ namespace GameplayAbilitySystem.Effects
     // so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
     public class EffectsModifyAggregator 
     {
-        private Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>> effectAggregator = 
+        public Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>> effectAggregator = 
             new Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>>();
 
         public Dictionary<AttributeType, AttributeModifyAggregator> AddorGet(EffectContext effectContext) 
@@ -135,7 +135,16 @@ namespace GameplayAbilitySystem.Effects
                 modifier.AttemptCalculateMagnitude(out var evaluatedValue);
 
                 // Check if we already have an entry for this gameplay effect attribute modifier
-                var attributeAggregatorMap = effectsModifyAggregator.AddorGet(effectContext);
+                // var attributeAggregatorMap = effectsModifyAggregator.AddorGet(effectContext);
+                
+                //todo-----
+                if (!effectsModifyAggregator.effectAggregator.TryGetValue(effectContext, out var attributeAggregators)) {
+                    attributeAggregators = new Dictionary<AttributeType, AttributeModifyAggregator>();
+                    effectsModifyAggregator.effectAggregator.Add(effectContext, attributeAggregators);
+                }
+                var attributeAggregatorMap = attributeAggregators;
+                // ---------------
+                // Dictionary<AttributeType, AttributeModifyAggregator> dic = 
 
                 if (modifier.AttributeType != null) {
                     // If aggregator for this attribute doesn't exist, add it.
