@@ -181,7 +181,7 @@ namespace GameplayAbilitySystem
 
         public IEnumerable<(GameplayTag Tag, EffectContext GrantingEffect)> GetActiveEffectsTags()
         {
-            List<EffectContext> activeEffects = EffectsContainer.effectsModifyAggregator.GetAllEffects();
+            List<EffectContext> activeEffects = EffectsContainer.GetAllEffects();
             if (activeEffects == null) 
                 return new List<(GameplayTag, EffectContext)>();
             return activeEffects.SelectMany(x => x.Effect.GrantedTags.Select(y => (y, x)));

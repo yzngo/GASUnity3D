@@ -16,24 +16,6 @@ namespace GameplayAbilitySystem.Effects
         public Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>> effectAggregator = 
             new Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>>();
 
-        public Dictionary<AttributeType, AttributeModifyAggregator> AddorGet(EffectContext effectContext) 
-        {
-            if (!effectAggregator.TryGetValue(effectContext, out var attributeAggregators)) {
-                attributeAggregators = new Dictionary<AttributeType, AttributeModifyAggregator>();
-                effectAggregator.Add(effectContext, attributeAggregators);
-            }
-            return attributeAggregators;
-        }
-
-        public void RemoveEffect(EffectContext effectContext) 
-        {
-            effectAggregator.Remove(effectContext);
-        }
-
-        public List<EffectContext> GetAllEffects() 
-        {
-            return effectAggregator.Keys.ToList();
-        }
 
         // 获取所有effect中,修改某个attribute的所有attributeAggregator
         public IEnumerable<AttributeModifyAggregator> GetAggregatorsForAttribute(AttributeType Attribute) 
@@ -110,6 +92,11 @@ namespace GameplayAbilitySystem.Effects
             var baseAttributeValue = target.GetBaseValue(attributeType);
             var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
             target.SetCurrentValue(attributeType, newCurrentAttributeValue);
+        }
+
+        public List<EffectContext> GetAllEffects()
+        {
+            return effectsModifyAggregator.effectAggregator.Keys.ToList();
         }
 
         private void OnActiveGameplayEffectAdded(EffectContext effectContext) 
@@ -274,8 +261,9 @@ namespace GameplayAbilitySystem.Effects
             // There could be multiple stacked effects, due to multiple casts
             // Remove one instance of this effect from the active list
             ModifyActiveGameplayEffect(effectContext, modifier => {
-
-                effectsModifyAggregator.RemoveEffect(effectContext);
+                
+                effectsModifyAggregator.effectAggregator.Remove(effectContext);
+                // effectsModifyAggregator.RemoveEffect(effectContext);
                 if (modifier.AttributeType == null) return;
 
                 // Find all remaining aggregators of the same type and recompute values
@@ -300,13 +288,11 @@ namespace GameplayAbilitySystem.Effects
                 case StackType.None:
                     break;
                 case StackType.StackBySource:
-                    matchingStackedActiveEffects = effectsModifyAggregator
-                                        .GetAllEffects()
+                    matchingStackedActiveEffects = GetAllEffects()
                                         .Where(x => x.Instigator == effectContext.Instigator && x.Effect == effectContext.Effect);
                     break;
                 case StackType.StackByTarget:
-                    matchingStackedActiveEffects = effectsModifyAggregator
-                                        .GetAllEffects()
+                    matchingStackedActiveEffects = GetAllEffects()
                                         .Where(x => x.Target == effectContext.Target && x.Effect == effectContext.Effect);
                     break;
             }
