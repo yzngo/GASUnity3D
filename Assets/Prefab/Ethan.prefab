@@ -1991,8 +1991,8 @@ GameObject:
   - component: {fileID: 7899279095267793612}
   - component: {fileID: 7899279095267793611}
   - component: {fileID: 7899279095267793610}
-  - component: {fileID: 7899279095267793603}
   - component: {fileID: 7899279095267793607}
+  - component: {fileID: 7899279095267793603}
   - component: {fileID: 7899279095267793605}
   m_Layer: 0
   m_Name: Ethan
@@ -2100,19 +2100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ecf93419cb10041ab05d5d43ac1552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7899279095267793603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7899279095267793602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 955d1cc64d738074886242fa61f0bdf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPoint: {fileID: 7899279095267886658}
 --- !u!114 &7899279095267793607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2174,6 +2161,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7899279095267793603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7899279095267793602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955d1cc64d738074886242fa61f0bdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPoint: {fileID: 7899279095267886658}
 --- !u!114 &7899279095267793605
 MonoBehaviour:
   m_ObjectHideFlags: 0

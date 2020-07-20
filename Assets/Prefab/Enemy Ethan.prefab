@@ -1890,7 +1890,6 @@ GameObject:
   - component: {fileID: 5555714685437361613}
   - component: {fileID: 5555714685437361612}
   - component: {fileID: 5555714685437361603}
-  - component: {fileID: 1295322296}
   m_Layer: 0
   m_Name: Enemy Ethan
   m_TagString: Untagged
@@ -1977,18 +1976,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 5555714685437583682}
---- !u!114 &1295322296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555714685437361602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f94e23f44264684797ec593a3701767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5555714685437361604
 GameObject:
   m_ObjectHideFlags: 0
