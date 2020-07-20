@@ -12,6 +12,7 @@ public class EffectsBar : MonoBehaviour {
         instigator = GameObject.FindWithTag("Player").GetComponent<AbilitySystem>();
         GameplayTagIndicator = GetComponentsInChildren<GameplayTagStatusBarButton>();
     }
+
     void Update() 
     {
         var effectsInfo = instigator.GetDurationEffects()
@@ -28,7 +29,7 @@ public class EffectsBar : MonoBehaviour {
             float totalTime = effectInfo.EffectContext.TotalTime;
             float remainingPercent =  totalTime > 0 ? 1 - elapsedTime / totalTime : 0;
 
-            GameplayTagIndicator[tileIndex].SetCooldownRemainingPercent(1- remainingPercent);
+            GameplayTagIndicator[tileIndex].SetRemainingPercent(remainingPercent);
             GameplayTagIndicator[tileIndex].ImageIcon.sprite = effectInfo.EffectContext.Effect.Icon;
             GameplayTagIndicator[tileIndex].ImageIcon.color = new Color( 1.0f, 1.0f, 1.0f);
             GameplayTagIndicator[tileIndex].GetComponentInChildren<RectTransform>(true).gameObject.SetActive(true);
@@ -38,7 +39,7 @@ public class EffectsBar : MonoBehaviour {
         for (int i = tileIndex; i < GameplayTagIndicator.Length; i++) {
             GameplayTagIndicator[i].ImageIcon.sprite = null;
             GameplayTagIndicator[i].ImageIcon.color = new Color(0, 0, 0, 0);
-            GameplayTagIndicator[i].SetCooldownRemainingPercent(0);
+            GameplayTagIndicator[i].SetRemainingPercent(0);
             GameplayTagIndicator[i].GetComponentInChildren<RectTransform>(true).gameObject.SetActive(false);
             GameplayTagIndicator[i].SetStacks(0);
         }
