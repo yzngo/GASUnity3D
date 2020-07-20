@@ -133,7 +133,7 @@ namespace GameplayAbilitySystem.Effects
                 target.SetBaseValue(changeByType.Key, changeByType.Value.newValue);
 
                 // mark the corresponding aggregator as dirty so we can recalculate the current values
-                var aggregators = target.EffectsContainer.effectsModifyAggregator.GetAggregatorsForAttribute(changeByType.Key);
+                var aggregators = target.EffectsContainer.GetAggregatorsForAttribute(changeByType.Key);
                 if (aggregators.Count() != 0) {
                     target.EffectsContainer.UpdateAttribute(aggregators, changeByType.Key);
                 } else {

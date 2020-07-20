@@ -9,15 +9,14 @@ using Cysharp.Threading.Tasks;
 
 namespace GameplayAbilitySystem.Effects 
 {
-    // This is used to keep track of all the "temporary" attribute modifiers,
-    // so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
     public class EffectsModifyAggregator 
     {
+        // This is used to keep track of all the "temporary" attribute modifiers,
+        // so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
         public Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>> effectAggregator = 
             new Dictionary<EffectContext, Dictionary<AttributeType, AttributeModifyAggregator>>();
 
 
-        // 获取所有effect中,修改某个attribute的所有attributeAggregator
         public IEnumerable<AttributeModifyAggregator> GetAggregatorsForAttribute(AttributeType Attribute) 
         {
             // Find all remaining aggregators of the same type and recompute values
@@ -99,6 +98,20 @@ namespace GameplayAbilitySystem.Effects
             return effectsModifyAggregator.effectAggregator.Keys.ToList();
         }
 
+        // 获取所有effect中,修改某个attribute的所有attributeAggregator
+        public IEnumerable<AttributeModifyAggregator> GetAggregatorsForAttribute(AttributeType Attribute) 
+        {
+            // Find all remaining aggregators of the same type and recompute values
+            var aggregators = effectsModifyAggregator.effectAggregator
+                                .Where(x => x.Value.ContainsKey(Attribute))
+                                .Select(x => x.Value[Attribute]);
+            var periodic = effectsModifyAggregator.effectAggregator
+                            .Where(x => x.Key.Effect.Configs.PeriodConfig.Period > 0)
+                            .Select(x => x.Key.GetPeriodicAggregatorForAttribute(Attribute))
+                            .Where(x => x != null);
+            return aggregators.Concat(periodic);
+        }
+
         private void OnActiveGameplayEffectAdded(EffectContext effectContext) 
         {
             // ActiveGameplayEffectAddedEvent?.Invoke(AbilitySystem, effectContext);
@@ -146,7 +159,7 @@ namespace GameplayAbilitySystem.Effects
                         aggregator.AddAggregatorModifier(modifier.OperationType, evaluatedValue);
                     }
                     // Recalculate new value by recomputing all aggregators
-                    var aggregators = effectsModifyAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
+                    var aggregators = GetAggregatorsForAttribute(modifier.AttributeType);
                     UpdateAttribute(aggregators, modifier.AttributeType);
                 }
             });
@@ -267,7 +280,7 @@ namespace GameplayAbilitySystem.Effects
                 if (modifier.AttributeType == null) return;
 
                 // Find all remaining aggregators of the same type and recompute values
-                var aggregators = effectsModifyAggregator.GetAggregatorsForAttribute(modifier.AttributeType);
+                var aggregators = GetAggregatorsForAttribute(modifier.AttributeType);
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
                     var current = target.GetBaseValue(modifier.AttributeType);
