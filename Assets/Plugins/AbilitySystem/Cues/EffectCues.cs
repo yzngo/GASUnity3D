@@ -14,16 +14,16 @@ namespace GameplayAbilitySystem.Cues
         public void HandleCue(AbilitySystem target, CueEventMomentType moment) {
             switch (moment) {
                 case CueEventMomentType.OnActive:
-                    OnActiveAction?.Action(target);
+                    OnActiveAction?.Execute(target);
                     break;
                 case CueEventMomentType.OnExecute:
-                    ExecuteAction?.Action(target);
+                    ExecuteAction?.Execute(target);
                     break;
                 case CueEventMomentType.WhileActive:
-                    WhileActiveAction?.Action(target);
+                    WhileActiveAction?.Execute(target);
                     break;
                 case CueEventMomentType.OnRemove:
-                    OnRemoveAction?.Action(target);
+                    OnRemoveAction?.Execute(target);
                     break;
             }
         }

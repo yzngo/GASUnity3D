@@ -18,7 +18,7 @@ namespace AbilitySystemDemo
         public Vector3 Scale = Vector3.one;
         public float DestroyInSeconds = -1;
 
-        public override async void Action(AbilitySystem target) 
+        public override async void Execute(AbilitySystem target) 
         {
             Time.timeScale = 0.5f;
             await UniTask.DelayFrame(5);
