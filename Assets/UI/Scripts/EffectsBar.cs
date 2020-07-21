@@ -17,20 +17,20 @@ public class EffectsBar : MonoBehaviour
     {
         var effectsInfo = instigator.GetDurationEffects()
                     .OrderBy(x => x.StartTime)
-                    .GroupBy(x => x.Effect.Id)
+                    .GroupBy(x => x.Effect.Configs.Id)
                     .Select(x => (EffectContext: x.Last(), Stacks: x.Count()));
 
         int tileIndex = 0;
         foreach(var effectInfo in effectsInfo) {
             if (effectTiles.Length < tileIndex ) return;
-            if (effectInfo.EffectContext.Effect.Icon == null) continue;
+            if (effectInfo.EffectContext.Effect.Configs.Icon == null) continue;
 
             float elapsedTime = effectInfo.EffectContext.ElapsedTime;
             float totalTime = effectInfo.EffectContext.TotalTime;
             float remainingPercent =  totalTime > 0 ? 1 - elapsedTime / totalTime : 0;
 
             effectTiles[tileIndex].SetRemainingPercent(remainingPercent);
-            effectTiles[tileIndex].SetSprite(effectInfo.EffectContext.Effect.Icon, Color.white);
+            effectTiles[tileIndex].SetSprite(effectInfo.EffectContext.Effect.Configs.Icon, Color.white);
             effectTiles[tileIndex].GetComponentInChildren<RectTransform>(true).gameObject.SetActive(true);
             effectTiles[tileIndex].SetStacks(effectInfo.Stacks);
             tileIndex++;

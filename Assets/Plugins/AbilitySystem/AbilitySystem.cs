@@ -141,8 +141,8 @@ namespace GameplayAbilitySystem
             // This is accomplished by finding all effects which grant these tags, and then adjusting start time
             var beRemovedInfo = appliedEffect.Configs.RemoveEffectsInfo;
             var beRemovedEffects = target.GetDurationEffects()
-                                .Where(x => beRemovedInfo.Any(y => x.Effect.Id == y.RemoveId))
-                                .Join(beRemovedInfo, x => x.Effect.Id, y => y.RemoveId, (x, y) => new { Id = x.Effect.Id, EffectContext = x, Stacks = y.RemoveStacks })
+                                .Where(x => beRemovedInfo.Any(y => x.Effect.Configs.Id == y.RemoveId))
+                                .Join(beRemovedInfo, x => x.Effect.Configs.Id, y => y.RemoveId, (x, y) => new { Id = x.Effect.Configs.Id, EffectContext = x, Stacks = y.RemoveStacks })
                                 .OrderBy(x => x.EffectContext.RemainingTime);
 
             Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();

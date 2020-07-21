@@ -8,6 +8,7 @@ namespace GameplayAbilitySystem.Effects
 {
     [Serializable]
     public class EffectConfigs {
+        public int Id;
         public Sprite Icon;
         public EffectType EffectType;
         public DurationConfig DurationConfig;

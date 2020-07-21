@@ -12,15 +12,8 @@ namespace GameplayAbilitySystem.Effects
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
     public class Effect : ScriptableObject 
     {
-        [SerializeField] private int id = default;
-        [SerializeField] private Sprite icon = default;
         [SerializeField] private EffectConfigs configs = default;
-
-        public int Id => id;
-        public Sprite Icon => icon;
         public EffectConfigs Configs => configs;
-
-
 
         // 求[此effect]聚合之后的对所有属性的所有操作集合
         // e.g.     HP ->  Add 100, Multi 0.5, Div 0.1
