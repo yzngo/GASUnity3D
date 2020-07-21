@@ -109,7 +109,7 @@ namespace GameplayAbilitySystem
 
             // remove effects that mark remove from config
             List<RemoveEffectInfo> beRemovedInfo = effect.Configs.RemoveEffectsInfo;
-            var beRemovedEffects = target.GetDurationEffects()
+            var beRemovedEffects = target.GetAllDurationEffects()
                                 .Where(x => beRemovedInfo.Any(y => x.Effect.Configs.Id == y.RemoveId))
                                 .Join(beRemovedInfo, x => x.Effect.Configs.Id, y => y.RemoveId, (x, y) => 
                                             new { Id = x.Effect.Configs.Id, EffectContext = x, Stacks = y.RemoveStacks })
@@ -134,7 +134,7 @@ namespace GameplayAbilitySystem
             }
         }
 
-        public IEnumerable<EffectContext> GetDurationEffects()
+        public IEnumerable<EffectContext> GetAllDurationEffects()
         {
             List<EffectContext> durationEffects = ActivedEffects.AllEffects;
             if (durationEffects == null) {
@@ -143,20 +143,11 @@ namespace GameplayAbilitySystem
             return durationEffects.Where(x => x.Effect.Configs.EffectType == EffectType.Normal && x.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration);
         }
 
-        public void OnAnimationEvent(string param)
-        {
-            OnAnimEvent.Invoke(param);
-        }
+        public void OnAnimationEvent(string param) => OnAnimEvent.Invoke(param);
 
 // attribute -----------------------------------------------------------------------------
         public bool IsAttributeExist(string type) => attributeSet.Attributes.Exists( x => x.AttributeType == type);
-        public void AddAttribute(string type, float baseValue, float currentValue) {
-            if (attributeSet == null) {
-                Debug.Log("attributeSet is null");
-            }
-            attributeSet.Add(type, baseValue, currentValue);
-        }
-
+        public void AddAttribute(string type, float baseValue, float currentValue) => attributeSet.Add(type, baseValue, currentValue);
         public float GetBaseValue(string type) => GetAttributeByType(type).BaseValue;
         public float GetCurrentValue(string type) => GetAttributeByType(type).CurrentValue;
         public void SetBaseValue(string type, float value) => GetAttributeByType(type).SetBaseValue(attributeSet, ref value);

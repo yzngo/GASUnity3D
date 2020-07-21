@@ -58,7 +58,7 @@ namespace GameplayAbilitySystem.Abilities
                                     .AllEffects
                                     .Where(x => x.IsCoolDownOf(this))
                                     .DefaultIfEmpty()
-                                    .OrderByDescending(x => x.RemainingTime)
+                                    .OrderByDescending(x => x?.RemainingTime)
                                     .FirstOrDefault();
 
             if (maxCDEffectContext == null) {
