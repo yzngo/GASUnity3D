@@ -25,7 +25,7 @@ namespace GameplayAbilitySystem.Abilities
             var animatorComponent = instigator.GetComponent<Animator>();
 
             // Make sure we have enough resources.  End ability if we don't
-            AbilityEventData abilityEventData = await instigator.OnAbilityEvent.WaitForEvent(
+            AbilityEventData abilityEventData = await instigator.OnAbilityStart.WaitForEvent(
                 (eventData) => eventData.abilityId == ability.Id
             );
             animatorComponent.SetTrigger(AnimationTriggerName);

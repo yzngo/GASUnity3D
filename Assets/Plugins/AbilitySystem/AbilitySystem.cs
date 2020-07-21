@@ -22,8 +22,7 @@ namespace GameplayAbilitySystem
 
         // Called when a AbilityEvent is executed
         private AbilityEvent onAbilityEvent = new AbilityEvent();
-        public AbilityEvent OnAbilityEvent => onAbilityEvent;
-
+        public AbilityEvent OnAbilityStart => onAbilityEvent;
         private AnimEvent onAnimEvent = new AnimEvent();
         public AnimEvent OnAnimEvent => onAnimEvent;
 
@@ -72,13 +71,12 @@ namespace GameplayAbilitySystem
             // 技能仅仅是一个时序流程
             runningAbilities.Add(ability);
             ability.Commit(this);
-            // GameplayTag abilityTag = ability.Tags.AbilityTags.Count > 0 ? ability.Tags.AbilityTags[0] : new GameplayTag();
+
             var data = new AbilityEventData();
             data.abilityId = ability.Id;
             data.ability = ability;
-            // data.abilityTag = abilityTag;
             data.target = target;
-            OnAbilityEvent?.Invoke(data);
+            OnAbilityStart.Invoke(data);
             return true;
         }
 

@@ -8,8 +8,10 @@ namespace GameplayAbilitySystem.Abilities
     public class InstantAttack : AbilityLogic 
     {
         public Effect TargetGameplayEffect;
-        public string ExecuteEffectToken;
-        // public GameplayTag WaitForEventTag;
+        [SerializeField] private bool waitForCastingStart = false;
+        [SerializeField] private bool waitForFireProjectile = false;
+        [SerializeField] private bool waitForCastingComplete = false;
+        [SerializeField] private Effect appliedEffectAfterComplete = default;
         public string AnimationTriggerName;
         public string AnimationCompleteTriggerName;
         public string CompletionAnimatorStateFullHash;
@@ -18,17 +20,17 @@ namespace GameplayAbilitySystem.Abilities
         {
             var animator = instigator.Animator;
             // Make sure we have enough resources.  End ability if we don't
-            AbilityEventData abilityEventData = await instigator.OnAbilityEvent.WaitForEvent(
+            AbilityEventData abilityEventData = await instigator.OnAbilityStart.WaitForEvent(
                 (eventData) => eventData.abilityId == ability.Id
             );
 
             animator.SetTrigger(AnimationTriggerName);
             animator.SetTrigger(AnimationCompleteTriggerName);
 
-            if ( !string.IsNullOrEmpty(ExecuteEffectToken) ) {
-                await instigator.OnAnimEvent.WaitForEvent( (x) => x == ExecuteEffectToken);
+            if ( waitForCastingComplete == true) {
+                await instigator.OnAnimEvent.WaitForEvent( (x) => x == AnimEventKey.CastingComplete);
             }
-            instigator.ApplyEffectToTarget(ability.Id, TargetGameplayEffect, abilityEventData.target);
+            instigator.ApplyEffectToTarget(ability.Id, appliedEffectAfterComplete, abilityEventData.target);
 
 
             var beh = animator.GetBehaviour<ActorFSMBehaviour>();
