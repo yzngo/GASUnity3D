@@ -73,7 +73,7 @@ namespace GameplayAbilitySystem.Abilities
         private bool IsCostSatisfied(AbilitySystem instigator) 
         {
             //       attribute type         operation type      value
-            Dictionary<string, Dictionary<ModifierOperationType, float>> modifiers = CostEffect.CalculateModifiers();
+            Dictionary<string, Dictionary<OperationType, float>> modifiers = CostEffect.CalculateModifiers();
 
             List<AttributeModifyInfo> totalModifyInfo =
                     CostEffect.CalculateAttributes(instigator, modifiers, operateOnCurrentValue: true);

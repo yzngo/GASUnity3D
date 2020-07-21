@@ -18,24 +18,24 @@ namespace GameplayAbilitySystem.Effects
         // 求[此effect]聚合之后的对所有属性的所有操作集合
         // e.g.     HP ->  Add 100, Multi 0.5, Div 0.1
         //          MP ->  Add 10,  Multi 0,   Div 0
-        public Dictionary<string, Dictionary<ModifierOperationType, float>> CalculateModifiers() 
+        public Dictionary<string, Dictionary<OperationType, float>> CalculateModifiers() 
         {
-            var totalModifies = new Dictionary<string, Dictionary<ModifierOperationType, float>>();
+            var totalModifies = new Dictionary<string, Dictionary<OperationType, float>>();
 
             foreach (var modifier in Configs.Modifiers) {
                 // 当前attributeType的条目是否存在
                 if (!totalModifies.TryGetValue(modifier.Type, out var typeModifiers)) {
-                    typeModifiers = new Dictionary<ModifierOperationType, float>();
+                    typeModifiers = new Dictionary<OperationType, float>();
                     totalModifies.Add(modifier.Type, typeModifiers);
                 }
                 // 当前attribute的operation条目是否存在
                 if (!typeModifiers.TryGetValue(modifier.OperationType, out var value)) {
                     value = 0;
                     switch (modifier.OperationType) {
-                        case ModifierOperationType.Multiply:
+                        case OperationType.Multiply:
                             value = 1;
                             break;
-                        case ModifierOperationType.Divide:
+                        case OperationType.Divide:
                             value = 1;
                             break;
                         default:
@@ -46,13 +46,13 @@ namespace GameplayAbilitySystem.Effects
                 }
 
                 switch (modifier.OperationType) {
-                    case ModifierOperationType.Add:
+                    case OperationType.Add:
                         totalModifies[modifier.Type][modifier.OperationType] += modifier.Value;
                         break;
-                    case ModifierOperationType.Multiply:
+                    case OperationType.Multiply:
                         totalModifies[modifier.Type][modifier.OperationType] *= modifier.Value;
                         break;
-                    case ModifierOperationType.Divide:
+                    case OperationType.Divide:
                         totalModifies[modifier.Type][modifier.OperationType] *= modifier.Value;
                         break;
                 }
@@ -64,19 +64,19 @@ namespace GameplayAbilitySystem.Effects
         //      MP -> oldValue 200 newValue 189
         public List<AttributeModifyInfo> CalculateAttributes(
                             AbilitySystem target, 
-                            Dictionary<string, Dictionary<ModifierOperationType, float>> totalModifies, 
+                            Dictionary<string, Dictionary<OperationType, float>> totalModifies, 
                             bool operateOnCurrentValue = false
         ) {
             var totalAttributeChange = new List<AttributeModifyInfo>();
 
             foreach (var modifyOfType in totalModifies) {
-                if (!modifyOfType.Value.TryGetValue(ModifierOperationType.Add, out var addition)) {
+                if (!modifyOfType.Value.TryGetValue(OperationType.Add, out var addition)) {
                     addition = 0;
                 }
-                if (!modifyOfType.Value.TryGetValue(ModifierOperationType.Multiply, out var multiplication)) {
+                if (!modifyOfType.Value.TryGetValue(OperationType.Multiply, out var multiplication)) {
                     multiplication = 1;
                 }
-                if (!modifyOfType.Value.TryGetValue(ModifierOperationType.Divide, out var division)) {
+                if (!modifyOfType.Value.TryGetValue(OperationType.Divide, out var division)) {
                     division = 1;
                 }
 

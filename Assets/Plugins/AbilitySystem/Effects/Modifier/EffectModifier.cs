@@ -8,13 +8,11 @@ namespace GameplayAbilitySystem.Effects
     public class EffectModifier
     {
         [SerializeField] private string type = default;
-        [SerializeField] private ModifierOperationType operationType = default;
-
-        [FormerlySerializedAs("scaledValue")]
+        [SerializeField] private OperationType operationType = default;
         [SerializeField] private float value = default;
 
         public string Type => type;
-        public ModifierOperationType OperationType => operationType;
+        public OperationType OperationType => operationType;
         public float Value => value;
         
         public bool AttemptCalculateMagnitude(out float evaluatedValue) {
