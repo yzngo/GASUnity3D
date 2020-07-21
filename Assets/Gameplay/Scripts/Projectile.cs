@@ -1,24 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour 
 {
-    public float SeekingSpeed = 1f;
-    private bool hasCollided = false;
-    private GameObject TargetCollider = null;
-    public AnimationCurve Speed;
+    [SerializeField] private float speed = 9.0f;
+    [SerializeField] private AnimationCurve speedCurve = default;
 
-    public async Task SeekTarget(Transform target, GameObject targetCollider) 
+    private bool collided = false;
+    private GameObject targetBody = null;
+
+    public async Task SeekTarget(Transform targetPoint, GameObject targetBody) 
     {
-        TargetCollider = targetCollider;
-        var t = 0f;
-        while (!hasCollided) {
-            transform.LookAt(target);
-            transform.position += transform.forward * Time.deltaTime * SeekingSpeed * Speed.Evaluate(t);
-
+        this.targetBody = targetBody;
+        float t = 0f;
+        while (!collided) {
+            transform.LookAt(targetPoint);
+            transform.position += transform.forward * Time.deltaTime * speed * speedCurve.Evaluate(t);
             await UniTask.DelayFrame(0);
             t += Time.deltaTime;
         }
@@ -26,8 +24,8 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject == TargetCollider) {
-            hasCollided = true;
+        if (other.gameObject == targetBody) {
+            collided = true;
         }
     }
 }
