@@ -56,7 +56,7 @@ namespace GameplayAbilitySystem.Abilities
 
             EffectContext maxCDEffectContext = instigator.ActivedEffects
                                     .AllEffects
-                                    .Where(x => x.IsCoolDownOf(this))
+                                    .Where(x => x.IsCoolDownEffectOf(this))
                                     .DefaultIfEmpty()
                                     .OrderByDescending(x => x?.RemainingTime)
                                     .FirstOrDefault();

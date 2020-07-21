@@ -28,7 +28,7 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-        public bool IsCoolDownOf(Ability ability) 
+        public bool IsCoolDownEffectOf(Ability ability) 
         {
             if (Effect.Configs.EffectType == EffectType.GlobalCoolDown) {
                 return true;
