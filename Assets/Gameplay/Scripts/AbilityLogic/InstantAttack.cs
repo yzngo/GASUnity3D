@@ -11,25 +11,25 @@ namespace GameplayAbilitySystem.Abilities
         [SerializeField] private bool waitForFireProjectile = false;
         [SerializeField] private bool waitForCastingComplete = false;
         [SerializeField] private Effect appliedEffectAfterComplete = default;
-        public string AnimationTriggerName;
-        public string AnimationCompleteTriggerName;
-        public string CompletionAnimatorStateFullHash;
 
         public override async void Execute(AbilitySystem instigator, Ability ability) 
         {
             var animator = instigator.Animator;
 
-            animator.SetTrigger(AnimationTriggerName);
-            animator.SetTrigger(AnimationCompleteTriggerName);
+            animator.SetTrigger(AnimParams.Do_Magic);
+            animator.SetTrigger(AnimParams.Execute_Magic_2);
 
             if ( waitForCastingComplete == true) {
                 await instigator.OnAnimEvent.WaitForEvent( (x) => x == AnimEventKey.CastingComplete);
             }
+
             instigator.ApplyEffectToTarget(ability.Id, appliedEffectAfterComplete, ability.Target);
 
-            var beh = animator.GetBehaviour<ActorFSMBehaviour>();
-            await beh.StateEnter.WaitForEvent((anim, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));
-
+            ActorFSMBehaviour fsmBehaviour = animator.GetBehaviour<ActorFSMBehaviour>();
+            await fsmBehaviour.StateEnter.WaitForEvent(
+                (anim, stateInfo, layerIndex) => 
+                    stateInfo.fullPathHash == Animator.StringToHash("Base.Idle")
+            );
             ability.End(instigator);
         }
 
