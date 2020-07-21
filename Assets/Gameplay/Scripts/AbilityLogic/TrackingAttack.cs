@@ -10,6 +10,8 @@ namespace GameplayAbilitySystem.Abilities
     public class TrackingAttack : AbilityLogic 
     {
         [SerializeField] private GameObject projectile = default;
+
+        [Tooltip("相对于发出者的偏移位置")]
         [SerializeField] private Vector3 projectilePositionOffset = default;
         [SerializeField] private Effect appliedEffectAfterComplete = default;
 
@@ -20,9 +22,6 @@ namespace GameplayAbilitySystem.Abilities
             AbilityEventData abilityEventData = await instigator.OnAbilityStart.WaitForEvent(
                 (eventData) => eventData.abilityId == ability.Id
             );
-
-            List<GameObject> objectsSpawned = new List<GameObject>();
-
             animator.SetTrigger(AnimParams.Do_Magic);
 
             GameObject instantiatedProjectile = null;
@@ -30,20 +29,18 @@ namespace GameplayAbilitySystem.Abilities
 
             if (projectile != null) {
                 instantiatedProjectile = Instantiate(projectile);
-                instantiatedProjectile.transform.position = 
-                        instigator.transform.position + projectilePositionOffset + instigator.transform.forward * 1.2f;
+                instantiatedProjectile.transform.position = instigator.transform.position + projectilePositionOffset;
             }
-            animator.SetTrigger(AnimParams.Execute_Magic);
 
+            animator.SetTrigger(AnimParams.Execute_Magic);
             await instigator.OnAnimEvent.WaitForEvent( (x) => x == AnimEventKey.FireProjectile );
 
-            // Animation complete.  Spawn and send projectile at target
             if (instantiatedProjectile != null) {
                 SeekTargetAndDestroy(instigator, abilityEventData, instantiatedProjectile);
             }
 
-            var beh = animator.GetBehaviour<ActorFSMBehaviour>();
-            await beh.StateEnter.WaitForEvent((_1, stateInfo, _2) => stateInfo.fullPathHash == Animator.StringToHash("Base.Idle"));
+            ActorFSMBehaviour fsmBehaviour = animator.GetBehaviour<ActorFSMBehaviour>();
+            await fsmBehaviour.StateEnter.WaitForEvent((_, stateInfo, _2) => stateInfo.fullPathHash == Animator.StringToHash("Base.Idle"));
             ability.End(instigator);
         }
 
@@ -52,6 +49,5 @@ namespace GameplayAbilitySystem.Abilities
             instigator.ApplyEffectToTarget(data.ability.Id, appliedEffectAfterComplete, data.target);
             DestroyImmediate(projectile);
         }
-
     }
 }

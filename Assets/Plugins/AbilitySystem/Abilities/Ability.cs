@@ -54,7 +54,6 @@ namespace GameplayAbilitySystem.Abilities
             // TODO: Remove gameplay cues
             // TODO: Cancel ability
             // TODO: Remove blocking/cancelling Gameplay Tags
-
             instigator.NotifyAbilityEnded(this);
         }
 

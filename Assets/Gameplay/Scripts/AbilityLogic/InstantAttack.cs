@@ -29,8 +29,7 @@ namespace GameplayAbilitySystem.Abilities
 
             ActorFSMBehaviour fsmBehaviour = animator.GetBehaviour<ActorFSMBehaviour>();
             await fsmBehaviour.StateEnter.WaitForEvent(
-                (anim, stateInfo, layerIndex) => 
-                    stateInfo.fullPathHash == Animator.StringToHash("Base.Idle")
+                (_, stateInfo, _1) => stateInfo.fullPathHash == Animator.StringToHash("Base.Idle")
             );
             ability.End(instigator);
         }
