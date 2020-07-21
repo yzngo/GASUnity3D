@@ -14,11 +14,6 @@ namespace GameplayAbilitySystem.Effects
         public string Type => type;
         public OperationType OperationType => operationType;
         public float Value => value;
-        
-        public bool AttemptCalculateMagnitude(out float evaluatedValue) {
-            evaluatedValue = Value;
-            return true;
-        }
 
         public EffectModifier InitializeEmpty() {
             this.type = string.Empty;
