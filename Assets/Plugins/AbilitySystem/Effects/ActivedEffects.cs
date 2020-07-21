@@ -27,7 +27,7 @@ namespace GameplayAbilitySystem.Effects
 
         public List<EffectContext> AllEffects => modifiesAggregator.Keys.ToList();
 
-        public void TryApplyDurationalEffect(EffectContext effectContext) 
+        public void ApplyDurationalEffect(EffectContext effectContext) 
         {
             int existingStacks = -1;
             int maxStacks = effectContext.Effect.Configs.StackConfig.Limit;

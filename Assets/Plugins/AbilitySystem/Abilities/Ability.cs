@@ -39,17 +39,11 @@ namespace GameplayAbilitySystem.Abilities
         public void End(AbilitySystem instigator) 
         {
             // TODO: Cancel all tasks?
-            // TODO: Remove gameplay cues
             // TODO: Cancel ability
-            // TODO: Remove blocking/cancelling Gameplay Tags
             instigator.NotifyAbilityEnded(this);
         }
 
-        /// <summary>
-        /// Applies cooldown. Cooldown is applied even if the ability is already
-        /// on cooldown
-        /// </summary>
-        protected void ApplyCooldown(AbilitySystem instigator) 
+        private void ApplyCooldown(AbilitySystem instigator) 
         {
             foreach (var cooldown in CooldownEffects) {
                 instigator.ApplyEffectToTarget(id, cooldown, instigator);
@@ -59,12 +53,12 @@ namespace GameplayAbilitySystem.Abilities
         public CoolDownInfo CalculateCooldown(AbilitySystem instigator) 
         {
             CoolDownInfo info = new CoolDownInfo(isCooling: false);
-            // Iterate through all gameplay effects on the ability system and find all effects which grant these cooldown tags
+
             EffectContext maxCDEffectContext = instigator.ActivedEffects
                                     .AllEffects
                                     .Where(x => x.IsCoolDownOf(this))
                                     .DefaultIfEmpty()
-                                    .OrderByDescending(x => x?.RemainingTime)
+                                    .OrderByDescending(x => x.RemainingTime)
                                     .FirstOrDefault();
 
             if (maxCDEffectContext == null) {
@@ -76,16 +70,18 @@ namespace GameplayAbilitySystem.Abilities
             return info;
         }
 
-        // Checks to see if the target GAS has the required cost resource to cast the ability
         private bool IsCostSatisfied(AbilitySystem instigator) 
         {
-            // Check the modifiers on the ability cost GameEffect
-            var modifiers = CostEffect.CalculateModifiers();
-            var attributeModification = CostEffect.CalculateAttributes(
-                    instigator, modifiers, operateOnCurrentValue: true);
+            //       attribute type         operation type      value
+            Dictionary<string, Dictionary<ModifierOperationType, float>> modifiers = CostEffect.CalculateModifiers();
 
-            foreach (var attribute in attributeModification) {
-                if (attribute.Value.newValue < 0) return false;
+            List<AttributeModifyInfo> totalModifyInfo =
+                    CostEffect.CalculateAttributes(instigator, modifiers, operateOnCurrentValue: true);
+
+            foreach (var singleModifyInfo in totalModifyInfo) {
+                if (singleModifyInfo.NewValue < 0) {
+                    return false;
+                }
             }
             return true;
         }
@@ -96,8 +92,6 @@ namespace GameplayAbilitySystem.Abilities
         /// </summary>
         private void ApplyCost(AbilitySystem instigator) 
         {
-            var modifiers = CostEffect.CalculateModifiers();
-            var attributeModification = CostEffect.CalculateAttributes(instigator, modifiers);
             CostEffect.ApplyInstantEffect(instigator);
         }
 

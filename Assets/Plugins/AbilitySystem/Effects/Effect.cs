@@ -62,12 +62,12 @@ namespace GameplayAbilitySystem.Effects
 
         // e.g. HP -> oldValue 100 newValue 200
         //      MP -> oldValue 200 newValue 189
-        public Dictionary<string, ModifyArrtibuteValues> CalculateAttributes(
+        public List<AttributeModifyInfo> CalculateAttributes(
                             AbilitySystem target, 
                             Dictionary<string, Dictionary<ModifierOperationType, float>> totalModifies, 
                             bool operateOnCurrentValue = false
         ) {
-            var totalAttributeChange = new Dictionary<string, ModifyArrtibuteValues>();
+            var totalAttributeChange = new List<AttributeModifyInfo>();
 
             foreach (var modifyOfType in totalModifies) {
                 if (!modifyOfType.Value.TryGetValue(ModifierOperationType.Add, out var addition)) {
@@ -88,12 +88,14 @@ namespace GameplayAbilitySystem.Effects
                 }
                 float newValue = (oldValue + addition) * (multiplication / division);
 
-                if (!totalAttributeChange.TryGetValue(modifyOfType.Key, out ModifyArrtibuteValues values)) {
-                    values = new ModifyArrtibuteValues();
-                    totalAttributeChange.Add(modifyOfType.Key, values);
+                AttributeModifyInfo values = totalAttributeChange.Find(x => x.Type == modifyOfType.Key);
+                if (values == null) {
+                    values = new AttributeModifyInfo();
+                    totalAttributeChange.Add(values);
                 }
-                values.newValue += newValue;
-                values.oldValue += oldValue;
+                values.Type = modifyOfType.Key;
+                values.NewValue += newValue;
+                values.OldValue += oldValue;
             }
             return totalAttributeChange;
         }
@@ -101,28 +103,28 @@ namespace GameplayAbilitySystem.Effects
         // instant 一定改变base值
         public void ApplyInstantEffect(AbilitySystem target) {
             var totalModifies = CalculateModifiers();
-            var totalAttributeChange = CalculateAttributes(target, totalModifies);
+            var totalModifyInfo = CalculateAttributes(target, totalModifies);
 
             // For each attribute, apply the new modified values
-            foreach (var changeByType in totalAttributeChange) {
-                target.SetBaseValue(changeByType.Key, changeByType.Value.newValue);
+            foreach (var singleModifyInfo in totalModifyInfo) {
+                target.SetBaseValue(singleModifyInfo.Type, singleModifyInfo.NewValue);
 
                 // mark the corresponding aggregator as dirty so we can recalculate the current values
-                var aggregators = target.ActivedEffects.GetAggregatorsForAttribute(changeByType.Key);
+                var aggregators = target.ActivedEffects.GetAggregatorsForAttribute(singleModifyInfo.Type);
                 if (aggregators.Count() != 0) {
-                    target.ActivedEffects.UpdateAttribute(aggregators, changeByType.Key);
+                    target.ActivedEffects.UpdateAttribute(aggregators, singleModifyInfo.Type);
                 } else {
                     // No aggregators, so set current value = base value
-                    target.SetCurrentValue(changeByType.Key, target.GetBaseValue(changeByType.Key));
+                    target.SetCurrentValue(singleModifyInfo.Type, target.GetBaseValue(singleModifyInfo.Type));
                 }
             }
         }
+    }
 
-        public class ModifyArrtibuteValues {
-            public float oldValue = 0f;
-            public float newValue = 0f;
-        }
-
+    public class AttributeModifyInfo {
+        public string Type { get; set; }
+        public float OldValue { get; set; }
+        public float NewValue { get; set; }
     }
 }
 
