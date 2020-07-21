@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectToSpawn: {fileID: 2000967301023497459, guid: 9bba9cf244c53c5439505dfc96fdd11c,
     type: 3}
-  DestroyInSeconds: -1
+  DestroyInSeconds: 2
