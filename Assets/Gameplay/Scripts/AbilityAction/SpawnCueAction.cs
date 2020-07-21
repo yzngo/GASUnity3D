@@ -12,16 +12,18 @@ namespace AbilitySystemDemo
     [CreateAssetMenu(fileName = "Spawn Object Gameplay Cue", menuName = "Ability System Demo/Gameplay Cue/Spawn Object Gameplay Cue")]
     class SpawnCueAction : BaseCueAction 
     {
-        public GameObject ObjectToSpawn = default;
-        public float DestroyInSeconds = -1;
+        [FormerlySerializedAs("ObjectToSpawn")]
+        [SerializeField] private GameObject particleToSpawn = default;
+
+        [SerializeField] private float DestroyInSeconds = -1;
 
         public override async void Execute(AbilitySystem target) 
         {
-            Time.timeScale = 0.5f;
-            await UniTask.DelayFrame(5);
-            Time.timeScale = 1;
+            // Time.timeScale = 0.5f;
+            // await UniTask.DelayFrame(5);
+            // Time.timeScale = 1;
 
-            Transform go = Instantiate(ObjectToSpawn, target.transform).transform;
+            Transform go = Instantiate(particleToSpawn, target.transform).transform;
             if (DestroyInSeconds > 0) {
                 await UniTask.Delay(TimeSpan.FromSeconds(DestroyInSeconds));
                 GameObject.DestroyImmediate(go.gameObject);
