@@ -16,6 +16,17 @@ namespace GameplayAbilitySystem.Utility
     [Serializable]
     public class AnimEvent : UnityEvent<string> {}
 
+    [Serializable] 
+    public class AbilityEvent : UnityEvent<AbilityEventData> {}
+
+    [Serializable]
+    public struct AbilityEventData 
+    {
+        public int abilityId;
+        public Ability ability;
+        public AbilitySystem target;
+        // 技能需要的参数填充到这
+    }
     public static class UnityEventExtensionMethods 
     {
         /// <summary>

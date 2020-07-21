@@ -21,6 +21,9 @@ namespace GameplayAbilitySystem
         public Transform TargetPoint => targetPoint;
 
         // Called when a AbilityEvent is executed
+        private AbilityEvent onAbilityStart = new AbilityEvent();
+        public AbilityEvent OnAbilityStart => onAbilityStart;
+
         private AnimEvent onAnimEvent = new AnimEvent();
         public AnimEvent OnAnimEvent => onAnimEvent;
 
@@ -58,7 +61,14 @@ namespace GameplayAbilitySystem
             // 一个技能的生命周期是从[释放开始]到[释放结束], 之后的工作交给effect
             // 技能仅仅是一个时序流程
             runningAbilities.Add(ability);
-            ability.Commit(this, target);
+            ability.Commit(this);
+
+            var data = new AbilityEventData();
+            data.abilityId = ability.Id;
+            data.ability = ability;
+            data.target = target;
+            OnAbilityStart.Invoke(data);
+
             return true;
         }
 

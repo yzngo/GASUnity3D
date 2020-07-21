@@ -16,6 +16,10 @@ namespace GameplayAbilitySystem.Abilities
         {
             var animator = instigator.Animator;
 
+            AbilityEventData abilityEventData = await instigator.OnAbilityStart.WaitForEvent(
+                (eventData) => eventData.abilityId == ability.Id
+            );
+
             animator.SetTrigger(AnimParams.Do_Magic);
             animator.SetTrigger(AnimParams.Execute_Magic_2);
 
@@ -23,7 +27,7 @@ namespace GameplayAbilitySystem.Abilities
                 await instigator.OnAnimEvent.WaitForEvent( (x) => x == AnimEventKey.CastingComplete);
             }
 
-            instigator.ApplyEffectToTarget(ability.Id, appliedEffectAfterComplete, ability.Target);
+            instigator.ApplyEffectToTarget(ability.Id, appliedEffectAfterComplete, abilityEventData.target);
 
             ActorFSMBehaviour fsmBehaviour = animator.GetBehaviour<ActorFSMBehaviour>();
             await fsmBehaviour.StateEnter.WaitForEvent(
