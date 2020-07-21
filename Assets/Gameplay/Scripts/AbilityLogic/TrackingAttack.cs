@@ -3,22 +3,15 @@ using GameplayAbilitySystem.Effects;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using GameplayAbilitySystem.Utility;
-using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Abilities
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Tracking Attack")]
     public class TrackingAttack : AbilityLogic 
     {
-        [FormerlySerializedAs("Projectile")]
-        public GameObject projectile;
-
-        [FormerlySerializedAs("ProjectilePositionOffset")]
-        public Vector3 projectilePositionOffset;
-
-        [FormerlySerializedAs("TargetGameplayEffect")]
-        public Effect appliedEffectAfterComplete;
-
+        [SerializeField] private GameObject projectile = default;
+        [SerializeField] private Vector3 projectilePositionOffset = default;
+        [SerializeField] private Effect appliedEffectAfterComplete = default;
 
         public override async void Execute(AbilitySystem instigator, Ability ability) 
         {
