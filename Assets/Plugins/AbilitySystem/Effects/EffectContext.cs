@@ -13,7 +13,6 @@ namespace GameplayAbilitySystem.Effects
         public AbilitySystem Instigator { get; private set; }
         public AbilitySystem Target { get; private set; }
 
-        private float timeOfLastPeriodicApply;
 
         public EffectContext(int sourceId, Effect effect, AbilitySystem instigator, AbilitySystem target) 
         {
@@ -24,7 +23,7 @@ namespace GameplayAbilitySystem.Effects
             Target = target;
 
             if (!Effect.Configs.PeriodConfig.IsExecuteOnApply) {
-                timeOfLastPeriodicApply = Time.time;
+                ResetPeriodicTime();
             }
         }
 
@@ -39,10 +38,6 @@ namespace GameplayAbilitySystem.Effects
             return false;
         }
 
-// force remove?
-        // 若强制移除, 则 = true
-        private bool forceRemoveEffect = false;
-        public bool ForceRemoveEffect => forceRemoveEffect;
 
 // cooldown time
         /// The cooldown time that has already elapsed for this gameplay effect
@@ -60,23 +55,15 @@ namespace GameplayAbilitySystem.Effects
         public float RemainingTime => 
                 Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? TotalTime - ElapsedTime : 0;
 
-// period
-        // 对于周期性的effect而言, 自从上次应用效果之后流逝的时间
-        public float TimeSincePreviousPeriodApply => Time.time - timeOfLastPeriodicApply;
-        // 对于周期性的effect而言, 到下次应用还需要的时间
-        public float TimeUntilNextPeriodApply => timeOfLastPeriodicApply + Effect.Configs.PeriodConfig.Period - Time.time;
-        private Dictionary<string, AttributeModifyAggregator> PeriodicEffectModificationsToDate = new Dictionary<string, AttributeModifyAggregator>();
-
-// reset time
         /// Reset duration of this effect.
         /// Optionally, we can provide an offset to compensate for
         /// the fact that the reset did not happen at exactly 0
         /// and over time this could cause time drift
         public void ResetDuration(float offset = 0) => StartTime = Time.time - offset;
 
-        /// Reset time at which last periodic application occured.
-        public void ResetPeriodicTime(float offset = 0) => timeOfLastPeriodicApply = Time.time - offset;
-
+//------------------------------------------
+        // 若强制移除, 则 = true
+        public bool ForceRemoveEffect { get; private set; }
         public void EndEffect() 
         {
             StartTime = Time.time - TotalTime;
@@ -85,8 +72,19 @@ namespace GameplayAbilitySystem.Effects
         public void ForceEndEffect() 
         {
             EndEffect();
-            forceRemoveEffect = true;
+            ForceRemoveEffect = true;
         }
+
+// period
+        private float timeOfLastPeriodicApply;
+        // 对于周期性的effect而言, 自从上次应用效果之后流逝的时间
+        public float TimeSincePreviousPeriodicApply => Time.time - timeOfLastPeriodicApply;
+        // 对于周期性的effect而言, 到下次应用还需要的时间
+        public float TimeUntilNextPeriodApply => timeOfLastPeriodicApply + Effect.Configs.PeriodConfig.Period - Time.time;
+        private Dictionary<string, AttributeModifyAggregator> PeriodicEffectModificationsToDate = new Dictionary<string, AttributeModifyAggregator>();
+
+        /// Reset time at which last periodic application occured.
+        public void ResetPeriodicTime(float offset = 0) => timeOfLastPeriodicApply = Time.time - offset;
 
         public void AddPeriodicEffectAttributeModifiers() 
         {
