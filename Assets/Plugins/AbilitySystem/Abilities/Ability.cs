@@ -14,13 +14,12 @@ namespace GameplayAbilitySystem.Abilities
     {
         public int Id => id;
         public Sprite Icon => icon;
-        public Effect CostEffect => costEffect; // Cost of using this ability
-        public List<Effect> CooldownEffects => cooldownEffects;     // Cooldowns associated with this ability
-        public AbilityLogic AbilityLogic => abilityLogic; // Defines what the ability actually does
+        public Effect CostEffect => costEffect; 
+        public List<Effect> CooldownEffects => cooldownEffects;
+        public AbilityLogic AbilityLogic => abilityLogic;
 
         [SerializeField] private int id = default;
         [SerializeField] private Sprite icon = default;
-        // [SerializeField] private AbilityTagContainer tags = default;
         [SerializeField] private Effect costEffect = default;
         [SerializeField] private List<Effect> cooldownEffects = default;
         [SerializeField] private AbilityLogic abilityLogic = default;
