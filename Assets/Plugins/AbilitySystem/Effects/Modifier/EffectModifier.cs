@@ -7,18 +7,17 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class EffectModifier
     {
-        [SerializeField] private string type = default;
-        [SerializeField] private OperationType operationType = default;
-        [SerializeField] private float value = default;
+        public string Type;
+        public OperationType OperationType;
+        public float Value;
 
-        public string Type => type;
-        public OperationType OperationType => operationType;
-        public float Value => value;
-
-        public EffectModifier InitializeEmpty() {
-            this.type = string.Empty;
-            return this;
-        }
-
+    }
+    
+    public enum OperationType 
+    {
+        Add, 
+        Multiply, 
+        Divide,
+        Override
     }
 }

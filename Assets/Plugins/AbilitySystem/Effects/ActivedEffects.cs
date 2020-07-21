@@ -96,7 +96,7 @@ namespace GameplayAbilitySystem.Effects
             }
             // If there are no gameplay effect modifiers, we need to add or get an empty entry
             if (effectContext.Effect.Configs.Modifiers.Count == 0) {
-                action((new EffectModifier()).InitializeEmpty());
+                action((new EffectModifier()));
             }
         }
 
