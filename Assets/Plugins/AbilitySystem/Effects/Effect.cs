@@ -47,13 +47,13 @@ namespace GameplayAbilitySystem.Effects
 
                 switch (modifier.OperationType) {
                     case ModifierOperationType.Add:
-                        totalModifies[modifier.Type][modifier.OperationType] += modifier.ScaledMagnitude;
+                        totalModifies[modifier.Type][modifier.OperationType] += modifier.Value;
                         break;
                     case ModifierOperationType.Multiply:
-                        totalModifies[modifier.Type][modifier.OperationType] *= modifier.ScaledMagnitude;
+                        totalModifies[modifier.Type][modifier.OperationType] *= modifier.Value;
                         break;
                     case ModifierOperationType.Divide:
-                        totalModifies[modifier.Type][modifier.OperationType] *= modifier.ScaledMagnitude;
+                        totalModifies[modifier.Type][modifier.OperationType] *= modifier.Value;
                         break;
                 }
             }
