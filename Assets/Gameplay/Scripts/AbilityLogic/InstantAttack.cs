@@ -7,7 +7,6 @@ namespace GameplayAbilitySystem.Abilities
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Instant Attack")]
     public class InstantAttack : AbilityLogic 
     {
-        public Effect TargetGameplayEffect;
         [SerializeField] private bool waitForCastingStart = false;
         [SerializeField] private bool waitForFireProjectile = false;
         [SerializeField] private bool waitForCastingComplete = false;
@@ -19,7 +18,7 @@ namespace GameplayAbilitySystem.Abilities
         public override async void Execute(AbilitySystem instigator, Ability ability) 
         {
             var animator = instigator.Animator;
-            // Make sure we have enough resources.  End ability if we don't
+
             AbilityEventData abilityEventData = await instigator.OnAbilityStart.WaitForEvent(
                 (eventData) => eventData.abilityId == ability.Id
             );
@@ -30,8 +29,7 @@ namespace GameplayAbilitySystem.Abilities
             if ( waitForCastingComplete == true) {
                 await instigator.OnAnimEvent.WaitForEvent( (x) => x == AnimEventKey.CastingComplete);
             }
-            instigator.ApplyEffectToTarget(ability.Id, appliedEffectAfterComplete, abilityEventData.target);
-
+            instigator.ApplyEffectToTarget(ability.Id, appliedEffectAfterComplete, ability.Target);
 
             var beh = animator.GetBehaviour<ActorFSMBehaviour>();
             await beh.StateEnter.WaitForEvent((anim, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));

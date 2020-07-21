@@ -47,30 +47,20 @@ namespace GameplayAbilitySystem
             AddAttribute(AttributeType.Speed, 5, 5);
         }
 
-        // Checks to see if the ability can be activated
-        // DO NOT execute the ability
-        // 激活之后后续流程交给ability
-        public bool CanActivateAbility(Ability ability) {
-            // Check if this ability is already active on this Ability System
+        public bool TryActivateAbility(Ability ability, AbilitySystem target = null) {
+
+            // Checks to see if the ability can be activated
             if (runningAbilities.Contains(ability)) {
                 return false;
             }
-
             if (!ability.IsActivatable(this)) {
                 return false;
             }
-            return true;
-        }
 
-        // Try to activate the ability
-        public bool TryActivateAbility(Ability ability, AbilitySystem target = null) {
-            if (!CanActivateAbility(ability)) {
-                return false;
-            }
             // 一个技能的生命周期是从[释放开始]到[释放结束], 之后的工作交给effect
             // 技能仅仅是一个时序流程
             runningAbilities.Add(ability);
-            ability.Commit(this);
+            ability.Commit(this, target);
 
             var data = new AbilityEventData();
             data.abilityId = ability.Id;

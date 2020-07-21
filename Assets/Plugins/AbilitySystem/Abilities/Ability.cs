@@ -18,6 +18,8 @@ namespace GameplayAbilitySystem.Abilities
         public List<Effect> CooldownEffects => cooldownEffects;     // Cooldowns associated with this ability
         public AbilityLogic AbilityLogic => abilityLogic; // Defines what the ability actually does
 
+        public AbilitySystem Target { get; private set; }
+        
         [SerializeField] private int id = default;
         [SerializeField] private Sprite icon = default;
         // [SerializeField] private AbilityTagContainer tags = default;
@@ -32,17 +34,13 @@ namespace GameplayAbilitySystem.Abilities
             return IsCostSatisfied(instigator) && !IsCooling(instigator) && IsTagsSatisfied(instigator);
         }
 
-        public bool Commit(AbilitySystem instigator) 
+        public bool Commit(AbilitySystem instigator, AbilitySystem target) 
         {
-            Activate(instigator);
-            ApplyCost(instigator);
-            return true;
-        }
-
-        public void Activate(AbilitySystem instigator) 
-        {
+            Target = target;
             AbilityLogic.Execute(instigator, this);
             ApplyCooldown(instigator);
+            ApplyCost(instigator);
+            return true;
         }
 
         private bool IsTagsSatisfied(AbilitySystem instigator) 

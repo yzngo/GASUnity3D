@@ -46,7 +46,7 @@ namespace GameplayAbilitySystem.Abilities
 
             // Animation complete.  Spawn and send projectile at target
             if (instantiatedProjectile != null) {
-                SeekTargetAndDestroy(instigator, abilityEventData, instantiatedProjectile);
+                SeekTargetAndDestroy(instigator, ability, instantiatedProjectile);
             }
 
 
@@ -56,9 +56,9 @@ namespace GameplayAbilitySystem.Abilities
             ability.End(instigator);
         }
 
-        private async void SeekTargetAndDestroy(AbilitySystem instigator, AbilityEventData data, GameObject projectile) {
-            await projectile.GetComponent<Projectile>().SeekTarget(data.target.TargetPoint, data.target.gameObject);
-            instigator.ApplyEffectToTarget(data.ability.Id, TargetGameplayEffect, data.target);
+        private async void SeekTargetAndDestroy(AbilitySystem instigator, Ability ability, GameObject projectile) {
+            await projectile.GetComponent<Projectile>().SeekTarget(ability.Target.TargetPoint, ability.Target.gameObject);
+            instigator.ApplyEffectToTarget(ability.Id, TargetGameplayEffect, ability.Target);
             DestroyImmediate(projectile);
         }
 
