@@ -1,5 +1,4 @@
 using System;
-using GameplayAbilitySystem.Attributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
