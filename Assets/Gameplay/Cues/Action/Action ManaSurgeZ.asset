@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b45c006d6c71954daab1ce6af98c39b, type: 3}
   m_Name: Action ManaSurgeZ
   m_EditorClassIdentifier: 
-  ObjectToSpawn: {fileID: 1329845292236604, guid: fb75f20b931549d4ebd279e408466153,
+  ObjectToSpawn: {fileID: 6866592132931656702, guid: 883fe89b98b887248b0fced4f2536153,
     type: 3}
-  Position: {x: 0, y: 0.9, z: 0}
+  Position: {x: 0, y: 0, z: 0}
   Rotation: {x: 0, y: 0, z: 0, w: 0}
-  Scale: {x: 2, y: 2, z: 2}
+  Scale: {x: 1, y: 1, z: 1}
   DestroyInSeconds: 2

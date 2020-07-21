@@ -12,13 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8376ce57df7894a8e62a6e646480d4, type: 3}
   m_Name: Ability Logic Blood Pact
   m_EditorClassIdentifier: 
-  TargetGameplayEffect: {fileID: 11400000, guid: ffd023926afb8604da27388cef668ff7,
-    type: 2}
-  waitForCastingStart: 0
-  waitForFireProjectile: 0
-  waitForCastingComplete: 1
+  waitForCastingAnimationComplete: 1
   appliedEffectAfterComplete: {fileID: 11400000, guid: ffd023926afb8604da27388cef668ff7,
     type: 2}
-  AnimationTriggerName: Do_Magic
-  AnimationCompleteTriggerName: Execute_Magic_2
-  CompletionAnimatorStateFullHash: Base.Idle

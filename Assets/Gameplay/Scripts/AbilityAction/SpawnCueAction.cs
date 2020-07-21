@@ -13,9 +13,6 @@ namespace AbilitySystemDemo
     class SpawnCueAction : BaseCueAction 
     {
         public GameObject ObjectToSpawn = default;
-        public Vector3 Position = default;
-        public Quaternion Rotation = default;
-        public Vector3 Scale = Vector3.one;
         public float DestroyInSeconds = -1;
 
         public override async void Execute(AbilitySystem target) 
@@ -24,11 +21,7 @@ namespace AbilitySystemDemo
             await UniTask.DelayFrame(5);
             Time.timeScale = 1;
 
-            Transform go = Instantiate(ObjectToSpawn).transform;
-            go.SetParent(target.transform);
-            go.localPosition = Position;
-            go.localRotation = Rotation;
-            go.localScale = Scale;
+            Transform go = Instantiate(ObjectToSpawn, target.transform).transform;
             if (DestroyInSeconds > 0) {
                 await UniTask.Delay(TimeSpan.FromSeconds(DestroyInSeconds));
                 GameObject.DestroyImmediate(go.gameObject);

@@ -29,7 +29,7 @@ namespace GameplayAbilitySystem.Abilities
 
             if (projectile != null) {
                 instantiatedProjectile = Instantiate(projectile);
-                instantiatedProjectile.transform.position = instigator.transform.position + projectilePositionOffset;
+                instantiatedProjectile.transform.position = instigator.transform.position + projectilePositionOffset + instigator.transform.forward * 1.2f;
             }
 
             animator.SetTrigger(AnimParams.Execute_Magic);
