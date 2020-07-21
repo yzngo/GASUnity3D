@@ -30,13 +30,11 @@ MonoBehaviour:
       PeriodResetPolicy: 0
       ExpirationPolicy: 0
     Modifiers:
-    - type: Health
-      operationType: 0
-      valueSourceType: 0
-      scaledValue: -15
-    - type: Health
-      operationType: 1
-      valueSourceType: 0
-      scaledValue: 0.85
+    - Type: Health
+      OperationType: 0
+      Value: -10
+    - Type: Health
+      OperationType: 1
+      Value: 0.8
     RemoveEffectsInfo: []
     Cues: []

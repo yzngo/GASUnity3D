@@ -30,10 +30,9 @@ MonoBehaviour:
       PeriodResetPolicy: 0
       ExpirationPolicy: 1
     Modifiers:
-    - type: Mana
-      operationType: 0
-      valueSourceType: 0
-      scaledValue: 5
+    - Type: Mana
+      OperationType: 0
+      Value: 10
     RemoveEffectsInfo: []
     Cues:
     - {fileID: 11400000, guid: 260647a52278cdc4eb6654efe826b9cd, type: 2}

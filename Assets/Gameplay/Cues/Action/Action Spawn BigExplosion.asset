@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b45c006d6c71954daab1ce6af98c39b, type: 3}
   m_Name: Action Spawn BigExplosion
   m_EditorClassIdentifier: 
-  ObjectToSpawn: {fileID: 8837822943257221629, guid: bd23c876debdaf643b3f90aca5310b55,
+  particleToSpawn: {fileID: 8837822943257221629, guid: bd23c876debdaf643b3f90aca5310b55,
     type: 3}
-  DestroyInSeconds: 2
+  destroyInSeconds: 2

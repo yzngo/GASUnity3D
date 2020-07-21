@@ -30,10 +30,9 @@ MonoBehaviour:
       PeriodResetPolicy: 0
       ExpirationPolicy: 0
     Modifiers:
-    - type: Health
-      operationType: 0
-      valueSourceType: 0
-      scaledValue: 5
+    - Type: Health
+      OperationType: 0
+      Value: 10
     RemoveEffectsInfo: []
     Cues:
     - {fileID: 11400000, guid: a0a0a94b358c56f45aaceb55727bf3d9, type: 2}

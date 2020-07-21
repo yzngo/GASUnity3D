@@ -30,9 +30,8 @@ MonoBehaviour:
       PeriodResetPolicy: 0
       ExpirationPolicy: 0
     Modifiers:
-    - type: Mana
-      operationType: 0
-      valueSourceType: 0
-      scaledValue: -4
+    - Type: Mana
+      OperationType: 0
+      Value: -5
     RemoveEffectsInfo: []
     Cues: []

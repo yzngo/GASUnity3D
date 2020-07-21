@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b45c006d6c71954daab1ce6af98c39b, type: 3}
   m_Name: Action Regen Health Sprite
   m_EditorClassIdentifier: 
-  ObjectToSpawn: {fileID: 6778610122037942427, guid: 42818cf4e9204754f9227ed013de20b8,
+  particleToSpawn: {fileID: 6778610122037942427, guid: 42818cf4e9204754f9227ed013de20b8,
     type: 3}
-  Position: {x: 0, y: 0, z: 0}
-  Rotation: {x: 0, y: 0, z: 0, w: 0}
-  Scale: {x: 1, y: 1, z: 1}
-  DestroyInSeconds: 3
+  destroyInSeconds: 3
