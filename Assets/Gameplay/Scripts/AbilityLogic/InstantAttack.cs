@@ -19,10 +19,6 @@ namespace GameplayAbilitySystem.Abilities
         {
             var animator = instigator.Animator;
 
-            AbilityEventData abilityEventData = await instigator.OnAbilityStart.WaitForEvent(
-                (eventData) => eventData.abilityId == ability.Id
-            );
-
             animator.SetTrigger(AnimationTriggerName);
             animator.SetTrigger(AnimationCompleteTriggerName);
 

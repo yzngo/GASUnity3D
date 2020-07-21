@@ -13,18 +13,6 @@ namespace GameplayAbilitySystem.Utility
     [Serializable] 
     public class AttributeChangeEvent : UnityEvent<AbilityAttribute> {}
 
-    [Serializable] 
-    public class AbilityEvent : UnityEvent<AbilityEventData> {}
-
-    [Serializable]
-    public struct AbilityEventData 
-    {
-        public int abilityId;
-        public Ability ability;
-        // public GameplayTag abilityTag;
-        public AbilitySystem target;
-    }
-
     [Serializable]
     public class AnimEvent : UnityEvent<string> {}
 

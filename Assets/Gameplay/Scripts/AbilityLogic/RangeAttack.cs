@@ -14,7 +14,6 @@ namespace GameplayAbilitySystem.Abilities
         public Effect TargetGameplayEffect;
         public string CastingInitiatedToken;
         public string FireProjectileToken;
-        // public GameplayTag WaitForEventTag;
         public string AnimationTriggerName;
         public string ProjectileFireTriggerName;
         public string CompletionAnimatorStateFullHash;
@@ -24,10 +23,6 @@ namespace GameplayAbilitySystem.Abilities
             // var abilitySystemActor = instigator.transform;
             var animatorComponent = instigator.GetComponent<Animator>();
 
-            // Make sure we have enough resources.  End ability if we don't
-            AbilityEventData abilityEventData = await instigator.OnAbilityStart.WaitForEvent(
-                (eventData) => eventData.abilityId == ability.Id
-            );
             animatorComponent.SetTrigger(AnimationTriggerName);
 
             List<GameObject> objectsSpawned = new List<GameObject>();
@@ -49,10 +44,8 @@ namespace GameplayAbilitySystem.Abilities
                 SeekTargetAndDestroy(instigator, ability, instantiatedProjectile);
             }
 
-
             var beh = animatorComponent.GetBehaviour<ActorFSMBehaviour>();
             await beh.StateEnter.WaitForEvent((animator, stateInfo, layerIndex) => stateInfo.fullPathHash == Animator.StringToHash(CompletionAnimatorStateFullHash));
-
             ability.End(instigator);
         }
 
