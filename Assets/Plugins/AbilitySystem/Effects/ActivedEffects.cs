@@ -89,14 +89,14 @@ namespace GameplayAbilitySystem.Effects
             return aggregators.Concat(periodic);
         }
 
-        private void ModifyActiveGameplayEffect(EffectContext effectContext, Action<EffectModifier> action) 
+        private void ModifyActiveGameplayEffect(EffectContext effectContext, Action<ModifierConfig> action) 
         {
             foreach (var modifier in effectContext.Effect.Configs.Modifiers) {
                 action(modifier);
             }
             // If there are no gameplay effect modifiers, we need to add or get an empty entry
             if (effectContext.Effect.Configs.Modifiers.Count == 0) {
-                action((new EffectModifier()));
+                action((new ModifierConfig()));
             }
         }
 

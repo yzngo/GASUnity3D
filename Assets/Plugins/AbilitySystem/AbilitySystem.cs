@@ -93,7 +93,7 @@ namespace GameplayAbilitySystem
         
         public void ApplyEffectToTarget(int sourceId, Effect effect, AbilitySystem target, float level = 0) 
         {
-            foreach(EffectModifier modifiers in effect.Configs.Modifiers) {
+            foreach(ModifierConfig modifiers in effect.Configs.Modifiers) {
                 if (!target.IsAttributeExist(modifiers.Type)) {
                     Debug.Log($"Being modified attribute {modifiers.Type} doesn't exist in abilitySystem {target.name}. ", this);
                     return ;

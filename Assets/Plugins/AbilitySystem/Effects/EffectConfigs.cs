@@ -14,7 +14,7 @@ namespace GameplayAbilitySystem.Effects
         public DurationConfig DurationConfig;
         public PeriodConfig PeriodConfig;
         public StackConfig StackConfig;
-        public List<EffectModifier> Modifiers;
+        public List<ModifierConfig> Modifiers;
         public List<RemoveEffectInfo> RemoveEffectsInfo;
         public List<EffectCues> Cues;
     }
@@ -75,6 +75,25 @@ namespace GameplayAbilitySystem.Effects
         ClearEntireStack,                       // 清空整个栈
         RemoveSingleStackAndRefreshDuration,    // 移除一个元素且刷新时间
         RefreshDuration                         // 刷新时间
+    }
+
+// Modifier Config -----------------------------------------------------------------------
+
+    [Serializable]
+    public class ModifierConfig
+    {
+        public string Type;
+        public OperationType OperationType;
+        public float Value;
+
+    }
+
+    public enum OperationType 
+    {
+        Add, 
+        Multiply, 
+        Divide,
+        Override
     }
 
 // Remove Effect Info --------------------------------------------------------------------
