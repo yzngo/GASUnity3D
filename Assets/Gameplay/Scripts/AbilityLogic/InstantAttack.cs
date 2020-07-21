@@ -14,6 +14,7 @@ namespace GameplayAbilitySystem.Abilities
         {
             Animator animator = instigator.Animator;
 
+            
             AbilityEventData abilityEventData = await instigator.OnAbilityStart.WaitForEvent(
                 (eventData) => eventData.abilityId == ability.Id
             );

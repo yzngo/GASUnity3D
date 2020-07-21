@@ -29,6 +29,13 @@ namespace GameplayAbilitySystem.Utility
     }
     public static class UnityEventExtensionMethods 
     {
+//****************************************************************************************
+// Cancel Task:
+//          CancellationTokenSource source = new CancellationTokenSource();
+//          source.Cancel();
+
+//          param: source.Token
+//****************************************************************************************
         /// <summary>
         /// Waits for event to execute, then returns.
         /// </summary>
@@ -45,6 +52,8 @@ namespace GameplayAbilitySystem.Utility
                 }
             }
             evt.RemoveListener(method);
+
+
         }
 
         /// <summary>

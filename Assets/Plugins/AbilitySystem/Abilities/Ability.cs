@@ -6,10 +6,6 @@ using System.Linq;
 namespace GameplayAbilitySystem.Abilities 
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability")]
-    /// <summary>
-    /// Abilities represent "things" that players can cast, etc.
-    /// E.g. a Ability might represent a fireball ability which the player casts and which damages a target
-    /// </summary>
     public class Ability : ScriptableObject
     {
         public int Id => id;
@@ -27,8 +23,9 @@ namespace GameplayAbilitySystem.Abilities
         public bool IsActivatable(AbilitySystem instigator) 
         {
             // Player must be "Idle" to begin ability activation
-            if (instigator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base.Idle")) return false;
-            return IsCostSatisfied(instigator) && !IsCooling(instigator) && IsTagsSatisfied(instigator);
+            if (instigator.Animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base.Idle")) 
+                return false;
+            return IsCostSatisfied(instigator) && !IsCooling(instigator);
         }
 
         public bool Commit(AbilitySystem instigator) 
@@ -37,15 +34,6 @@ namespace GameplayAbilitySystem.Abilities
             ApplyCooldown(instigator);
             ApplyCost(instigator);
             return true;
-        }
-
-        private bool IsTagsSatisfied(AbilitySystem instigator) 
-        {
-            // Checks to make sure Source ability system doesn't have prohibited tags
-            bool hasActivationRequiredTags = true;
-            bool hasActivationBlockedTags = false;
-
-            return !hasActivationBlockedTags && hasActivationRequiredTags;
         }
 
         public void End(AbilitySystem instigator) 
