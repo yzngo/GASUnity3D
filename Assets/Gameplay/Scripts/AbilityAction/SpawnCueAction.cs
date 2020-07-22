@@ -13,8 +13,6 @@ namespace AbilitySystemDemo
     class SpawnCueAction : BaseCueAction 
     {
         [SerializeField] private GameObject particleToSpawn = default;
-
-        [FormerlySerializedAs("DestroyInSeconds")]
         [SerializeField] private float destroyInSeconds = -1;
 
         public override async void Execute(AbilitySystem target) 
