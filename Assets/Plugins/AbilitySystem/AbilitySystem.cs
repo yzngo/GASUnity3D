@@ -4,7 +4,6 @@ using GameplayAbilitySystem.Abilities;
 using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using GameplayAbilitySystem.Attributes;
-using GameplayAbilitySystem.Cues;
 using GameplayAbilitySystem.Utility;
 
 namespace GameplayAbilitySystem 

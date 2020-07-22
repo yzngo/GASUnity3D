@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using GameplayAbilitySystem;
 using GameplayAbilitySystem.Attributes;
 using UnityEngine;
-using GameplayAbilitySystem.Cues;
 using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Effects 

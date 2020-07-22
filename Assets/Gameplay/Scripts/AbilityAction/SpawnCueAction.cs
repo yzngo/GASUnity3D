@@ -1,7 +1,7 @@
 
 using System;
 using GameplayAbilitySystem;
-using GameplayAbilitySystem.Cues;
+using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Cysharp.Threading.Tasks;

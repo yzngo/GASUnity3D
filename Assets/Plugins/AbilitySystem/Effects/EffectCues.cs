@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.Cues 
+namespace GameplayAbilitySystem.Effects 
 {
     [CreateAssetMenu(fileName = "GameplayCue", menuName = "Ability System/Cues/Cues")]
     public sealed class EffectCues : ScriptableObject 

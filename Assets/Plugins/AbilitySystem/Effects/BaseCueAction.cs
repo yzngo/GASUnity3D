@@ -1,7 +1,7 @@
 using UnityEngine;
 using GameplayAbilitySystem;
-namespace GameplayAbilitySystem.Cues {
-
+namespace GameplayAbilitySystem.Effects 
+{
     public abstract class BaseCueAction : ScriptableObject 
     {
         public abstract void Execute(AbilitySystem target); 

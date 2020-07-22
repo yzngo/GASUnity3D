@@ -26,9 +26,7 @@ MonoBehaviour:
         type: 2}
     StackConfig:
       Type: 1
-      Limit: 5
-      DurationRefreshPolicy: 1
-      PeriodResetPolicy: 1
+      MaxStacks: 2
       ExpirationPolicy: 1
     Modifiers: []
     RemoveEffectsInfo: []

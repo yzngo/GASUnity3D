@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using GameplayAbilitySystem.Cues;
 using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Effects 
