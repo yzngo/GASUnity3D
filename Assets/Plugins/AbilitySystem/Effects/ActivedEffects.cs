@@ -93,36 +93,60 @@ namespace GameplayAbilitySystem.Effects
 
         private void ApplyEffect(EffectContext effectContext) 
         {
-            ModifyActiveEffect(effectContext, modifier => {
 
-                // Check if we already have an entry for this gameplay effect attribute modifier
-                // var attributeAggregatorMap = effectsModifyAggregator.AddorGet(effectContext);
+            ApplyModifiers(effectContext);
+
+
+            // ModifyActiveEffect(effectContext, modifier => {
+
+                // Check if we already have an entry for this effect operations
                 
-                //todo-----
-                if (!effects.TryGetValue(effectContext, out var attributeAggregators)) {
-                    attributeAggregators = new Dictionary<string, AttributeOperationContainer>();
-                    effects.Add(effectContext, attributeAggregators);
-                }
-                var attributeAggregatorMap = attributeAggregators;
-                // ---------------
-                // Dictionary<AttributeType, AttributeModifyAggregator> dic = 
+                // Dictionary<string, AttributeOperationContainer> operations;
+                // if (!effects.TryGetValue(effectContext, out operations)) {
+                //     operations = new Dictionary<string, AttributeOperationContainer>();
+                //     effects.Add(effectContext, operations);
+                // }
 
+            //     if (!string.IsNullOrEmpty(modifier.AttributeType)) {
+            //         // If aggregator for this attribute doesn't exist, add it.
+            //         if (!operations.TryGetValue(modifier.AttributeType, out AttributeOperationContainer op)) {
+            //             op = new AttributeOperationContainer();
+            //             operations.Add(modifier.AttributeType, op);
+            //         }
+            //         // If this is a periodic effect, we don't add any attributes here. 
+            //         // They will be added as required on period expiry and stored in a separate structure
+            //         if (effectContext.Effect.Configs.PeriodConfig.Period <= 0) {
+            //             op.AddOperation(modifier.OperationType, modifier.Value);
+            //         }
+            //         target.ReEvaluateCurrentValueFor(modifier.AttributeType);
+            //     }
+            // });
+        }
+
+        private void ApplyModifiers(EffectContext effectContext)
+        {
+            Dictionary<string, AttributeOperationContainer> operations;
+            if (!effects.TryGetValue(effectContext, out operations)) {
+                operations = new Dictionary<string, AttributeOperationContainer>();
+                effects.Add(effectContext, operations);
+            }
+
+            foreach(ModifierConfig modifier in effectContext.Effect.Configs.Modifiers) {
                 if (!string.IsNullOrEmpty(modifier.AttributeType)) {
-                    // If aggregator for this attribute doesn't exist, add it.
-                    if (!attributeAggregatorMap.TryGetValue(modifier.AttributeType, out AttributeOperationContainer aggregator)) {
-                        aggregator = new AttributeOperationContainer();
-                        attributeAggregatorMap.Add(modifier.AttributeType, aggregator);
+
+                    if (!operations.TryGetValue(modifier.AttributeType, out AttributeOperationContainer operation)) {
+                        operation = new AttributeOperationContainer();
+                        operations.Add(modifier.AttributeType, operation);
                     }
                     // If this is a periodic effect, we don't add any attributes here. 
                     // They will be added as required on period expiry and stored in a separate structure
                     if (effectContext.Effect.Configs.PeriodConfig.Period <= 0) {
-                        aggregator.AddOperation(modifier.OperationType, modifier.Value);
+                        operation.AddOperation(modifier.OperationType, modifier.Value);
                     }
+                    target.ReEvaluateCurrentValueFor(modifier.AttributeType);
                     // Recalculate new value by recomputing all aggregators
-                    var operations = GetAllOperationFor(modifier.AttributeType);
-                    UpdateAttribute(modifier.AttributeType, operations);
                 }
-            });
+            }
         }
 
         private async void CheckGameplayEffectForTimedEffects(EffectContext effectContext) 
