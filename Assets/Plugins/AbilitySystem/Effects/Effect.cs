@@ -103,13 +103,14 @@ namespace GameplayAbilitySystem.Effects
             // For each attribute, apply the new modified values
             foreach (AttributeModifyInfo modify in allModify) {
                 target.SetBaseValue(modify.AttributeType, modify.NewValue);
+                target.ReEvaluateCurrentValueFor(modify.AttributeType);
 
-                IEnumerable<AttributeOperationContainer> operations = target.ActivedEffects.GetAllOperationFor(modify.AttributeType);
-                if (operations.Count() != 0) {
-                    target.ActivedEffects.UpdateAttribute(modify.AttributeType, operations);
-                } else {
-                    target.SetCurrentValue(modify.AttributeType, target.GetBaseValue(modify.AttributeType));
-                }
+                // IEnumerable<AttributeOperationContainer> operations = target.ActivedEffects.GetAllOperationFor(modify.AttributeType);
+                // if (operations.Count() != 0) {
+                //     target.ActivedEffects.UpdateAttribute(modify.AttributeType, operations);
+                // } else {
+                //     target.SetCurrentValue(modify.AttributeType, target.GetBaseValue(modify.AttributeType));
+                // }
             }
         }
     }

@@ -153,5 +153,15 @@ namespace GameplayAbilitySystem
         public void SetBaseValue(string type, float value) => GetAttributeByType(type).SetBaseValue(attributeSet, ref value);
         public void SetCurrentValue(string type, float value) => GetAttributeByType(type).SetCurrentValue(attributeSet, ref value);
         public Attribute GetAttributeByType(string type) => attributeSet.Attributes.FirstOrDefault(x => x.AttributeType == type);
+
+        public void ReEvaluateCurrentValueFor(string attributeType)
+        {
+            IEnumerable<AttributeOperationContainer> operations = ActivedEffects.GetAllOperationFor(attributeType);
+            if (operations.Count() != 0) {
+                ActivedEffects.UpdateAttribute(attributeType, operations);
+            } else {
+                SetCurrentValue(attributeType, GetBaseValue(attributeType));
+            }
+        }
     }
 }

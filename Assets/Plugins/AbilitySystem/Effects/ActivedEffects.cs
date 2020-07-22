@@ -68,22 +68,19 @@ namespace GameplayAbilitySystem.Effects
             target.SetCurrentValue(attributeType, newCurrentValue);
         }
 
-
-        // 获取所有effect中,修改某个attribute的所有attributeAggregator
         public IEnumerable<AttributeOperationContainer> GetAllOperationFor(string attributeType) 
         {
-            // Find all remaining aggregators of the same type and recompute values
             var operation = effects
                                 .Where(x => x.Value.ContainsKey(attributeType))
                                 .Select(x => x.Value[attributeType]);
             var periodic = effects
                             .Where(x => x.Key.Effect.Configs.PeriodConfig.Period > 0)
-                            .Select(x => x.Key.GetPeriodicAggregatorForAttribute(attributeType))
+                            .Select(x => x.Key.GetPeriodicOperationsFor(attributeType))
                             .Where(x => x != null);
             return operation.Concat(periodic);
         }
 
-        private void ModifyActiveGameplayEffect(EffectContext effectContext, Action<ModifierConfig> action) 
+        private void ModifyActiveEffect(EffectContext effectContext, Action<ModifierConfig> action) 
         {
             foreach (var modifier in effectContext.Effect.Configs.Modifiers) {
                 action(modifier);
@@ -96,7 +93,7 @@ namespace GameplayAbilitySystem.Effects
 
         private void ApplyEffect(EffectContext effectContext) 
         {
-            ModifyActiveGameplayEffect(effectContext, modifier => {
+            ModifyActiveEffect(effectContext, modifier => {
 
                 // Check if we already have an entry for this gameplay effect attribute modifier
                 // var attributeAggregatorMap = effectsModifyAggregator.AddorGet(effectContext);
@@ -137,7 +134,7 @@ namespace GameplayAbilitySystem.Effects
             }
             // There could be multiple stacked effects, due to multiple casts
             // Remove one instance of this effect from the active list
-            ModifyActiveGameplayEffect(effectContext, modifier => {
+            ModifyActiveEffect(effectContext, modifier => {
                 
                 effects.Remove(effectContext);
                 // effectsModifyAggregator.RemoveEffect(effectContext);
@@ -205,7 +202,7 @@ namespace GameplayAbilitySystem.Effects
                 foreach (var cue in gameplayCues) {
                     cue.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
                 }
-                effectContext.AddPeriodicOperation();
+                effectContext.AddPeriodicOperations();
                 effectContext.ResetPeriodicTime();
             }
         }

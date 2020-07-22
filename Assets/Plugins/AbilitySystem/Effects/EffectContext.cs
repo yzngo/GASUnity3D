@@ -25,7 +25,7 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-// time
+// ---------------------------------------------------------------------------------------
         public float StartTime { get; private set; }
 
         // The duration that has already elapsed for this effect
@@ -40,7 +40,7 @@ namespace GameplayAbilitySystem.Effects
         // Reset start time of this effect.
         public void ResetStartTime(float offset = 0) => StartTime = Time.time - offset;
 
-//------------------------------------------
+// ---------------------------------------------------------------------------------------
         // 若强制移除, 则 = true ?
         public bool ForceRemoveEffect { get; private set; }
         public void EndEffect() 
@@ -53,17 +53,14 @@ namespace GameplayAbilitySystem.Effects
             EndEffect();
             ForceRemoveEffect = true;
         }
-
-// period
+// ---------------------------------------------------------------------------------------
         private float periodicStartTime;
         public float PeriodicElapsedDuration => Time.time - periodicStartTime;
         public float PeriodicRemainingDuration => Effect.Configs.PeriodConfig.Period - PeriodicElapsedDuration;
         private Dictionary<string, AttributeOperationContainer> periodicOperations = new Dictionary<string, AttributeOperationContainer>();
-
-        /// Reset time at which last periodic application occured.
         public void ResetPeriodicTime(float offset = 0) => periodicStartTime = Time.time - offset;
 
-        public void AddPeriodicOperation() 
+        public void AddPeriodicOperations() 
         {
             foreach (ModifierConfig modifier in Effect.Configs.Modifiers) {
 
@@ -71,7 +68,6 @@ namespace GameplayAbilitySystem.Effects
                     operations = new AttributeOperationContainer();
                     periodicOperations.Add(modifier.AttributeType, operations);
                 }
-
                 operations.AddOperation(modifier.OperationType, modifier.Value);
 
                 // Recalculate new value by recomputing all aggregators
@@ -80,12 +76,13 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-        public AttributeOperationContainer GetPeriodicAggregatorForAttribute(string Attribute) 
+        public AttributeOperationContainer GetPeriodicOperationsFor(string attribute) 
         {
-            periodicOperations.TryGetValue(Attribute, out var aggregator);
-            return aggregator;
+            periodicOperations.TryGetValue(attribute, out var operations);
+            return operations;
         }
 
+// ---------------------------------------------------------------------------------------
         public bool IsCoolDownEffectOf(Ability ability) 
         {
             if (Effect.Configs.EffectType == EffectType.GlobalCoolDown) {
