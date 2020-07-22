@@ -129,7 +129,6 @@ namespace GameplayAbilitySystem.Effects
             foreach (var cue in cues) {
                 cue.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
             }
-            // apply 为什么要add到列表?
             effectContext.ApplyPeriodicOperations();
             effectContext.ResetPeriodicTime();
         }
