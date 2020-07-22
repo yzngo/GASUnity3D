@@ -2087,7 +2087,7 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 0.2
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.5
-  SpeedAttribute: 
+  SpeedAttribute: Speed
 --- !u!114 &7899279095267793610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3000,6 +3000,26 @@ PrefabInstance:
       propertyPath: MaxAttributeType
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: abilitySystem
+      value: 
+      objectReference: {fileID: 7899279095267793603}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: attributeType
+      value: Mana
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: maxAttributeType
+      value: MaxMana
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: attributeBar
+      value: 
+      objectReference: {fileID: 1359391840599656395}
     - target: {fileID: 2202905021266549665, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3043,6 +3063,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 295742051}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1359391840599656395 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1359391840308129192, guid: e05a0ff48b22f914d920b149824050af,
+    type: 3}
+  m_PrefabInstance: {fileID: 295742051}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3364226669340750563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3065,6 +3091,26 @@ PrefabInstance:
       propertyPath: MaxAttributeType
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: abilitySystem
+      value: 
+      objectReference: {fileID: 7899279095267793603}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: attributeType
+      value: Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: maxAttributeType
+      value: MaxHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: attributeBar
+      value: 
+      objectReference: {fileID: 4354318907793874763}
     - target: {fileID: 2202905021266549665, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3180,6 +3226,12 @@ PrefabInstance:
 --- !u!224 &3468449178994551106 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2202905021266549665, guid: e05a0ff48b22f914d920b149824050af,
+    type: 3}
+  m_PrefabInstance: {fileID: 3364226669340750563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &4354318907793874763 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1359391840308129192, guid: e05a0ff48b22f914d920b149824050af,
     type: 3}
   m_PrefabInstance: {fileID: 3364226669340750563}
   m_PrefabAsset: {fileID: 0}

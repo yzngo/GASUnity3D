@@ -1891,8 +1891,8 @@ GameObject:
   - component: {fileID: 5555714685437361612}
   - component: {fileID: 5555714685437361603}
   m_Layer: 0
-  m_Name: Enemy Ethan
-  m_TagString: Untagged
+  m_Name: EnemyEthan
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2887,6 +2887,26 @@ PrefabInstance:
       propertyPath: attributeSet
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: abilitySystem
+      value: 
+      objectReference: {fileID: 5555714685437361603}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: attributeType
+      value: Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: maxAttributeType
+      value: MaxHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017678857333680879, guid: e05a0ff48b22f914d920b149824050af,
+        type: 3}
+      propertyPath: attributeBar
+      value: 
+      objectReference: {fileID: 2017753674824409404}
     - target: {fileID: 2202905021266549665, guid: e05a0ff48b22f914d920b149824050af,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3002,6 +3022,12 @@ PrefabInstance:
 --- !u!224 &1175243351360853813 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2202905021266549665, guid: e05a0ff48b22f914d920b149824050af,
+    type: 3}
+  m_PrefabInstance: {fileID: 1071020996309585044}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2017753674824409404 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1359391840308129192, guid: e05a0ff48b22f914d920b149824050af,
     type: 3}
   m_PrefabInstance: {fileID: 1071020996309585044}
   m_PrefabAsset: {fileID: 0}
