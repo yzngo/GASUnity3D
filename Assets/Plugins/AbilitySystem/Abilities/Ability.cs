@@ -73,10 +73,10 @@ namespace GameplayAbilitySystem.Abilities
         private bool IsCostSatisfied(AbilitySystem instigator) 
         {
             //       attribute type         operation type      value
-            Dictionary<string, Dictionary<OperationType, float>> modifiers = CostEffect.CalculateModifiers();
+            Dictionary<string, Dictionary<OperationType, float>> modifiers = CostEffect.GetAllOperation();
 
             List<AttributeModifyInfo> totalModifyInfo =
-                    CostEffect.CalculateAttributes(instigator, modifiers, operateOnCurrentValue: true);
+                    CostEffect.GetAllModify(instigator, modifiers, operateOnCurrentValue: true);
 
             foreach (var singleModifyInfo in totalModifyInfo) {
                 if (singleModifyInfo.NewValue < 0) {
@@ -92,7 +92,7 @@ namespace GameplayAbilitySystem.Abilities
         /// </summary>
         private void ApplyCost(AbilitySystem instigator) 
         {
-            CostEffect.ApplyInstantEffect(instigator);
+            CostEffect.InstantApplyTo(instigator);
         }
 
         // Checks to see if the ability is off cooldown

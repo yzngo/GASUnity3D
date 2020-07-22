@@ -101,7 +101,7 @@ namespace GameplayAbilitySystem
             }
 
             if (effect.Configs.DurationConfig.Policy == DurationPolicy.Instant) {
-                effect.ApplyInstantEffect(target);
+                effect.InstantApplyTo(target);
             } else {
                 EffectContext effectContext = new EffectContext(sourceId, effect, this, target);
                 target.ActivedEffects.ApplyDurationalEffect(effectContext);

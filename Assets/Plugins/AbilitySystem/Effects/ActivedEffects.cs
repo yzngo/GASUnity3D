@@ -16,7 +16,7 @@ namespace GameplayAbilitySystem.Effects
         // so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
 
         // effect -> attribute -> modifies
-        private Dictionary<EffectContext, Dictionary<string, AttributeOperationContainer>> modifiesAggregator = 
+        private Dictionary<EffectContext, Dictionary<string, AttributeOperationContainer>> effects = 
             new Dictionary<EffectContext, Dictionary<string, AttributeOperationContainer>>();
 
 
@@ -25,7 +25,7 @@ namespace GameplayAbilitySystem.Effects
             this.target = target;
         }
 
-        public List<EffectContext> AllEffects => modifiesAggregator.Keys.ToList();
+        public List<EffectContext> AllEffects => effects.Keys.ToList();
 
         public void ApplyDurationalEffect(EffectContext effectContext) 
         {
@@ -76,17 +76,17 @@ namespace GameplayAbilitySystem.Effects
 
 
         // 获取所有effect中,修改某个attribute的所有attributeAggregator
-        public IEnumerable<AttributeOperationContainer> GetAggregatorsForAttribute(string Attribute) 
+        public IEnumerable<AttributeOperationContainer> GetAllOperationFor(string attributeType) 
         {
             // Find all remaining aggregators of the same type and recompute values
-            var aggregators = modifiesAggregator
-                                .Where(x => x.Value.ContainsKey(Attribute))
-                                .Select(x => x.Value[Attribute]);
-            var periodic = modifiesAggregator
+            var operation = effects
+                                .Where(x => x.Value.ContainsKey(attributeType))
+                                .Select(x => x.Value[attributeType]);
+            var periodic = effects
                             .Where(x => x.Key.Effect.Configs.PeriodConfig.Period > 0)
-                            .Select(x => x.Key.GetPeriodicAggregatorForAttribute(Attribute))
+                            .Select(x => x.Key.GetPeriodicAggregatorForAttribute(attributeType))
                             .Where(x => x != null);
-            return aggregators.Concat(periodic);
+            return operation.Concat(periodic);
         }
 
         private void ModifyActiveGameplayEffect(EffectContext effectContext, Action<ModifierConfig> action) 
@@ -108,9 +108,9 @@ namespace GameplayAbilitySystem.Effects
                 // var attributeAggregatorMap = effectsModifyAggregator.AddorGet(effectContext);
                 
                 //todo-----
-                if (!modifiesAggregator.TryGetValue(effectContext, out var attributeAggregators)) {
+                if (!effects.TryGetValue(effectContext, out var attributeAggregators)) {
                     attributeAggregators = new Dictionary<string, AttributeOperationContainer>();
-                    modifiesAggregator.Add(effectContext, attributeAggregators);
+                    effects.Add(effectContext, attributeAggregators);
                 }
                 var attributeAggregatorMap = attributeAggregators;
                 // ---------------
@@ -125,10 +125,10 @@ namespace GameplayAbilitySystem.Effects
                     // If this is a periodic effect, we don't add any attributes here. 
                     // They will be added as required on period expiry and stored in a separate structure
                     if (effectContext.Effect.Configs.PeriodConfig.Period <= 0) {
-                        aggregator.Add(modifier.OperationType, modifier.Value);
+                        aggregator.AddOperation(modifier.OperationType, modifier.Value);
                     }
                     // Recalculate new value by recomputing all aggregators
-                    var aggregators = GetAggregatorsForAttribute(modifier.Type);
+                    var aggregators = GetAllOperationFor(modifier.Type);
                     UpdateAttribute(aggregators, modifier.Type);
                 }
             });
@@ -145,12 +145,12 @@ namespace GameplayAbilitySystem.Effects
             // Remove one instance of this effect from the active list
             ModifyActiveGameplayEffect(effectContext, modifier => {
                 
-                modifiesAggregator.Remove(effectContext);
+                effects.Remove(effectContext);
                 // effectsModifyAggregator.RemoveEffect(effectContext);
                 if (string.IsNullOrEmpty(modifier.Type)) return;
 
                 // Find all remaining aggregators of the same type and recompute values
-                var aggregators = GetAggregatorsForAttribute(modifier.Type);
+                var aggregators = GetAllOperationFor(modifier.Type);
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
                     var current = target.GetBaseValue(modifier.Type);

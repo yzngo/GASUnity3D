@@ -15,21 +15,18 @@ namespace GameplayAbilitySystem.Effects
         [SerializeField] private EffectConfigs configs = default;
         public EffectConfigs Configs => configs;
 
-        // 求[此effect]聚合之后的对所有属性的所有操作集合
-        // e.g.     HP ->  Add 100, Multi 0.5, Div 0.1
-        //          MP ->  Add 10,  Multi 0,   Div 0
-        public Dictionary<string, Dictionary<OperationType, float>> CalculateModifiers() 
+        public Dictionary<string, Dictionary<OperationType, float>> GetAllOperation() 
         {
-            var totalModifies = new Dictionary<string, Dictionary<OperationType, float>>();
+            var allOperation = new Dictionary<string, Dictionary<OperationType, float>>();
 
-            foreach (var modifier in Configs.Modifiers) {
-                // 当前attributeType的条目是否存在
-                if (!totalModifies.TryGetValue(modifier.Type, out var typeModifiers)) {
-                    typeModifiers = new Dictionary<OperationType, float>();
-                    totalModifies.Add(modifier.Type, typeModifiers);
+            foreach (ModifierConfig modifier in Configs.Modifiers) {
+
+                if (!allOperation.TryGetValue(modifier.Type, out Dictionary<OperationType, float> operation)) {
+                    operation = new Dictionary<OperationType, float>();
+                    allOperation.Add(modifier.Type, operation);
                 }
-                // 当前attribute的operation条目是否存在
-                if (!typeModifiers.TryGetValue(modifier.OperationType, out var value)) {
+
+                if (!operation.TryGetValue(modifier.OperationType, out float value)) {
                     value = 0;
                     switch (modifier.OperationType) {
                         case OperationType.Multiply:
@@ -42,80 +39,76 @@ namespace GameplayAbilitySystem.Effects
                             value = 0;
                             break;
                     }
-                    typeModifiers.Add(modifier.OperationType, value);
+                    operation.Add(modifier.OperationType, value);
                 }
 
                 switch (modifier.OperationType) {
                     case OperationType.Add:
-                        totalModifies[modifier.Type][modifier.OperationType] += modifier.Value;
+                        allOperation[modifier.Type][modifier.OperationType] += modifier.Value;
                         break;
                     case OperationType.Multiply:
-                        totalModifies[modifier.Type][modifier.OperationType] *= modifier.Value;
+                        allOperation[modifier.Type][modifier.OperationType] *= modifier.Value;
                         break;
                     case OperationType.Divide:
-                        totalModifies[modifier.Type][modifier.OperationType] *= modifier.Value;
+                        allOperation[modifier.Type][modifier.OperationType] *= modifier.Value;
                         break;
                 }
             }
-            return totalModifies;
+            return allOperation;
         }
 
-        // e.g. HP -> oldValue 100 newValue 200
-        //      MP -> oldValue 200 newValue 189
-        public List<AttributeModifyInfo> CalculateAttributes(
+        public List<AttributeModifyInfo> GetAllModify(
                             AbilitySystem target, 
-                            Dictionary<string, Dictionary<OperationType, float>> totalModifies, 
-                            bool operateOnCurrentValue = false
-        ) {
-            var totalAttributeChange = new List<AttributeModifyInfo>();
+                            Dictionary<string, Dictionary<OperationType, float>> allOperation, 
+                            bool operateOnCurrentValue = false) 
+        {
+            var allModify = new List<AttributeModifyInfo>();
 
-            foreach (var modifyOfType in totalModifies) {
-                if (!modifyOfType.Value.TryGetValue(OperationType.Add, out var addition)) {
+            foreach (var operation in allOperation) {
+                if (!operation.Value.TryGetValue(OperationType.Add, out float addition)) {
                     addition = 0;
                 }
-                if (!modifyOfType.Value.TryGetValue(OperationType.Multiply, out var multiplication)) {
+                if (!operation.Value.TryGetValue(OperationType.Multiply, out float multiplication)) {
                     multiplication = 1;
                 }
-                if (!modifyOfType.Value.TryGetValue(OperationType.Divide, out var division)) {
+                if (!operation.Value.TryGetValue(OperationType.Divide, out float division)) {
                     division = 1;
                 }
 
                 float oldValue = 0f;
                 if (!operateOnCurrentValue) {
-                    oldValue = target.GetBaseValue(modifyOfType.Key);
+                    oldValue = target.GetBaseValue(operation.Key);
                 } else {
-                    oldValue = target.GetCurrentValue(modifyOfType.Key);
+                    oldValue = target.GetCurrentValue(operation.Key);
                 }
                 float newValue = (oldValue + addition) * (multiplication / division);
 
-                AttributeModifyInfo values = totalAttributeChange.Find(x => x.Type == modifyOfType.Key);
+                AttributeModifyInfo values = allModify.Find(x => x.Type == operation.Key);
                 if (values == null) {
                     values = new AttributeModifyInfo();
-                    totalAttributeChange.Add(values);
+                    allModify.Add(values);
                 }
-                values.Type = modifyOfType.Key;
+                values.Type = operation.Key;
                 values.NewValue += newValue;
                 values.OldValue += oldValue;
             }
-            return totalAttributeChange;
+            return allModify;
         }
 
-        // instant 一定改变base值
-        public void ApplyInstantEffect(AbilitySystem target) {
-            var totalModifies = CalculateModifiers();
-            var totalModifyInfo = CalculateAttributes(target, totalModifies);
+        public void InstantApplyTo(AbilitySystem target) 
+        {
+            Dictionary<string, Dictionary<OperationType, float>> allOperation = this.GetAllOperation();
+            List<AttributeModifyInfo> allModify = this.GetAllModify(target, allOperation);
 
             // For each attribute, apply the new modified values
-            foreach (var singleModifyInfo in totalModifyInfo) {
-                target.SetBaseValue(singleModifyInfo.Type, singleModifyInfo.NewValue);
+            foreach (AttributeModifyInfo modify in allModify) {
+                target.SetBaseValue(modify.Type, modify.NewValue);
 
-                // mark the corresponding aggregator as dirty so we can recalculate the current values
-                var aggregators = target.ActivedEffects.GetAggregatorsForAttribute(singleModifyInfo.Type);
-                if (aggregators.Count() != 0) {
-                    target.ActivedEffects.UpdateAttribute(aggregators, singleModifyInfo.Type);
+                IEnumerable<AttributeOperationContainer> operation = target.ActivedEffects.GetAllOperationFor(modify.Type);
+                if (operation.Count() != 0) {
+                    target.ActivedEffects.UpdateAttribute(operation, modify.Type);
                 } else {
-                    // No aggregators, so set current value = base value
-                    target.SetCurrentValue(singleModifyInfo.Type, target.GetBaseValue(singleModifyInfo.Type));
+                    target.SetCurrentValue(modify.Type, target.GetBaseValue(modify.Type));
                 }
             }
         }
@@ -127,4 +120,3 @@ namespace GameplayAbilitySystem.Effects
         public float NewValue { get; set; }
     }
 }
-

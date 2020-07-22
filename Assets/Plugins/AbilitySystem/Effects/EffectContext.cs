@@ -98,11 +98,11 @@ namespace GameplayAbilitySystem.Effects
                     PeriodicEffectModificationsToDate.Add(modifier.Type, aggregator);
                 }
 
-                aggregator.Add(modifier.OperationType, modifier.Value);
+                aggregator.AddOperation(modifier.OperationType, modifier.Value);
 
                 // Recalculate new value by recomputing all aggregators
                 var aggregators = Target.ActivedEffects
-                                    .GetAggregatorsForAttribute(modifier.Type);
+                                    .GetAllOperationFor(modifier.Type);
                 Target.ActivedEffects.UpdateAttribute(aggregators, modifier.Type);
             }
         }
