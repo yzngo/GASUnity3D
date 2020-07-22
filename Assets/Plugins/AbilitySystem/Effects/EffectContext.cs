@@ -58,34 +58,32 @@ namespace GameplayAbilitySystem.Effects
         private float timeOfLastPeriodicApply;
         public float TimeSincePreviousPeriodicApply => Time.time - timeOfLastPeriodicApply;
         public float TimeUntilNextPeriodApply => timeOfLastPeriodicApply + Effect.Configs.PeriodConfig.Period - Time.time;
-        private Dictionary<string, AttributeOperationContainer> periodicEffectModificationsToDate = new Dictionary<string, AttributeOperationContainer>();
+        private Dictionary<string, AttributeOperationContainer> periodicOperation = new Dictionary<string, AttributeOperationContainer>();
 
         /// Reset time at which last periodic application occured.
         public void ResetPeriodicTime(float offset = 0) => timeOfLastPeriodicApply = Time.time - offset;
 
-        public void AddPeriodicEffectAttributeModifiers() 
+        public void AddPeriodicOperation() 
         {
-            // Check out ActiveGameplayEffectContainer.AddActiveGameplayEffect to see how to populate the ActiveEffectAttributeAggregator object
-            foreach (var modifier in Effect.Configs.Modifiers) {
+            foreach (ModifierConfig modifier in Effect.Configs.Modifiers) {
 
-                // If aggregator for this attribute doesn't exist, add it.
-                if (!periodicEffectModificationsToDate.TryGetValue(modifier.Type, out var aggregator)) {
+                if (!periodicOperation.TryGetValue(modifier.AttributeType, out var aggregator)) {
                     aggregator = new AttributeOperationContainer();
-                    periodicEffectModificationsToDate.Add(modifier.Type, aggregator);
+                    periodicOperation.Add(modifier.AttributeType, aggregator);
                 }
 
                 aggregator.AddOperation(modifier.OperationType, modifier.Value);
 
                 // Recalculate new value by recomputing all aggregators
                 var aggregators = Target.ActivedEffects
-                                    .GetAllOperationFor(modifier.Type);
-                Target.ActivedEffects.UpdateAttribute(aggregators, modifier.Type);
+                                    .GetAllOperationFor(modifier.AttributeType);
+                Target.ActivedEffects.UpdateAttribute(aggregators, modifier.AttributeType);
             }
         }
 
         public AttributeOperationContainer GetPeriodicAggregatorForAttribute(string Attribute) 
         {
-            periodicEffectModificationsToDate.TryGetValue(Attribute, out var aggregator);
+            periodicOperation.TryGetValue(Attribute, out var aggregator);
             return aggregator;
         }
 

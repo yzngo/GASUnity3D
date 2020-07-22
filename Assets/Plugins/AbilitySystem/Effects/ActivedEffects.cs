@@ -116,11 +116,11 @@ namespace GameplayAbilitySystem.Effects
                 // ---------------
                 // Dictionary<AttributeType, AttributeModifyAggregator> dic = 
 
-                if (!string.IsNullOrEmpty(modifier.Type)) {
+                if (!string.IsNullOrEmpty(modifier.AttributeType)) {
                     // If aggregator for this attribute doesn't exist, add it.
-                    if (!attributeAggregatorMap.TryGetValue(modifier.Type, out AttributeOperationContainer aggregator)) {
+                    if (!attributeAggregatorMap.TryGetValue(modifier.AttributeType, out AttributeOperationContainer aggregator)) {
                         aggregator = new AttributeOperationContainer();
-                        attributeAggregatorMap.Add(modifier.Type, aggregator);
+                        attributeAggregatorMap.Add(modifier.AttributeType, aggregator);
                     }
                     // If this is a periodic effect, we don't add any attributes here. 
                     // They will be added as required on period expiry and stored in a separate structure
@@ -128,8 +128,8 @@ namespace GameplayAbilitySystem.Effects
                         aggregator.AddOperation(modifier.OperationType, modifier.Value);
                     }
                     // Recalculate new value by recomputing all aggregators
-                    var aggregators = GetAllOperationFor(modifier.Type);
-                    UpdateAttribute(aggregators, modifier.Type);
+                    var aggregators = GetAllOperationFor(modifier.AttributeType);
+                    UpdateAttribute(aggregators, modifier.AttributeType);
                 }
             });
         }
@@ -147,17 +147,17 @@ namespace GameplayAbilitySystem.Effects
                 
                 effects.Remove(effectContext);
                 // effectsModifyAggregator.RemoveEffect(effectContext);
-                if (string.IsNullOrEmpty(modifier.Type)) return;
+                if (string.IsNullOrEmpty(modifier.AttributeType)) return;
 
                 // Find all remaining aggregators of the same type and recompute values
-                var aggregators = GetAllOperationFor(modifier.Type);
+                var aggregators = GetAllOperationFor(modifier.AttributeType);
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
-                    var current = target.GetBaseValue(modifier.Type);
-                    if (current < 0) target.SetBaseValue(modifier.Type, 0f);
-                    target.SetCurrentValue(modifier.Type, current);
+                    var current = target.GetBaseValue(modifier.AttributeType);
+                    if (current < 0) target.SetBaseValue(modifier.AttributeType, 0f);
+                    target.SetCurrentValue(modifier.AttributeType, current);
                 } else {
-                    UpdateAttribute(aggregators, modifier.Type);
+                    UpdateAttribute(aggregators, modifier.AttributeType);
                 }
             });
         }
@@ -211,7 +211,7 @@ namespace GameplayAbilitySystem.Effects
                 foreach (var cue in gameplayCues) {
                     cue.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
                 }
-                effectContext.AddPeriodicEffectAttributeModifiers();
+                effectContext.AddPeriodicOperation();
                 effectContext.ResetPeriodicTime();
             }
         }

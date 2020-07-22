@@ -21,9 +21,9 @@ namespace GameplayAbilitySystem.Effects
 
             foreach (ModifierConfig modifier in Configs.Modifiers) {
 
-                if (!allOperation.TryGetValue(modifier.Type, out Dictionary<OperationType, float> operation)) {
+                if (!allOperation.TryGetValue(modifier.AttributeType, out Dictionary<OperationType, float> operation)) {
                     operation = new Dictionary<OperationType, float>();
-                    allOperation.Add(modifier.Type, operation);
+                    allOperation.Add(modifier.AttributeType, operation);
                 }
 
                 if (!operation.TryGetValue(modifier.OperationType, out float value)) {
@@ -44,13 +44,13 @@ namespace GameplayAbilitySystem.Effects
 
                 switch (modifier.OperationType) {
                     case OperationType.Add:
-                        allOperation[modifier.Type][modifier.OperationType] += modifier.Value;
+                        allOperation[modifier.AttributeType][modifier.OperationType] += modifier.Value;
                         break;
                     case OperationType.Multiply:
-                        allOperation[modifier.Type][modifier.OperationType] *= modifier.Value;
+                        allOperation[modifier.AttributeType][modifier.OperationType] *= modifier.Value;
                         break;
                     case OperationType.Divide:
-                        allOperation[modifier.Type][modifier.OperationType] *= modifier.Value;
+                        allOperation[modifier.AttributeType][modifier.OperationType] *= modifier.Value;
                         break;
                 }
             }

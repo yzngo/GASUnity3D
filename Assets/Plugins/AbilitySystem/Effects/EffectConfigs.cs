@@ -82,7 +82,8 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class ModifierConfig
     {
-        public string Type;
+        [FormerlySerializedAs("Type")]
+        public string AttributeType;
         public OperationType OperationType;
         public float Value;
 
