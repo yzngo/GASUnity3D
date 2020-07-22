@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 
 namespace GameplayAbilitySystem.Effects 
 {
-    [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Gameplay Effect")]
+    [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Effect")]
     public class Effect : ScriptableObject 
     {
         [SerializeField] private EffectConfigs configs = default;

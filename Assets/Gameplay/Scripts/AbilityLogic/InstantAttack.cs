@@ -4,7 +4,7 @@ using GameplayAbilitySystem.Utility;
 
 namespace GameplayAbilitySystem.Abilities
 {
-    [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Instant Attack")]
+    [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability Logic/Instant Attack")]
     public class InstantAttack : AbilityLogic 
     {
         [SerializeField] private bool waitForCastingAnimationComplete = false;

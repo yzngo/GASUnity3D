@@ -6,7 +6,7 @@ using GameplayAbilitySystem.Utility;
 
 namespace GameplayAbilitySystem.Abilities
 {
-    [CreateAssetMenu(fileName = "Ability", menuName = "Ability System Demo/Ability Logic/Tracking Attack")]
+    [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability Logic/Tracking Attack")]
     public class TrackingAttack : AbilityLogic 
     {
         [SerializeField] private GameObject projectile = default;

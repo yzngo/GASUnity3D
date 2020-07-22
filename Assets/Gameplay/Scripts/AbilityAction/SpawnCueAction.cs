@@ -9,7 +9,7 @@ using Cysharp.Threading.Tasks;
 
 namespace AbilitySystemDemo 
 {
-    [CreateAssetMenu(fileName = "Spawn Object Gameplay Cue", menuName = "Ability System Demo/Gameplay Cue/Spawn Object Gameplay Cue")]
+    [CreateAssetMenu(fileName = "Spawn Object Cue", menuName = "Ability System/Cues/Action/Spawn Object Gameplay Cue")]
     class SpawnCueAction : BaseCueAction 
     {
         [SerializeField] private GameObject particleToSpawn = default;
