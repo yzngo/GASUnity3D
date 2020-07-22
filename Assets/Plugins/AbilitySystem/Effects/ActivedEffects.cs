@@ -74,23 +74,10 @@ namespace GameplayAbilitySystem.Effects
                         operation.AddOperation(modifier.OperationType, modifier.Value);
                     }
                     target.ReEvaluateCurrentValueFor(modifier.AttributeType);
-                    // Recalculate new value by recomputing all aggregators
                 }
             }
         }
 
-        private void ModifyActiveEffect(EffectContext effectContext, Action<ModifierConfig> action) 
-        {
-            foreach (var modifier in effectContext.Effect.Configs.Modifiers) {
-                action(modifier);
-            }
-            // If there are no gameplay effect modifiers, we need to add or get an empty entry
-            if (effectContext.Effect.Configs.Modifiers.Count == 0) {
-                action((new ModifierConfig()));
-            }
-        }
-
-        // 处理effect应用之后的逻辑
         private async Task WaitForExpiredOf(EffectContext effectContext) 
         {
             bool expired = false;
@@ -115,29 +102,18 @@ namespace GameplayAbilitySystem.Effects
                 }
             }
 
+            effects.Remove(effectContext);
+            foreach(var modifier in effectContext.Effect.Configs.Modifiers) {
+                if (string.IsNullOrEmpty(modifier.AttributeType)) {
+                    return;
+                }
+                target.ReEvaluateCurrentValueFor(modifier.AttributeType);
+            } 
+
             List<EffectCues> cues = effectContext.Effect.Configs.Cues;
             foreach (var cue in cues) {
                 cue.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
             }
-            // There could be multiple stacked effects, due to multiple casts
-            // Remove one instance of this effect from the active list
-            ModifyActiveEffect(effectContext, modifier => {
-                
-                effects.Remove(effectContext);
-                // effectsModifyAggregator.RemoveEffect(effectContext);
-                if (string.IsNullOrEmpty(modifier.AttributeType)) return;
-
-                // Find all remaining aggregators of the same type and recompute values
-                var aggregators = GetAllOperationTo(modifier.AttributeType);
-                // If there are no aggregators, set base = current
-                if (aggregators.Count() == 0) {
-                    var current = target.GetBaseValue(modifier.AttributeType);
-                    if (current < 0) target.SetBaseValue(modifier.AttributeType, 0f);
-                    target.SetCurrentValue(modifier.AttributeType, current);
-                } else {
-                    UpdateAttribute(modifier.AttributeType, aggregators);
-                }
-            });
         }
 
         private void ApplyPeriodicEffect(EffectContext effectContext) 
