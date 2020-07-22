@@ -66,11 +66,11 @@ namespace GameplayAbilitySystem.Effects
 
     public static partial class ExtensionMethods 
     {
-        public static float Evaluate(this IEnumerable<AttributeOperationContainer> operationContainers, float baseValue) 
+        public static float Evaluate(this IEnumerable<AttributeOperationContainer> operationContainers, float valueToEvaluate) 
         {
             float additives = operationContainers.Select(x => x.GetAdditives()).Sum();
             float multipliers = operationContainers.Select(x => x.GetMultipliers()).Aggregate(1f, (result, item) => result * item);
-            return (baseValue + additives) * multipliers;
+            return (valueToEvaluate + additives) * multipliers;
         }
     }
 }

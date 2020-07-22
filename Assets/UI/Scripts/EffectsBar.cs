@@ -15,7 +15,7 @@ public class EffectsBar : MonoBehaviour
 
     void Update() 
     {
-        var effectsInfo = instigator.GetAllDurationEffects()
+        var effectsInfo = instigator.GetAllDurationalEffects()
                     .OrderBy(x => x.StartTime)
                     .GroupBy(x => x.Effect.Configs.Id)
                     .Select(x => (EffectContext: x.First(), Stacks: x.Count()));

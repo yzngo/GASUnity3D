@@ -109,7 +109,7 @@ namespace GameplayAbilitySystem
 
             // remove effects that mark remove from config
             List<RemoveEffectInfo> beRemovedInfo = effect.Configs.RemoveEffectsInfo;
-            var beRemovedEffects = target.GetAllDurationEffects()
+            var beRemovedEffects = target.GetAllDurationalEffects()
                                 .Where(x => beRemovedInfo.Any(y => x.Effect.Configs.Id == y.RemoveId))
                                 .Join(beRemovedInfo, x => x.Effect.Configs.Id, y => y.RemoveId, (x, y) => 
                                             new { Id = x.Effect.Configs.Id, EffectContext = x, Stacks = y.RemoveStacks })
@@ -117,7 +117,7 @@ namespace GameplayAbilitySystem
 
             Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
             foreach(var beRemovedEffect in beRemovedEffects) {
-                var e = beRemovedEffect.EffectContext.Effect;
+                Effect e = beRemovedEffect.EffectContext.Effect;
                 if (!stacks.ContainsKey(e)) {
                     stacks.Add(e, 0);
                 }
@@ -134,7 +134,7 @@ namespace GameplayAbilitySystem
             }
         }
 
-        public IEnumerable<EffectContext> GetAllDurationEffects()
+        public IEnumerable<EffectContext> GetAllDurationalEffects()
         {
             List<EffectContext> durationEffects = ActivedEffects.AllEffects;
             if (durationEffects == null) {
