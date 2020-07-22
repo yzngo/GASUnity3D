@@ -156,7 +156,7 @@ namespace GameplayAbilitySystem
 
         public void ReEvaluateCurrentValueFor(string attributeType)
         {
-            IEnumerable<AttributeOperationContainer> operations = ActivedEffects.GetAllOperationFor(attributeType);
+            IEnumerable<AttributeOperationContainer> operations = ActivedEffects.GetAllOperationTo(attributeType);
             if (operations.Count() != 0) {
                 ActivedEffects.UpdateAttribute(attributeType, operations);
             } else {

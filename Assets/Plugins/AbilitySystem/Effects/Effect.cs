@@ -57,7 +57,7 @@ namespace GameplayAbilitySystem.Effects
             return allOperation;
         }
 
-        public List<AttributeModifyInfo> GetAllModify(
+        public List<AttributeModifyInfo> GetAllModifyInfo(
                             AbilitySystem target, 
                             Dictionary<string, Dictionary<OperationType, float>> allOperation, 
                             bool operateOnCurrentValue = false) 
@@ -98,7 +98,7 @@ namespace GameplayAbilitySystem.Effects
         public void InstantApplyTo(AbilitySystem target) 
         {
             Dictionary<string, Dictionary<OperationType, float>> allOperation = this.GetAllOperation();
-            List<AttributeModifyInfo> allModify = this.GetAllModify(target, allOperation);
+            List<AttributeModifyInfo> allModify = this.GetAllModifyInfo(target, allOperation);
 
             // For each attribute, apply the new modified values
             foreach (AttributeModifyInfo modify in allModify) {

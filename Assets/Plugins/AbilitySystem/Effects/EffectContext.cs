@@ -60,7 +60,7 @@ namespace GameplayAbilitySystem.Effects
         private Dictionary<string, AttributeOperationContainer> periodicOperations = new Dictionary<string, AttributeOperationContainer>();
         public void ResetPeriodicTime(float offset = 0) => periodicStartTime = Time.time - offset;
 
-        public void AddPeriodicOperations() 
+        public void ApplyPeriodicOperations() 
         {
             foreach (ModifierConfig modifier in Effect.Configs.Modifiers) {
 
@@ -71,7 +71,7 @@ namespace GameplayAbilitySystem.Effects
                 operations.AddOperation(modifier.OperationType, modifier.Value);
 
                 // Recalculate new value by recomputing all aggregators
-                IEnumerable<AttributeOperationContainer> op = Target.ActivedEffects.GetAllOperationFor(modifier.AttributeType);
+                IEnumerable<AttributeOperationContainer> op = Target.ActivedEffects.GetAllOperationTo(modifier.AttributeType);
                 Target.ActivedEffects.UpdateAttribute(modifier.AttributeType, op);
             }
         }

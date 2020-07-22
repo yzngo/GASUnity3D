@@ -54,10 +54,10 @@ namespace GameplayAbilitySystem.Effects
     [Serializable]
     public class StackConfig {
         public StackType Type;
-        public int Limit;
-        public StackRefreshPolicy DurationRefreshPolicy;   // 时间刷新策略
-        public StackRefreshPolicy PeriodResetPolicy;       // 周期刷新策略
-        public StackExpirationPolicy ExpirationPolicy;     // 过期策略
+
+        [FormerlySerializedAs("Limit")]
+        public int MaxStacks;
+        public StackExpirationPolicy ExpirationPolicy;     // 最上边一层到期时执行的策略 
     }
 
     public enum StackType {
@@ -66,15 +66,10 @@ namespace GameplayAbilitySystem.Effects
         StackByTarget
     }
 
-    public enum StackRefreshPolicy {
-        RefreshOnSuccessfulApply,     // 成功施放之后刷新
-        NeverRefresh                        // 永不刷新
-    }
-
     public enum StackExpirationPolicy {
         ClearEntireStack,                       // 清空整个栈
         RemoveSingleStackAndRefreshDuration,    // 移除一个元素且刷新时间
-        RefreshDuration                         // 刷新时间
+        RefreshDuration                         // 只刷新时间, 不移除, 即永不过期, 无限循环
     }
 
 // Modifier Config -----------------------------------------------------------------------

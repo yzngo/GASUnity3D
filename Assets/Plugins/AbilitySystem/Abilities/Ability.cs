@@ -76,7 +76,7 @@ namespace GameplayAbilitySystem.Abilities
             Dictionary<string, Dictionary<OperationType, float>> modifiers = CostEffect.GetAllOperation();
 
             List<AttributeModifyInfo> totalModifyInfo =
-                    CostEffect.GetAllModify(instigator, modifiers, operateOnCurrentValue: true);
+                    CostEffect.GetAllModifyInfo(instigator, modifiers, operateOnCurrentValue: true);
 
             foreach (var singleModifyInfo in totalModifyInfo) {
                 if (singleModifyInfo.NewValue < 0) {

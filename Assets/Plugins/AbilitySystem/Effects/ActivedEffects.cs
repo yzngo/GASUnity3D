@@ -23,40 +23,19 @@ namespace GameplayAbilitySystem.Effects
 
         public void ApplyDurationalEffect(EffectContext effectContext) 
         {
+            IEnumerable<EffectContext> matchingStackedActiveEffects = GetStackedEffectsSameAs(effectContext);
+
             int existingStacks = -1;
-            int maxStacks = effectContext.Effect.Configs.StackConfig.Limit;
-            IEnumerable<EffectContext> matchingStackedActiveEffects = GetMatchingStackedEffectsByEffect(effectContext);
-
-            switch (effectContext.Effect.Configs.StackConfig.DurationRefreshPolicy) {
-                case StackRefreshPolicy.RefreshOnSuccessfulApply: // We refresh all instances of this game effect
-                    if (matchingStackedActiveEffects == null) break;
-                    foreach (var effect in matchingStackedActiveEffects) {
-                        effect.ResetStartTime();
-                    }
-                    break;
-                case StackRefreshPolicy.NeverRefresh: // Don't do anything.  Effect will expire naturally
-                    break;
-
-            }
-            switch (effectContext.Effect.Configs.StackConfig.PeriodResetPolicy) {
-                case StackRefreshPolicy.RefreshOnSuccessfulApply: // We refresh all instances of this game effect
-                    if (matchingStackedActiveEffects == null) break;
-                    foreach (var effect in matchingStackedActiveEffects) {
-                        effect.ResetPeriodicTime();
-                    }
-                    break;
-                case StackRefreshPolicy.NeverRefresh: // Don't do anything.  Each stack maintains its own periodic effect
-                    break;
-            }
+            int maxStacks = effectContext.Effect.Configs.StackConfig.MaxStacks;
 
             existingStacks = matchingStackedActiveEffects?.Count() ?? -1;
             if (existingStacks < maxStacks) { // We can still add more stacks.
-                ApplyEffect(effectContext);
+                ApplyModifier(effectContext);
                 // We only need to do timed checks for durational abilities
                 if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration
                     || effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Infinite) {
                     // var removalTime = effectContext.Effect.GameplayEffectPolicy.DurationMagnitude * 1000.0f;
-                    CheckGameplayEffectForTimedEffects(effectContext);
+                    CheckForTimedEffects(effectContext);
                 }
             }
         }
@@ -68,7 +47,7 @@ namespace GameplayAbilitySystem.Effects
             target.SetCurrentValue(attributeType, newCurrentValue);
         }
 
-        public IEnumerable<AttributeOperationContainer> GetAllOperationFor(string attributeType) 
+        public IEnumerable<AttributeOperationContainer> GetAllOperationTo(string attributeType) 
         {
             var operation = effects
                                 .Where(x => x.Value.ContainsKey(attributeType))
@@ -80,50 +59,7 @@ namespace GameplayAbilitySystem.Effects
             return operation.Concat(periodic);
         }
 
-        private void ModifyActiveEffect(EffectContext effectContext, Action<ModifierConfig> action) 
-        {
-            foreach (var modifier in effectContext.Effect.Configs.Modifiers) {
-                action(modifier);
-            }
-            // If there are no gameplay effect modifiers, we need to add or get an empty entry
-            if (effectContext.Effect.Configs.Modifiers.Count == 0) {
-                action((new ModifierConfig()));
-            }
-        }
-
-        private void ApplyEffect(EffectContext effectContext) 
-        {
-
-            ApplyModifiers(effectContext);
-
-
-            // ModifyActiveEffect(effectContext, modifier => {
-
-                // Check if we already have an entry for this effect operations
-                
-                // Dictionary<string, AttributeOperationContainer> operations;
-                // if (!effects.TryGetValue(effectContext, out operations)) {
-                //     operations = new Dictionary<string, AttributeOperationContainer>();
-                //     effects.Add(effectContext, operations);
-                // }
-
-            //     if (!string.IsNullOrEmpty(modifier.AttributeType)) {
-            //         // If aggregator for this attribute doesn't exist, add it.
-            //         if (!operations.TryGetValue(modifier.AttributeType, out AttributeOperationContainer op)) {
-            //             op = new AttributeOperationContainer();
-            //             operations.Add(modifier.AttributeType, op);
-            //         }
-            //         // If this is a periodic effect, we don't add any attributes here. 
-            //         // They will be added as required on period expiry and stored in a separate structure
-            //         if (effectContext.Effect.Configs.PeriodConfig.Period <= 0) {
-            //             op.AddOperation(modifier.OperationType, modifier.Value);
-            //         }
-            //         target.ReEvaluateCurrentValueFor(modifier.AttributeType);
-            //     }
-            // });
-        }
-
-        private void ApplyModifiers(EffectContext effectContext)
+        private void ApplyModifier(EffectContext effectContext)
         {
             Dictionary<string, AttributeOperationContainer> operations;
             if (!effects.TryGetValue(effectContext, out operations)) {
@@ -149,11 +85,22 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-        private async void CheckGameplayEffectForTimedEffects(EffectContext effectContext) 
+        private void ModifyActiveEffect(EffectContext effectContext, Action<ModifierConfig> action) 
         {
-            await WaitForEffectExpiryTime(effectContext);
-            var gameplayCues = effectContext.Effect.Configs.Cues;
-            foreach (var cue in gameplayCues) {
+            foreach (var modifier in effectContext.Effect.Configs.Modifiers) {
+                action(modifier);
+            }
+            // If there are no gameplay effect modifiers, we need to add or get an empty entry
+            if (effectContext.Effect.Configs.Modifiers.Count == 0) {
+                action((new ModifierConfig()));
+            }
+        }
+
+        private async void CheckForTimedEffects(EffectContext effectContext) 
+        {
+            await WaitForExpiredOf(effectContext);
+            List<EffectCues> effectCues = effectContext.Effect.Configs.Cues;
+            foreach (var cue in effectCues) {
                 cue.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
             }
             // There could be multiple stacked effects, due to multiple casts
@@ -165,7 +112,7 @@ namespace GameplayAbilitySystem.Effects
                 if (string.IsNullOrEmpty(modifier.AttributeType)) return;
 
                 // Find all remaining aggregators of the same type and recompute values
-                var aggregators = GetAllOperationFor(modifier.AttributeType);
+                var aggregators = GetAllOperationTo(modifier.AttributeType);
                 // If there are no aggregators, set base = current
                 if (aggregators.Count() == 0) {
                     var current = target.GetBaseValue(modifier.AttributeType);
@@ -186,108 +133,95 @@ namespace GameplayAbilitySystem.Effects
         /// </summary>
         /// <param name="effectContext"></param>
         /// <returns> </returns>
-        private async Task WaitForEffectExpiryTime(EffectContext effectContext) 
+        private async Task WaitForExpiredOf(EffectContext effectContext) 
         {
-            bool durationExpired = false;
-            while (!durationExpired) {
+            bool expired = false;
+            while (!expired) {
                 await UniTask.DelayFrame(0);
 
                 if (effectContext.ForceRemoveEffect) {
-                    durationExpired = true;
+                    expired = true;
                 } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration) {
                     // Check whether required time has expired
                     // We only need to do this for effects with a finite duration
-                    durationExpired = effectContext.RemainingDuration <= 0 ? true : false;
+                    expired = effectContext.RemainingDuration <= 0 ? true : false;
                 } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Infinite) {
-                    durationExpired = effectContext.StartTime <= 0 ? true : false;
+                    expired = effectContext.StartTime <= 0 ? true : false;
                 }
                 // Periodic effects only occur if the period is > 0
                 if (effectContext.Effect.Configs.PeriodConfig.Period > 0) {
-                    CheckAndApplyPeriodicEffect(effectContext);
+                    if (effectContext.PeriodicRemainingDuration <= 0) {
+                        ApplyPeriodicEffect(effectContext);
+                    }
                 }
-                if (durationExpired) { // This effect is due for expiry
-                    ApplyStackExpirationPolicy(effectContext, ref durationExpired);
+                if (expired) { // This effect is due for expiry
+                    ApplyStackExpirationPolicy(effectContext, ref expired);
                 }
             }
         }
 
-        private void CheckAndApplyPeriodicEffect(EffectContext effectContext) 
+        private void ApplyPeriodicEffect(EffectContext effectContext) 
         {
-            if (effectContext.PeriodicRemainingDuration <= 0) {
-                // Apply gameplay effect defined for period.  
-                if (effectContext.Effect.Configs.PeriodConfig.EffectOnExecute != null) {
-                    effectContext.Instigator.ApplyEffectToTarget(
-                        effectContext.SourceId, 
-                        effectContext.Effect.Configs.PeriodConfig.EffectOnExecute, 
-                        effectContext.Target
-                    );
-                }
-                var gameplayCues = effectContext.Effect.Configs.Cues;
-                foreach (var cue in gameplayCues) {
-                    cue.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
-                }
-                effectContext.AddPeriodicOperations();
-                effectContext.ResetPeriodicTime();
+            if (effectContext.Effect.Configs.PeriodConfig.EffectOnExecute != null) {
+                effectContext.Instigator.ApplyEffectToTarget(
+                    effectContext.SourceId, 
+                    effectContext.Effect.Configs.PeriodConfig.EffectOnExecute, 
+                    effectContext.Target
+                );
             }
+            List<EffectCues> cues = effectContext.Effect.Configs.Cues;
+            foreach (var cue in cues) {
+                cue.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
+            }
+            // apply 为什么要add到列表?
+            effectContext.ApplyPeriodicOperations();
+            effectContext.ResetPeriodicTime();
         }
 
-        private void ApplyStackExpirationPolicy(EffectContext effectContext, ref bool durationExpired) 
+        private void ApplyStackExpirationPolicy(EffectContext effectContext, ref bool expired) 
         {
-            IEnumerable<EffectContext> matchingEffects;
+            IEnumerable<EffectContext> matchingEffects = GetStackedEffectsSameAs(effectContext);
+            if (matchingEffects == null) {
+                return;
+            }
 
             switch (effectContext.Effect.Configs.StackConfig.ExpirationPolicy) {
-                case StackExpirationPolicy.ClearEntireStack: // Remove all effects which match
-                    matchingEffects = GetMatchingStackedEffectsByEffect(effectContext);
-                    if (matchingEffects == null) break;
+                case StackExpirationPolicy.ClearEntireStack:
                     foreach (var effect in matchingEffects) {
                         effect.EndEffect();
                     }
                     break;
                 case StackExpirationPolicy.RemoveSingleStackAndRefreshDuration:
-                    // Remove this effect, and reset all other durations to max
-                    matchingEffects = GetMatchingStackedEffectsByEffect(effectContext);
-                    if (matchingEffects == null) break;
 
                     foreach (var effect in matchingEffects) {
-                        // We need to cater for the fact that the cooldown
-                        // may have exceeded the actual limit by a little bit
-                        // due to framerate.  So, when we reset the other cooldowns
-                        // we need to account for this difference
-                        var timeOverflow = effect.RemainingDuration;
-                        effect.ResetStartTime(timeOverflow);
+                        effect.ResetStartTime();
                     }
-                    // This effect was going to expire anyway, but we put this here to be explicit to future code readers
                     effectContext.EndEffect();
                     break;
                 case StackExpirationPolicy.RefreshDuration:
                     // Refreshing duration on expiry basically means the effect can never expire
-                    matchingEffects = GetMatchingStackedEffectsByEffect(effectContext);
-                    if (matchingEffects == null) break;
                     foreach (var effect in matchingEffects) {
                         effect.ResetStartTime();
-                        durationExpired = false; // Undo effect expiry.  This effect should never expire
+                        expired = false; // Undo effect expiry.  This effect should never expire
                     }
                     break;
             }
         }
 
-
-        private IEnumerable<EffectContext> GetMatchingStackedEffectsByEffect(EffectContext effectContext) 
+        private IEnumerable<EffectContext> GetStackedEffectsSameAs(EffectContext effectContext) 
         {
-            IEnumerable<EffectContext> matchingStackedActiveEffects = null;
+            IEnumerable<EffectContext> effects = null;
             switch (effectContext.Effect.Configs.StackConfig.Type) {
-                // Stacking Type None:
-                // Add effect as a separate instance. 
                 case StackType.None:
                     break;
                 case StackType.StackBySource:
-                    matchingStackedActiveEffects = AllEffects.Where(x => x.Instigator == effectContext.Instigator && x.Effect == effectContext.Effect);
+                    effects = AllEffects.Where(x => x.Instigator == effectContext.Instigator && x.Effect == effectContext.Effect);
                     break;
                 case StackType.StackByTarget:
-                    matchingStackedActiveEffects = AllEffects.Where(x => x.Target == effectContext.Target && x.Effect == effectContext.Effect);
+                    effects = AllEffects.Where(x => x.Target == effectContext.Target && x.Effect == effectContext.Effect);
                     break;
             }
-            return matchingStackedActiveEffects;
+            return effects;
         }
     }
 }

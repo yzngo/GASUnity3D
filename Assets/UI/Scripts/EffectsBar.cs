@@ -18,7 +18,7 @@ public class EffectsBar : MonoBehaviour
         var effectsInfo = instigator.GetAllDurationEffects()
                     .OrderBy(x => x.StartTime)
                     .GroupBy(x => x.Effect.Configs.Id)
-                    .Select(x => (EffectContext: x.Last(), Stacks: x.Count()));
+                    .Select(x => (EffectContext: x.First(), Stacks: x.Count()));
 
         int tileIndex = 0;
         foreach(var effectInfo in effectsInfo) {
