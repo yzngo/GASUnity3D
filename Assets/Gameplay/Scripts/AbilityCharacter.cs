@@ -20,6 +20,20 @@ public class AbilityCharacter : MonoBehaviour
     void Awake()
     {
         AbilitySystem = GetComponent<AbilitySystem>();
+        var temp = new List<CastingAbilityContainer>() {
+            new CastingAbilityContainer() {
+                ability = TestData.CreateAbility("heal"),
+                target = null,
+            },
+            new CastingAbilityContainer() {
+                ability = TestData.CreateAbility("blood"),
+                target = null,
+            },
+            new CastingAbilityContainer() {
+                ability = TestData.CreateAbility("fire"),
+                target = null,
+            },
+        };
     }
 
     public void CastAbility(int n)
