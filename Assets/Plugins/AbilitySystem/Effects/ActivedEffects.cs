@@ -21,7 +21,7 @@ namespace GameplayAbilitySystem.Effects
             this.target = target;
         }
 
-        public void ApplyDurationalEffect(EffectContext effectContext) 
+        public async void ApplyDurationalEffect(EffectContext effectContext) 
         {
             int stacks = GetStackedEffectsSameAs(effectContext)?.Count() ?? -1;
             int maxStacks = effectContext.Effect.Configs.StackConfig.MaxStacks;
@@ -29,7 +29,7 @@ namespace GameplayAbilitySystem.Effects
             if (stacks < maxStacks) {
                 ApplyModifier(effectContext);
                 if (effectContext.Effect.Configs.DurationConfig.Policy != DurationPolicy.Instant) {
-                    CheckForTimedEffects(effectContext);
+                    await WaitForExpiredOf(effectContext);
                 }
             }
         }
@@ -90,11 +90,33 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-        private async void CheckForTimedEffects(EffectContext effectContext) 
+        // 处理effect应用之后的逻辑
+        private async Task WaitForExpiredOf(EffectContext effectContext) 
         {
-            await WaitForExpiredOf(effectContext);
-            List<EffectCues> effectCues = effectContext.Effect.Configs.Cues;
-            foreach (var cue in effectCues) {
+            bool expired = false;
+            while (!expired) {
+                await UniTask.DelayFrame(0);
+
+                if (effectContext.ForceRemoveEffect) {
+                    expired = true;
+                } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration) {
+                    expired = effectContext.RemainingDuration <= 0 ? true : false;
+                } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Infinite) {
+                    expired = effectContext.StartTime <= 0 ? true : false;
+                }
+
+                if (effectContext.Effect.Configs.PeriodConfig.Period > 0) {
+                    if (effectContext.PeriodicRemainingDuration <= 0) {
+                        ApplyPeriodicEffect(effectContext);
+                    }
+                }
+                if (expired) {
+                    ApplyStackExpirationPolicy(effectContext, ref expired);
+                }
+            }
+
+            List<EffectCues> cues = effectContext.Effect.Configs.Cues;
+            foreach (var cue in cues) {
                 cue.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
             }
             // There could be multiple stacked effects, due to multiple casts
@@ -116,42 +138,6 @@ namespace GameplayAbilitySystem.Effects
                     UpdateAttribute(modifier.AttributeType, aggregators);
                 }
             });
-        }
-
-        /// <summary>
-        /// This function is used to do checks for things that may happen on a timed basis, such as
-        /// periodic effects or effect expiry
-        /// This is currently updated every frame.  Perhaps there are ways to make this more efficient?
-        /// The main advantage of checking every frame is we can manipulate the WorldStartTime to
-        /// effectively "refresh" the effect or end it at will.
-        /// </summary>
-        /// <param name="effectContext"></param>
-        /// <returns> </returns>
-        private async Task WaitForExpiredOf(EffectContext effectContext) 
-        {
-            bool expired = false;
-            while (!expired) {
-                await UniTask.DelayFrame(0);
-
-                if (effectContext.ForceRemoveEffect) {
-                    expired = true;
-                } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration) {
-                    // Check whether required time has expired
-                    // We only need to do this for effects with a finite duration
-                    expired = effectContext.RemainingDuration <= 0 ? true : false;
-                } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Infinite) {
-                    expired = effectContext.StartTime <= 0 ? true : false;
-                }
-                // Periodic effects only occur if the period is > 0
-                if (effectContext.Effect.Configs.PeriodConfig.Period > 0) {
-                    if (effectContext.PeriodicRemainingDuration <= 0) {
-                        ApplyPeriodicEffect(effectContext);
-                    }
-                }
-                if (expired) { // This effect is due for expiry
-                    ApplyStackExpirationPolicy(effectContext, ref expired);
-                }
-            }
         }
 
         private void ApplyPeriodicEffect(EffectContext effectContext) 

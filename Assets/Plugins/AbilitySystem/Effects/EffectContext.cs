@@ -69,10 +69,7 @@ namespace GameplayAbilitySystem.Effects
                     periodicOperations.Add(modifier.AttributeType, operations);
                 }
                 operations.AddOperation(modifier.OperationType, modifier.Value);
-
-                // Recalculate new value by recomputing all aggregators
-                IEnumerable<AttributeOperationContainer> op = Target.ActivedEffects.GetAllOperationTo(modifier.AttributeType);
-                Target.ActivedEffects.UpdateAttribute(modifier.AttributeType, op);
+                Target.ReEvaluateCurrentValueFor(modifier.AttributeType);
             }
         }
 
