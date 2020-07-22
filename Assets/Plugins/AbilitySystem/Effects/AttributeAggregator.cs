@@ -4,18 +4,12 @@ using GameplayAbilitySystem.Attributes;
 
 namespace GameplayAbilitySystem.Effects 
 {
-    public class AttributeModifyAggregator 
+    public class AttributeOperationContainer 
     {
         // e.g. HP
         //      add     10 40 50
         //      multi   0.1 0.3 
-        private string attributeType;
         private Dictionary<OperationType, List<float>> modifiers = new Dictionary<OperationType, List<float>>();
-
-        public AttributeModifyAggregator(string attributeType) 
-        {
-            this.attributeType = attributeType;
-        }
 
         public void AddAggregatorModifier(OperationType modifierOperation, float evaluatedValue) 
         {
@@ -80,7 +74,7 @@ namespace GameplayAbilitySystem.Effects
 
     public static partial class ExtensionMethods 
     {
-        public static float Evaluate(this IEnumerable<AttributeModifyAggregator> aggregators, float baseValue) 
+        public static float Evaluate(this IEnumerable<AttributeOperationContainer> aggregators, float baseValue) 
         {
             var additives = aggregators.Select(x => x.GetAdditives()).Sum();
             var multipliers = aggregators
