@@ -8,7 +8,6 @@ namespace GameplayAbilitySystem.Cues
     {
         [SerializeField] private BaseCueAction ExecuteAction = default;
         [SerializeField] private BaseCueAction OnActiveAction = default;
-        [SerializeField] private BaseCueAction WhileActiveAction = default;
         [SerializeField] private BaseCueAction OnRemoveAction = default;
 
         public void HandleCue(AbilitySystem target, CueEventMomentType moment) {
@@ -19,9 +18,6 @@ namespace GameplayAbilitySystem.Cues
                 case CueEventMomentType.OnExecute:
                     ExecuteAction?.Execute(target);
                     break;
-                case CueEventMomentType.WhileActive:
-                    WhileActiveAction?.Execute(target);
-                    break;
                 case CueEventMomentType.OnRemove:
                     OnRemoveAction?.Execute(target);
                     break;
@@ -29,15 +25,10 @@ namespace GameplayAbilitySystem.Cues
         }
     }
 
-    /// ?????
-    /// WhileActive/OnActive is called for Infinite effects
-    /// OnExecute is called for Instant effects/on each tick
-    /// WhileActive/OnActive/OnRemove is called for Duration effects
     public enum CueEventMomentType 
     {
         OnActive,       // Called when Cue is first activated
         OnExecute,      // Called when a Cue is executed (e.g. instant/periodic/tick)
-        WhileActive,    // Called *while* Cue is active
         OnRemove        // Called when a Cue is removed
     }
 }
