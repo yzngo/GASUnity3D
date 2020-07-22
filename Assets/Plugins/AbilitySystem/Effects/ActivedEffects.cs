@@ -23,18 +23,12 @@ namespace GameplayAbilitySystem.Effects
 
         public void ApplyDurationalEffect(EffectContext effectContext) 
         {
-            IEnumerable<EffectContext> matchingStackedActiveEffects = GetStackedEffectsSameAs(effectContext);
-
-            int existingStacks = -1;
+            int stacks = GetStackedEffectsSameAs(effectContext)?.Count() ?? -1;
             int maxStacks = effectContext.Effect.Configs.StackConfig.MaxStacks;
 
-            existingStacks = matchingStackedActiveEffects?.Count() ?? -1;
-            if (existingStacks < maxStacks) { // We can still add more stacks.
+            if (stacks < maxStacks) {
                 ApplyModifier(effectContext);
-                // We only need to do timed checks for durational abilities
-                if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration
-                    || effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Infinite) {
-                    // var removalTime = effectContext.Effect.GameplayEffectPolicy.DurationMagnitude * 1000.0f;
+                if (effectContext.Effect.Configs.DurationConfig.Policy != DurationPolicy.Instant) {
                     CheckForTimedEffects(effectContext);
                 }
             }
@@ -180,29 +174,30 @@ namespace GameplayAbilitySystem.Effects
 
         private void ApplyStackExpirationPolicy(EffectContext effectContext, ref bool expired) 
         {
-            IEnumerable<EffectContext> matchingEffects = GetStackedEffectsSameAs(effectContext);
-            if (matchingEffects == null) {
+            IEnumerable<EffectContext> effects = GetStackedEffectsSameAs(effectContext);
+            if (effects == null) {
                 return;
             }
 
             switch (effectContext.Effect.Configs.StackConfig.ExpirationPolicy) {
                 case StackExpirationPolicy.ClearEntireStack:
-                    foreach (var effect in matchingEffects) {
+                    foreach (var effect in effects) {
                         effect.EndEffect();
                     }
                     break;
                 case StackExpirationPolicy.RemoveSingleStackAndRefreshDuration:
 
-                    foreach (var effect in matchingEffects) {
+                    foreach (var effect in effects) {
                         effect.ResetStartTime();
                     }
                     effectContext.EndEffect();
                     break;
                 case StackExpirationPolicy.RefreshDuration:
                     // Refreshing duration on expiry basically means the effect can never expire
-                    foreach (var effect in matchingEffects) {
+                    // Undo effect expiry.  This effect should never expire
+                    foreach (var effect in effects) {
                         effect.ResetStartTime();
-                        expired = false; // Undo effect expiry.  This effect should never expire
+                        expired = false; 
                     }
                     break;
             }
