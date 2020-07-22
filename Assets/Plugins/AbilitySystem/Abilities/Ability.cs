@@ -58,15 +58,15 @@ namespace GameplayAbilitySystem.Abilities
                                     .AllEffects
                                     .Where(x => x.IsCoolDownEffectOf(this))
                                     .DefaultIfEmpty()
-                                    .OrderByDescending(x => x?.RemainingTime)
+                                    .OrderByDescending(x => x?.RemainingDuration)
                                     .FirstOrDefault();
 
             if (maxCDEffectContext == null) {
                 return info;
             }
             info.isCooling = true;
-            info.elapsed = maxCDEffectContext.ElapsedTime;
-            info.total = maxCDEffectContext.TotalTime;
+            info.elapsed = maxCDEffectContext.ElapsedDuration;
+            info.total = maxCDEffectContext.TotalDuration;
             return info;
         }
 

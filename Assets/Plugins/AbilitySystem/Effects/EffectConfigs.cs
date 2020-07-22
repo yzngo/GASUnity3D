@@ -86,7 +86,6 @@ namespace GameplayAbilitySystem.Effects
         public string AttributeType;
         public OperationType OperationType;
         public float Value;
-
     }
 
     public enum OperationType 

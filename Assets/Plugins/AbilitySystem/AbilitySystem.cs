@@ -113,7 +113,7 @@ namespace GameplayAbilitySystem
                                 .Where(x => beRemovedInfo.Any(y => x.Effect.Configs.Id == y.RemoveId))
                                 .Join(beRemovedInfo, x => x.Effect.Configs.Id, y => y.RemoveId, (x, y) => 
                                             new { Id = x.Effect.Configs.Id, EffectContext = x, Stacks = y.RemoveStacks })
-                                .OrderBy(x => x.EffectContext.RemainingTime);
+                                .OrderBy(x => x.EffectContext.RemainingDuration);
 
             Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
             foreach(var beRemovedEffect in beRemovedEffects) {

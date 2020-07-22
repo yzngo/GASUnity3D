@@ -25,8 +25,8 @@ public class EffectsBar : MonoBehaviour
             if (effectTiles.Length < tileIndex ) return;
             if (effectInfo.EffectContext.Effect.Configs.Icon == null) continue;
 
-            float elapsedTime = effectInfo.EffectContext.ElapsedTime;
-            float totalTime = effectInfo.EffectContext.TotalTime;
+            float elapsedTime = effectInfo.EffectContext.ElapsedDuration;
+            float totalTime = effectInfo.EffectContext.TotalDuration;
             float remainingPercent =  totalTime > 0 ? 1 - elapsedTime / totalTime : 0;
 
             effectTiles[tileIndex].SetRemainingPercent(remainingPercent);

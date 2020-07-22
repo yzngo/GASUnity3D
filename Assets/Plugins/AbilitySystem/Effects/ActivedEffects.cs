@@ -11,21 +11,15 @@ namespace GameplayAbilitySystem.Effects
     public class ActivedEffects 
     {
         private AbilitySystem target;
-
-        // This is used to keep track of all the "temporary" attribute modifiers,
-        // so we can calculate them all as f(Base, Added, Multiplied, Divided) = (Base + Added) * (Multiplied/Divided)
-
-        // effect -> attribute -> modifies
         private Dictionary<EffectContext, Dictionary<string, AttributeOperationContainer>> effects = 
-            new Dictionary<EffectContext, Dictionary<string, AttributeOperationContainer>>();
+                                        new Dictionary<EffectContext, Dictionary<string, AttributeOperationContainer>>();
 
+        public List<EffectContext> AllEffects => effects.Keys.ToList();
 
         public ActivedEffects(AbilitySystem target) 
         {
             this.target = target;
         }
-
-        public List<EffectContext> AllEffects => effects.Keys.ToList();
 
         public void ApplyDurationalEffect(EffectContext effectContext) 
         {
@@ -67,11 +61,11 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-        public void UpdateAttribute(IEnumerable<AttributeOperationContainer> aggregator, string attributeType) 
+        public void UpdateAttribute(string attributeType, IEnumerable<AttributeOperationContainer> operations) 
         {
-            var baseAttributeValue = target.GetBaseValue(attributeType);
-            var newCurrentAttributeValue = aggregator.Evaluate(baseAttributeValue);
-            target.SetCurrentValue(attributeType, newCurrentAttributeValue);
+            float baseValue = target.GetBaseValue(attributeType);
+            float newCurrentValue = operations.Evaluate(baseValue);
+            target.SetCurrentValue(attributeType, newCurrentValue);
         }
 
 
@@ -128,8 +122,8 @@ namespace GameplayAbilitySystem.Effects
                         aggregator.AddOperation(modifier.OperationType, modifier.Value);
                     }
                     // Recalculate new value by recomputing all aggregators
-                    var aggregators = GetAllOperationFor(modifier.AttributeType);
-                    UpdateAttribute(aggregators, modifier.AttributeType);
+                    var operations = GetAllOperationFor(modifier.AttributeType);
+                    UpdateAttribute(modifier.AttributeType, operations);
                 }
             });
         }
@@ -157,7 +151,7 @@ namespace GameplayAbilitySystem.Effects
                     if (current < 0) target.SetBaseValue(modifier.AttributeType, 0f);
                     target.SetCurrentValue(modifier.AttributeType, current);
                 } else {
-                    UpdateAttribute(aggregators, modifier.AttributeType);
+                    UpdateAttribute(modifier.AttributeType, aggregators);
                 }
             });
         }
@@ -182,7 +176,7 @@ namespace GameplayAbilitySystem.Effects
                 } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration) {
                     // Check whether required time has expired
                     // We only need to do this for effects with a finite duration
-                    durationExpired = effectContext.RemainingTime <= 0 ? true : false;
+                    durationExpired = effectContext.RemainingDuration <= 0 ? true : false;
                 } else if (effectContext.Effect.Configs.DurationConfig.Policy == DurationPolicy.Infinite) {
                     durationExpired = effectContext.StartTime <= 0 ? true : false;
                 }
@@ -198,7 +192,7 @@ namespace GameplayAbilitySystem.Effects
 
         private void CheckAndApplyPeriodicEffect(EffectContext effectContext) 
         {
-            if (effectContext.TimeUntilNextPeriodApply <= 0) {
+            if (effectContext.PeriodicRemainingDuration <= 0) {
                 // Apply gameplay effect defined for period.  
                 if (effectContext.Effect.Configs.PeriodConfig.EffectOnExecute != null) {
                     effectContext.Instigator.ApplyEffectToTarget(
@@ -238,7 +232,7 @@ namespace GameplayAbilitySystem.Effects
                         // may have exceeded the actual limit by a little bit
                         // due to framerate.  So, when we reset the other cooldowns
                         // we need to account for this difference
-                        var timeOverflow = effect.RemainingTime;
+                        var timeOverflow = effect.RemainingDuration;
                         effect.ResetStartTime(timeOverflow);
                     }
                     // This effect was going to expire anyway, but we put this here to be explicit to future code readers

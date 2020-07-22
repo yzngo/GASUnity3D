@@ -83,12 +83,12 @@ namespace GameplayAbilitySystem.Effects
                 }
                 float newValue = (oldValue + addition) * (multiplication / division);
 
-                AttributeModifyInfo values = allModify.Find(x => x.Type == operation.Key);
+                AttributeModifyInfo values = allModify.Find(x => x.AttributeType == operation.Key);
                 if (values == null) {
                     values = new AttributeModifyInfo();
                     allModify.Add(values);
                 }
-                values.Type = operation.Key;
+                values.AttributeType = operation.Key;
                 values.NewValue += newValue;
                 values.OldValue += oldValue;
             }
@@ -102,20 +102,20 @@ namespace GameplayAbilitySystem.Effects
 
             // For each attribute, apply the new modified values
             foreach (AttributeModifyInfo modify in allModify) {
-                target.SetBaseValue(modify.Type, modify.NewValue);
+                target.SetBaseValue(modify.AttributeType, modify.NewValue);
 
-                IEnumerable<AttributeOperationContainer> operation = target.ActivedEffects.GetAllOperationFor(modify.Type);
-                if (operation.Count() != 0) {
-                    target.ActivedEffects.UpdateAttribute(operation, modify.Type);
+                IEnumerable<AttributeOperationContainer> operations = target.ActivedEffects.GetAllOperationFor(modify.AttributeType);
+                if (operations.Count() != 0) {
+                    target.ActivedEffects.UpdateAttribute(modify.AttributeType, operations);
                 } else {
-                    target.SetCurrentValue(modify.Type, target.GetBaseValue(modify.Type));
+                    target.SetCurrentValue(modify.AttributeType, target.GetBaseValue(modify.AttributeType));
                 }
             }
         }
     }
 
     public class AttributeModifyInfo {
-        public string Type { get; set; }
+        public string AttributeType { get; set; }
         public float OldValue { get; set; }
         public float NewValue { get; set; }
     }
