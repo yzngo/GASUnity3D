@@ -23,15 +23,15 @@ public class AbilityCharacter : MonoBehaviour
         var temp = new List<CastingAbilityContainer>() {
             new CastingAbilityContainer() {
                 ability = TestData.CreateAbility("fire"),
-                target = null,
+                target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<AbilitySystem>(),
             },
             new CastingAbilityContainer() {
                 ability = TestData.CreateAbility("bloodPact"),
-                target = null,
+                target = AbilitySystem,
             },
             new CastingAbilityContainer() {
                 ability = TestData.CreateAbility("heal"),
-                target = null,
+                target = AbilitySystem,
             },
         };
     }
