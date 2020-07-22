@@ -37,7 +37,7 @@ namespace GameplayAbilitySystem.Effects
                 case StackRefreshPolicy.RefreshOnSuccessfulApply: // We refresh all instances of this game effect
                     if (matchingStackedActiveEffects == null) break;
                     foreach (var effect in matchingStackedActiveEffects) {
-                        effect.ResetDuration();
+                        effect.ResetStartTime();
                     }
                     break;
                 case StackRefreshPolicy.NeverRefresh: // Don't do anything.  Effect will expire naturally
@@ -239,7 +239,7 @@ namespace GameplayAbilitySystem.Effects
                         // due to framerate.  So, when we reset the other cooldowns
                         // we need to account for this difference
                         var timeOverflow = effect.RemainingTime;
-                        effect.ResetDuration(timeOverflow);
+                        effect.ResetStartTime(timeOverflow);
                     }
                     // This effect was going to expire anyway, but we put this here to be explicit to future code readers
                     effectContext.EndEffect();
@@ -249,7 +249,7 @@ namespace GameplayAbilitySystem.Effects
                     matchingEffects = GetMatchingStackedEffectsByEffect(effectContext);
                     if (matchingEffects == null) break;
                     foreach (var effect in matchingEffects) {
-                        effect.ResetDuration();
+                        effect.ResetStartTime();
                         durationExpired = false; // Undo effect expiry.  This effect should never expire
                     }
                     break;

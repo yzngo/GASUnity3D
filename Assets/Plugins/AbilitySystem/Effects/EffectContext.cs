@@ -9,10 +9,8 @@ namespace GameplayAbilitySystem.Effects
     {
         public int SourceId { get; private set; }
         public Effect Effect { get; private set; }
-        public float StartTime { get; private set; }
         public AbilitySystem Instigator { get; private set; }
         public AbilitySystem Target { get; private set; }
-
 
         public EffectContext(int sourceId, Effect effect, AbilitySystem instigator, AbilitySystem target) 
         {
@@ -27,42 +25,23 @@ namespace GameplayAbilitySystem.Effects
             }
         }
 
-        public bool IsCoolDownEffectOf(Ability ability) 
-        {
-            if (Effect.Configs.EffectType == EffectType.GlobalCoolDown) {
-                return true;
-            }
-            if (ability.Id == SourceId && Effect.Configs.EffectType == EffectType.CoolDown) {
-                return true;
-            }
-            return false;
-        }
+// time
+        public float StartTime { get; private set; }
 
-
-// cooldown time
-        /// The cooldown time that has already elapsed for this gameplay effect
+        // The time that has already elapsed for this effect
         public float ElapsedTime => Time.time - StartTime;
-        /// <summary>
-        /// The total cooldown time for this gameplay effect
-        /// </summary>
-        /// <value>Cooldown time total</value>
-        public float TotalTime => 
-                Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? Effect.Configs.DurationConfig.DurationLength : 0;
-        /// <summary>
-        /// The cooldown time that is remaining for this gameplay effect
-        /// </summary>
-        /// <value>Cooldown time remaining</value>
-        public float RemainingTime => 
-                Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? TotalTime - ElapsedTime : 0;
 
-        /// Reset duration of this effect.
-        /// Optionally, we can provide an offset to compensate for
-        /// the fact that the reset did not happen at exactly 0
-        /// and over time this could cause time drift
-        public void ResetDuration(float offset = 0) => StartTime = Time.time - offset;
+        // The total time for this effect
+        public float TotalTime => Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? Effect.Configs.DurationConfig.DurationLength : 0;
+
+        // The time that is remaining for this effect
+        public float RemainingTime => Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? TotalTime - ElapsedTime : 0;
+
+        // Reset start time of this effect.
+        public void ResetStartTime(float offset = 0) => StartTime = Time.time - offset;
 
 //------------------------------------------
-        // 若强制移除, 则 = true
+        // 若强制移除, 则 = true ?
         public bool ForceRemoveEffect { get; private set; }
         public void EndEffect() 
         {
@@ -77,11 +56,9 @@ namespace GameplayAbilitySystem.Effects
 
 // period
         private float timeOfLastPeriodicApply;
-        // 对于周期性的effect而言, 自从上次应用效果之后流逝的时间
         public float TimeSincePreviousPeriodicApply => Time.time - timeOfLastPeriodicApply;
-        // 对于周期性的effect而言, 到下次应用还需要的时间
         public float TimeUntilNextPeriodApply => timeOfLastPeriodicApply + Effect.Configs.PeriodConfig.Period - Time.time;
-        private Dictionary<string, AttributeOperationContainer> PeriodicEffectModificationsToDate = new Dictionary<string, AttributeOperationContainer>();
+        private Dictionary<string, AttributeOperationContainer> periodicEffectModificationsToDate = new Dictionary<string, AttributeOperationContainer>();
 
         /// Reset time at which last periodic application occured.
         public void ResetPeriodicTime(float offset = 0) => timeOfLastPeriodicApply = Time.time - offset;
@@ -92,10 +69,9 @@ namespace GameplayAbilitySystem.Effects
             foreach (var modifier in Effect.Configs.Modifiers) {
 
                 // If aggregator for this attribute doesn't exist, add it.
-                if (!PeriodicEffectModificationsToDate.TryGetValue(modifier.Type, out var aggregator)) {
+                if (!periodicEffectModificationsToDate.TryGetValue(modifier.Type, out var aggregator)) {
                     aggregator = new AttributeOperationContainer();
-                    // aggregator.Dirtied.AddListener(UpdateAttribute);
-                    PeriodicEffectModificationsToDate.Add(modifier.Type, aggregator);
+                    periodicEffectModificationsToDate.Add(modifier.Type, aggregator);
                 }
 
                 aggregator.AddOperation(modifier.OperationType, modifier.Value);
@@ -109,8 +85,19 @@ namespace GameplayAbilitySystem.Effects
 
         public AttributeOperationContainer GetPeriodicAggregatorForAttribute(string Attribute) 
         {
-            PeriodicEffectModificationsToDate.TryGetValue(Attribute, out var aggregator);
+            periodicEffectModificationsToDate.TryGetValue(Attribute, out var aggregator);
             return aggregator;
+        }
+
+        public bool IsCoolDownEffectOf(Ability ability) 
+        {
+            if (Effect.Configs.EffectType == EffectType.GlobalCoolDown) {
+                return true;
+            }
+            if (ability.Id == SourceId && Effect.Configs.EffectType == EffectType.CoolDown) {
+                return true;
+            }
+            return false;
         }
     }
 }
