@@ -23,13 +23,11 @@ namespace AbilitySystemDemo
         }
         public override async void Execute(AbilitySystem target) 
         {
-            Transform go;
-            if (string.IsNullOrEmpty(objectKey)) {
-                go = Instantiate(particleToSpawn, target.transform).transform;
-            } else {
-                Debug.Log("spawn cue: " + objectKey);
-                go = await Addressables.LoadAssetAsync<Transform>(objectKey).Task;
+            if (particleToSpawn == null) {
+                particleToSpawn = Resources.Load<GameObject>("Particle/" + objectKey);
             }
+            Transform go;
+            go = Instantiate(particleToSpawn, target.transform).transform;
             // Time.timeScale = 0.5f;
             // await UniTask.DelayFrame(5);
             // Time.timeScale = 1;

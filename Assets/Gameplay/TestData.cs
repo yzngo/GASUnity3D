@@ -32,24 +32,6 @@ namespace AbilitySystemDemo
             cueActions.Add("spawnEnergyExplosion",  GetSpawnCueAction("EnergyExplosion", 2));
             cueActions.Add("spawnMagicCircle",      GetSpawnCueAction("MagicCircle", 3));
 
-            // cues.Add("fire",        GetEffectCues(cueActions["spawnBigExplosion"], 
-            //                                         cueActions["spawnBigExplosion"], 
-            //                                         cueActions["spawnBigExplosion"]));
-
-            // cues.Add("heal",        GetEffectCues(cueActions["spawnMagicCircle"]));
-
-            // cues.Add("mana",        GetEffectCues(cueActions["spawnEnergyExplosion"], 
-            //                                         null, 
-            //                                        cueActions["spawnEnergyExplosion"]));
-
-            // cues.Add("regenHealth", GetEffectCues(cueActions["regenHealthSprite"], 
-            //                                         cueActions["regenHealthSprite"], 
-            //                                         null));
-
-            // cues.Add("regenMana",   GetEffectCues(cueActions["manaSurgeZ"], 
-            //                                         cueActions["manaSurgeZ"], 
-            //                                        null));
-
             coolDownConfig.Add("bloodPact", GetCoolDownConfig(isGlobal:false, duration:2));
             coolDownConfig.Add("fire",      GetCoolDownConfig(isGlobal:false, duration:3));
             coolDownConfig.Add("global",    GetCoolDownConfig(isGlobal:true,  duration:1));
@@ -111,7 +93,7 @@ namespace AbilitySystemDemo
                     cueActions["spawnBigExplosion"], cueActions["spawnBigExplosion"], cueActions["spawnBigExplosion"]
                 )
             ));
-            effect.Add("fire", GetEffect(normalConfig["heal"]));
+            effect.Add("fire", GetEffect(normalConfig["fire"]));
 
             normalConfig.Add("bloodPact", GetNormalEffectConfigs(
                 iconKey: "ManaIcon",
@@ -129,10 +111,10 @@ namespace AbilitySystemDemo
             logic.Add("heal", GetInstantLogic(false, effect["heal"]));
 
             ability.Add("fire", CreateAbility(
-                "ManaIcon", 
+                "FireIcon", 
                 effect["cost_mana"], 
-                new List<Effect>() {effect["cd_bloodPact"], effect["cd_global"] },
-                logic["bloodPact"]
+                new List<Effect>() {effect["cd_fire"], effect["cd_global"] },
+                logic["fire"]
             ));
 
             ability.Add("heal", CreateAbility(

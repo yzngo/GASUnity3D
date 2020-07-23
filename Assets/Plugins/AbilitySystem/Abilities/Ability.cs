@@ -8,15 +8,16 @@ namespace GameplayAbilitySystem.Abilities
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability")]
     public class Ability : ScriptableObject
     {
-        public int Id { get => id; set { id = value; } }
-        public Sprite Icon { get => icon; set { icon = value; } }
-        public string IconKey;
-        public Effect CostEffect { get => costEffect; set { costEffect = value; } }
-        public List<Effect> CooldownEffects { get => cooldownEffects; set { cooldownEffects = value; } }
+        public int Id { get => id; set { id = value; }}
+        public Sprite Icon { get => icon; set { icon = value; }}
+        public string IconKey { get => iconKey; set { iconKey = value; }}
+        public Effect CostEffect { get => costEffect; set { costEffect = value; }}
+        public List<Effect> CooldownEffects { get => cooldownEffects; set { cooldownEffects = value; }}
         public AbilityLogic AbilityLogic { get => abilityLogic; set { abilityLogic = value; }}
 
         [SerializeField] private int id = default;
         [SerializeField] private Sprite icon = default;
+        [SerializeField] private string iconKey = default;
         [SerializeField] private Effect costEffect = default;
         [SerializeField] private List<Effect> cooldownEffects = default;
         [SerializeField] private AbilityLogic abilityLogic = default;
@@ -54,14 +55,12 @@ namespace GameplayAbilitySystem.Abilities
         public CoolDownInfo CalculateCooldown(AbilitySystem instigator) 
         {
             CoolDownInfo info = new CoolDownInfo(isCooling: false);
-
             EffectContext maxCDEffectContext = instigator.ActivedEffects
                                     .AllEffects
                                     .Where(x => x.IsCoolDownEffectOf(this))
                                     .DefaultIfEmpty()
                                     .OrderByDescending(x => x?.RemainingDuration)
                                     .FirstOrDefault();
-
             if (maxCDEffectContext == null) {
                 return info;
             }

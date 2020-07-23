@@ -26,9 +26,7 @@ namespace GameplayAbilitySystem.Effects
             int maxStacks = effectContext.Effect.Configs.StackConfig.MaxStacks;
 
             if (stacks < maxStacks) {
-                if (effectContext.Effect.Configs.Modifiers != null) {
                     ApplyModifier(effectContext);
-                }
                 if (effectContext.Effect.Configs.DurationConfig.Policy != DurationPolicy.Instant) {
                     await WaitForExpiredOf(effectContext);
                 }
@@ -62,19 +60,21 @@ namespace GameplayAbilitySystem.Effects
                 effects.Add(effectContext, operations);
             }
 
-            foreach(ModifierConfig modifier in effectContext.Effect.Configs.Modifiers) {
-                if (!string.IsNullOrEmpty(modifier.AttributeType)) {
+            if (effectContext.Effect.Configs.Modifiers != null) {
+                foreach(ModifierConfig modifier in effectContext.Effect.Configs.Modifiers) {
+                    if (!string.IsNullOrEmpty(modifier.AttributeType)) {
 
-                    if (!operations.TryGetValue(modifier.AttributeType, out AttributeOperationContainer operation)) {
-                        operation = new AttributeOperationContainer();
-                        operations.Add(modifier.AttributeType, operation);
+                        if (!operations.TryGetValue(modifier.AttributeType, out AttributeOperationContainer operation)) {
+                            operation = new AttributeOperationContainer();
+                            operations.Add(modifier.AttributeType, operation);
+                        }
+                        // If this is a periodic effect, we don't add any attributes here. 
+                        // They will be added as required on period expiry and stored in a separate structure
+                        if (effectContext.Effect.Configs.PeriodConfig.Period <= 0) {
+                            operation.AddOperation(modifier.OperationType, modifier.Value);
+                        }
+                        target.ReEvaluateCurrentValueFor(modifier.AttributeType);
                     }
-                    // If this is a periodic effect, we don't add any attributes here. 
-                    // They will be added as required on period expiry and stored in a separate structure
-                    if (effectContext.Effect.Configs.PeriodConfig.Period <= 0) {
-                        operation.AddOperation(modifier.OperationType, modifier.Value);
-                    }
-                    target.ReEvaluateCurrentValueFor(modifier.AttributeType);
                 }
             }
         }

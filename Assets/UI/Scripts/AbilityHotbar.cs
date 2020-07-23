@@ -18,7 +18,8 @@ public class AbilityHotbar : MonoBehaviour
 
         for (int i = 0; i < abilityCharacter.abilities.Count; i++) {
             if (abilityTiles.Length > i) {
-                abilityTiles[i].SetSprite(abilityCharacter.abilities[i].ability.Icon, Color.white);
+                Sprite sprite = Resources.Load<Sprite>(abilityCharacter.abilities[i].ability.IconKey);
+                abilityTiles[i].SetSprite(sprite, Color.white);
             }
         }
     }
@@ -26,7 +27,7 @@ public class AbilityHotbar : MonoBehaviour
     void Update() 
     {
         for (int i = 0; i < abilityTiles.Length; i++) {
-            var button = abilityTiles[i];
+            BaseTile button = abilityTiles[i];
             CoolDownInfo info = GetCooldownOfAbility(i);
             float remainingPercent = info.isCooling ? 1 - info.elapsed / info.total : 0;
             button.SetRemainingPercent(remainingPercent);

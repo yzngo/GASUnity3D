@@ -16,31 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: c5e4db2039d87424d8ca2f77be75c578
-  m_SerializeEntries:
-  - m_GUID: 012e223bae53ce3439432cd17309ca89
-    m_Address: FireIcon
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 012e223bae53ce3439432cd17309ca89, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 012e223bae53ce3439432cd17309ca89, type: 3}
-  - m_GUID: 1e82c0b745885eb47b3352f4754feb46
-    m_Address: ManaIcon
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 1e82c0b745885eb47b3352f4754feb46, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 1e82c0b745885eb47b3352f4754feb46, type: 3}
-  - m_GUID: 92a77166f9a72d840a4ad2cce89c7683
-    m_Address: HealIcon
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 92a77166f9a72d840a4ad2cce89c7683, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 92a77166f9a72d840a4ad2cce89c7683, type: 3}
-  - m_GUID: aa3085d98ebe25e4aa4a8b71b6f7bd80
-    m_Address: TimeMask
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: aa3085d98ebe25e4aa4a8b71b6f7bd80, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: aa3085d98ebe25e4aa4a8b71b6f7bd80, type: 3}
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b813cd049fececb44b59ac1ca13454c9, type: 2}
   m_SchemaSet:

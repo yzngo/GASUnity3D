@@ -38,14 +38,11 @@ namespace GameplayAbilitySystem.Abilities
             GameObject instantiatedProjectile = null;
             await instigator.OnAnimEvent.WaitForEvent( (x) => x == AnimEventKey.CastingStart );
 
-            if (projectileKey.Length > 0) {
-                instantiatedProjectile = await Addressables.LoadAssetAsync<GameObject>(projectileKey).Task;
-                instantiatedProjectile.transform.position = instigator.transform.position + projectilePositionOffset + instigator.transform.forward * 1.2f;
-            } else 
-            if (projectile != null) {
-                instantiatedProjectile = Instantiate(projectile);
-                instantiatedProjectile.transform.position = instigator.transform.position + projectilePositionOffset + instigator.transform.forward * 1.2f;
+            if (projectile == null) {
+                projectile = Resources.Load<GameObject>(projectileKey);
             }
+            instantiatedProjectile = Instantiate(projectile);
+            instantiatedProjectile.transform.position = instigator.transform.position + projectilePositionOffset + instigator.transform.forward * 1.2f;
 
             animator.SetTrigger(AnimParams.Execute_Magic);
             await instigator.OnAnimEvent.WaitForEvent( (x) => x == AnimEventKey.FireProjectile );

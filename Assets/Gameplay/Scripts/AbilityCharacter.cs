@@ -3,8 +3,7 @@ using GameplayAbilitySystem;
 using GameplayAbilitySystem.Abilities;
 using UnityEngine;
 using System;
-using UnityEngine.Serialization;
-using System.Threading.Tasks;
+
 namespace AbilitySystemDemo 
 {
     public class AbilityCharacter : MonoBehaviour
@@ -16,15 +15,12 @@ namespace AbilitySystemDemo
             public AbilitySystem target;
         }
 
-        public List<CastingAbilityContainer> abilities = new List<CastingAbilityContainer>();
+        public List<CastingAbilityContainer> abilities;
         public AbilitySystem AbilitySystem { get; private set; }
 
         private void  Awake()
         {
             AbilitySystem = GetComponent<AbilitySystem>();
-        }
-
-        private void Start() {
             abilities = new List<CastingAbilityContainer>() {
                 new CastingAbilityContainer() {
                     ability = TestData.GetAbility("fire"),

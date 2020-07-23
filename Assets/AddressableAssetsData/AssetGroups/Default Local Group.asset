@@ -16,71 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 69f1dfdd717555844b183adfb5ba13bb
-  m_SerializeEntries:
-  - m_GUID: 42818cf4e9204754f9227ed013de20b8
-    m_Address: Sprites
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 6778610122037942427, guid: 42818cf4e9204754f9227ed013de20b8,
-      type: 3}
-    m_TargetAsset: {fileID: 6778610122037942427, guid: 42818cf4e9204754f9227ed013de20b8,
-      type: 3}
-  - m_GUID: 87613a41b93a7d44a9290c82c0dd98c2
-    m_Address: EnemyEthan
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 5555714685437361602, guid: 87613a41b93a7d44a9290c82c0dd98c2,
-      type: 3}
-    m_TargetAsset: {fileID: 5555714685437361602, guid: 87613a41b93a7d44a9290c82c0dd98c2,
-      type: 3}
-  - m_GUID: 883fe89b98b887248b0fced4f2536153
-    m_Address: EnergyExplosionRay
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 6866592132931656702, guid: 883fe89b98b887248b0fced4f2536153,
-      type: 3}
-    m_TargetAsset: {fileID: 6866592132931656702, guid: 883fe89b98b887248b0fced4f2536153,
-      type: 3}
-  - m_GUID: 9bba9cf244c53c5439505dfc96fdd11c
-    m_Address: EnergyExplosion
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 2000967301023497459, guid: 9bba9cf244c53c5439505dfc96fdd11c,
-      type: 3}
-    m_TargetAsset: {fileID: 2000967301023497459, guid: 9bba9cf244c53c5439505dfc96fdd11c,
-      type: 3}
-  - m_GUID: a08d0acbcd80f704a969037d0167cd0b
-    m_Address: MagicCircle
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 8877813536497269358, guid: a08d0acbcd80f704a969037d0167cd0b,
-      type: 3}
-    m_TargetAsset: {fileID: 8877813536497269358, guid: a08d0acbcd80f704a969037d0167cd0b,
-      type: 3}
-  - m_GUID: bd23c876debdaf643b3f90aca5310b55
-    m_Address: FireExplosion
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 8837822943257221629, guid: bd23c876debdaf643b3f90aca5310b55,
-      type: 3}
-    m_TargetAsset: {fileID: 8837822943257221629, guid: bd23c876debdaf643b3f90aca5310b55,
-      type: 3}
-  - m_GUID: f7bc84987aa57c54490b6e94cb99c9ad
-    m_Address: Fireball
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 1562012672535379221, guid: f7bc84987aa57c54490b6e94cb99c9ad,
-      type: 3}
-    m_TargetAsset: {fileID: 1562012672535379221, guid: f7bc84987aa57c54490b6e94cb99c9ad,
-      type: 3}
-  - m_GUID: fddc582aed5bbbd4ab4ac8025536d369
-    m_Address: Ethan
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 7899279095267793602, guid: fddc582aed5bbbd4ab4ac8025536d369,
-      type: 3}
-    m_TargetAsset: {fileID: 7899279095267793602, guid: fddc582aed5bbbd4ab4ac8025536d369,
-      type: 3}
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b813cd049fececb44b59ac1ca13454c9, type: 2}
   m_SchemaSet:
