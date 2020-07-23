@@ -18,7 +18,7 @@ MonoBehaviour:
     EffectType: 0
     DurationConfig:
       Policy: 1
-      DurationLength: 21
+      Duration: 21
     PeriodConfig:
       Period: 3
       IsExecuteOnApply: 0
@@ -26,9 +26,7 @@ MonoBehaviour:
         type: 2}
     StackConfig:
       Type: 0
-      Limit: 0
-      DurationRefreshPolicy: 0
-      PeriodResetPolicy: 0
+      MaxStacks: 0
       ExpirationPolicy: 0
     Modifiers: []
     RemoveEffectsInfo:
@@ -36,3 +34,7 @@ MonoBehaviour:
       RemoveStacks: 1
     Cues:
     - {fileID: 11400000, guid: c2fdf7b8b6a3efe4bb8950654af72d18, type: 2}
+    EffectCues:
+      OnActiveAction: {fileID: 11400000, guid: 618bd045e4cc1904ca17c40f22b0d313, type: 2}
+      OnExecuteAction: {fileID: 0}
+      OnRemoveAction: {fileID: 0}

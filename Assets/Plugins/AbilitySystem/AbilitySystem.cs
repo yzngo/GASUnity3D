@@ -126,11 +126,8 @@ namespace GameplayAbilitySystem
                 stacks[e]++;
             }
 
-            // Execute gameplay cue
-            List<EffectCues> cues = effect.Configs.Cues;
-            for (var i = 0; i < cues.Count; i++) {
-                cues[i].HandleCue(target, CueEventMomentType.OnActive);
-            }
+            EffectCues cues = effect.Configs.EffectCues;
+            cues.HandleCue(target, CueEventMomentType.OnActive);
         }
 
         public IEnumerable<EffectContext> GetAllDurationalEffects()

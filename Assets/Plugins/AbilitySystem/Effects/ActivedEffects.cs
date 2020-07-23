@@ -109,10 +109,8 @@ namespace GameplayAbilitySystem.Effects
                 target.ReEvaluateCurrentValueFor(modifier.AttributeType);
             } 
 
-            List<EffectCues> cues = effectContext.Effect.Configs.Cues;
-            foreach (var cue in cues) {
-                cue.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
-            }
+            EffectCues cues = effectContext.Effect.Configs.EffectCues;
+            cues.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
         }
 
         private void ApplyPeriodicEffect(EffectContext effectContext) 
@@ -124,10 +122,8 @@ namespace GameplayAbilitySystem.Effects
                     effectContext.Target
                 );
             }
-            List<EffectCues> cues = effectContext.Effect.Configs.Cues;
-            foreach (var cue in cues) {
-                cue.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
-            }
+            EffectCues cues = effectContext.Effect.Configs.EffectCues;
+            cues.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
             effectContext.ApplyPeriodicOperations();
             effectContext.ResetPeriodicTime();
         }

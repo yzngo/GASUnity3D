@@ -16,7 +16,7 @@ namespace GameplayAbilitySystem.Effects
         public StackConfig StackConfig;
         public List<ModifierConfig> Modifiers;
         public List<RemoveEffectInfo> RemoveEffectsInfo;
-        public List<EffectCues> Cues;
+        public EffectCues EffectCues;
     }
 
 // Type ----------------------------------------------------------------------------------
@@ -134,4 +134,43 @@ namespace GameplayAbilitySystem.Effects
         [Tooltip("Number of stacks of each GameEffect to remove.  0 means remove all stacks.")]
         public int RemoveStacks;
     }
+
+// cues ----------------------------------------------------------------------------------
+
+    [Serializable]
+    public struct EffectCues
+    {
+        public BaseCueAction OnActiveAction;
+        public BaseCueAction OnExecuteAction;
+        public BaseCueAction OnRemoveAction;
+
+        public EffectCues(BaseCueAction onActive, BaseCueAction onExecute, BaseCueAction onRemove)
+        {
+            OnActiveAction = onActive;
+            OnExecuteAction = onExecute;
+            OnRemoveAction = onRemove;
+        }
+
+        public void HandleCue(AbilitySystem target, CueEventMomentType moment) {
+            switch (moment) {
+                case CueEventMomentType.OnActive:
+                    OnActiveAction?.Execute(target);
+                    break;
+                case CueEventMomentType.OnExecute:
+                    OnExecuteAction?.Execute(target);
+                    break;
+                case CueEventMomentType.OnRemove:
+                    OnRemoveAction?.Execute(target);
+                    break;
+            }
+        }
+    }
+
+    public enum CueEventMomentType 
+    {
+        OnActive,       // Called when Cue is first activated
+        OnExecute,      // Called when a Cue is executed (e.g. instant/periodic/tick)
+        OnRemove        // Called when a Cue is removed
+    }
 }
+

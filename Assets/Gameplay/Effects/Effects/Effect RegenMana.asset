@@ -18,21 +18,24 @@ MonoBehaviour:
     EffectType: 0
     DurationConfig:
       Policy: 0
-      DurationLength: 0
+      Duration: 0
     PeriodConfig:
       Period: 0
       IsExecuteOnApply: 0
       EffectOnExecute: {fileID: 0}
     StackConfig:
       Type: 0
-      Limit: 0
-      DurationRefreshPolicy: 0
-      PeriodResetPolicy: 0
+      MaxStacks: 0
       ExpirationPolicy: 1
     Modifiers:
-    - Type: Mana
+    - AttributeType: Mana
       OperationType: 0
       Value: 10
     RemoveEffectsInfo: []
     Cues:
     - {fileID: 11400000, guid: 260647a52278cdc4eb6654efe826b9cd, type: 2}
+    EffectCues:
+      OnActiveAction: {fileID: 11400000, guid: 18b01f624b6fd2f46853987e494b09e9, type: 2}
+      OnExecuteAction: {fileID: 11400000, guid: 18b01f624b6fd2f46853987e494b09e9,
+        type: 2}
+      OnRemoveAction: {fileID: 0}

@@ -15,7 +15,7 @@ namespace AbilitySystemDemo
         public static int GetId() => id++;
 
         private static Dictionary<string, SpawnCueAction> cueActions = new Dictionary<string, SpawnCueAction>();
-        private static Dictionary<string, EffectCues> cues = new Dictionary<string, EffectCues>();
+        // private static Dictionary<string, EffectCuesTemp> cues = new Dictionary<string, EffectCuesTemp>();
         private static Dictionary<string, EffectConfigs> coolDownConfig = new Dictionary<string, EffectConfigs>();
         private static Dictionary<string, EffectConfigs> costConfig = new Dictionary<string, EffectConfigs>();
         private static Dictionary<string, EffectConfigs> normalConfig = new Dictionary<string, EffectConfigs>();
@@ -29,11 +29,23 @@ namespace AbilitySystemDemo
             cueActions.Add("spawnEnergyExplosion",  GetSpawnCueAction("EnergyExplosion", 2));
             cueActions.Add("spawnMagicCircle",      GetSpawnCueAction("MagicCircle", 3));
 
-            cues.Add("fire",        GetEffectCues(cueActions["spawnBigExplosion"], cueActions["spawnBigExplosion"], cueActions["spawnBigExplosion"]));
-            cues.Add("heal",        GetEffectCues(cueActions["spawnMagicCircle"]));
-            cues.Add("mana",        GetEffectCues(cueActions["spawnEnergyExplosion"], null, cueActions["spawnEnergyExplosion"]));
-            cues.Add("regenHealth", GetEffectCues(cueActions["regenHealthSprite"], cueActions["regenHealthSprite"], null));
-            cues.Add("regenMana",   GetEffectCues(cueActions["manaSurgeZ"], cueActions["manaSurgeZ"], null));
+            // cues.Add("fire",        GetEffectCues(cueActions["spawnBigExplosion"], 
+            //                                         cueActions["spawnBigExplosion"], 
+            //                                         cueActions["spawnBigExplosion"]));
+
+            // cues.Add("heal",        GetEffectCues(cueActions["spawnMagicCircle"]));
+
+            // cues.Add("mana",        GetEffectCues(cueActions["spawnEnergyExplosion"], 
+            //                                         null, 
+            //                                        cueActions["spawnEnergyExplosion"]));
+
+            // cues.Add("regenHealth", GetEffectCues(cueActions["regenHealthSprite"], 
+            //                                         cueActions["regenHealthSprite"], 
+            //                                         null));
+
+            // cues.Add("regenMana",   GetEffectCues(cueActions["manaSurgeZ"], 
+            //                                         cueActions["manaSurgeZ"], 
+            //                                        null));
 
             coolDownConfig.Add("bloodPact", GetCoolDownConfig(isGlobal:false, duration:2));
             coolDownConfig.Add("fire",      GetCoolDownConfig(isGlobal:false, duration:3));
@@ -105,8 +117,7 @@ namespace AbilitySystemDemo
             int maxStack,
             StackExpirationPolicy stackExpirationPolicy,
             List<ModifierConfig> modifiers,
-            List<RemoveEffectInfo> removeEffectsInfo,
-            List<EffectCues> cues
+            List<RemoveEffectInfo> removeEffectsInfo
         ) {
             EffectConfigs config = new EffectConfigs();
             config.Id = GetId();
@@ -117,7 +128,6 @@ namespace AbilitySystemDemo
             config.StackConfig = new StackConfig(stackType, maxStack, stackExpirationPolicy);
             config.Modifiers = modifiers;
             config.RemoveEffectsInfo = removeEffectsInfo;
-            config.Cues = cues;
             return config;
         }
 
@@ -140,13 +150,6 @@ namespace AbilitySystemDemo
                 new ModifierConfig(attributeType, operation, cost)
             };
             return config;
-        }
-
-        private static EffectCues GetEffectCues(BaseCueAction onActive = null, BaseCueAction onExecute = null, BaseCueAction onRemove = null)
-        {
-            EffectCues cues = ScriptableObject.CreateInstance("EffectCues") as EffectCues;
-            cues.Reset(onActive, onExecute, onRemove);
-            return cues;
         }
 
     }
