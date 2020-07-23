@@ -10,6 +10,7 @@ namespace GameplayAbilitySystem.Abilities
     {
         public int Id { get => id; set { id = value; } }
         public Sprite Icon { get => icon; set { icon = value; } }
+        public string IconKey;
         public Effect CostEffect { get => costEffect; set { costEffect = value; } }
         public List<Effect> CooldownEffects { get => cooldownEffects; set { cooldownEffects = value; } }
         public AbilityLogic AbilityLogic { get => abilityLogic; set { abilityLogic = value; }}

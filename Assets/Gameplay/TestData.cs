@@ -15,11 +15,14 @@ namespace AbilitySystemDemo
         public static int GetId() => id++;
 
         private static Dictionary<string, SpawnCueAction> cueActions = new Dictionary<string, SpawnCueAction>();
-        // private static Dictionary<string, EffectCuesTemp> cues = new Dictionary<string, EffectCuesTemp>();
         private static Dictionary<string, EffectConfigs> coolDownConfig = new Dictionary<string, EffectConfigs>();
         private static Dictionary<string, EffectConfigs> costConfig = new Dictionary<string, EffectConfigs>();
         private static Dictionary<string, EffectConfigs> normalConfig = new Dictionary<string, EffectConfigs>();
         private static Dictionary<string, Effect> effect = new Dictionary<string, Effect>();
+
+        private static Dictionary<string, InstantAttack> instantAttack = new Dictionary<string, InstantAttack>();
+        private static Dictionary<string, AbilityLogic> logic = new Dictionary<string, AbilityLogic>();
+        private static Dictionary<string, Ability> ability = new Dictionary<string, Ability>();
         static TestData() 
         {
             cueActions.Add("manaSurgeZ",            GetSpawnCueAction("EnergyExplosionRay", 2));
@@ -57,6 +60,7 @@ namespace AbilitySystemDemo
 
 // -----------------------------------------------------------------------------------
 
+
             effect.Add("cd_bloodPact",     GetEffect(coolDownConfig["bloodPact"]));
             effect.Add("cd_fire",          GetEffect(coolDownConfig["fire"]));
             effect.Add("cd_global",        GetEffect(coolDownConfig["global"]));
@@ -65,29 +69,106 @@ namespace AbilitySystemDemo
             effect.Add("cost_health",       GetEffect(costConfig["health"]));
             effect.Add("cost_mana",         GetEffect(costConfig["mana"]));
 
-            // normalConfig.Add("regenMana", GetNormalEffectConfigs(
-            //     string.Empty(),
+            normalConfig.Add("regenMana", GetNormalEffectConfigs(
+                modifiers: new List<ModifierConfig>() {
+                    new ModifierConfig(AttributeType.Mana, OperationType.Add, 10)
+                },
+                cues: new EffectCues(
+                    cueActions["manaSurgeZ"], cueActions["manaSurgeZ"], null
+                )
+            ));
+            effect.Add("regenMana", GetEffect(normalConfig["regenMana"]));
 
-            // ));
-            // normalConfig.Add("bloodPact",   GetNormalEffectConfigs(
-                // "ManaIcon", 
-                // DurationPolicy.Duration, 20.0f,
-                // 2, true, 
-            // ));
+            normalConfig.Add("regenHealth", GetNormalEffectConfigs(
+                modifiers: new List<ModifierConfig>() {
+                    new ModifierConfig(AttributeType.Health, OperationType.Add, 10)
+                },
+                cues: new EffectCues(
+                    cueActions["regenHealthSprite"], cueActions["regenHealthSprite"], null
+                )
+            ));
+            effect.Add("regenHealth", GetEffect(normalConfig["regenHealth"]));
 
+            normalConfig.Add("heal", GetNormalEffectConfigs(
+                iconKey: "HealIcon",
+                durationPolicy: DurationPolicy.Duration, duration: 20,
+                period: 3, isExecuteOnApply: false, effectOnExecute: effect["regenHealth"],
+                removeEffectsInfo: new List<RemoveEffectInfo>() {
+                    new RemoveEffectInfo(100, 1)
+                },
+                cues: new EffectCues(
+                    cueActions["spawnMagicCircle"], null, null
+                )
+            ));
+            effect.Add("heal", GetEffect(normalConfig["heal"]));
+
+            normalConfig.Add("fire", GetNormalEffectConfigs(
+                iconKey: "FireIcon",
+                modifiers: new List<ModifierConfig>() {
+                    new ModifierConfig(AttributeType.Health, OperationType.Add, -5)
+                },
+                cues: new EffectCues(
+                    cueActions["spawnBigExplosion"], cueActions["spawnBigExplosion"], cueActions["spawnBigExplosion"]
+                )
+            ));
+            effect.Add("fire", GetEffect(normalConfig["heal"]));
+
+            normalConfig.Add("bloodPact", GetNormalEffectConfigs(
+                iconKey: "ManaIcon",
+                durationPolicy: DurationPolicy.Duration, duration: 20,
+                period: 2, isExecuteOnApply: true, effectOnExecute: effect["regenMana"],
+                stackType: StackType.StackBySource, maxStack: 2, stackExpirationPolicy: StackExpirationPolicy.RemoveSingleStackAndRefreshDuration,
+                cues: new EffectCues(
+                    cueActions["spawnEnergyExplosion"], null, cueActions["spawnEnergyExplosion"]
+                )
+            ));
+            effect.Add("bloodPact", GetEffect(normalConfig["bloodPact"]));
+
+            logic.Add("fire", GetTrackingLogic("fireball", new Vector3(0, 1.5f, 0), effect["fire"]));
+            logic.Add("bloodPact", GetInstantLogic( true, effect["bloodPact"]));
+            logic.Add("heal", GetInstantLogic(false, effect["heal"]));
+
+            ability.Add("fire", CreateAbility(
+                "ManaIcon", 
+                effect["cost_health"], 
+                new List<Effect>() {effect["cd_bloodPact"], effect["cd_global"] },
+                logic["bloodPact"]
+            ));
+
+            ability.Add("heal", CreateAbility(
+                "HealIcon",
+                effect["cost_mana"],
+                new List<Effect>() { effect["cd_heal"], effect["cd_global"]},
+                logic["heal"]
+            ));
+
+            ability.Add("bloodPact", CreateAbility(
+                "ManaIcon",
+                effect["cost_health"],
+                new List<Effect>() { effect["cd_bloodPact"], effect["cd_global"]},
+                logic["bloodPact"]
+            ));
         }
-        public static async Task<Ability> CreateAbility(string abilityId)
+
+
+        public static Ability GetAbility(string id)
         {
-            var ability = ScriptableObject.CreateInstance("Ability") as Ability;
-            if(abilityId == "fire") {
-                ability.Id = 1;
-                ability.Icon = await Addressables.LoadAssetAsync<Sprite>("FireIcon").Task;
+            return ability[id];
+        }
 
-            } else if (abilityId == "bloodPact") {
-
-            } else if (abilityId == "heal") {
-                
-            }
+        private static Ability CreateAbility(
+            string iconKey,
+            Effect cost,
+            List<Effect> coolDown,
+            AbilityLogic logic
+        )
+        {
+            Ability ability = ScriptableObject.CreateInstance("Ability") as Ability;
+            ability.Id = GetId();
+            ability.IconKey = iconKey;
+            ability.CostEffect = cost;
+            ability.CooldownEffects = coolDown;
+            ability.AbilityLogic = logic;
             return ability;
         }
 
@@ -106,28 +187,46 @@ namespace AbilitySystemDemo
             return effect;
         }
 
-        private static async Task<EffectConfigs> GetNormalEffectConfigs(
-            string iconKey,
-            DurationPolicy durationPolicy,
-            float duration,
-            float period,
-            bool isExecuteOnApply,
-            Effect effectOnExecute,
-            StackType stackType,
-            int maxStack,
-            StackExpirationPolicy stackExpirationPolicy,
-            List<ModifierConfig> modifiers,
-            List<RemoveEffectInfo> removeEffectsInfo
+        private static AbilityLogic GetInstantLogic(bool wait, Effect effect)
+        {
+            InstantAttack instant = ScriptableObject.CreateInstance("InstantAttack") as InstantAttack;
+            instant.SetData(wait, effect);
+            return instant;
+        }
+
+        private static AbilityLogic GetTrackingLogic(string projectileKey, Vector3 offset, Effect effect)
+        {
+            TrackingAttack tracking = ScriptableObject.CreateInstance("TrackingAttack") as TrackingAttack;
+            tracking.SetData(projectileKey, offset, effect);
+            return tracking;
+        }
+
+
+
+        private static EffectConfigs GetNormalEffectConfigs(
+            string iconKey = "",
+            DurationPolicy durationPolicy = DurationPolicy.Instant,
+            float duration = 0,
+            float period = 0,
+            bool isExecuteOnApply = false,
+            Effect effectOnExecute = null,
+            StackType stackType = StackType.None,
+            int maxStack = 0,
+            StackExpirationPolicy stackExpirationPolicy = StackExpirationPolicy.ClearEntireStack,
+            List<ModifierConfig> modifiers = null,
+            List<RemoveEffectInfo> removeEffectsInfo = null,
+            EffectCues cues = null
         ) {
             EffectConfigs config = new EffectConfigs();
             config.Id = GetId();
-            config.Icon = await Addressables.LoadAssetAsync<Sprite>(iconKey).Task;
+            config.IconKey = iconKey;
             config.EffectType = EffectType.Normal;
             config.DurationConfig = new DurationConfig(durationPolicy, duration);
             config.PeriodConfig = new PeriodConfig(period, isExecuteOnApply, effectOnExecute);
             config.StackConfig = new StackConfig(stackType, maxStack, stackExpirationPolicy);
             config.Modifiers = modifiers;
             config.RemoveEffectsInfo = removeEffectsInfo;
+            config.EffectCues = cues;
             return config;
         }
 
@@ -136,8 +235,7 @@ namespace AbilitySystemDemo
             EffectConfigs config = new EffectConfigs();
             config.Id = GetId();
             config.EffectType = isGlobal ? EffectType.GlobalCoolDown : EffectType.CoolDown;
-            config.DurationConfig.Policy = DurationPolicy.Duration;
-            config.DurationConfig.Duration = duration;
+            config.DurationConfig = new DurationConfig(DurationPolicy.Duration, duration);
             return config;
         }
 

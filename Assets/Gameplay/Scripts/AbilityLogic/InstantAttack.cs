@@ -10,6 +10,12 @@ namespace GameplayAbilitySystem.Abilities
         [SerializeField] private bool waitForCastingAnimationComplete = false;
         [SerializeField] private Effect appliedEffectAfterComplete = default;
 
+        public void SetData(bool wait, Effect effect)
+        {
+            waitForCastingAnimationComplete = wait;
+            appliedEffectAfterComplete = effect;
+        }
+
         public override async void Execute(AbilitySystem instigator, Ability ability) 
         {
             Animator animator = instigator.Animator;

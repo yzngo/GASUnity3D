@@ -20,20 +20,20 @@ namespace AbilitySystemDemo
         public List<CastingAbilityContainer> abilities = new List<CastingAbilityContainer>();
         public AbilitySystem AbilitySystem { get; private set; }
 
-        private async void  Awake()
+        private void  Awake()
         {
             AbilitySystem = GetComponent<AbilitySystem>();
             var temp = new List<CastingAbilityContainer>() {
                 new CastingAbilityContainer() {
-                    ability = await TestData.CreateAbility("fire"),
+                    ability = TestData.GetAbility("fire"),
                     target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<AbilitySystem>(),
                 },
                 new CastingAbilityContainer() {
-                    ability = await TestData.CreateAbility("bloodPact"),
+                    ability = TestData.GetAbility("bloodPact"),
                     target = AbilitySystem,
                 },
                 new CastingAbilityContainer() {
-                    ability = await TestData.CreateAbility("heal"),
+                    ability = TestData.GetAbility("heal"),
                     target = AbilitySystem,
                 },
             };

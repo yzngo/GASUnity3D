@@ -110,7 +110,7 @@ namespace GameplayAbilitySystem.Effects
             } 
 
             EffectCues cues = effectContext.Effect.Configs.EffectCues;
-            cues.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
+            cues?.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
         }
 
         private void ApplyPeriodicEffect(EffectContext effectContext) 
@@ -123,7 +123,7 @@ namespace GameplayAbilitySystem.Effects
                 );
             }
             EffectCues cues = effectContext.Effect.Configs.EffectCues;
-            cues.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
+            cues?.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
             effectContext.ApplyPeriodicOperations();
             effectContext.ResetPeriodicTime();
         }

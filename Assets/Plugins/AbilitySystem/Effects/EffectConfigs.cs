@@ -10,6 +10,7 @@ namespace GameplayAbilitySystem.Effects
     {
         public int Id;
         public Sprite Icon;
+        public string IconKey;
         public EffectType EffectType;
         public DurationConfig DurationConfig;
         public PeriodConfig PeriodConfig;
@@ -32,7 +33,7 @@ namespace GameplayAbilitySystem.Effects
 // Duration ------------------------------------------------------------------------------
 
     [Serializable]
-    public struct DurationConfig 
+    public class DurationConfig 
     {
         public DurationPolicy Policy;
         public float Duration;
@@ -54,7 +55,7 @@ namespace GameplayAbilitySystem.Effects
 // Period --------------------------------------------------------------------------------
 
     [Serializable]
-    public struct PeriodConfig 
+    public class PeriodConfig 
     {
         public float Period;
         public bool IsExecuteOnApply;
@@ -70,7 +71,7 @@ namespace GameplayAbilitySystem.Effects
 // Stack ---------------------------------------------------------------------------------
 
     [Serializable]
-    public struct StackConfig 
+    public class StackConfig 
     {
         public StackType Type;
         public int MaxStacks;
@@ -101,7 +102,7 @@ namespace GameplayAbilitySystem.Effects
 // Modifier Config -----------------------------------------------------------------------
 
     [Serializable]
-    public struct ModifierConfig
+    public class ModifierConfig
     {
         public string AttributeType;
         public OperationType OperationType;
@@ -126,19 +127,24 @@ namespace GameplayAbilitySystem.Effects
 // Remove Effect Info --------------------------------------------------------------------
 
     [Serializable]
-    public struct RemoveEffectInfo 
+    public class RemoveEffectInfo 
     {
         [Tooltip("GameplayEffects with this id will be candidates for removal")]
         public int RemoveId;
 
         [Tooltip("Number of stacks of each GameEffect to remove.  0 means remove all stacks.")]
         public int RemoveStacks;
+        public RemoveEffectInfo(int removeId, int removeStacks)
+        {
+            RemoveId = removeId;
+            RemoveStacks = removeStacks;
+        }
     }
 
 // cues ----------------------------------------------------------------------------------
 
     [Serializable]
-    public struct EffectCues
+    public class EffectCues
     {
         public BaseCueAction OnActiveAction;
         public BaseCueAction OnExecuteAction;

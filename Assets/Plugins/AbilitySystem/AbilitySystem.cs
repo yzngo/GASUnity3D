@@ -127,7 +127,7 @@ namespace GameplayAbilitySystem
             }
 
             EffectCues cues = effect.Configs.EffectCues;
-            cues.HandleCue(target, CueEventMomentType.OnActive);
+            cues?.HandleCue(target, CueEventMomentType.OnActive);
         }
 
         public IEnumerable<EffectContext> GetAllDurationalEffects()

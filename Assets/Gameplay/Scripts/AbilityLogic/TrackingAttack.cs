@@ -3,6 +3,7 @@ using GameplayAbilitySystem.Effects;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using GameplayAbilitySystem.Utility;
+using UnityEngine.AddressableAssets;
 
 namespace GameplayAbilitySystem.Abilities
 {
@@ -11,9 +12,19 @@ namespace GameplayAbilitySystem.Abilities
     {
         [SerializeField] private GameObject projectile = default;
 
+
         [Tooltip("相对于发出者的偏移位置")]
         [SerializeField] private Vector3 projectilePositionOffset = default;
         [SerializeField] private Effect appliedEffectAfterComplete = default;
+
+        private string projectileKey = "";
+
+        public void SetData(string projectileKey, Vector3 offset, Effect effect)
+        {
+            this.projectileKey = projectileKey;
+            projectilePositionOffset = offset;
+            appliedEffectAfterComplete = effect;
+        }
 
         public override async void Execute(AbilitySystem instigator, Ability ability) 
         {
@@ -27,6 +38,10 @@ namespace GameplayAbilitySystem.Abilities
             GameObject instantiatedProjectile = null;
             await instigator.OnAnimEvent.WaitForEvent( (x) => x == AnimEventKey.CastingStart );
 
+            if (projectileKey.Length > 0) {
+                instantiatedProjectile = await Addressables.LoadAssetAsync<GameObject>(projectileKey).Task;
+                instantiatedProjectile.transform.position = instigator.transform.position + projectilePositionOffset + instigator.transform.forward * 1.2f;
+            } else 
             if (projectile != null) {
                 instantiatedProjectile = Instantiate(projectile);
                 instantiatedProjectile.transform.position = instigator.transform.position + projectilePositionOffset + instigator.transform.forward * 1.2f;
