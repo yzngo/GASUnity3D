@@ -8,11 +8,11 @@ namespace GameplayAbilitySystem.Abilities
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability")]
     public class Ability : ScriptableObject
     {
-        public int Id => id;
-        public Sprite Icon => icon;
-        public Effect CostEffect => costEffect; 
-        public List<Effect> CooldownEffects => cooldownEffects;
-        public AbilityLogic AbilityLogic => abilityLogic;
+        public int Id { get => id; set { id = value; } }
+        public Sprite Icon { get => icon; set { icon = value; } }
+        public Effect CostEffect { get => costEffect; set { costEffect = value; } }
+        public List<Effect> CooldownEffects { get => cooldownEffects; set { cooldownEffects = value; } }
+        public AbilityLogic AbilityLogic { get => abilityLogic; set { abilityLogic = value; }}
 
         [SerializeField] private int id = default;
         [SerializeField] private Sprite icon = default;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameplayAbilitySystem.Abilities;
 using static GameplayAbilitySystem.Abilities.Ability;
+using AbilitySystemDemo;
 
 [DisallowMultipleComponent]
 public class AbilityHotbar : MonoBehaviour 

@@ -32,7 +32,7 @@ namespace GameplayAbilitySystem.Effects
         public float ElapsedDuration => Time.time - StartTime;
 
         // The total time for this effect
-        public float TotalDuration => Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? Effect.Configs.DurationConfig.DurationLength : 0;
+        public float TotalDuration => Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? Effect.Configs.DurationConfig.Duration: 0;
 
         // The time that is remaining for this effect
         public float RemainingDuration => Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration ? TotalDuration - ElapsedDuration : 0;

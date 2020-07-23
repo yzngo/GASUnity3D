@@ -6,7 +6,8 @@ using UnityEngine.Serialization;
 namespace GameplayAbilitySystem.Effects 
 {
     [Serializable]
-    public class EffectConfigs {
+    public class EffectConfigs 
+    {
         public int Id;
         public Sprite Icon;
         public EffectType EffectType;
@@ -17,9 +18,12 @@ namespace GameplayAbilitySystem.Effects
         public List<RemoveEffectInfo> RemoveEffectsInfo;
         public List<EffectCues> Cues;
     }
+
 // Type ----------------------------------------------------------------------------------
+
     [Serializable]
-    public enum EffectType {
+    public enum EffectType 
+    {
         Normal,
         Cost,
         CoolDown,
@@ -28,12 +32,20 @@ namespace GameplayAbilitySystem.Effects
 // Duration ------------------------------------------------------------------------------
 
     [Serializable]
-    public class DurationConfig {
+    public struct DurationConfig 
+    {
         public DurationPolicy Policy;
-        public float DurationLength;
+        public float Duration;
+
+        public DurationConfig(DurationPolicy policy, float duration)
+        {
+            Policy = policy;
+            Duration = duration;
+        }
     }
 
-    public enum DurationPolicy {
+    public enum DurationPolicy 
+    {
         Instant,
         Duration,
         Infinite
@@ -42,30 +54,45 @@ namespace GameplayAbilitySystem.Effects
 // Period --------------------------------------------------------------------------------
 
     [Serializable]
-    public class PeriodConfig {
+    public struct PeriodConfig 
+    {
         public float Period;
         public bool IsExecuteOnApply;
         public Effect EffectOnExecute;
+        public PeriodConfig(float period, bool isExecuteOnApply, Effect effectOnExecute)
+        {
+            Period = period;
+            IsExecuteOnApply = isExecuteOnApply;
+            EffectOnExecute = effectOnExecute;
+        }
     }
 
 // Stack ---------------------------------------------------------------------------------
 
     [Serializable]
-    public class StackConfig {
+    public struct StackConfig 
+    {
         public StackType Type;
-
-        [FormerlySerializedAs("Limit")]
         public int MaxStacks;
         public StackExpirationPolicy ExpirationPolicy;     // 最上边一层到期时执行的策略 
+
+        public StackConfig(StackType type, int maxStacks, StackExpirationPolicy policy)
+        {
+            Type = type;
+            MaxStacks = maxStacks;
+            ExpirationPolicy = policy;
+        }
     }
 
-    public enum StackType {
+    public enum StackType 
+    {
         None, 
         StackBySource, 
         StackByTarget
     }
 
-    public enum StackExpirationPolicy {
+    public enum StackExpirationPolicy 
+    {
         ClearEntireStack,                       // 清空整个栈
         RemoveSingleStackAndRefreshDuration,    // 移除一个元素且刷新时间
         RefreshDuration                         // 只刷新时间, 不移除, 即永不过期, 无限循环
@@ -74,12 +101,18 @@ namespace GameplayAbilitySystem.Effects
 // Modifier Config -----------------------------------------------------------------------
 
     [Serializable]
-    public class ModifierConfig
+    public struct ModifierConfig
     {
-        [FormerlySerializedAs("Type")]
         public string AttributeType;
         public OperationType OperationType;
         public float Value;
+
+        public ModifierConfig(string type, OperationType operation, float value)
+        {
+            AttributeType = type;
+            OperationType = operation;
+            Value = value;
+        }
     }
 
     public enum OperationType 
@@ -93,11 +126,12 @@ namespace GameplayAbilitySystem.Effects
 // Remove Effect Info --------------------------------------------------------------------
 
     [Serializable]
-    public class RemoveEffectInfo {
+    public struct RemoveEffectInfo 
+    {
         [Tooltip("GameplayEffects with this id will be candidates for removal")]
         public int RemoveId;
 
         [Tooltip("Number of stacks of each GameEffect to remove.  0 means remove all stacks.")]
-        public int RemoveStacks = 0;
+        public int RemoveStacks;
     }
 }

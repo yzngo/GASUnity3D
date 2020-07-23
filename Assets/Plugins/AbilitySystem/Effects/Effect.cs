@@ -12,7 +12,7 @@ namespace GameplayAbilitySystem.Effects
     public class Effect : ScriptableObject 
     {
         [SerializeField] private EffectConfigs configs = default;
-        public EffectConfigs Configs => configs;
+        public EffectConfigs Configs { get => configs; set { configs = value;}}
 
         public Dictionary<string, Dictionary<OperationType, float>> GetAllOperation() 
         {
