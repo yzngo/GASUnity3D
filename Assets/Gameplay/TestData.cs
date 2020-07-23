@@ -124,13 +124,13 @@ namespace AbilitySystemDemo
             ));
             effect.Add("bloodPact", GetEffect(normalConfig["bloodPact"]));
 
-            logic.Add("fire", GetTrackingLogic("fireball", new Vector3(0, 1.5f, 0), effect["fire"]));
+            logic.Add("fire", GetTrackingLogic("Fireball", new Vector3(0, 1.5f, 0), effect["fire"]));
             logic.Add("bloodPact", GetInstantLogic( true, effect["bloodPact"]));
             logic.Add("heal", GetInstantLogic(false, effect["heal"]));
 
             ability.Add("fire", CreateAbility(
                 "ManaIcon", 
-                effect["cost_health"], 
+                effect["cost_mana"], 
                 new List<Effect>() {effect["cd_bloodPact"], effect["cd_global"] },
                 logic["bloodPact"]
             ));
@@ -204,6 +204,7 @@ namespace AbilitySystemDemo
 
 
         private static EffectConfigs GetNormalEffectConfigs(
+            EffectCues cues,
             string iconKey = "",
             DurationPolicy durationPolicy = DurationPolicy.Instant,
             float duration = 0,
@@ -214,8 +215,7 @@ namespace AbilitySystemDemo
             int maxStack = 0,
             StackExpirationPolicy stackExpirationPolicy = StackExpirationPolicy.ClearEntireStack,
             List<ModifierConfig> modifiers = null,
-            List<RemoveEffectInfo> removeEffectsInfo = null,
-            EffectCues cues = null
+            List<RemoveEffectInfo> removeEffectsInfo = null
         ) {
             EffectConfigs config = new EffectConfigs();
             config.Id = GetId();

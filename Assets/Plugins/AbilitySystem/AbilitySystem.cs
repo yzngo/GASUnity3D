@@ -92,10 +92,12 @@ namespace GameplayAbilitySystem
         
         public void ApplyEffectToTarget(int sourceId, Effect effect, AbilitySystem target, float level = 0) 
         {
-            foreach(ModifierConfig modifiers in effect.Configs.Modifiers) {
-                if (!target.IsAttributeExist(modifiers.AttributeType)) {
-                    Debug.Log($"Being modified attribute {modifiers.AttributeType} doesn't exist in abilitySystem {target.name}. ", this);
-                    return ;
+            if (effect.Configs.Modifiers != null) {
+                foreach(ModifierConfig modifiers in effect.Configs.Modifiers) {
+                    if (!target.IsAttributeExist(modifiers.AttributeType)) {
+                        Debug.Log($"Being modified attribute {modifiers.AttributeType} doesn't exist in abilitySystem {target.name}. ", this);
+                        return ;
+                    }
                 }
             }
 
@@ -107,27 +109,27 @@ namespace GameplayAbilitySystem
             }
 
             // remove effects that mark remove from config
-            List<RemoveEffectInfo> beRemovedInfo = effect.Configs.RemoveEffectsInfo;
-            var beRemovedEffects = target.GetAllDurationalEffects()
-                                .Where(x => beRemovedInfo.Any(y => x.Effect.Configs.Id == y.RemoveId))
-                                .Join(beRemovedInfo, x => x.Effect.Configs.Id, y => y.RemoveId, (x, y) => 
-                                            new { Id = x.Effect.Configs.Id, EffectContext = x, Stacks = y.RemoveStacks })
-                                .OrderBy(x => x.EffectContext.RemainingDuration);
+            // List<RemoveEffectInfo> beRemovedInfo = effect.Configs.RemoveEffectsInfo;
+            // var beRemovedEffects = target.GetAllDurationalEffects()
+            //                     .Where(x => beRemovedInfo.Any(y => x.Effect.Configs.Id == y.RemoveId))
+            //                     .Join(beRemovedInfo, x => x.Effect.Configs.Id, y => y.RemoveId, (x, y) => 
+            //                                 new { Id = x.Effect.Configs.Id, EffectContext = x, Stacks = y.RemoveStacks })
+            //                     .OrderBy(x => x.EffectContext.RemainingDuration);
 
-            Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
-            foreach(var beRemovedEffect in beRemovedEffects) {
-                Effect e = beRemovedEffect.EffectContext.Effect;
-                if (!stacks.ContainsKey(e)) {
-                    stacks.Add(e, 0);
-                }
-                if (beRemovedEffect.Stacks == 0 || stacks[e] < beRemovedEffect.Stacks ) {
-                    beRemovedEffect.EffectContext.ForceEndEffect();
-                }
-                stacks[e]++;
-            }
+            // Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
+            // foreach(var beRemovedEffect in beRemovedEffects) {
+            //     Effect e = beRemovedEffect.EffectContext.Effect;
+            //     if (!stacks.ContainsKey(e)) {
+            //         stacks.Add(e, 0);
+            //     }
+            //     if (beRemovedEffect.Stacks == 0 || stacks[e] < beRemovedEffect.Stacks ) {
+            //         beRemovedEffect.EffectContext.ForceEndEffect();
+            //     }
+            //     stacks[e]++;
+            // }
 
             EffectCues cues = effect.Configs.EffectCues;
-            cues?.HandleCue(target, CueEventMomentType.OnActive);
+            cues.HandleCue(target, CueEventMomentType.OnActive);
         }
 
         public IEnumerable<EffectContext> GetAllDurationalEffects()

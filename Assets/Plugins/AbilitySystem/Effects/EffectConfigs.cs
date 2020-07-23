@@ -33,7 +33,7 @@ namespace GameplayAbilitySystem.Effects
 // Duration ------------------------------------------------------------------------------
 
     [Serializable]
-    public class DurationConfig 
+    public struct DurationConfig 
     {
         public DurationPolicy Policy;
         public float Duration;
@@ -55,7 +55,7 @@ namespace GameplayAbilitySystem.Effects
 // Period --------------------------------------------------------------------------------
 
     [Serializable]
-    public class PeriodConfig 
+    public struct PeriodConfig 
     {
         public float Period;
         public bool IsExecuteOnApply;
@@ -71,7 +71,7 @@ namespace GameplayAbilitySystem.Effects
 // Stack ---------------------------------------------------------------------------------
 
     [Serializable]
-    public class StackConfig 
+    public struct StackConfig 
     {
         public StackType Type;
         public int MaxStacks;
@@ -102,7 +102,7 @@ namespace GameplayAbilitySystem.Effects
 // Modifier Config -----------------------------------------------------------------------
 
     [Serializable]
-    public class ModifierConfig
+    public struct ModifierConfig
     {
         public string AttributeType;
         public OperationType OperationType;
@@ -127,7 +127,7 @@ namespace GameplayAbilitySystem.Effects
 // Remove Effect Info --------------------------------------------------------------------
 
     [Serializable]
-    public class RemoveEffectInfo 
+    public struct RemoveEffectInfo 
     {
         [Tooltip("GameplayEffects with this id will be candidates for removal")]
         public int RemoveId;
@@ -144,7 +144,7 @@ namespace GameplayAbilitySystem.Effects
 // cues ----------------------------------------------------------------------------------
 
     [Serializable]
-    public class EffectCues
+    public struct EffectCues
     {
         public BaseCueAction OnActiveAction;
         public BaseCueAction OnExecuteAction;

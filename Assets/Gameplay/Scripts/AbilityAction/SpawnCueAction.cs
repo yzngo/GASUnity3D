@@ -27,7 +27,8 @@ namespace AbilitySystemDemo
             if (string.IsNullOrEmpty(objectKey)) {
                 go = Instantiate(particleToSpawn, target.transform).transform;
             } else {
-                go = await Addressables.LoadAssetAsync<Transform>(objectKey);
+                Debug.Log("spawn cue: " + objectKey);
+                go = await Addressables.LoadAssetAsync<Transform>(objectKey).Task;
             }
             // Time.timeScale = 0.5f;
             // await UniTask.DelayFrame(5);

@@ -26,7 +26,9 @@ namespace GameplayAbilitySystem.Effects
             int maxStacks = effectContext.Effect.Configs.StackConfig.MaxStacks;
 
             if (stacks < maxStacks) {
-                ApplyModifier(effectContext);
+                if (effectContext.Effect.Configs.Modifiers != null) {
+                    ApplyModifier(effectContext);
+                }
                 if (effectContext.Effect.Configs.DurationConfig.Policy != DurationPolicy.Instant) {
                     await WaitForExpiredOf(effectContext);
                 }
@@ -102,15 +104,18 @@ namespace GameplayAbilitySystem.Effects
             }
 
             effects.Remove(effectContext);
-            foreach(var modifier in effectContext.Effect.Configs.Modifiers) {
-                if (string.IsNullOrEmpty(modifier.AttributeType)) {
-                    return;
-                }
-                target.ReEvaluateCurrentValueFor(modifier.AttributeType);
+
+            if (effectContext.Effect.Configs.Modifiers != null) {
+                foreach(var modifier in effectContext.Effect.Configs.Modifiers) {
+                    if (string.IsNullOrEmpty(modifier.AttributeType)) {
+                        return;
+                    }
+                    target.ReEvaluateCurrentValueFor(modifier.AttributeType);
+            }
             } 
 
             EffectCues cues = effectContext.Effect.Configs.EffectCues;
-            cues?.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
+            cues.HandleCue(effectContext.Target, CueEventMomentType.OnRemove);
         }
 
         private void ApplyPeriodicEffect(EffectContext effectContext) 
@@ -123,7 +128,7 @@ namespace GameplayAbilitySystem.Effects
                 );
             }
             EffectCues cues = effectContext.Effect.Configs.EffectCues;
-            cues?.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
+            cues.HandleCue(effectContext.Target, CueEventMomentType.OnExecute);
             effectContext.ApplyPeriodicOperations();
             effectContext.ResetPeriodicTime();
         }

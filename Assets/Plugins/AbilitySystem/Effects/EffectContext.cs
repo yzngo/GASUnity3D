@@ -62,14 +62,16 @@ namespace GameplayAbilitySystem.Effects
 
         public void ApplyPeriodicOperations() 
         {
-            foreach (ModifierConfig modifier in Effect.Configs.Modifiers) {
+            if (Effect.Configs.Modifiers != null) {
+                foreach (ModifierConfig modifier in Effect.Configs.Modifiers) {
 
-                if (!periodicOperations.TryGetValue(modifier.AttributeType, out var operations)) {
-                    operations = new AttributeOperationContainer();
-                    periodicOperations.Add(modifier.AttributeType, operations);
+                    if (!periodicOperations.TryGetValue(modifier.AttributeType, out var operations)) {
+                        operations = new AttributeOperationContainer();
+                        periodicOperations.Add(modifier.AttributeType, operations);
+                    }
+                    operations.AddOperation(modifier.OperationType, modifier.Value);
+                    Target.ReEvaluateCurrentValueFor(modifier.AttributeType);
                 }
-                operations.AddOperation(modifier.OperationType, modifier.Value);
-                Target.ReEvaluateCurrentValueFor(modifier.AttributeType);
             }
         }
 

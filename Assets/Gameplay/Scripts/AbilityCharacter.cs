@@ -16,14 +16,16 @@ namespace AbilitySystemDemo
             public AbilitySystem target;
         }
 
-        [FormerlySerializedAs("Abilities")]
         public List<CastingAbilityContainer> abilities = new List<CastingAbilityContainer>();
         public AbilitySystem AbilitySystem { get; private set; }
 
         private void  Awake()
         {
             AbilitySystem = GetComponent<AbilitySystem>();
-            var temp = new List<CastingAbilityContainer>() {
+        }
+
+        private void Start() {
+            abilities = new List<CastingAbilityContainer>() {
                 new CastingAbilityContainer() {
                     ability = TestData.GetAbility("fire"),
                     target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<AbilitySystem>(),
