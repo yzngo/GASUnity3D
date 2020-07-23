@@ -16,11 +16,7 @@ public class EffectsBar : MonoBehaviour
 
     void Update() 
     {
-        IEnumerable<(EffectContext EffectContext, int Stacks)> effectsInfo = 
-                instigator.GetAllDurationalEffects()
-                    .OrderBy(x => x.StartTime)
-                    .GroupBy(x => x.Effect.Configs.Id)
-                    .Select(x => ( x.First(), x.Count()));
+        IEnumerable<(EffectContext EffectContext, int Stacks)> effectsInfo = instigator. GetAllDurationalEffects();
         int tileIndex = 0;
         foreach(var effectInfo in effectsInfo) {
             if (effectTiles.Length < tileIndex ) return;
@@ -32,7 +28,6 @@ public class EffectsBar : MonoBehaviour
             float totalTime = effectInfo.EffectContext.TotalDuration;
             float remainingPercent =  totalTime > 0 ? 1 - elapsedTime / totalTime : 0;
             
-
             effectTiles[tileIndex].SetRemainingPercent(remainingPercent);
             Sprite sprite = Resources.Load<Sprite>(effectInfo.EffectContext.Effect.Configs.IconKey);
             effectTiles[tileIndex].SetSprite(sprite,  Color.white);

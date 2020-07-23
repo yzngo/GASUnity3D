@@ -132,13 +132,16 @@ namespace GameplayAbilitySystem
             cues.HandleCue(target, CueEventMomentType.OnActive);
         }
 
-        public IEnumerable<EffectContext> GetAllDurationalEffects()
+        public IEnumerable<(EffectContext effectContext, int stacks)> GetAllDurationalEffects()
         {
             List<EffectContext> durationEffects = ActivedEffects.AllEffects;
             if (durationEffects == null) {
-                return new List<EffectContext>();
+                return new List<(EffectContext effect, int atacks)>();
             }
-            return durationEffects.Where(x => x.Effect.Configs.EffectType == EffectType.Normal && x.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration);
+            return durationEffects.Where(x => x.Effect.Configs.EffectType == EffectType.Normal && x.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration)
+                           .OrderBy(x => x.StartTime)
+                           .GroupBy(x => x.Effect.Configs.Id)
+                           .Select(x => ( x.First(), x.Count()));
         }
 
         public void OnAnimationEvent(string param) => OnAnimEvent.Invoke(param);

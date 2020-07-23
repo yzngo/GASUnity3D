@@ -18,6 +18,7 @@ public class AbilityHotbar : MonoBehaviour
 
         for (int i = 0; i < abilityCharacter.abilities.Count; i++) {
             if (abilityTiles.Length > i) {
+                //todo -> use addressable
                 Sprite sprite = Resources.Load<Sprite>(abilityCharacter.abilities[i].ability.IconKey);
                 abilityTiles[i].SetSprite(sprite, Color.white);
             }
