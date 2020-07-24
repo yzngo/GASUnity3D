@@ -1,7 +1,11 @@
 1. modifier搞懂, 重构		√
 2. scriptObject -> 读数据,代码配置
+    linq相关操作移到底层
+    remove弄好
+    sprite不放在ability和effect中, 直接通过id读表
 2. 迁移到僵尸项目上, 和现有代码整合
 3. 根据需求修改代码 实现一个demo 
+
 
 
 哪些在编辑器里配置, 哪些在excel里配置?

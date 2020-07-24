@@ -115,5 +115,12 @@ namespace GameplayAbilitySystem.Abilities
                 this.total = total;
             }
         }
+
+        public static Ability Create(string id)
+        {
+            Ability ability = ScriptableObject.CreateInstance("Ability") as Ability;
+            ability.Id = 1;
+            return ability;
+        }
     }
 }

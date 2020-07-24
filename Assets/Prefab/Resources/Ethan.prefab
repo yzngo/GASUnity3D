@@ -1991,7 +1991,6 @@ GameObject:
   - component: {fileID: 7899279095267793612}
   - component: {fileID: 7899279095267793611}
   - component: {fileID: 7899279095267793610}
-  - component: {fileID: 7899279095267793607}
   - component: {fileID: 7899279095267793603}
   - component: {fileID: 7899279095267793605}
   m_Layer: 0
@@ -2100,67 +2099,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ecf93419cb10041ab05d5d43ac1552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7899279095267793607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7899279095267793602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c616ba6d7fe50574a8085de0087bf060, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Inputs:
-  - Button: Ability 1
-    ButtonState: 2
-    Handler:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7899279095267793605}
-          m_MethodName: CastAbility
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - Button: Ability 2
-    ButtonState: 2
-    Handler:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7899279095267793605}
-          m_MethodName: CastAbility
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - Button: Ability 3
-    ButtonState: 2
-    Handler:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7899279095267793605}
-          m_MethodName: CastAbility
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &7899279095267793603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2186,13 +2124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98537c238586d554397a08703062c104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities:
-  - ability: {fileID: 11400000, guid: ae33e3a3cccb84e4fb4bfb4c2d5c089e, type: 2}
-    target: {fileID: 0}
-  - ability: {fileID: 11400000, guid: 2583a21c4bcf5a240a37b1568534e68f, type: 2}
-    target: {fileID: 7899279095267793603}
-  - ability: {fileID: 11400000, guid: 2ad2b404d2dbabc42ad72e779397634f, type: 2}
-    target: {fileID: 7899279095267793603}
 --- !u!1 &7899279095267793604
 GameObject:
   m_ObjectHideFlags: 0
