@@ -7,9 +7,6 @@ namespace GameplayAbilitySystem
     [AddComponentMenu("Ability System/Ability System")]
     public class AbilitySystem : MonoBehaviour 
     {
-        [SerializeField] private Transform targetPoint = default;
-        public Transform TargetPoint => targetPoint;
-
         private AbilityEvent onAbilityStart = new AbilityEvent();
         public AbilityEvent OnAbilityStart => onAbilityStart;
 

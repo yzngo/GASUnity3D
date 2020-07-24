@@ -55,7 +55,7 @@ namespace GameplayAbilitySystem
         }
 
         private async void SeekTargetAndDestroy(AbilitySystem instigator, AbilityEventData data, GameObject projectile) {
-            await projectile.GetComponent<Projectile>().SeekTarget(data.target.TargetPoint, data.target.gameObject);
+            await projectile.GetComponent<Projectile>().SeekTarget(data.target.transform, data.target.gameObject);
             instigator.ApplyEffectToTarget(data.ability.Id, appliedEffectAfterComplete, data.target);
             DestroyImmediate(projectile);
         }
