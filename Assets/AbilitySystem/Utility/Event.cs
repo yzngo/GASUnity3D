@@ -1,14 +1,13 @@
 
 using System;
 using UnityEngine.Events;
-using GameplayAbilitySystem.Abilities;
 using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 
-using AbilityAttribute = GameplayAbilitySystem.Attributes.Attribute;
+using AbilityAttribute = GameplayAbilitySystem.Attribute;
 
-namespace GameplayAbilitySystem.Utility 
+namespace GameplayAbilitySystem
 {
     [Serializable] 
     public class AttributeChangeEvent : UnityEvent<AbilityAttribute> {}
@@ -22,7 +21,7 @@ namespace GameplayAbilitySystem.Utility
     [Serializable]
     public struct AbilityEventData 
     {
-        public int abilityId;
+        public string abilityId;
         public Ability ability;
         public AbilitySystem target;
         // 技能需要的参数填充到这

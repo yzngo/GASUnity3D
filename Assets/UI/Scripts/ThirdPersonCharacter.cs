@@ -1,6 +1,5 @@
-using GameplayAbilitySystem.Attributes;
-using UnityEngine;
 using GameplayAbilitySystem;
+using UnityEngine;
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
 	[RequireComponent(typeof(Rigidbody))]

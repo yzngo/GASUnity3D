@@ -1,8 +1,7 @@
-using GameplayAbilitySystem.Effects;
 using UnityEngine;
-using GameplayAbilitySystem.Utility;
+using System.Collections.Generic;
 
-namespace GameplayAbilitySystem.Abilities
+namespace GameplayAbilitySystem
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability Logic/Instant Attack")]
     public class InstantAttack : AbilityLogic 
@@ -39,6 +38,25 @@ namespace GameplayAbilitySystem.Abilities
                 (_, stateInfo, _1) => stateInfo.fullPathHash == Animator.StringToHash("Base.Idle")
             );
             ability.End(instigator);
+        }
+
+        private static Dictionary<string, InstantAttack> logics = new Dictionary<string, InstantAttack>();
+        public static AbilityLogic Get(string abilityId)
+        {
+            if (!logics.TryGetValue(abilityId, out var logic)) {
+                logic = ScriptableObject.CreateInstance("InstantAttack") as InstantAttack;
+                logics.Add(abilityId, logic);
+
+                if (abilityId == ID.ability_bloodPact) {
+                    Effect effect = Effect.Get(EffectConfigs.GetNormalConfig(ID.effect_bloodPact));
+                    logic.SetData( true, effect);
+
+                } else if (abilityId == ID.ability_heal) {
+                    Effect effect = Effect.Get(EffectConfigs.GetNormalConfig(ID.effect_heal));
+                    logic.SetData( false, effect);
+                }
+            }
+            return logic;
         }
 
     }

@@ -1,12 +1,10 @@
 ﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-using GameplayAbilitySystem;
-using GameplayAbilitySystem.Attributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace GameplayAbilitySystem.Effects 
+namespace GameplayAbilitySystem
 {
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Effect")]
     public class Effect : ScriptableObject 
@@ -103,6 +101,15 @@ namespace GameplayAbilitySystem.Effects
                 target.SetBaseValue(modify.AttributeType, modify.NewValue);
                 target.ReEvaluateCurrentValueFor(modify.AttributeType);
             }
+        }
+
+        private static Dictionary<string, Effect> effect = new Dictionary<string, Effect>();
+
+        public static Effect Get(EffectConfigs config)
+        {
+            Effect effect = ScriptableObject.CreateInstance("Effect") as Effect;
+            effect.configs = config;
+            return effect;
         }
     }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace GameplayAbilitySystem.Attributes 
+namespace GameplayAbilitySystem
 {
     [System.Serializable]
     public class Attribute

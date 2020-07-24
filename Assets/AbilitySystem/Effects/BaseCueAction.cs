@@ -1,6 +1,5 @@
 using UnityEngine;
-using GameplayAbilitySystem;
-namespace GameplayAbilitySystem.Effects 
+namespace GameplayAbilitySystem
 {
     public abstract class BaseCueAction : ScriptableObject 
     {

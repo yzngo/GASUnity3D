@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GameplayAbilitySystem;
-using GameplayAbilitySystem.Abilities;
 using UnityEngine;
 using System;
 
@@ -14,20 +13,20 @@ namespace AbilitySystemDemo
         private void Awake()
         {
             AbilitySystem = GetComponent<AbilitySystem>();
-
             // 开始游戏之前根据选好的技能初始化技能相关数据.
-            // Abilities.Add("fire", Ability.Create("fire"));
-            // Abilities.Add("bloodPact", Ability.Create("bloodPact"));
-            // Abilities.Add("heal", Ability.Create("heal"));
-            Abilities.Add("fire", TestData.GetAbility("fire"));
-            Abilities.Add("bloodPact", TestData.GetAbility("bloodPact"));
-            Abilities.Add("heal", TestData.GetAbility("heal"));
+            Abilities.Add(ID.ability_fire,      Ability.Get(ID.ability_fire));
+            Abilities.Add(ID.ability_bloodPact, Ability.Get(ID.ability_bloodPact));
+            Abilities.Add(ID.ability_heal,      Ability.Get(ID.ability_heal));
+            // Abilities.Add("fire", TestData.GetAbility("fire"));
+            // Abilities.Add("bloodPact", TestData.GetAbility("bloodPact"));
+            // Abilities.Add("heal", TestData.GetAbility("heal"));
         }
 
-        public void CastAbility(string id, AbilitySystem target = null)
+        public void CastAbility(string id)
         {
+            AbilitySystem target = null;
             // 释放技能之前先确定好目标, 要补充没有目标的情况下技能的表现
-            if (id == "fire") {
+            if (id == ID.ability_fire) {
                 target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<AbilitySystem>();
             } else {
                 target = AbilitySystem;
@@ -37,13 +36,13 @@ namespace AbilitySystemDemo
 
         private void Update() {
             if (Input.GetButtonUp("Ability 1")) {
-                CastAbility("fire");
+                CastAbility(ID.ability_fire);
             } 
             else if (Input.GetButtonUp("Ability 2")) {
-                CastAbility("bloodPact");
+                CastAbility(ID.ability_bloodPact);
             }   
             else if (Input.GetButtonUp("Ability 3")) {
-                CastAbility("heal");
+                CastAbility(ID.ability_heal);
             }
         }
     }

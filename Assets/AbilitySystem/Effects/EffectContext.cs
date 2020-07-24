@@ -1,18 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Attributes;
-using GameplayAbilitySystem.Abilities;
 
-namespace GameplayAbilitySystem.Effects 
+namespace GameplayAbilitySystem
 {
     public class EffectContext 
     {
-        public int SourceId { get; private set; }
+        public string SourceId { get; private set; }
         public Effect Effect { get; private set; }
         public AbilitySystem Instigator { get; private set; }
         public AbilitySystem Target { get; private set; }
 
-        public EffectContext(int sourceId, Effect effect, AbilitySystem instigator, AbilitySystem target) 
+        public EffectContext(string sourceId, Effect effect, AbilitySystem instigator, AbilitySystem target) 
         {
             SourceId = sourceId;
             Effect = effect;

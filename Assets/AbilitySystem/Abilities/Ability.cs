@@ -1,23 +1,18 @@
 using System.Collections.Generic;
-using GameplayAbilitySystem.Effects;
 using UnityEngine;
 using System.Linq;
 
-namespace GameplayAbilitySystem.Abilities 
+namespace GameplayAbilitySystem
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability")]
     public class Ability : ScriptableObject
     {
-        public int Id { get => id; set { id = value; }}
-        public Sprite Icon { get => icon; set { icon = value; }}
-        public string IconKey { get => iconKey; set { iconKey = value; }}
+        public string Id { get => id; set { id = value; }}
         public Effect CostEffect { get => costEffect; set { costEffect = value; }}
         public List<Effect> CooldownEffects { get => cooldownEffects; set { cooldownEffects = value; }}
         public AbilityLogic AbilityLogic { get => abilityLogic; set { abilityLogic = value; }}
 
-        [SerializeField] private int id = default;
-        [SerializeField] private Sprite icon = default;
-        [SerializeField] private string iconKey = default;
+        [SerializeField] private string id = default;
         [SerializeField] private Effect costEffect = default;
         [SerializeField] private List<Effect> cooldownEffects = default;
         [SerializeField] private AbilityLogic abilityLogic = default;
@@ -102,25 +97,40 @@ namespace GameplayAbilitySystem.Abilities
             return info.isCooling;
         }
 
-        public struct CoolDownInfo
-        {
-            public bool isCooling;
-            public float elapsed;
-            public float total;
+        private static Dictionary<string, Ability> abilities = new Dictionary<string, Ability>();
 
-            public CoolDownInfo(bool isCooling, float elapsed = 0f, float total = 0f)
-            {
-                this.isCooling = isCooling;
-                this.elapsed = elapsed;
-                this.total = total;
+        public static Ability Get(string abilityId)
+        {
+            if (!abilities.TryGetValue(abilityId, out var ability)) {
+                ability = ScriptableObject.CreateInstance("Ability") as Ability;
+                ability.Id = abilityId;
+                ability.CostEffect = Effect.Get(EffectConfigs.GetCostConfig(abilityId));
+                ability.CooldownEffects = new List<Effect>() {
+                    Effect.Get(EffectConfigs.GetCoolDownConfig(abilityId)),
+                    Effect.Get(EffectConfigs.GetGlobalCoolDownConfig())
+                };
+                if (abilityId == ID.ability_fire) {
+                    ability.AbilityLogic = TrackingAttack.Get(abilityId);
+                } else {
+                    ability.AbilityLogic = InstantAttack.Get(abilityId);
+                }
             }
-        }
-
-        public static Ability Create(string id)
-        {
-            Ability ability = ScriptableObject.CreateInstance("Ability") as Ability;
-            ability.Id = 1;
             return ability;
         }
     }
+
+    public struct CoolDownInfo
+    {
+        public bool isCooling;
+        public float elapsed;
+        public float total;
+
+        public CoolDownInfo(bool isCooling, float elapsed = 0f, float total = 0f)
+        {
+            this.isCooling = isCooling;
+            this.elapsed = elapsed;
+            this.total = total;
+        }
+    }
+
 }

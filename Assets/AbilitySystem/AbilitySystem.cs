@@ -1,10 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Abilities;
-using GameplayAbilitySystem.Effects;
 using UnityEngine;
-using GameplayAbilitySystem.Attributes;
-using GameplayAbilitySystem.Utility;
 
 namespace GameplayAbilitySystem 
 {
@@ -90,7 +86,7 @@ namespace GameplayAbilitySystem
             // }
         // }
         
-        public void ApplyEffectToTarget(int sourceId, Effect effect, AbilitySystem target, float level = 0) 
+        public void ApplyEffectToTarget(string sourceId, Effect effect, AbilitySystem target, float level = 0) 
         {
             if (effect.Configs.Modifiers != null) {
                 foreach(ModifierConfig modifiers in effect.Configs.Modifiers) {
@@ -108,40 +104,52 @@ namespace GameplayAbilitySystem
                 target.ActivedEffects.ApplyDurationalEffect(effectContext);
             }
 
-            // remove effects that mark remove from config
-            // List<RemoveEffectInfo> beRemovedInfo = effect.Configs.RemoveEffectsInfo;
-            // var beRemovedEffects = target.GetAllDurationalEffects()
-            //                     .Where(x => beRemovedInfo.Any(y => x.Effect.Configs.Id == y.RemoveId))
-            //                     .Join(beRemovedInfo, x => x.Effect.Configs.Id, y => y.RemoveId, (x, y) => 
-            //                                 new { Id = x.Effect.Configs.Id, EffectContext = x, Stacks = y.RemoveStacks })
-            //                     .OrderBy(x => x.EffectContext.RemainingDuration);
-
-            // Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
-            // foreach(var beRemovedEffect in beRemovedEffects) {
-            //     Effect e = beRemovedEffect.EffectContext.Effect;
-            //     if (!stacks.ContainsKey(e)) {
-            //         stacks.Add(e, 0);
-            //     }
-            //     if (beRemovedEffect.Stacks == 0 || stacks[e] < beRemovedEffect.Stacks ) {
-            //         beRemovedEffect.EffectContext.ForceEndEffect();
-            //     }
-            //     stacks[e]++;
-            // }
-
             EffectCues cues = effect.Configs.EffectCues;
             cues.HandleCue(target, CueEventMomentType.OnActive);
+
+            // remove effects that mark remove from config
+            List<RemoveEffectInfo> beRemovedInfo = effect.Configs.RemoveEffectsInfo;
+            var allEffects = target.GetAllDurationalEffects();
+            if (beRemovedInfo == null || allEffects == null) {
+                return;
+            }
+            var beRemovedEffects = target.GetAllDurationalEffects()
+                                .Where(x => beRemovedInfo.Any(y => x.effectContext.Effect.Configs.Id == y.RemoveId))
+                                .Join(beRemovedInfo, x => x.effectContext.Effect.Configs.Id, y => y.RemoveId, (x, y) => 
+                                            new { Id = x.effectContext.Effect.Configs.Id, 
+                                                  EffectContext = x.effectContext, 
+                                                  Stacks = y.RemoveStacks 
+                                                })
+                                .OrderBy(x => x.EffectContext.RemainingDuration);
+
+            Dictionary<Effect, int> stacks = new Dictionary<Effect, int>();
+            foreach(var beRemovedEffect in beRemovedEffects) {
+                Effect e = beRemovedEffect.EffectContext.Effect;
+                if (!stacks.ContainsKey(e)) {
+                    stacks.Add(e, 0);
+                }
+                if (beRemovedEffect.Stacks == 0 || stacks[e] < beRemovedEffect.Stacks ) {
+                    beRemovedEffect.EffectContext.ForceEndEffect();
+                }
+                stacks[e]++;
+            }
         }
 
         public IEnumerable<(EffectContext effectContext, int stacks)> GetAllDurationalEffects()
         {
             List<EffectContext> durationEffects = ActivedEffects.AllEffects;
             if (durationEffects == null) {
-                return new List<(EffectContext effect, int atacks)>();
+                return null;
             }
-            return durationEffects.Where(x => x.Effect.Configs.EffectType == EffectType.Normal && x.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration)
+            var e = durationEffects.Where(x => x.Effect.Configs.EffectType == EffectType.Normal && x.Effect.Configs.DurationConfig.Policy == DurationPolicy.Duration)
                            .OrderBy(x => x.StartTime)
                            .GroupBy(x => x.Effect.Configs.Id)
                            .Select(x => ( x.First(), x.Count()));
+
+            if (e.Count() == 0) {
+                return null;
+            }
+            return e;
         }
 
         public void OnAnimationEvent(string param) => OnAnimEvent.Invoke(param);

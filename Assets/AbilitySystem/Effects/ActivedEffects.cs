@@ -1,11 +1,10 @@
 using System.Linq;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Attributes;
 using System;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 
-namespace GameplayAbilitySystem.Effects 
+namespace GameplayAbilitySystem
 {
     public class ActivedEffects 
     {

@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using GameplayAbilitySystem.Effects;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using GameplayAbilitySystem.Utility;
 using UnityEngine.AddressableAssets;
 
-namespace GameplayAbilitySystem.Abilities
+namespace GameplayAbilitySystem
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability Logic/Tracking Attack")]
     public class TrackingAttack : AbilityLogic 
@@ -60,6 +58,21 @@ namespace GameplayAbilitySystem.Abilities
             await projectile.GetComponent<Projectile>().SeekTarget(data.target.TargetPoint, data.target.gameObject);
             instigator.ApplyEffectToTarget(data.ability.Id, appliedEffectAfterComplete, data.target);
             DestroyImmediate(projectile);
+        }
+
+        private static Dictionary<string, TrackingAttack> logics = new Dictionary<string, TrackingAttack>();
+        public static AbilityLogic Get(string abilityId)
+        {
+            if (!logics.TryGetValue(abilityId, out var logic)) {
+                logic = ScriptableObject.CreateInstance("TrackingAttack") as TrackingAttack;
+                logics.Add(abilityId, logic);
+                
+                if (abilityId == ID.ability_fire) {
+                    Effect effect = Effect.Get(EffectConfigs.GetNormalConfig(ID.effect_fire));
+                    logic.SetData(AddressKey.Fireball, new Vector3(0, 1.5f, 0), effect);
+                }
+            }
+            return logic;
         }
     }
 }

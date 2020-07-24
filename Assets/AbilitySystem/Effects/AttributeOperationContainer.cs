@@ -1,8 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Attributes;
 
-namespace GameplayAbilitySystem.Effects 
+namespace GameplayAbilitySystem
 {
     public class AttributeOperationContainer 
     {

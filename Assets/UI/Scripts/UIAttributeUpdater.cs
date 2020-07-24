@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameplayAbilitySystem;
-using GameplayAbilitySystem.Attributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 public class UIAttributeUpdater : MonoBehaviour 

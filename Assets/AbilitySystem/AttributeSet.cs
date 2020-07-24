@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using GameplayAbilitySystem.Utility;
 
-namespace GameplayAbilitySystem.Attributes 
+namespace GameplayAbilitySystem
 {
     public sealed class AttributeSet
     {

@@ -2,7 +2,6 @@ using System.Linq;
 using UnityEngine;
 using GameplayAbilitySystem;
 using System.Collections.Generic;
-using GameplayAbilitySystem.Effects;
 public class EffectsBar : MonoBehaviour 
 {
     private AbilitySystem instigator;
@@ -16,11 +15,14 @@ public class EffectsBar : MonoBehaviour
 
     void Update() 
     {
-        IEnumerable<(EffectContext EffectContext, int Stacks)> effectsInfo = instigator. GetAllDurationalEffects();
+        IEnumerable<(EffectContext EffectContext, int Stacks)> effectsInfo = instigator.GetAllDurationalEffects();
+        if (effectsInfo == null) {
+            return;
+        }
         int tileIndex = 0;
         foreach(var effectInfo in effectsInfo) {
             if (effectTiles.Length < tileIndex ) return;
-            if (effectInfo.EffectContext.Effect.Configs.IconKey.Length <= 0) {
+            if (effectInfo.EffectContext.Effect.Configs.DisplayWhenActived == false) {
                 continue;
             }
 
@@ -29,7 +31,10 @@ public class EffectsBar : MonoBehaviour
             float remainingPercent =  totalTime > 0 ? 1 - elapsedTime / totalTime : 0;
             
             effectTiles[tileIndex].SetRemainingPercent(remainingPercent);
-            Sprite sprite = Resources.Load<Sprite>(effectInfo.EffectContext.Effect.Configs.IconKey);
+            
+            KV.effectId_SpriteKey.TryGetValue(effectInfo.EffectContext.Effect.Configs.Id, out string iconKey);
+            Sprite sprite = Resources.Load<Sprite>(iconKey);
+
             effectTiles[tileIndex].SetSprite(sprite,  Color.white);
             effectTiles[tileIndex].GetComponentInChildren<RectTransform>(true).gameObject.SetActive(true);
             effectTiles[tileIndex].SetStacks(effectInfo.Stacks);

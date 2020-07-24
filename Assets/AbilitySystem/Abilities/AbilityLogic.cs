@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GameplayAbilitySystem.Abilities
+namespace GameplayAbilitySystem
 {
     public abstract class AbilityLogic : ScriptableObject 
     {
