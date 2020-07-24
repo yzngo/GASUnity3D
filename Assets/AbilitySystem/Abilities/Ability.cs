@@ -102,7 +102,7 @@ namespace GameplayAbilitySystem
         public static Ability Get(string abilityId)
         {
             if (!abilities.TryGetValue(abilityId, out var ability)) {
-                ability = ScriptableObject.CreateInstance("Ability") as Ability;
+                ability = ScriptableObject.CreateInstance(typeof(Ability)) as Ability;
                 ability.Id = abilityId;
                 ability.CostEffect = Effect.Get(EffectConfigs.GetCostConfig(abilityId));
                 ability.CooldownEffects = new List<Effect>() {
@@ -112,7 +112,7 @@ namespace GameplayAbilitySystem
                 if (abilityId == ID.ability_fire) {
                     ability.AbilityLogic = TrackingAttack.Get(abilityId);
                 } else {
-                    ability.AbilityLogic = InstantAttack.Get(abilityId);
+                    ability.AbilityLogic = ApplyEffect.Get(abilityId);
                 }
             }
             return ability;

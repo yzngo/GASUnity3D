@@ -54,7 +54,7 @@ namespace GameplayAbilitySystem
                 config.EffectType = EffectType.GlobalCoolDown;
                 // 读配置获取公共cd时长
                 // --------------------------------------------------------
-                float duration = 1;
+                float duration = TestData.globalCoolDown;
                 // --------------------------------------------------------
                 config.DurationConfig = new DurationConfig(DurationPolicy.Duration, duration);
             }

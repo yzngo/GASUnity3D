@@ -41,7 +41,7 @@ namespace GameplayAbilitySystem
         public static BaseCueAction Get(string id)
         {
             if (!actions.TryGetValue(id, out var action)) {
-                action = ScriptableObject.CreateInstance("SpawnCueAction") as SpawnCueAction;
+                action = ScriptableObject.CreateInstance(typeof(SpawnCueAction)) as SpawnCueAction;
                 actions.Add(id, action);
                 if (id == ID.cue_manaSurgeZ) {
                     action.objectKey =  AddressKey.EnergyExplosionRay;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace GameplayAbilitySystem
 {
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability Logic/Instant Attack")]
-    public class InstantAttack : AbilityLogic 
+    public class ApplyEffect : AbilityLogic 
     {
         [SerializeField] private bool waitForCastingAnimationComplete = false;
         [SerializeField] private Effect appliedEffectAfterComplete = default;
@@ -40,11 +40,11 @@ namespace GameplayAbilitySystem
             ability.End(instigator);
         }
 
-        private static Dictionary<string, InstantAttack> logics = new Dictionary<string, InstantAttack>();
+        private static Dictionary<string, ApplyEffect> logics = new Dictionary<string, ApplyEffect>();
         public static AbilityLogic Get(string abilityId)
         {
             if (!logics.TryGetValue(abilityId, out var logic)) {
-                logic = ScriptableObject.CreateInstance("InstantAttack") as InstantAttack;
+                logic = ScriptableObject.CreateInstance(typeof(ApplyEffect)) as ApplyEffect;
                 logics.Add(abilityId, logic);
 
                 if (abilityId == ID.ability_bloodPact) {

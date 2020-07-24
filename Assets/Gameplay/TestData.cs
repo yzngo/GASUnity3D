@@ -58,4 +58,23 @@ namespace GameplayAbilitySystem
             abilityId_SpriteKey.Add(ID.ability_bloodPact, AddressKey.ManaIcon);
         }
     }
+
+    public static class TestData {
+        public static readonly int globalCoolDown = 1;
+        
+    }
+
+    public class AbilityData {
+        public string id;           // fire
+        public string costType;     // hp, mp...
+        public int costValue;       // 50
+        public int cdValue;         // 2s
+        public bool applyGlobalCoolDown;    // true
+        public string logicType;    // trackingAttack,  
+        public string logicId;      //          -> logic表
+    }
+
+    public class EffectData {
+        
+    }
 }
