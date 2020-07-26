@@ -7,10 +7,10 @@ namespace GameplayAbilitySystem
     [CreateAssetMenu(fileName = "Ability", menuName = "Ability System/Ability")]
     public class Ability : ScriptableObject
     {
-        public string Id { get => id; set { id = value; }}
-        public Effect CostEffect { get => costEffect; set { costEffect = value; }}
-        public List<Effect> CooldownEffects { get => cooldownEffects; set { cooldownEffects = value; }}
-        public AbilityLogic AbilityLogic { get => abilityLogic; set { abilityLogic = value; }}
+        public string Id => id;
+        public Effect CostEffect => costEffect;
+        public List<Effect> CooldownEffects => cooldownEffects;
+        public AbilityLogic AbilityLogic => abilityLogic;
 
         [SerializeField] private string id = default;
         [SerializeField] private Effect costEffect = default;
@@ -103,16 +103,16 @@ namespace GameplayAbilitySystem
         {
             if (!abilities.TryGetValue(abilityId, out var ability)) {
                 ability = ScriptableObject.CreateInstance(typeof(Ability)) as Ability;
-                ability.Id = abilityId;
-                ability.CostEffect = Effect.Get(EffectConfigs.GetCostConfig(abilityId));
-                ability.CooldownEffects = new List<Effect>() {
+                ability.id = abilityId;
+                ability.costEffect = Effect.Get(EffectConfigs.GetCostConfig(abilityId));
+                ability.cooldownEffects = new List<Effect>() {
                     Effect.Get(EffectConfigs.GetCoolDownConfig(abilityId)),
                     Effect.Get(EffectConfigs.GetGlobalCoolDownConfig())
                 };
                 if (abilityId == ID.ability_fire) {
-                    ability.AbilityLogic = TrackingAttack.Get(abilityId);
+                    ability.abilityLogic = TrackingAttack.Get(abilityId);
                 } else {
-                    ability.AbilityLogic = ApplyEffect.Get(abilityId);
+                    ability.abilityLogic = ApplyEffect.Get(abilityId);
                 }
             }
             return ability;
