@@ -28,9 +28,6 @@ namespace GameplayAbilitySystem
             }
             Transform go;
             go = Instantiate(particleToSpawn, target.transform).transform;
-            // Time.timeScale = 0.5f;
-            // await UniTask.DelayFrame(5);
-            // Time.timeScale = 1;
             if (destroyInSeconds > 0) {
                 await UniTask.Delay(TimeSpan.FromSeconds(destroyInSeconds));
                 GameObject.DestroyImmediate(go.gameObject);
@@ -43,30 +40,9 @@ namespace GameplayAbilitySystem
             if (!actions.TryGetValue(id, out var action)) {
                 action = ScriptableObject.CreateInstance(typeof(SpawnCueAction)) as SpawnCueAction;
                 actions.Add(id, action);
-                if (id == ID.cue_manaSurgeZ) {
-                    action.objectKey =  AddressKey.EnergyExplosionRay;
-                    action.ResetDestroyTime(2);
-
-                } else if (id == ID.cue_regenHealthSprite) {
-                    action.objectKey = AddressKey.Sprites;
-                    action.ResetDestroyTime(3);
-
-                } else if (id == ID.cue_regenHealth) {
-                    action.objectKey = AddressKey.MagicCircle;
-                    action.ResetDestroyTime(1);
-
-                } else if (id == ID.cue_spawnBigExplosion) {
-                    action.objectKey = AddressKey.FireExplosion;
-                    action.ResetDestroyTime(2);
-
-                } else if (id == ID.cue_spawnEnergyExplosion) {
-                    action.objectKey = AddressKey.EnergyExplosion;
-                    action.ResetDestroyTime(2);
-
-                } else if (id == ID.cue_spawnMagicCircle) {
-                    action.objectKey = AddressKey.MagicCircle;
-                    action.ResetDestroyTime(3);
-                }
+                TestData.spawnCueData.TryGetValue(id, out var data);
+                action.objectKey = data.objectToSpawn;
+                action.ResetDestroyTime(data.destroyTime);
             }
             return action;
         }

@@ -21,7 +21,7 @@ namespace GameplayAbilitySystem
     }
     
     // id 之后全部改成读表
-    public static partial class ID 
+    public static class ID 
     {
     // cue
         public const string cue_manaSurgeZ= "manaSurgeZ";
@@ -61,8 +61,19 @@ namespace GameplayAbilitySystem
 
     public static class TestData {
         public static readonly int globalCoolDown = 1;
-        
+        public static readonly Dictionary<string, SpawnCueData> spawnCueData = new Dictionary<string, SpawnCueData>();
+
+        static TestData() {
+            spawnCueData.Add(ID.cue_regenHealth, new SpawnCueData(ID.cue_regenHealth, AddressKey.MagicCircle, 1.0f));
+            spawnCueData.Add(ID.cue_manaSurgeZ, new SpawnCueData(ID.cue_manaSurgeZ, AddressKey.EnergyExplosionRay, 2.0f));
+            spawnCueData.Add(ID.cue_regenHealthSprite, new SpawnCueData(ID.cue_regenHealthSprite, AddressKey.Sprites, 3.0f));
+            spawnCueData.Add(ID.cue_spawnBigExplosion, new SpawnCueData(ID.cue_spawnBigExplosion, AddressKey.FireExplosion, 2.0f));
+            spawnCueData.Add(ID.cue_spawnEnergyExplosion, new SpawnCueData(ID.cue_spawnEnergyExplosion, AddressKey.EnergyExplosion, 2.0f));
+            spawnCueData.Add(ID.cue_spawnMagicCircle, new SpawnCueData(ID.cue_spawnMagicCircle, AddressKey.MagicCircle, 3.0f));
+        }
     }
+
+
 
     public class AbilityData {
         public string id;           // fire
@@ -73,8 +84,15 @@ namespace GameplayAbilitySystem
         public string logicType;    // trackingAttack,  
         public string logicId;      //          -> logic表
     }
-
-    public class EffectData {
-        
+    public class SpawnCueData {
+        public string id;
+        public string objectToSpawn;
+        public float destroyTime;
+        public SpawnCueData(string id, string objectToSpawn, float destroyTime)
+        {
+            this.id = id;
+            this.objectToSpawn = objectToSpawn;
+            this.destroyTime = destroyTime;
+        }
     }
 }
