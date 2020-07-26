@@ -10,15 +10,14 @@ public class AbilityHotbar : MonoBehaviour
     private BaseTile[] abilityTiles;
 
     private bool initted = false;
-    void Awake() 
+
+    private void Awake() 
     {
         abilityCharacter = GameObject.FindWithTag("Player").GetComponent<AbilityCharacter>();
         abilityTiles = GetComponentsInChildren<BaseTile>();
     }
 
-
-
-    void Update() 
+    private void Update() 
     {
         int i = 0;
         if (initted == false) {
@@ -37,15 +36,10 @@ public class AbilityHotbar : MonoBehaviour
         i = 0;
         foreach(var ability in abilityCharacter.Abilities) {
             BaseTile tile = abilityTiles[i];
-            CoolDownInfo info = GetCooldownOfAbility(ability.Value);
+            CoolDownInfo info = ability.Value.GetCooldownInfo(abilityCharacter.AbilitySystem);
             float remainingPercent = info.isCooling ? 1 - info.elapsed / info.total : 0;
             tile.SetRemainingPercent(remainingPercent);
             i++;
         }
-    }
-
-    public CoolDownInfo GetCooldownOfAbility(Ability ability)
-    {
-        return ability.CalculateCooldown(abilityCharacter.AbilitySystem);
     }
 }

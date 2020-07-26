@@ -47,7 +47,7 @@ namespace GameplayAbilitySystem
             }
         }
 
-        public CoolDownInfo CalculateCooldown(AbilitySystem instigator) 
+        public CoolDownInfo GetCooldownInfo(AbilitySystem instigator) 
         {
             CoolDownInfo info = new CoolDownInfo(isCooling: false);
             EffectContext maxCDEffectContext = instigator.ActivedEffects
@@ -93,7 +93,7 @@ namespace GameplayAbilitySystem
         // Checks to see if the ability is off cooldown
         private bool IsCooling(AbilitySystem instigator) 
         {
-            CoolDownInfo info = CalculateCooldown(instigator);
+            CoolDownInfo info = GetCooldownInfo(instigator);
             return info.isCooling;
         }
 
