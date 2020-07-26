@@ -68,7 +68,7 @@ namespace GameplayAbilitySystem
                 logics.Add(abilityId, logic);
                 
                 if (abilityId == ID.ability_fire) {
-                    Effect effect = Effect.Get(EffectConfigs.GetNormalConfig(ID.effect_fire));
+                    Effect effect = Effect.Get(EffectConfig.GetNormalConfig(ID.effect_fire));
                     logic.SetData(AddressKey.Fireball, new Vector3(0, 1.5f, 0), effect);
                 }
             }

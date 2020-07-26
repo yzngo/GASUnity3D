@@ -48,11 +48,11 @@ namespace GameplayAbilitySystem
                 logics.Add(abilityId, logic);
 
                 if (abilityId == ID.ability_bloodPact) {
-                    Effect effect = Effect.Get(EffectConfigs.GetNormalConfig(ID.effect_bloodPact));
+                    Effect effect = Effect.Get(EffectConfig.GetNormalConfig(ID.effect_bloodPact));
                     logic.SetData( true, effect);
 
                 } else if (abilityId == ID.ability_heal) {
-                    Effect effect = Effect.Get(EffectConfigs.GetNormalConfig(ID.effect_heal));
+                    Effect effect = Effect.Get(EffectConfig.GetNormalConfig(ID.effect_heal));
                     logic.SetData( false, effect);
                 }
             }

@@ -3,7 +3,7 @@ using GameplayAbilitySystem;
 using UnityEngine;
 using System;
 
-namespace AbilitySystemDemo 
+namespace GameplayAbilitySystem
 {
     public class AbilityCharacter : MonoBehaviour
     {

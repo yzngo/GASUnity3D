@@ -9,8 +9,8 @@ namespace GameplayAbilitySystem
     [CreateAssetMenu(fileName = "Gameplay Effect", menuName = "Ability System/Effect")]
     public class Effect : ScriptableObject 
     {
-        [SerializeField] private EffectConfigs configs = default;
-        public EffectConfigs Configs => configs;
+        [SerializeField] private EffectConfig configs = default;
+        public EffectConfig Configs => configs;
 
         public Dictionary<string, Dictionary<OperationType, float>> GetAllOperation() 
         {
@@ -105,7 +105,7 @@ namespace GameplayAbilitySystem
 
         private static Dictionary<string, Effect> effect = new Dictionary<string, Effect>();
 
-        public static Effect Get(EffectConfigs config)
+        public static Effect Get(EffectConfig config)
         {
             Effect effect = ScriptableObject.CreateInstance("Effect") as Effect;
             effect.configs = config;

@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 namespace GameplayAbilitySystem
 {
     [Serializable]
-    public class EffectConfigs 
+    public class EffectConfig 
     {
         public string Id;
         public bool DisplayWhenActived;
@@ -18,13 +18,13 @@ namespace GameplayAbilitySystem
         public List<RemoveEffectInfo> RemoveEffectsInfo;
         public EffectCues EffectCues;
 
-        private static Dictionary<string, EffectConfigs> configs = new Dictionary<string, EffectConfigs>();
+        private static Dictionary<string, EffectConfig> configs = new Dictionary<string, EffectConfig>();
 
-        public static EffectConfigs GetCoolDownConfig(string abilityId) 
+        public static EffectConfig GetCoolDownConfig(string abilityId) 
         {
             string effectId = abilityId + "CoolDownEffect";
             if (!configs.TryGetValue( effectId, out var config )) {
-                config = new EffectConfigs();
+                config = new EffectConfig();
                 configs.Add(effectId, config);
                 config.Id = effectId;
                 config.EffectType = EffectType.CoolDown;
@@ -44,11 +44,11 @@ namespace GameplayAbilitySystem
             return config;
         }
 
-        public static EffectConfigs GetGlobalCoolDownConfig()
+        public static EffectConfig GetGlobalCoolDownConfig()
         {
             string effectId = "globalCoolDownEffect";
             if (!configs.TryGetValue(effectId, out var config)) {
-                config = new EffectConfigs();
+                config = new EffectConfig();
                 configs.Add(effectId, config);
                 config.Id = effectId;
                 config.EffectType = EffectType.GlobalCoolDown;
@@ -61,11 +61,11 @@ namespace GameplayAbilitySystem
             return config;   
         }
 
-        public static EffectConfigs GetCostConfig(string abilityId)
+        public static EffectConfig GetCostConfig(string abilityId)
         {
             string effectId = abilityId + "Cost";
             if (!configs.TryGetValue(abilityId, out var config)) {
-                config = new EffectConfigs();
+                config = new EffectConfig();
                 configs.Add(effectId, config);
                 config.Id = effectId;
                 config.EffectType = EffectType.Cost;
@@ -87,10 +87,10 @@ namespace GameplayAbilitySystem
             return config;
         }
 
-        public static EffectConfigs GetNormalConfig(string effectId)
+        public static EffectConfig GetNormalConfig(string effectId)
         {
             if (!configs.TryGetValue(effectId, out var config)) {
-                config = new EffectConfigs();
+                config = new EffectConfig();
                 configs.Add(effectId, config);
                 config.Id = effectId;
                 config.EffectType = EffectType.Normal;
@@ -202,7 +202,7 @@ namespace GameplayAbilitySystem
             Period = period;
             IsExecuteOnApply = isExecuteOnApply;
             EffectId = effectId;
-            EffectOnExecute = Effect.Get(EffectConfigs.GetNormalConfig(effectId));
+            EffectOnExecute = Effect.Get(EffectConfig.GetNormalConfig(effectId));
         }
     }
 

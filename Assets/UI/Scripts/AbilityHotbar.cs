@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using AbilitySystemDemo;
 using GameplayAbilitySystem;
 
 [DisallowMultipleComponent]

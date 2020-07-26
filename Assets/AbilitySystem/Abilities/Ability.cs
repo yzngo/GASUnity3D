@@ -104,10 +104,10 @@ namespace GameplayAbilitySystem
             if (!abilities.TryGetValue(abilityId, out var ability)) {
                 ability = ScriptableObject.CreateInstance(typeof(Ability)) as Ability;
                 ability.id = abilityId;
-                ability.costEffect = Effect.Get(EffectConfigs.GetCostConfig(abilityId));
+                ability.costEffect = Effect.Get(EffectConfig.GetCostConfig(abilityId));
                 ability.cooldownEffects = new List<Effect>() {
-                    Effect.Get(EffectConfigs.GetCoolDownConfig(abilityId)),
-                    Effect.Get(EffectConfigs.GetGlobalCoolDownConfig())
+                    Effect.Get(EffectConfig.GetCoolDownConfig(abilityId)),
+                    Effect.Get(EffectConfig.GetGlobalCoolDownConfig())
                 };
                 if (abilityId == ID.ability_fire) {
                     ability.abilityLogic = TrackingAttack.Get(abilityId);
